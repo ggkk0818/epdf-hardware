@@ -1,0 +1,99 @@
+(footprint "SH1.0_4P_SMD_Horizontal"
+		(layer "F.Cu")
+		(uuid "a1b10001-0000-4000-8000-000000000004")
+	(descr "SH1.0 4P horizontal SMD socket, cable exits -X")
+	(tags "SH1.0 connector")
+	(property "Reference" "REF**"
+		(at 0 -2.5 0)
+		(layer "F.SilkS")
+		(uuid "52bf46ed-996a-4a9d-bd1c-1df87637c8a6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "SH1.0_4P"
+		(at 0 2.5 0)
+		(layer "F.Fab")
+		(uuid "7c1d4b8e-9b60-4f34-8b21-b72ce46b47f1")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.25 -2.4)
+		(end 3.3 -2.4)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b1b10001-0000-4000-8000-000000000001")
+	)
+	(fp_line
+		(start -1.25 2.4)
+		(end -1.25 -2.4)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b1b10001-0000-4000-8000-000000000002")
+	)
+	(fp_line
+		(start 3.3 -2.4)
+		(end 3.3 2.4)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b1b10001-0000-4000-8000-000000000003")
+	)
+	(fp_line
+		(start 3.3 2.4)
+		(end -1.25 2.4)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b1b10001-0000-4000-8000-000000000004")
+	)
+	(pad "1" smd roundrect
+		(at 0 1.5)
+		(size 1.55 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "d72f8c7c-6dab-4358-b920-8db8f2733c5c")
+	)
+	(pad "2" smd roundrect
+		(at 0 0.5)
+		(size 1.55 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "e5ae8389-2ded-46ad-b188-1ac705b5c328")
+	)
+	(pad "3" smd roundrect
+		(at 0 -0.5)
+		(size 1.55 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "38be3c62-bdee-4d24-a617-3774b07abc12")
+	)
+	(pad "4" smd roundrect
+		(at 0 -1.5)
+		(size 1.55 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "906f1c77-3c74-4c52-9eb4-4928b65e6930")
+	)
+	(embedded_fonts no)
+	)

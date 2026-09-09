@@ -1,0 +1,37 @@
+# KiCad
+
+# 本地项目设置（网格、颜色等个人偏好，不适合提交）
+*.kicad_prl
+
+# KiCad 生成的封装信息缓存
+fp-info-cache
+
+# KiCad 自动备份目录
+*-backups/
+
+# KiCad 本地历史记录（.history 内还含一个嵌套的 git 仓库）
+.history/
+
+# 旧版 KiCad 生成的备份文件
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-bak/
+
+# 打包产物
+*.zip
+
+# Python（inspect_dll.py / kicad_bridge.py 等脚本）
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 操作系统
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 编辑器 / IDE
+.vscode/
+.idea/

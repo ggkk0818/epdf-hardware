@@ -1,0 +1,202 @@
+(footprint "WAFER-SH1.0-4PWB"
+	(layer "F.Cu")
+	(uuid "d0b10001-0000-4000-8000-000000000021")
+	(descr "SH1.0 4P right-angle SMD wafer, cable exits -X")
+	(tags "WAFER-SH1.0-4PWB SH1.0 connector")
+	(property "Reference" "REF**"
+		(at 1.0 -4.2 0)
+		(layer "F.SilkS")
+		(uuid "d0b10001-0000-4000-8000-000000000022")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "WAFER-SH1.0-4PWB"
+		(at 2.15 3.7 0)
+		(layer "F.Fab")
+		(uuid "d0b10001-0000-4000-8000-000000000023")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.0 -3.5)
+		(end 5.9 -3.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "d0b10001-0000-4000-8000-000000000024")
+	)
+	(fp_line
+		(start 5.9 -3.5)
+		(end 5.9 3.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "d0b10001-0000-4000-8000-000000000025")
+	)
+	(fp_line
+		(start 5.9 3.5)
+		(end -1.0 3.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "d0b10001-0000-4000-8000-000000000026")
+	)
+	(fp_line
+		(start -1.0 3.5)
+		(end -1.0 -3.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "d0b10001-0000-4000-8000-000000000027")
+	)
+	(fp_line
+		(start 0 -3.175)
+		(end 4.3 -3.175)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "d0b10001-0000-4000-8000-000000000028")
+	)
+	(fp_line
+		(start 4.3 -3.175)
+		(end 4.3 3.175)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "d0b10001-0000-4000-8000-000000000029")
+	)
+	(fp_line
+		(start 4.3 3.175)
+		(end 0 3.175)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "d0b10001-0000-4000-8000-00000000002a")
+	)
+	(fp_line
+		(start 0 3.175)
+		(end 0 -3.175)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "d0b10001-0000-4000-8000-00000000002b")
+	)
+	(fp_line
+		(start -0.7 -3.4)
+		(end 5.6 -3.4)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "d0b10001-0000-4000-8000-00000000002c")
+	)
+	(fp_line
+		(start 5.6 -3.4)
+		(end 5.6 3.4)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "d0b10001-0000-4000-8000-00000000002d")
+	)
+	(fp_line
+		(start 5.6 3.4)
+		(end -0.7 3.4)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "d0b10001-0000-4000-8000-00000000002e")
+	)
+	(fp_line
+		(start -0.7 3.4)
+		(end -0.7 -3.4)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "d0b10001-0000-4000-8000-00000000002f")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 2.15 0 0)
+		(layer "F.Fab")
+		(uuid "d0b10001-0000-4000-8000-000000000030")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at 4.3 -1.5)
+		(size 1.7 0.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "d0b10001-0000-4000-8000-000000000031")
+	)
+	(pad "2" smd roundrect
+		(at 4.3 -0.5)
+		(size 1.7 0.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "d0b10001-0000-4000-8000-000000000032")
+	)
+	(pad "3" smd roundrect
+		(at 4.3 0.5)
+		(size 1.7 0.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "d0b10001-0000-4000-8000-000000000033")
+	)
+	(pad "4" smd roundrect
+		(at 4.3 1.5)
+		(size 1.7 0.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "d0b10001-0000-4000-8000-000000000034")
+	)
+	(pad "5" smd rect
+		(at 0.9 -2.6)
+		(size 2.5 1.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "d0b10001-0000-4000-8000-000000000035")
+	)
+	(pad "6" smd rect
+		(at 0.9 2.6)
+		(size 2.5 1.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "d0b10001-0000-4000-8000-000000000036")
+	)
+	(embedded_fonts no)
+)
