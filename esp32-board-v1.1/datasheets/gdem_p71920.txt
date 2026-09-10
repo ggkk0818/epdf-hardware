@@ -1,0 +1,92 @@
+=== PAGE 7 ===
+ 10.2 inch Series
+5. Input/output Pin Assignment
+No. Name I/O Description Remark
+Keep Open
+1 NC Do not connect withother NC pins
+2 GDR O N-Channel MOSFETGate Drive Control
+Y
+3 RESE I Current Sense Input fortheControl Loop
+Keep Open
+4 NC NC Do not connect withother NC pins
+A
+5 VSH C PositiveSource driving voltage
+Note5-6
+6 TSCL O I2C Interface todigital temperaLture sensorClock pin
+Note5-6
+7 TSDA I/O I2C Interface todigital temperature sensorData pin
+P
+8 BS1 I Bus Interface selection pin Note5-5
+9 BUSY O Busy state outputSpin Note5-4
+Note5-3
+10 RES# I Reset signal input.Active Low.
+I
+11 D/C# I DataD/Command control pin Note5-2
+Chipselect inputpin
+12 CS# I Note5-1
+13 SCL OI Serial Clock pin (SPI)
+14 SDA I/O Serial Data pin (SPI)
+OPowerSupply forinterface logic pins It should be
+15 VDDIO P
+connected with VCI
+16 VCI P PowerSupply forthechip
+G
+17 VSS P Ground
+Corelogic power pin VDDcan be regulated internally
+18 VDD C from VCI. A capacitorshould beconnected between
+VDDand VSS
+Keep Open
+19 VPP P FOR TEST
+20 VSH1 C PositiveSource driving voltage
+PowerSupply pin forPositiveGate driving voltage and
+21 VGH C
+VSH1
+22 VSL C Negative Sourcedriving voltage
+PowerSupply pin forNegative Gate driving voltage
+23 VGL C
+VCOM and VSL
+24 VCOM C VCOM driving voltage
+www.good-display.com 7/31 GDEM102T91
+=== PAGE 19 ===
+ 8. Block Diagram
+AEDREAR Y :TRIOCLAOPOC
+AERA
+YTIRALC
+10.2 inch Series
+Y
+A
+L
+10.2Inch EPD
+P
+S
+I
+D
+O
+PREVGH
+&
+OI2C bus PREVGL
+EPD
+Temperature Data & control bus (SPI)
+DC-DC
+Senser
+MCU Circuit Circuit
+Circuit I2C bus
+(Optional)
+G EPD VCI VCC
+Capacitor Power Circuit
+Circuit
+www.good-display.com 19/31 GDEM102T91
+=== PAGE 20 ===
+ 10.2 inch Series
+9.Typical Application Circuit with SPI Interface
+Y
+A
+L
+P
+S
+I
+D
+O
+O
+G
+www.good-display.com 20/31 GDEM102T91

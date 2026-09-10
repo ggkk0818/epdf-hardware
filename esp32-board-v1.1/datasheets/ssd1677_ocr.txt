@@ -1,0 +1,12 @@
+images 1
+--- image 0 (C:/Code/epdf-hardware/esp32-board-v1.1/datasheets/ssd1677_fig13_0.png) ---
+VGH
+CONNECTION
+EXTERNAL TEMP SENSOR
+CONNECTION
+'VGL
+TSCIU
+VSH2
+•VOO IO
+VGH
+VCCiM

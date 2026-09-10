@@ -1,0 +1,3718 @@
+
+
+######## tps63070 ########
+--- page 2 ---
+TPS63070
+SLVSC58B–JUNE2016–REVISEDMARCH2019 www.ti.com
+Table of Contents
+1 Features.................................................................. 1 9 ApplicationandImplementation........................ 16
+2 Applications........................................................... 1 9.1 ApplicationInformation............................................16
+3 Description............................................................. 1 9.2 TypicalApplicationforadjustableversion..............16
+4 RevisionHistory..................................................... 2 9.3 TypicalApplicationforFixedVoltageVersion .......26
+5 DeviceComparisonTable..................................... 3 10 PowerSupplyRecommendations..................... 31
+10.1 ThermalInformation..............................................31
+6 PinConfigurationandFunctions......................... 3
+11 Layout................................................................... 32
+7 Specifications......................................................... 4
+11.1 LayoutGuidelines.................................................32
+7.1 AbsoluteMaximumRatings......................................4
+11.2 LayoutExample....................................................32
+7.2 ESDRatings ............................................................4
+12 DeviceandDocumentationSupport................. 33
+7.3 RecommendedOperatingConditions.......................4
+7.4 ThermalInformation .................................................5 12.1 DeviceSupport ....................................................33
+7.5 ElectricalCharacteristics...........................................6 12.2 RelatedLinks........................................................33
+7.6 TypicalCharacteristics..............................................8 12.3 ReceivingNotificationofDocumentationUpdates33
+12.4 CommunityResources..........................................33
+8 DetailedDescription.............................................. 9
+12.5 Trademarks...........................................................33
+8.1 Overview...................................................................9
+12.6 ElectrostaticDischargeCaution............................33
+8.2 FunctionalBlockDiagramTPS63070.......................9
+12.7 Glossary................................................................33
+8.3 FunctionalBlockDiagramTPS630701...................10
+13 Mechanical,Packaging,andOrderable
+8.4 FeatureDescription.................................................10
+Information........................................................... 34
+8.5 DeviceFunctionalModes........................................14
+4 Revision History
+NOTE:Pagenumbersforpreviousrevisionsmaydifferfrompagenumbersinthecurrentversion.
+ChangesfromRevisionA(August2016)toRevisionB Page
+• AddedVariousminoreditorialupdatesandcorrections......................................................................................................... 1
+• AddedTPS630702Variant..................................................................................................................................................... 1
+• AddedTPS630702Variantwith"outputdischarge=on"option.............................................................................................. 3
+• AddedTPS630702VOUTinfo............................................................................................................................................... 7
+• AddedTPS630702VFBinfoat3instances........................................................................................................................... 7
+• AddedParameterNameRODtooutputdischargeresistancerow........................................................................................ 7
+• AddedLinktoTechNoteSLVAE62...................................................................................................................................... 13
+• Addedmoredescriptivetextforbetterunderstanding.......................................................................................................... 15
+• ChangedDescriptionofDischargeFeature,reflectingTPS630702..................................................................................... 15
+• ChangeddescriptionofoutputvoltageprogrammingtomatchECtable............................................................................. 17
+• Addedtableofcontentforapplicationcurves...................................................................................................................... 20
+• AddedTPS630702Variant................................................................................................................................................... 33
+ChangesfromOriginal(June2016)toRevisionA Page
+• AddedfullProductionData .................................................................................................................................................... 1
+2 SubmitDocumentationFeedback Copyright©2016–2019,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS63070
+--- page 3 ---
+12 8
+7
+13
+11 9 6
+10
+1 2 3 4 5
+PS/S
+L1
+PG
+PGND
+VAUX
+L2
+GND
+VIN VOUT 8 12
+7 13
+EN 14 FB2 6 9 11
+10
+15 5
+VSEL FB 4 3 2 1
+GND
+L2
+VAUX
+PGND
+PG
+L1
+PS/S
+TPS63070
+www.ti.com SLVSC58B–JUNE2016–REVISEDMARCH2019
+5 Device Comparison Table
+DeviceNumber Features OutputVoltage Marking
+TPS63070 outputdischarge=off adjustable 3070
+TPS630701 outputdischarge=off fixed5V 0701
+TPS630702 outputdischarge=on adjustable 0702
+6 Pin Configuration and Functions
+QFNPACKAGE
+Top View Bottom View
+VOUT VIN
+FB2 14 EN
+15
+FB VSEL
+PinFunctions
+PIN
+I/O DESCRIPTION
+NAME NO.
+EN 14 I Enableinput.Pullhightoenablethedevice,pulllowtodisablethedevice.
+FB 5 I Voltagefeedbackofadjustableversions,mustbeconnectedtoVOUTonfixedoutputvoltage
+versions
+GND 4 Control/logicground
+L1 11 I ConnectionforInductor
+L2 9 I ConnectionforInductor
+PS/SYNC 1 I PulltolowforforcedPWM,pullhighforPWM/PFM(powersave)mode.Applyaclocksignalto
+synchronizetoanexternalfrequency.
+PG 2 O Opendrainpowergoodoutput
+PGND 10 Powerground
+VIN 12,13 I Supplyvoltageforpowerstage
+VOUT 7,8 O Buck-boostconverteroutput
+VAUX 3 O ConnectionforCapacitorofinternalvoltageregulator.Thispinmustnotbeloadedexternally.
+VSEL 15 I Voltagescalinginput.AhighlevelonthispinenablesatransistorwhichpullspinFB2toGND.
+FB2 6 O Voltagescalingoutput.ConnectaresistorfromFBtoFB2tochangethevoltagedividerratioonthe
+feedbackpin.AlogichighlevelonVSELwillchangetheoutputvoltagetoahighervalue.Leavethe
+pinopenorconnecttoGNDifnotused.
+Copyright©2016–2019,TexasInstrumentsIncorporated SubmitDocumentationFeedback 3
+ProductFolderLinks:TPS63070
+--- page 4 ---
+TPS63070
+SLVSC58B–JUNE2016–REVISEDMARCH2019 www.ti.com
+7 Specifications
+7.1 Absolute Maximum Ratings
+overoperatingjunctiontemperaturerange(unlessotherwisenoted) (1)
+MIN MAX UNIT
+VIN,PS/SYNC,EN,VSEL –0.3 20 V
+L1 –0.3 20 V
+L1(transientfort<10ns)(2) –3 25 V
+Voltagerange L2,PG,VOUT,FB –0.3 12 V
+L2(transientfort<10ns)(2) –3 15 V
+AUX –0.3 7 V
+FB2 –0.3 3 V
+Operatingjunction –40 150 °C
+temperature,T
+j
+Storagetemperature °C
+–65 150
+range,T
+stg
+(1) StressesbeyondthoselistedunderAbsoluteMaximumRatingsmaycausepermanentdamagetothedevice.Thesearestressratings
+only,whichdonotimplyfunctionaloperationofthedeviceattheseoranyotherconditionsbeyondthoseindicatedunderRecommended
+OperatingConditions.Exposuretoabsolute-maximum-ratedconditionsforextendedperiodsmayaffectdevicereliability.
+(2) Whileswitching
+7.2 ESD Ratings
+VALUE UNIT
+Humanbodymodel(HBM),perANSI/ESDA/JEDECJS-001,allpins(1) ±2000
+V (ESD) Electrostaticdischarge Chargeddevicemodel(CDM),perJEDECspecificationJESD22-C101, ±500 V
+allpins(2)
+(1) JEDECdocumentJEP155statesthat500-VHBMallowssafemanufacturingwithastandardESDcontrolprocess.
+(2) JEDECdocumentJEP157statesthat250-VCDMallowssafemanufacturingwithastandardESDcontrolprocess.
+7.3 Recommended Operating Conditions
+overoperatingjunctiontemperaturerange(unlessotherwisenoted)
+MIN NOM MAX UNIT
+SupplyvoltageatVIN 2.0 16 V
+OutputVoltage 2.5 9 V
+EffectiveInductance 0.7 1.5 2.8 µH
+CapacitanceconnectedtoVINpin 4.7 10 µF
+CapacitanceconnectedtoVAUXpin 100 nF
+TotalcapacitanceconnectedtoVOUTpin (1) 15 47 470 µF
+dutycycleinbuckmodeoverrecommendedoperatingconditions 30 %
+dutycycleinbuckmodeoverrecommendedoperatingconditionsbuteffective 20 %
+outputcapacitanceCout,eff≥40uF;effectiveinductanceL,eff=0.7µHto1.8uH
+Operatingjunctiontemperaturerange,T –40 125 °C
+J
+(1) Duetothedcbiaseffectofceramiccapacitors,theeffectivecapacitanceislowerthanthenominalvaluewhenavoltageisapplied.This
+iswhythecapacitanceisspecifiedtoallowtheselectionoftheminimalcapacitorrequiredwiththedcbiaseffectforthistypeof
+capacitorinmind.Thecapacitancerangegivenaboveisforthenominalinductanceof1.5µH.Pleasealsoseethedetaileddesign
+procedureintheapplicationsectionabouttheratioofinductanceandminimumoutputcapacitance.
+4 SubmitDocumentationFeedback Copyright©2016–2019,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS63070
+--- page 5 ---
+TPS63070
+www.ti.com SLVSC58B–JUNE2016–REVISEDMARCH2019
+7.4 Thermal Information
+TPS63070x
+THERMALMETRIC(1) VQFN UNIT
+13PINS
+R Junction-to-ambientthermalresistance 63 °C/W
+θJA
+R Junction-to-case(top)thermalresistance 42 °C/W
+θJC(top)
+R Junction-to-boardthermalresistance 13 °C/W
+θJB
+ψ Junction-to-topcharacterizationparameter 2.4 °C/W
+JT
+ψ Junction-to-boardcharacterizationparameter 13 °C/W
+JB
+R Junction-to-case(bottom)thermalresistance n/a °C/W
+θJC(bot)
+(1) Formoreinformationabouttraditionalandnewthermalmetrics,seetheICPackageThermalMetricsapplicationreport,SPRA953.
+Copyright©2016–2019,TexasInstrumentsIncorporated SubmitDocumentationFeedback 5
+ProductFolderLinks:TPS63070
+--- page 6 ---
+TPS63070
+SLVSC58B–JUNE2016–REVISEDMARCH2019 www.ti.com
+7.5 Electrical Characteristics
+overVIN=2Vto16V;Tj=-40°Cto125°C;typicalvaluesareatTj=25°C(unlessotherwisenoted)
+PARAMETER TESTCONDITIONS MIN TYP MAX UNIT
+SUPPLY
+VIN Inputvoltagerange oncestarted;Vout≥3.0V 2.0 16 V
+VIN Inputvoltagerange forstart-up;Vout<3.0V 3.0 16 V
+duringoperationwitheither
+VIN≥4.5VorVOUT≥4.5V
+IOUT Outputcurrent 2 A
+andtheboostfactor
+(VOUT/VIN)≤1
+intoVIN;IOUT=0mA,
+I Quiescentcurrent V =VIN=6V,PFM 54 103 μA
+Q EN
+VOUT=5V;Tj=-40°Cto85°C
+intoVIN;IOUT=0mA,
+I Quiescentcurrent V =VIN=6V,PFM 133 μA
+Q EN
+VOUT=5V;Tj=-40°Cto125°C
+intoVOUT;IOUT=0mA,
+I Quiescentcurrent V =VIN=6V,VOUT=5V,PFM 5 9 μA
+Q EN
+Tj=-40°Cto85°C
+intoVOUT;IOUT=0mA,
+I Quiescentcurrent V =VIN=6V,VOUT=5V,PFM 17 μA
+Q EN
+Tj=-40°Cto125°C
+V =0V;Tj=-40°Cto85°C;
+I Shutdowncurrent EN 2 12 μA
+SD VIN=5V
+I Shutdowncurrent V =0V;Tj=-40°Cto85°C 26 μA
+SD EN
+V Undervoltagelockoutthreshold VINvoltagefalling 1.7 1.85 1.95 V
+UVLO
+V Undervoltagelockouthysteresis VINvoltagerising 525 850 mV
+UVLO,TH
+T Thermalshutdown 160 °C
+SD
+T Thermalshutdownhysteresis 20 °C
+SD
+LOGICSIGNALS:EN,PS/SYNC,PG,VSEL
+ThresholdVoltagerisingedgefor
+V ENpinandPS/SYNCusedfor 0.77 0.8 0.83 V
+THR
+PWM/PFMmodechange
+ThresholdVoltagefallingedgefor
+V ENpinandPS/SYNCusedfor 0.67 0.7 0.73 V
+THF
+PWM/PFMmodechange
+VSELlowlevelinputvoltage;
+V PS/SYNClowlevelinputvoltage 0.3 V
+IL
+whenusedforsynchronization
+VSELhighlevelinputvoltage; 1.1
+V PS/SYNChighlevelinputvoltage V
+IH
+whenusedforsynchronization
+EN,PS/SYNC,VSELinputcurrent 0.2 μA
+V PGoutputlowvoltage I =-1mA 0.4 V
+OL PG
+I PGoutputleakagecurrent PGpinhighimpedance;V =5V 0.2 μA
+LKG PG
+I PGsinkcurrent 1 mA
+PG
+PowerGoodThresholdVoltage,
+V 94.5 96 98.5 %
+TH_PG risingVout
+PowerGoodThresholdVoltage,
+V 90 92 94.5 %
+TH_PG fallingVout
+6 SubmitDocumentationFeedback Copyright©2016–2019,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS63070
+--- page 11 ---
+TPS63070
+www.ti.com SLVSC58B–JUNE2016–REVISEDMARCH2019
+Feature Description (continued)
+L1 L2
+Vin Vout
+Boost
+Drive
+Buck
+Drive
+PWM PWM
+Buck Boost gmc Rs
+Ramp Ramp
+gmv FB
+Vref
+Ramp Generator 0.8V
+Copyright © 2016,Texas Instruments Incorporated
+Figure7. AverageCurrent ModeControl
+8.4.2 PreciseEnable
+The enable pin of the TPS63070 is not just a simple digital input but compares the voltage applied to a fixed
+threshold of 0.8V for a rising voltage. This allows to drive the pin by a slowly changing voltage and enables the
+useofanexternalRCnetworktoachieveaprecisepower-updelay. Theenableinput thresholdfor afallingedge
+istypically100mVlowerthantherisingedgethreshold.TheTPS63070startsoperationwhentherisingthreshold
+is exceeded. For proper operation, the EN pin must be terminated and must not be left floating. Pulling the EN
+pin low forces the device into shutdown. In this mode, the internal high side and low side MOSFETs are turned
+off and the entire internal-control circuitry is switched off. The enable pin can also be used with an external
+voltagedividertosetauser-definedminimumsupplyvoltage.
+It is recommended to not connect EN directly to VIN but use a resistor in series in the range of 1kΩ to 1MΩ. If
+several inputs like EN and PS/SYNC are connected to VIN, the resistor can be shared. No resistor is required if
+thepinisdrivenfromananalogordigital signalrather thanasupplyvoltage.
+8.4.3 PowerGood
+The device has a built in power good output that indicates whether the output voltage has reached its nominal
+value. The PG signal is generated based on the status of the output voltage monitor. The power good circuit
+operatesaslongastheconverterisenabledandVINisabovetheundervoltagelockoutthreshold.
+If the output voltage has not reached the regulated condition, the PG pin is held low. When the regulated
+conditionisreached,PGishighimpedance.
+The PG output needs an external pull-up resistor. This resistor can be pulled to any voltage up to the maximum
+outputvoltagerating.
+Table1.Power GoodStatus
+EN outputvoltagestatus PG
+low outputoff low
+high outputvoltageabovepowergood highimpedance
+threshold
+high outputvoltagebelowpowergood low
+threshold,inthermalshutdownorinput/
+outputovervoltageprotectionactive
+Copyright©2016–2019,TexasInstrumentsIncorporated SubmitDocumentationFeedback 11
+ProductFolderLinks:TPS63070
+--- page 12 ---
+TPS63070
+SLVSC58B–JUNE2016–REVISEDMARCH2019 www.ti.com
+8.4.4 SoftStart
+To minimize inrush current during start up, the device has a soft start. When the EN pin is set high, after a
+thermal shutdown or after the undervoltage lockout threshold is exceeded, a soft-start cycle is started and the
+input current is ramped until the output voltage reaches regulation. The device ramps up the output voltage in a
+controlled manner, even if a large capacitor is connected at the output. During soft-start, as long as the output
+voltage is below the power good threshold, the input current limit is reduced to typically 1A. The soft-start time is
+defined by the current limit during the soft-start phase along with the load current, output capacitance and the
+inputtooutputvoltageratio.
+8.4.5 PS/SYNC
+ThePS/SYNCpinhastwofunctions:
+• switchingbetweenforcedPWMmodeandpower savemode
+• synchronizingtoanexternalclockappliedatpinPS/SYNC
+When PS/SYNC is set high, the device operates in power save mode at low output current. For an average
+inductor current above a certain threshold the device switches to forced PWM mode. The automatic switch-over
+from PFM to PWM and vice versa is done such that the efficiency is kept at the maximum possible level. It is not
+based on a fixed threshold but at a current that depends on input voltage and output voltage to keep the
+efficiencyatthemaximumpossiblelevel.
+The power save mode is disabled when PS/SYNC is set low. The device then operates in forced fixed frequency
+PWMmodeindependentoftheoutputcurrent.
+TPS6307x can be synchronized to an external clock applied at pin PS/SYNC. Details about the voltage level and
+frequency range can be found in the electrical characteristics. When an external clock is detected, TPS6307x
+switches from internal clock or power save mode to fixed frequency operation based on the external clock
+frequency. When the external clock is removed, TPS6307x switches back to internal clock or power save mode
+depending on the average inductor current and status of the PS/SYNC pin. The PS/SYNC pin has two parallel
+input stages, a slow one with the precise threshold for PWM/PFM mode change and a fast digital input stage for
+anexternalclocksignalforsynchronization.
+It is recommended to not connect PS/SYNC directly to VIN but use a resistor in series in the range of 1kΩ to
+1MΩ. If several inputs like EN and PS/SYNC are connected to VIN, the resistor can be shared. No resistor is
+requiredifthepinisdrivenfromananalogordigitalsignalrather thanasupplyvoltage.
+8.4.6 ShortCircuitProtection
+The TPS6307x provides short circuit protection to protect itself and the application. When the output voltage is
+below 1.2 V, the back-gate diodes of the low side input FET and high side output FET are used for rectification.
+For an input voltage above 9 V and an output voltage below 2.2 V, the switching frequency is scaled to ½ of its
+nominalvalue.
+12 SubmitDocumentationFeedback Copyright©2016–2019,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS63070
+--- page 13 ---
+TPS63070
+www.ti.com SLVSC58B–JUNE2016–REVISEDMARCH2019
+8.4.7 VSELandFB2pins
+The VSEL pin allows to dynamically select between two different output voltages on the adjustable version. The
+voltage is set by a resistor that is connected between the FB and the FB2 pin. FB2 is connected to GND if VSEL
+= high. FB2 is high impedance if VSEL= low. The transition speed during a voltage change is defined by the loop
+bandwidthofthedeviceandcanbeadjustedbyaddingafeed-forwardcapacitorinparalleltoR1.
+1.5 µH
+TPS63070
+L1 L2
+VIN = 2.0 V to 16 V VOUT= Vo1 / Vo2
+2x10 µF 10 µF VIN VOUT 10 µF
+R1
+0805 0603 0603 3x22 µF
+FB
+10 kΩ PS/SYNC R2 R3
+EN FB2
+VSEL
+PG
+PGND
+VAUX GND
+100 nF
+Copyright © 2016,Texas Instruments Incorporated
+Figure8. TypicalApplicationusingVSEL
+Theresistor valuesforthefeedbackdividerandFB2areinthe50-500kΩ range.R3iscalculatedasfollows:
+(1)
+FormoredetailsonhowtouseVSELseeTechnoteSLVAE62.
+8.4.8 OvervoltageProtection
+TPS6307x has a built in over-voltage protection which limits the output voltage. The voltage is internally sensed
+ontheVOUT pin.Incasethevoltageonthefeedbackpinisnotsetcorrectlyortheconnectionisopen,thislimits
+the output voltage to a value that protects the output stage from a too high voltage by limiting it to a internally set
+value.
+Input over-voltage protection forces PFM mode to make sure the device is protected against boosting from the
+output to the input. This may happen if there is a large capacitor charged above the nominal voltage on the
+output and the supply on the input is removed. In PWM mode, the device is able to provide current from the
+output to the input causing a rise in the input voltage. In PFM mode, the current to the input is blocked so the
+input voltage can not rise. The input over-voltage protection does not protect the device from a too high voltage
+applied to the input but just from operating such that the device itself causes a rise of the input voltage above
+criticallevels.Bothover-voltagesensorsarede-glitchedbyapproximately1µs.
+8.4.9 UndervoltageLockout
+When the input voltage drops, the undervoltage lockout prevents mis-operation by switching off the device. The
+converter starts operation when the input voltage exceeds the threshold by a hysteresis of typically 850 mV. This
+relatively large hysteresis is needed to allow operation down to 2-V of supply voltage for the case when the
+outputvoltageisupat3-V orabovebutrestrict start-upfor thecasewhentheoutput voltageiszero. Forstart-up
+when the output voltage has not yet ramped, the rising UVLO threshold was set to a level that allows to start
+TPS63070atasupplyvoltagewheretheloaddoesnotdemandmuchloadcurrent.
+8.4.10 OvertemperatureProtection
+The junction temperature (Tj) of the device is monitored by an internal temperature sensor. When Tj exceeds the
+thermal shutdown temperature, the device goes into thermal shutdown. The power stage is turned off and PG
+goes low. When Tj decreases below the hysteresis amount, the converter resumes normal operation, beginning
+withaSoft Startcycle.Toavoidunstableconditions,ahysteresisoftypically20°Cisimplementedonthethermal
+shutdowntemperature.Inaddition,thethermalshutdownisdebouncedbyapproximately10 µs.
+Copyright©2016–2019,TexasInstrumentsIncorporated SubmitDocumentationFeedback 13
+ProductFolderLinks:TPS63070
+--- page 14 ---
+TPS63070
+SLVSC58B–JUNE2016–REVISEDMARCH2019 www.ti.com
+8.5 Device Functional Modes
+8.5.1 PowerSaveMode
+Depending on the load current, in order to provide the best efficiency over the complete load range, the device
+works in PWM mode at an inductor current of approximately 650 mA or higher. At lighter load, the device
+switches automatically in to Power Save Mode to reduce power consumption and extend battery life. The
+PFM/PWM pin can be used to select between the two different operation modes. To enable Power Save Mode,
+thePFM/PWMpinmustbesethigh.
+During Power Save Mode, the part operates with a reduced switching frequency and supply current to maintain
+high efficiency. The output voltage is monitored by a comparator for the threshold "comp low" and "comp high" at
+every clock cycle. When the device enters Power Save Mode, the converter stops operating and the output
+voltage drops. The slope of the output voltage depends on the load and the output capacitance. When the output
+voltage reaches the comp low threshold, at the next clock cycle the device ramps up the output voltage again by
+starting operation. Operation can last for one or several pulses until the "comp high" threshold is reached. At the
+next PFM cycle, if the inductor current is still lower than about 650 mA, the device switches off again and the
+same operation is repeated. Instead, if at the next PFM cycle, the inductor current is above approximately 650
+mA,thedeviceautomaticallyswitchestoPWMmode.
+In order to keep high efficiency in PFM mode, there is only a comparator active to keep the output voltage
+regulated. The AC ripple in this condition is increased, compared to the voltage in PWM mode. The amplitude of
+this voltage ripple typically is 50 mV pk-pk, with 22 µF effective capacitance. In order to avoid a critical voltage
+drop when switching from 0 A to full load, the output voltage in PFM is typically 1 % above the nominal value in
+PWM. This allows the converter to operate with a small output capacitor and still have a low absolute voltage
+dropduringheavyloadtransients.
+PowerSaveModecanbedisabledbyprogrammingthePFM/PWM pinlow.
+Heavy Load transient step
+PFM mode at light load
+current
+Comparator high
++1%*Vo 50mV ripple in PFM
+Comparator low
+Vo PWM mode
+AbsoluteVoltage drop
+with positioning
+Figure9. DynamicVoltagePositioning
+8.5.2 CurrentLimit
+it is possible to calculate the output current in the different conditions in boost mode using Equation 2 and
+Equation3andinbuckmodeusingEquation4andEquation5.
+V -V
+OUT IN
+DutyCycleBoost D=
+V
+OUT (2)
+Output Current Boost I OUT =0 x I IN (1-D) (3)
+V
+OUT
+DutyCycleBuck D=
+V
+IN (4)
+Output Current Buck I OUT = (0 x I IN ) / D (5)
+14 SubmitDocumentationFeedback Copyright©2016–2019,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS63070
+--- page 16 ---
+TPS63070
+SLVSC58B–JUNE2016–REVISEDMARCH2019 www.ti.com
+9 Application and Implementation
+NOTE
+Information in the following applications sections is not part of the TI component
+specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+responsible for determining suitability of components for their purposes. Customers should
+validateandtesttheirdesignimplementationtoconfirmsystem functionality.
+9.1 Application Information
+The TPS6307x is a high efficiency, low quiescent current buck-boost converter suitable for applications where
+the input voltage can be higher or lower than the output voltage. The TPS63070 is internally supplied from the
+higher of the input voltage or output voltage. For proper operation either one or both need to have a voltage of
+3.0Vorabovebutmustnotexceedtheirmaximumrating.
+9.2 Typical Application for adjustable version
+L
+1.5µH
+L1 L2
+TPS63070 VOUT= 2.5 V to 9 V
+VIN = 2.0 V to 16 V C4
+C1 VOUT 10µF COUT
+VIN
+CIN 10µF R1
+0603 3x22µF
+2x10µF 0603 0805
+0805 FB R4
+VSEL R2 100 kΩ
+R5 FB2
+10 kΩ
+EN PG
+PS/SYNC PGND
+VAUX GND
+CVAUX
+100 nF
+Copyright © 2016,Texas Instruments Incorporated
+Figure10. TypicalApplicationForAdjustableVersion
+9.2.1 Design Requirements
+The design guidelines provide a component selection to operate the device within the recommended operating
+conditions. The input and output capacitors have been split into a small 0603 size capacitor close to the device
+pinsand0805sizecapacitorstogettherequiredcapacitance.
+Table2.BillofMaterials
+REFERENCE DESCRIPTION VALUE MANUFACTURER
+IC TPS63070RNM TexasInstruments
+L XFL4020-152ME 1.5µH Coilcraft
+2x10µF/25V/
+CIN GRM21BC71E106ME11L Murata
+X7S/0805
+10µF/25V/X5R/
+C1 TMK107BBJ106MA-T TaiyoYuden
+0603
+3x22µF/16V/
+COUT GRM21BC81C226ME44L Murata
+X6S/0805
+10µF/25V/X5R/
+C4 TMK107BBJ106MA-T TaiyoYuden
+0603
+16 SubmitDocumentationFeedback Copyright©2016–2019,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS63070
+--- page 17 ---
+TPS63070
+www.ti.com SLVSC58B–JUNE2016–REVISEDMARCH2019
+Table2.BillofMaterials(continued)
+REFERENCE DESCRIPTION VALUE MANUFACTURER
+100nF/25V/X7R/
+CVAUX TMK105B7104MV-FR TaiyoYuden
+0402
+dependingondesired
+R1,R2 MetalFilmResistor;1%
+outputvoltage
+R4 MetalFilmResistor;1% 100kΩ
+9.2.2 DetailedDesignProcedure
+The TPS6307x series of buck-boost converter has internal loop compensation. Therefore, the external L-C filter
+hastobeselectedaccordingtotheinternalcompensation.It'simportanttoconsider that theeffectiveinductance,
+due to inductor tolerance and current derating can vary between 20% and -30%. The same for the capacitance
+of the output filter: the effective capacitance can vary between +20% and -80% of the specified datasheet value,
+due to capacitor tolerance and bias voltage. For this reason, Output Filter Selection shows the nominal
+capacitance and inductance value allowed. The effective capacitance of the adjustable version TPS63070 on the
+output (in µF) needs to be at least 10 times higher than the effective inductance (in µH) to ensure a good
+transientresponseandstableoperation.
+Table3.OutputFilterSelection
+INDUCTOR
+OUTPUTCAPACITORVALUE[µF](2)
+VALUE[µH](1)
+22 47 68 100
+1.0 √ √ √
+1.5 √(3) √ √
+2.2 √ √
+(1) Inductortoleranceandcurrentde-ratingisanticipated.Theeffectiveinductancecanvaryby+20%and
+–30%.
+(2) Capacitancetoleranceandbiasvoltagede-ratingof+20%and-50%isanticipated.Forcapacitorswith
+largerdcbiaseffect,alargernominalvalueneedstobeselected.
+(3) Typicalapplication.Othercheckmarksindicatesrecommendedfiltercombinations
+9.2.2.1 ProgrammingTheOutputVoltage
+WhiletheoutputvoltageoftheTPS63070isadjustable,theTPS630701issettoafixedvoltage.Forfixedoutput
+versions, the FB pin must be connected to the output directly. The adjustable version can be programmed for
+output voltages from 2.5V to 9V by using a resistive divider from VOUT to GND. The voltage at the FB pin
+(V )is regulated to 800mV. The value of the output voltage is set by the selection of the resistive divider from
+REF
+Equation 6 . It is recommended to choose resistor values which allow a current of at least 2uA, meaning the
+value of R2 shouldn't exceed 400kΩ. Lower resistor values are recommended for highest accuracy and most
+robustdesign.
+æV ö
+R =R ç OUT -1÷
+1 2 è 0.8V ø (6)
+Table4.Typical ResistorValues
+OutputVoltage R1 R2
+3.3V 470kΩ 150kΩ
+5.0V 680kΩ 130kΩ
+5.3V 560kΩ 100kΩ
+5.5V 300kΩ 51kΩ
+6.5V 360kΩ 51kΩ
+9V 402kΩ 39kΩ
+Copyright©2016–2019,TexasInstrumentsIncorporated SubmitDocumentationFeedback 17
+ProductFolderLinks:TPS63070
+--- page 19 ---
+TPS63070
+www.ti.com SLVSC58B–JUNE2016–REVISEDMARCH2019
+9.2.2.3 CapacitorSelection
+9.2.2.3.1 InputCapacitor
+It is recommended to use a combination of capacitors on the input. A small size ceramic capacitor as close as
+possible from the VIN pin to GND to block high frequency noise and a larger one in parallel for the required
+capacitance on for good transient behavior of the regulator. X5R or X7R ceramic capacitor are recommended.
+The input capacitor needs to be large enough to avoid supply voltage dips shorter than 5us as the undervoltage
+lockoutcircuitryneedstimetoreact.
+9.2.2.3.2 OutputCapacitor
+Same as the input, the output capacitor should be a combination of capacitors optimized for suppressing high
+frequency noise and a larger capacitor for low output voltage ripple and stable operation. The use of small X5R
+or X7R ceramic capacitors placed as close as possible to the VOUT and GND pins of the IC is recommended. A
+0603 size capacitor close to the pins of the IC and as many 0805 capacitors as required to get the capacitance
+given the output voltage and dc bias effect of the ceramic capacitors is best. The recommended typical output
+capacitor valuesareoutlinedinOutputFilterSelection.PleasealsoseetheRecommendedOperatingConditions
+fortheminimumandmaximumcapacitanceat theoutput.
+Larger capacitors will cause lower output voltage ripple as well as lower output voltage drop during load
+transients.
+Table6.Typical Capacitors
+VALUE PARTNUMBER COMPONENT COMMENT SIZE(LxWxHmm)
+SUPPLIER(1)
+22µF EMK212BBJ226MG-T TaiyoYuden inputcapacitorforVin≤8V 2x1.25x1.25
+22µF TMK316BBJ226ML TaiyoYuden inputcapacitor 3.2x1.6x1.6
+10µF TMK107BBJ106MA-T TaiyoYuden bypasscapacitordirectlyat 1.6x0.8x0.8
+devicepinsonVINtoGND
+andVOUTtoGND
+10µF GRM21BC71E106ME11 Murata smallbodysize;2parts 2x1.25x1.25
+requiredifusedatVIN>6V
+22µF GRM21BC81C226ME44 Murata smallbodysize;3parts 2x1.25x1.25
+requiredifusedatVo>5V;
+otherwise2parts
+(1) SeeThird-partyProductsDisclaimer
+Copyright©2016–2019,TexasInstrumentsIncorporated SubmitDocumentationFeedback 19
+ProductFolderLinks:TPS63070
+--- page 26 ---
+TPS63070
+SLVSC58B–JUNE2016–REVISEDMARCH2019 www.ti.com
+9.3 Typical Application for Fixed Voltage Version
+L
+1.5µH
+TPS630701
+L1 L2
+VOUT= 5 V
+VIN = 2.0 V to 16 V C4
+VOUT
+C1 10µF COUT
+VIN
+CIN 10µF
+0603 3x22µF
+2x10 µF 0603
+0805
+0805 FB R4
+VSEL 100 kΩ
+R5 FB2
+10 kΩ
+EN PG
+PS/SYNC PGND
+VAUX GND
+CVAUX
+100 nF
+Copyright © 2016,Texas Instruments Incorporated
+Figure37. TypicalApplicationFor FixedVoltageVersionWithMinimum ExternalPartCountAnd
+Minimum Soft StartTime
+9.3.1 Design Requirements
+The design guidelines provide a component selection to operate the device within the recommended operating
+conditions. The input and output capacitors have been split into a small 0603 size capacitor close to the device
+pinsand0805sizecapacitorstogettherequiredcapacitance.
+Table8.BillofMaterials
+REFERENCE DESCRIPTION VALUE MANUFACTURER
+IC TPS630701RNM TexasInstruments
+L XFL4020-1.5µH 1.5µH Coilcraft
+2x10µF/25V/
+CIN GRM21BC71E106ME11L Murata
+X7S/0805
+10µF/25V/X5R/
+C1 TMK107BBJ106MA-T TaiyoYuden
+0603
+3x22µF/16V/
+COUT GRM21BC81C226ME44L Murata
+X6S/0805
+10µF/25V/X5R/
+C4 TMK107BBJ106MA-T TaiyoYuden
+0603
+100nF/25V/X7R/
+CVAUX TMK105B7104MV-FR TaiyoYuden
+0402
+R4 MetalFilmResistor;1% 100kΩ -
+26 SubmitDocumentationFeedback Copyright©2016–2019,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS63070
+--- page 32 ---
+TPS63070
+SLVSC58B–JUNE2016–REVISEDMARCH2019 www.ti.com
+11 Layout
+11.1 Layout Guidelines
+For all switching power supplies, the layout is an important step in the design, especially at high peak currents
+and high switching frequencies. If the layout is not carefully done, the regulator could show stability problems as
+well as EMI problems. Therefore, use wide and short traces for the main current path and for the power ground
+connection. The input capacitor, output capacitor, and the inductor should be placed as close as possible to the
+IC. Use a common ground node for power ground and a different one for control ground to minimize the effects
+ofgroundnoise.ConnectthesegroundnodesatanyplaceclosetooneofthegroundpinoftheIC.
+A ceramic capacitor each, as close as possible from the VIN pin to GND and one from the VOUT pin to GND,
+shown as C1 and C4 in the layout proposal are used to suppress high frequency noise. The case size should be
+0603 or smaller for good high frequency performance. Additional 0805 size input and output capacitors are used
+to get the required capacitance on the input and output depending on the supply voltage range and the output
+voltage.
+The feedback divider should be placed as close as possible to the feedback pin of the IC. To lay out the control
+ground, short traces are recommended as well, separation from the power ground traces. This avoids ground
+shiftproblems,whichcanoccurduetosuperimpositionofpower groundcurrent andcontrolgroundcurrent.
+In case any of the digital inputs EN, VSEL or PS/SYNC need to be tied to the input supply voltage VIN, a 10k
+resistor mustbeusedinseries.Onecommon resistorfor alldigitalinputsthat aretiedtoVINissufficient.
+11.2 Layout Example
+L1
+GND
+GND
+CIN COUT
+C1 C4
+1L GP 2L
+VIN DN VOUT
+R3
+VIN EN FB2 VOUT
+VSEL FB
+S/SP GP XUAV DN G
+R1
+R2
+C
+VAUX
+Figure51. EVMLayout
+32 SubmitDocumentationFeedback Copyright©2016–2019,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS63070
+--- page 35 ---
+PACKAGE OPTION ADDENDUM
+www.ti.com 9-Dec-2025
+PACKAGING INFORMATION
+Orderable part number Status Material type Package | Pins Package qty | Carrier RoHS Lead finish/ MSL rating/ Op temp (°C) Part marking
+(1) (2) (3) Ball material Peak reflow (6)
+(4) (5)
+TPS630701RNMR Active Production VQFN-HR (RNM) | 15 3000 | LARGE T&R Yes Call TI | Sn Level-1-260C-UNLIM -40 to 125 0701
+TPS630701RNMR.A Active Production VQFN-HR (RNM) | 15 3000 | LARGE T&R Yes SN Level-1-260C-UNLIM -40 to 125 0701
+TPS630701RNMT Active Production VQFN-HR (RNM) | 15 250 | SMALL T&R Yes Call TI | Sn Level-1-260C-UNLIM -40 to 125 0701
+TPS630701RNMT.A Active Production VQFN-HR (RNM) | 15 250 | SMALL T&R Yes SN Level-1-260C-UNLIM -40 to 125 0701
+TPS630702RNMR Active Production VQFN-HR (RNM) | 15 3000 | LARGE T&R Yes SN Level-1-260C-UNLIM -40 to 125 0702
+TPS630702RNMR.A Active Production VQFN-HR (RNM) | 15 3000 | LARGE T&R Yes SN Level-1-260C-UNLIM -40 to 125 0702
+TPS630702RNMT Active Production VQFN-HR (RNM) | 15 250 | SMALL T&R Yes Call TI | Sn Level-1-260C-UNLIM -40 to 125 0702
+TPS630702RNMT.A Active Production VQFN-HR (RNM) | 15 250 | SMALL T&R Yes SN Level-1-260C-UNLIM -40 to 125 0702
+TPS63070RNMR Active Production VQFN-HR (RNM) | 15 3000 | LARGE T&R Yes Call TI | Sn Level-1-260C-UNLIM -40 to 125 3070
+TPS63070RNMR.A Active Production VQFN-HR (RNM) | 15 3000 | LARGE T&R Yes SN Level-1-260C-UNLIM -40 to 125 3070
+TPS63070RNMT Active Production VQFN-HR (RNM) | 15 250 | SMALL T&R Yes Call TI | Sn Level-1-260C-UNLIM -40 to 125 3070
+TPS63070RNMT.A Active Production VQFN-HR (RNM) | 15 250 | SMALL T&R Yes SN Level-1-260C-UNLIM -40 to 125 3070
+(1) Status: For more details on status, see our product life cycle.
+(2) Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+(3) RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+(4) Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+(5) MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+(6) Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+Addendum-Page 1
+--- page 37 ---
+PACKAGE MATERIALS INFORMATION
+www.ti.com 10-Dec-2025
+TAPE AND REEL INFORMATION
+REEL DIMENSIONS TAPE DIMENSIONS
+K0 P1
+W
+B0
+Reel
+Diameter
+Cavity A0
+A0 Dimension designed to accommodate the component width
+B0 Dimension designed to accommodate the component length
+K0 Dimension designed to accommodate the component thickness
+W Overall width of the carrier tape
+P1 Pitch between successive cavity centers
+Reel Width (W1)
+QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+Sprocket Holes
+Q1 Q2 Q1 Q2
+Q3 Q4 Q3 Q4 User Direction of Feed
+Pocket Quadrants
+*All dimensions are nominal
+Device Package Package Pins SPQ Reel Reel A0 B0 K0 P1 W Pin1
+Type Drawing Diameter Width (mm) (mm) (mm) (mm) (mm) Quadrant
+(mm) W1 (mm)
+TPS630701RNMT VQFN- RNM 15 250 180.0 12.4 2.8 3.3 1.2 8.0 12.0 Q1
+HR
+TPS630702RNMR VQFN- RNM 15 3000 330.0 12.4 2.8 3.3 1.2 8.0 12.0 Q1
+HR
+TPS63070RNMR VQFN- RNM 15 3000 180.0 12.4 2.8 3.3 1.1 4.0 12.0 Q1
+HR
+TPS63070RNMT VQFN- RNM 15 250 180.0 12.4 2.8 3.3 1.1 4.0 12.0 Q1
+HR
+Pack Materials-Page 1
+--- page 38 ---
+PACKAGE MATERIALS INFORMATION
+www.ti.com 10-Dec-2025
+TAPE AND REEL BOX DIMENSIONS
+Width (mm) H
+W L
+*All dimensions are nominal
+Device Package Type Package Drawing Pins SPQ Length (mm) Width (mm) Height (mm)
+TPS630701RNMT VQFN-HR RNM 15 250 341.0 182.0 80.0
+TPS630702RNMR VQFN-HR RNM 15 3000 346.0 346.0 33.0
+TPS63070RNMR VQFN-HR RNM 15 3000 210.0 185.0 35.0
+TPS63070RNMT VQFN-HR RNM 15 250 210.0 185.0 35.0
+Pack Materials-Page 2
+--- page 39 ---
+PACKAGE OUTLINE
+RNM0015A VQFN - 1 mm max height
+SCALE 4.000
+PLASTIC QUAD FLATPACK - NO LEAD
+B 2.6 A
+2.4
+PIN 1 INDEX AREA
+3.1
+2.9
+1.0
+0.8 C
+SEATING PLANE
+0.05
+PKG 0.08 C
+0.00
+2X 0.725 2X 0.775
+2X 0.5 (0.2) TYP
+5 7 8 2X (0.25)
+0.5 TYP
+1.6
+4
+1.4
+9
+SYMM
+1.5 1
+11
+1.25
+2X
+1 1.05
+15 13 12
+8X 0 0 . . 5 3 0.3 2X 0 0 . . 5 3
+15X
+0.2
+0.1 C B A
+0.05 C
+4222000/B 03/2020
+NOTES:
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+www.ti.com
+
+
+######## max17048 ########
+--- page 1 ---
+EVALUATION KIT AVAILABLE
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+General Description Features and Benefits
+The MAX17048/MAX17049 ICs are tiny, micropower cur- ● MAX17048: 1 Cell, MAX17049: 2 Cells
+rent fuel gauges for lithium-ion (Li+) batteries in handheld
+● Precision ±7.5mV/Cell Voltage Measurement
+and portable equipment. The MAX17048 operates with
+● ModelGauge Algorithm
+a single lithium cell and the MAX17049 with two lithium
+• Provides Accurate State-of-Charge
+cells in series.
+• Compensates for Temperature/Load Variation
+The ICs use the sophisticated Li+ battery-modeling algo-
+• Does Not Accumulate Errors, Unlike Coulomb
+rithm ModelGauge™ to track the battery relative state-of-
+Counters
+charge (SOC) continuously over widely varying charge
+• Eliminates Learning
+and discharge conditions. The ModelGauge algorithm • Eliminates Current-Sense Resistor
+eliminates current-sense resistor and battery-learn cycles
+● Ultra-Low Quiescent Current
+required in traditional fuel gauges. Temperature compen-
+• 3μA Hibernate, 23μA Active
+sation is implemented using the system microcontroller.
+• Fuel Gauges in Hibernate Mode
+The ICs automatically detect when the battery enters a • Automatically Enters and Exits Hibernate Mode
+low-current state and enters low-power 3µA hibernate
+● Reports Charge and Discharge Rate
+mode, while still providing accurate fuel gauging. The
+ICs automatically exit hibernate mode when the system ● Battery-Insertion Debounce
+returns to active state. • Best of 16 Samples to Estimate Initial SOC
+On battery insertion, the ICs debounce initial voltage ● Programmable Reset for Battery Swap
+measurements to improve the initial SOC estimate, • 2.28V to 3.48V Range
+thus allowing them to be located on system side. SOC, ● Configurable Alert Indicator
+voltage, and rate information is accessed using the I2C • Low SOC
+interface. The ICs are available in a tiny 0.9mm x 1.7mm, • 1% Change in SOC
+8-bump wafer-level package (WLP), or a 2mm x 2mm, • Battery Undervoltage/Overvoltage
+8-pin TDFN package. • VRESET Alert
+● I2C Interface
+Applications
+● 8-Bit OTP ID Register (Contact Factory)
+● Smartphones, Tablets
+● Smartwatches, Wearables
+● Bluetooth Headsets Simple Fuel-Gauge Circuit Diagram
+● Health and Fitness Monitors
+● Digital Still, Video, and Action Cameras
+● Medical Devices
+● Handheld Computers and Terminals
+● Wireless Speakers MAX17048
+● Home and Building Automation, Sensors
+VDD ALRT
+CELL SDA SYSTEM
+ONLY ONE µP
+EXTERNAL CTG SCL
+COMPONENT
+GND QSTRT
+Ordering Information appears at end of data sheet.
+ModelGauge is a trademark of Maxim Integrated Products, Inc.
+19-6171; Rev 7; 11/16
+--- page 2 ---
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+Absolute Maximum Ratings
+CELL to GND ........................................................-0.3V to +12V Storage Temperature Range ............................-55°C to +125°C
+All Other Pins to GND .............................................-0.3V to +6V Lead Temperature (TDFN only) (soldering, 10s) ............+300°C
+Continuous Sink Current, SDA, ALRT ...............................20mA Soldering Temperature (reflow).......................................+260°C
+Operating Temperature Range ...........................-40°C to +85°C
+Stresses beyond those listed under “Absolute Maximum Ratings” may cause permanent damage to the device. These are stress ratings only, and functional operation of the device at these
+or any other conditions beyond those indicated in the operational sections of the specifications is not implied. Exposure to absolute maximum rating conditions for extended periods may affect
+device reliability.
+Electrical Characteristics
+(VDD = 2.5V to 4.5V, TA= -20°C to +70°C, unless otherwise noted. Typical values are at TA = +25°C.) (Note 1)
+PARAMETER SYMBOL CONDITIONS MIN TYP MAX UNITS
+Supply Voltage VDD (Note 2) 2.5 4.5 V
+Fuel-Gauge SOC Reset Configuration range, in 40mV steps 2.28 3.48 V
+(VRESET Register)
+VRST
+Trimmed at 3V 2.85 3.0 3.15 V
+SCL, SDA,
+Data I/O Pins (Note 2) -0.3 +5.5 V
+ALRT
+Sleep mode, TA ≤ +50°C 0.5 2
+Hibernate mode, reset comparator
+3 5
+IDD0 disabled (VRESET.Dis = 1)
+Supply Current µA
+Hibernate mode, reset comparator
+4
+enabled (VRESET.Dis = 0)
+IDD1 Active mode 23 40
+Time Base Accuracy tERR Active, hibernate modes (Note 3) -3.5 ±1 +3.5 %
+Active mode 250 ms
+ADC Sample Period
+Hibernate mode 45 s
+VCELL = 3.6V, TA = +25°C (Note 4) -7.5 +7.5
+Voltage Error VERR mV/cell
+-20 +20
+Voltage-Measurement Resolution 1.25 mV/cell
+MAX17048: VDD pin 2.5 5
+Voltage-Measurement Range V
+MAX17049: CELL pin 5 10
+SDA, SCL, QSTRT Input
+Logic-High
+VIH 1.4 V
+SDA, SCL, QSTRT Input
+Logic-Low
+VIL 0.5 V
+SDA, ALRT Output
+Logic-Low
+VOL IOL = 4mA 0.4 V
+SDA, SCL Bus
+Low-Detection Current
+IPD VSDA = VSCL = 0.4V (Note 5) 0.2 0.4 µA
+Bus Low-Detection Timeout tSLEEP (Note 6) 1.75 2.5 s
+www.maximintegrated.com Maxim Integrated │ 2
+--- page 6 ---
+TOP VIEW
+(PAD SIDE DOWN)
+SDA SCL QSTRT ALRT
+8 7 6 5
+MAX17048 A1 A2 A3 A4
+MAX17049
++
+B1 B2 B3 B4
+1 2 3 4
+CTG CELL VDD GND
+TDFN
+PIN/BUMP
+NAME FUNCTION
+TDFN WLP
+1 A1 CTG Connect to Ground
+Connect to the Positive Battery Terminal.
+2 A2 CELL MAX17048: Not internally connected.
+MAX17049: Voltage sense input.
+Power-Supply Input. Bypass with 0.1µF to GND.
+3 A3 VDD MAX17048: Voltage sense input. Connect to positive battery terminal.
+MAX17049: Connect to regulated power-supply voltage.
+4 A4 GND Ground. Connect to negative battery terminal.
+Open-Drain, Active-Low Alert Output. Optionally connect to interrupt input of the system
+5 B4 ALRT
+microcontroller.
+6 B3 QSTRT Quick-Start Input. Allows reset of the device through hardware. Connect to GND if not used.
+7 B2 SCL I2C Clock Input. SCL has an internal pulldown (IPD) for sensing disconnection.
+8 B1 SDA
+Open-Drain I2C Data Input/Output. SDA has an internal pulldown (IPD) for sensing
+disconnection.
+— — EP Exposed Pad (TDFN Only). Connect to GND.
++
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+Pin/Bump Configurations
+TOP VIEW
+(BUMP SIDE DOWN)
+MAX17048
+MAX17049
+CTG CELL VDD GND
+SDA SCL QSTRT ALRT
+WLP
+Pin/Bump Descriptions
+www.maximintegrated.com Maxim Integrated │ 6
+--- page 9 ---
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+Battery Swap Detection quick-start. A quick-start is initiated by a rising edge on
+the QSTRT pin, or by writing 1 to the quick-start bit in the
+If VCELL falls below VRST, the IC quick-starts when
+MODE register.
+VCELL returns above VRST. This handles battery swap;
+the SOC of the previous battery does not affect that of the
+Power-On Reset (POR)
+new one. See the Quick-Start and VRESET/ID Register
+POR includes a quick-start, so only use it when the bat-
+(0x18) sections.
+tery is fully relaxed. See the Quick-Start section. This
+Quick-Start command restores all registers to their default values.
+After this command, reload the custom model. See the
+If the IC generates an erroneous initial SOC, the battery
+CMD Register (0xFE) section.
+insertion and system powerup voltage waveforms must
+be examined to determine if a quick-start is necessary,
+Hibernate Mode
+as well as the best time to execute the command. The IC
+The ICs have a low-power hibernate mode that can accu-
+samples the maximum VCELL during the first 17ms. See
+rately fuel gauge the battery when the charge/discharge
+the Battery Insertion Debounce section. Unless VCELL is
+rate is low. By default, the device automatically enters
+fully relaxed, even the best sampled voltage can appear
+and exits the hibernate mode according to the charge/
+greater or less than OCV. Therefore, quick-start must be
+discharge rate, which minimizes quiescent current (below
+used cautiously.
+5µA) without compromising fuel-gauge accuracy. The ICs
+Most systems should not use quick-start because the can be forced into hibernate or active modes. Force the
+ICs handle most startup problems transparently, such as IC into hibernate mode to reduce power consumption in
+intermittent battery-terminal connection during insertion. If applications with less than C/4-rate maximum loading.
+battery voltage stabilizes faster than 17ms, as illustrated For applications with higher loading, Maxim recommends
+in Figure 6, then do not use quick-start. the default configuration of automatic control of hibernate
+The quick-start command restarts fuel-gauge calcula- mode.
+tions in the same manner as initial power-up of the IC. If In hibernate mode, the device reduces its ADC conver-
+the system power-up sequence is so noisy that the initial sion period and SOC update to once per 45s. See the
+estimate of SOC has unacceptable error, the system HIBRT Register (0x0A) section for details on how the IC
+microcontroller might be able to reduce the error by using automatically enters and exits hibernate mode.
+VCELL
+STEADY SYSTEM
+LOAD BEGINS VCELL STEADY
+SYSTEM
+LOAD BEGINS
+BEST TIME TO
+QUICK-START
+VCELL HAS
+FULLY RELAXED
+TIME
+TIME
+VCELL HAS INITIAL SAMPLE QUICK-START DURING
+FULLY RELAXED DEBOUNCE WINDOW THIS TIME SPAN
+INITIAL SAMPLE
+DEBOUNCE WINDOW
+Figure 6. Insertion Waveform Not Requiring Quick-Start Figure 7. Insertion Waveform Requiring Quick-Start Command
+Command
+www.maximintegrated.com Maxim Integrated │ 9
+--- page 10 ---
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+Alert Interrupt Register Summary
+The ICs can interrupt a system microcontroller with All registers must be written and read as 16-bit words;
+five configurable alerts (see Table 1). All alerts can be 8-bit writes cause no effect. Any bits marked X (don’t
+disabled or enabled with software. When the interrupt care) or read only must be written with the rest of the
+occurs, the system microcontroller can determine the register, but the value written is ignored by the IC. The
+cause from the STATUS register. values read from don’t care bits are undefined. Calculate
+When an alert is triggered, the IC drives the ALRT the register’s value by multiplying the 16-bit word by the
+pin logic-low and sets CONFIG.ALRT = 1. The ALRT register’s LSb value, as shown in Table 2.
+pin remains logic-low until the system software writes
+VCELL Register (0x02)
+CONFIG.ALRT = 0 to clear the alert. The alert function
+is enabled by default, so any alert can occur immediately
+The MAX17048 measures VCELL between the VDD and
+GND pins. The MAX17049 measures VCELL between the
+upon power-up. Entering sleep mode clears no alerts.
+CELL and GND pins. VCELL is the average of four ADC
+Sleep Mode conversions. The value updates every 250ms in active
+In sleep mode, the IC halts all operations, reducing cur- mode and every 45s in hibernate mode.
+rent consumption to below 1µA. After exiting sleep mode,
+SOC Register (0x04)
+the IC continues normal operation. In sleep mode, the
+The ICs calculate SOC using the ModelGauge algorithm.
+IC does not detect self-discharge. If the battery changes
+This register automatically adapts to variation in battery
+state while the IC sleeps, the IC cannot detect it, causing
+size since ModelGauge naturally recognizes relative SOC.
+SOC error. Wake up the IC before charging or discharg-
+ing. To enter sleep mode, write MODE.EnSleep = 1 and The upper byte least-significant bit has units of 1%. The
+either: lower byte provides additional resolution.
+• Hold SDA and SCL logic-low for a period for tSLEEP. The first update is available approximately 1s after POR
+A rising edge on SDA or SCL wakes up the IC. of the IC. Subsequent updates occur at variable intervals
+depending on application conditions.
+• Write CONFIG.SLEEP = 1. To wake up the IC, write
+CONFIG.SLEEP = 0. Other communication does not
+wake up the IC. POR does wake up the IC.
+Applications which can tolerate 4µA should use hibernate
+rather than sleep mode.
+Table 1. Alert Interrupt Summary
+ALERT FUNCTION WHERE CONFIGURED INDICATOR BIT
+Low SOC CONFIG.ATHD STATUS.HD
+SOC 1% change CONFIG.ALSC STATUS.SC
+Reset VRESET, STATUS.RI STATUS.VR
+Overvoltage VALRT.MAX STATUS.VH
+Undervoltage VALRT.MIN STATUS.VL
+Table 2. Register Summary
+REGISTER
+ADDRESS 16-BIT LSb DESCRIPTION READ/WRITE DEFAULT
+NAME
+0x02 VCELL 78.125µV/cell ADC measurement of VCELL. R —
+0x04 SOC 1%/256 Battery state of charge. R —
+Initiates quick-start, reports hibernate mode,
+0x06 MODE — W 0x0000
+and enables sleep mode.
+0x08 VERSION — IC production version. R 0x001_
+Controls thresholds for entering and exiting
+0x0A HIBRT — R/W 0x8030
+hibernate mode.
+www.maximintegrated.com Maxim Integrated │ 10
+--- page 12 ---
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+HIBRT Register (0x0A) • ALSC (SOC change alert) enables alerting when
+SOC changes by at least 1%. Each alert remains until
+To disable hibernate mode, set HIBRT = 0x0000. To
+STATUS.SC is cleared, after which the alert automati-
+always use hibernate mode, set HIBRT = 0xFFFF (see
+cally clears until SOC again changes by 1%. Do not
+Figure 9).
+use this alert to accumulate changes in SOC.
+• ActThr (active threshold): If at any ADC sample |OCV-
+CELL| is greater than ActThr, the IC exits hibernate • ALRT (alert status bit) is set by the IC when an alert
+occurs. When this bit is set, the ALRT pin asserts
+mode. 1 LSb = 1.25mV.
+low. Clear this bit to service and deassert the ALRT
+• HibThr (hibernate threshold). If the absolute value of
+pin. The power-up default value for ALRT is 0. The
+CRATE is less than HibThr for longer than 6min, the IC
+STATUS register specifies why the ALRT pin was
+enters hibernate mode. 1 LSb = 0.208%/hr.
+asserted.
+CONFIG Register (0x0C) • ATHD (empty alert threshold) sets the SOC threshold,
+• RCOMP is an 8-bit value that can be adjusted to opti- where an interrupt is generated on the ALRT pin and
+mize IC performance for different lithium chemistries can be programmed from 1% up to 32%. The value is
+or different operating temperatures. Contact Maxim (32 - ATHD)% (e.g., 00000b → 32%, 00001b → 31%,
+for instructions for optimization. The POR value of 00010b → 30%, 11111b → 1%). The POR value of
+RCOMP is 0x97. ATHD is 0x1C, or 4%. The alert only occurs on a falling
+edge past this threshold.
+• SLEEP forces the IC in or out of sleep mode if Mode.
+EnSleep is set. Writing 1 forces the IC to enter sleep
+mode, and 0 forces the IC to exit. The POR value of
+SLEEP is 0.
+MSB (HibThr)—ADDRESS 0x0A LSB (ActThr)—ADDRESS 0x0B
+27 26 25 24 23 22 21 20 27 26 25 24 23 22 21 20
+MSb LSb MSb LSb
+HibThr 20 UNIT: 0.208%/hr
+ActThr 20 UNIT: 1.25mV
+Figure 9. HIBRT Register Format
+MSB (RCOMP)—ADDRESS 0x0C LSB—ADDRESS 0x0D
+RCOMP RCOMP RCOMP RCOMP RCOMP RCOMP RCOMP RCOMP ATHD ATHD ATHD ATHD ATHD
+SLEEP ALSC ALRT
+7 6 5 4 3 2 1 0 4 3 2 1 0
+MSb LSb MSb LSb
+Figure 10. CONFIG Register Format
+www.maximintegrated.com Maxim Integrated │ 12
+--- page 14 ---
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+STATUS Register (0x1A) To unlock the TABLE registers, write 0x57 to address
+0x3F, and 0x4A to address 0x3E. While TABLE is
+An alert can indicate many different conditions. The
+unlocked, no ModelGauge registers are updated, so
+STATUS register identifies which alert condition was met.
+relock as soon as possible by writing 0x00 to address
+Clear the corresponding bit after servicing the alert (see
+0x3F, and 0x00 to address 0x3E.
+Figure 13).
+Reset Indicator: CMD Register (0xFE)
+• RI (reset indicator) is set when the device powers up. Writing a value of 0x5400 to this register causes
+Any time this bit is set, the IC is not configured, so the the device to completely reset as if power had been
+model should be loaded and the bit should be cleared. removed (see the Power-On Reset (POR) section). The
+reset occurs when the last bit has been clocked in. The
+Alert Descriptors:
+IC does not respond with an I2C ACK after this com-
+These bits are set only when they cause an alert (e.g., if
+mand sequence.
+CONFIG.ALSC = 0, then SC is never set).
+• VH (voltage high) is set when VCELL has been above Application Examples
+ALRT.VALRTMAX. The ICs have a variety of configurations, depending on
+• VL (voltage low) is set when VCELL has been below the application. Table 3 shows the most common system
+ALRT.VALRTMIN. configurations and the proper pin connections for each.
+• VR (voltage reset) is set after the device has been In all cases, the system must provide pullup circuits for
+reset if EnVr is set. ALRT (if used), SDA, and SDL.
+• HD (SOC low) is set when SOC crosses the value in Figure 14 shows an example application for a 1S cell
+CONFIG.ATHD. pack. In this example, the ALRT pin is connected to the
+microcontroller’s interrupt input to allow the MAX17048 to
+• SC (1% SOC change) is set when SOC changes by at
+signal when the battery is low. The QSTRT pin is unused
+least 1% if CONFIG.ALSC is set.
+in this application and is connected to GND.
+Enable or Disable VRESET Alert:
+Figure 15 shows a MAX17049 example application using
+• EnVr (enable voltage reset alert) when set to 1 asserts a 2S cell pack. The MAX17049 is mounted on the system
+the ALRT pin when a voltage-reset event occurs under side and powered from a 3.3V supply generated by the
+the conditions described by the VRESET/ ID register. system. The CELL pin is still connected directly to PACK+.
+TABLE Registers (0x40 to 0x7F)
+Contact Maxim for details on how to configure these
+registers. The default value is appropriate for some Li+
+batteries.
+MSB—ADDRESS 0x1A LSB—ADDRESS 0x1B
+X EnVR SC HD VR VL VH RI X X X X X X X X
+MSb LSb MSb LSb
+Figure 13. STATUS Register Format
+www.maximintegrated.com Maxim Integrated │ 14
+--- page 16 ---
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+I2C Bus System Acknowledge Bits
+The I2C bus system supports operation as a slave-only Each byte of a data transfer is acknowledged with an
+device in a single or multislave, and single or multimaster acknowledge bit (A) or a no-acknowledge bit (N). Both
+system. Slave devices can share the bus by uniquely set- the master and the MAX17048 slave generate acknowl-
+ting the 7-bit slave address. The I2C interface consists of edge bits. To generate an acknowledge, the receiving
+a serial-data line (SDA) and serial-clock line (SCL). SDA device must pull SDA low before the rising edge of the
+and SCL provide bidirectional communication between acknowledge-related clock pulse (ninth pulse) and keep it
+the IC’s slave device and a master device at speeds up to low until SCL returns low. To generate a no- acknowledge
+400kHz. The IC’s SDA pin operates bidirectionally; that is, (also called NAK), the receiver releases SDA before the
+when the IC receives data, SDA operates as an input, and rising edge of the acknowledge-related clock pulse and
+when the IC returns data, SDA operates as an open-drain leaves SDA high until SCL returns low. Monitoring the
+output, with the host system providing a resistive pullup. acknowledge bits allows for detection of unsuccessful
+The IC always operates as a slave device, receiving and data transfers. An unsuccessful data transfer can occur
+transmitting data under the control of a master device. if a receiving device is busy or if a system fault has
+The master initiates all transactions on the bus and gener- occurred. In the event of an unsuccessful data transfer,
+ates the SCL signal, as well as the START and STOP bits, the bus master should reattempt communication.
+which begin and end each transaction.
+Data Order
+Bit Transfer A byte of data consists of 8 bits ordered most significant
+One data bit is transferred during each SCL clock cycle, bit (MSb) first. The least significant bit (LSb) of each
+with the cycle defined by SCL transitioning low-to-high byte is followed by the acknowledge bit. The IC registers
+and then high-to-low. The SDA logic level must remain composed of multibyte values are ordered MSB first.
+stable during the high period of the SCL clock pulse. The MSB of multibyte registers is stored on even data-
+Any change in SDA when SCL is high is interpreted as a memory addresses.
+START or STOP control signal.
+Slave Address
+Bus Idle A bus master initiates communication with a slave device
+The bus is defined to be idle, or not busy, when no master by issuing a START condition followed by a slave address
+device has control. Both SDA and SCL remain high when (SAddr) and the read/write (R/W) bit. When the bus is
+the bus is idle. The STOP condition is the proper method idle, the ICs continuously monitor for a START condition
+to return the bus to the idle state. followed by its slave address. When the ICs receive a
+slave address that matches the value in the slave address
+START and STOP Conditions
+register, they respond with an acknowledge bit during the
+The master initiates transactions with a START condition clock period following the R/W bit. The 7-bit slave address
+(S) by forcing a high-to-low transition on SDA while SCL is fixed to 0x6C (write)/0x6D (read):
+is high. The master terminates a transaction with a STOP
+condition (P), a low-to-high transition on SDA while SCL
+MAX17048/MAX17049
+is high. A Repeated START condition (Sr) can be used in 0110110
+SLAVE ADDRESS
+place of a STOP then START sequence to terminate one
+transaction and begin another without returning the bus to
+Read/Write Bit
+the idle state. In multimaster systems, a Repeated START
+allows the master to retain control of the bus. The START The R/W bit following the slave address determines the
+and STOP conditions are the only bus activities in which data direction of subsequent bytes in the transfer. R/W =
+the SDA transitions when SCL is high. 0 selects a write transaction with the following bytes being
+written by the master to the slave. R/W = 1 selects a read
+transaction with the following bytes being read from the
+slave by the master (Table 4).
+www.maximintegrated.com Maxim Integrated │ 16
+--- page 18 ---
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+Read Data Protocol Data is returned beginning with the MSb of the data in
+MAddr. Because the address is automatically incremented
+The read data protocol is used to read to register from the
+after the LSb of each byte is returned, the MSb of the data
+ICs starting at the memory address specified by MAddr.
+at address MAddr + 1 is available to the host immediately
+Both register bytes must be read in the same transaction
+after the acknowledgment of the data at address MAddr.
+for the register data to be valid. Data0 represents the data
+If the bus master continues to read beyond address FFh,
+byte in memory location MAddr, Data1 represents the
+the ICs output data values of FFh. Addresses labeled
+data from MAddr + 1, and DataN represents the last byte
+Reserved in the memory map return undefined data. The
+read by the master:
+bus master terminates the read transaction at any byte
+S. SAddr W. A. MAddr. A. Sr. SAddr R. A. boundary by issuing a no acknowledge followed by a
+Data0. A. Data1. A... DataN. N. P STOP or Repeated START.
+Ordering Information
+PART TEMP RANGE PIN-PACKAGE DESCRIPTION
+MAX17048G+ -40°C to +85°C 8 TDFN-EP* 1-Cell ModelGauge IC
+MAX17048G+T10 -40°C to +85°C 8 TDFN-EP* 1-Cell ModelGauge IC
+MAX17048X+ -40°C to +85°C 8 WLP 1-Cell ModelGauge IC
+MAX17048X+T10 -40°C to +85°C 8 WLP 1-Cell ModelGauge IC
+MAX17049G+ -40°C to +85°C 8 TDFN-EP* 2-Cell ModelGauge IC
+MAX17049G+T10 -40°C to +85°C 8 TDFN-EP* 2-Cell ModelGauge IC
+MAX17049X+ -40°C to +85°C 8 WLP 2-Cell ModelGauge IC
+MAX17049X+T10 -40°C to +85°C 8 WLP 2-Cell ModelGauge IC
++Denotes a lead(Pb)-free/RoHS-compliant package.
+*EP = Exposed pad.
+T = Tape and reel.
+Package Information
+For the latest package outline information and land patterns (footprints), go to www.maximintegrated.com/packages. Note that a “+”,
+“#”, or “-” in the package code indicates RoHS status only. Package drawings may show a different suffix character, but the drawing
+pertains to the package regardless of RoHS status.
+PACKAGE TYPE PACKAGE CODE OUTLINE NO. LAND PATTERN NO.
+Refer to
+8 WLP W80B1+1 21-0555
+Application Note 1891
+8 TDFN-EP T822+3 21-0168 90-0065
+www.maximintegrated.com Maxim Integrated │ 18
+--- page 19 ---
+MAX17048/MAX17049 3μA 1-Cell/2-Cell Fuel Gauge with ModelGauge
+Revision History
+REVISION REVISION PAGES
+DESCRIPTION
+NUMBER DATE CHANGED
+0 2/12 Initial release —
+1 4/12 Corrected byte-order errors 10, 11, 13
+Updated soldering temperature in Absolute Maximum Ratings; corrected Hibernate
+2 8/12 2, 12, 14
+register names that were switched
+3 10/12
+Corrected VDD pin names in Absolute Maximum Ratings and Electrical
+2, 3
+Characteristics
+4 8/13 Corrected version number 10
+5 10/13 Corrected conditions for Supply Current in Electrical Charateristics 2
+Updated VRESET recommendation from 40mV–80mV below 300mW empty voltage
+6 10/14 13, 14
+and corrected VR bit of Status register
+7 11/16 Updated front page title, description, applications, and features 1
+For pricing, delivery, and ordering information, please contact Maxim Direct at 1-888-629-4642, or visit Maxim Integrated’s website at www.maximintegrated.com.
+Maxim Integrated cannot assume responsibility for use of any circuitry other than circuitry entirely embodied in a Maxim Integrated product. No circuit patent licenses
+are implied. Maxim Integrated reserves the right to change the circuitry and specifications without notice at any time. The parametric values (min and max limits)
+shown in the Electrical Characteristics table are guaranteed. Other parametric values quoted in this data sheet are provided for guidance.
+Maxim Integrated and the Maxim Integrated logo are trademarks of Maxim Integrated Products, Inc. © 2016 Maxim Integrated Products, Inc. │ 19
+
+
+######## tusb320li ########
+--- page 1 ---
+CC Logic CC1
+For Mode
+Configuration and
+Detection CC2
+I2C GPIO
+GPIOs
+DDV
+Controller
+DNG
+Product Order Technical Tools & Support &
+Folder Now Documents Software Community
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017
+TUSB320LI, TUSB320HI USB Type-C Configuration Channel Logic and Port Control
+1 Features 3 Description
+• USB Type-C™Specification1.1 The TUSB320LI and TUSB320HI devices (remainder
+1 of this document called TUSB320 unless otherwise
+• BackwardCompatiblewithUSBType-C
+noted) enables USB Type-C ports with the
+Specification1.0
+configuration channel (CC) logic needed for Type-C
+• SupportsUpto3AofCurrentAdvertisementand ecosystems. The TUSB320 devices use the CC pins
+Detection to determine port attach and detach, cable
+orientation, role detection, and port control for Type-C
+• ModeConfiguration
+current mode. The TUSB320 devices can be
+– HostOnly– DFP(Source)
+configured as a downstream facing port (DFP),
+– DeviceOnly– UFP(Sink) upstream facing port (UFP) or a dual role port (DRP)
+– DualRolePort –DRP makingitidealfor anyapplication.
+– SupportsbothTry.SRCandTry.SNK The TUSB320 devices alternate configuration as a
+DFP or UFP according to the Type-C specifications.
+• ChannelConfiguration(CC)
+The CC logic block monitors the CC1 and CC2 pins
+– AttachofUSBPortDetection
+for pullup or pulldown resistances to determine when
+– CableOrientationDetection a USB port has been attached, the orientation of the
+– RoleDetection cable, and the role detected. The CC logic detects
+the Type-C current mode as default, medium, or high
+– Type-C CurrentMode(Default,Medium,High)
+depending on the role detected. V detection is
+BUS
+• V BUS Detection implemented to determine a successful attach in UFP
+• I2CorGPIOControl andDRPmodes.
+• RoleConfigurationControlThroughI2C The devices operate over a wide supply range and
+• SupplyVoltage:2.7Vto5V have low-power consumption. The TUSB320 is
+available in two versions of enable: Active low enable
+• LowCurrentConsumption
+called TUSB320LI and active high enable called
+• IndustrialTemperatureRangeof –40to85°C TUSB320HI. The TUSB320 family of devices are
+availableinindustrialtemperatureranges.
+2 Applications
+DeviceInformation(1)
+• Host,Device,DualRolePortApplications
+PARTNUMBER PACKAGE BODYSIZE(NOM)
+• MobilePhones
+TUSB320HI X2QFN(12) 1.60mm×1.60mm
+• Tablets andNotebooks
+TUSB320LI X2QFN(12) 1.60mm×1.60mm
+• USBPeripherals
+(1) For all available packages, see the orderable addendum at
+theendofthedatasheet.
+SimplifiedSchematic
+SampleApplications
+VBUS
+VBUS Detection
+Copyright © 2016, Texas Instruments Incorporated
+1
+An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+intellectualpropertymattersandotherimportantdisclaimers.PRODUCTIONDATA.
+--- page 2 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+Table of Contents
+1 Features.................................................................. 1 7.5 RegisterMaps.........................................................16
+2 Applications........................................................... 1 8 ApplicationandImplementation........................ 21
+3 Description............................................................. 1 8.1 ApplicationInformation............................................21
+4 RevisionHistory..................................................... 2 8.2 TypicalApplication..................................................21
+8.3 InitializationSetUp ................................................28
+5 PinConfigurationandFunctions......................... 3
+9 PowerSupplyRecommendations...................... 28
+6 Specifications......................................................... 4
+10 Layout................................................................... 29
+6.1 AbsoluteMaximumRatings......................................4
+6.2 ESDRatings..............................................................4 10.1 LayoutGuidelines.................................................29
+6.3 RecommendedOperatingConditions.......................4 10.2 LayoutExample....................................................29
+6.4 ThermalInformation..................................................4 11 DeviceandDocumentationSupport................. 30
+6.5 ElectricalCharacteristics...........................................5 11.1 RelatedLinks........................................................30
+6.6 TimingRequirements................................................6 11.2 ReceivingNotificationofDocumentationUpdates30
+6.7 SwitchingCharacteristics..........................................6 11.3 CommunityResources..........................................30
+7 DetailedDescription.............................................. 8 11.4 Trademarks...........................................................30
+7.1 Overview...................................................................8 11.5 ElectrostaticDischargeCaution............................30
+7.2 FeatureDescription...................................................9 11.6 Glossary................................................................30
+7.3 DeviceFunctionalModes........................................13 12 Mechanical,Packaging,andOrderable
+Information........................................................... 30
+7.4 Programming...........................................................15
+4 Revision History
+ChangesfromRevisionC(October2016)toRevisionD Page
+• ChangedR valuesFrom:MIN=891,TYP=900,MAX=909KΩTo:MIN=855,TYP=887,MAX=920KΩ...........6
+VBUS
+ChangesfromRevisionB(September2016)toRevisionC Page
+• ChangedtextforPin7inthePinFunctionstableFrom:"defaultcurrentmodedetected(H);mediumorhighcurrent
+modedetected(L)."To:"RefertoTable3formoredetails."................................................................................................. 3
+• ChangedtextforPin8inthePinFunctionstableFrom:"defaultormediumcurrentmodedetected(H);highcurrent
+modedetected(L)."To:"RefertoTable3formoredetails."................................................................................................. 3
+ChangesfromRevisionA(February2016)toRevisionB Page
+• ChangedpinsCC1andCC2valuesFrom:MIN=–0.3MAX=V +0.3To:MIN–0.3MAX=6intheAbsolute
+DD
+MaximumRatings................................................................................................................................................................... 4
+ChangesfromOriginal(August2015)toRevisionA Page
+• AddedNote1and2tothePinFunctionstable...................................................................................................................... 3
+• ChangedtheDESCRIPTIONofpinEN_NpininthePinFunctionstable............................................................................. 4
+• ChangedtheDESCRIPTIONofpinENpininthePinFunctionstable.................................................................................. 4
+• ChangedtheDESCRIPTIONofpinV inthePinFunctionstable....................................................................................... 4
+DD
+• AddedNote2totheElectricalCharacteristicstable ............................................................................................................. 5
+• AddedTestCondition"SeeFigure1"toVBUS_THRintheElectricalCharacteristics ......................................................... 6
+• ReplacedtheTimingRequirementstable ............................................................................................................................. 6
+• AddedNote:"SWmustmakesure..."totheDescriptionofINTERRUPT_STATUSinTable9 ......................................... 18
+• Addedtexttolistitem2intheTUSB320LInitializationProceduresection......................................................................... 28
+• Addedtexttolistitem2intheTUSB320HInitializationProceduresection......................................................................... 28
+2 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 3 ---
+2 1
+C C
+C C
+2 1
+PORT 3 12 VDD
+VBUS_DET 4 11 EN
+ADDR 5 10 GND
+INT_N/OUT3 6 9 ID
+7 8
+T 1 T 2
+U U
+O O
+A/ L/
+D C
+S S
+2CC 1CC
+GND
+1TUO/ADS 2TUO/LCS
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+5 Pin Configuration and Functions
+RWBPackage
+12-PinX2QFN RWBPackage
+TUSB320LTopView 12-PinX2QFN
+TUSB320HTopView
+2 1
+PORT 3 12 VDD
+VBUS_DET 4 11 EN_N
+ADDR 5 10
+INT_N/OUT3 6 9 ID
+7 8
+PinFunctions
+PIN
+NO. TYPE DESCRIPTION
+NAME
+TUSB320L TUSB320H
+CC1 1 1 I/O Type-Cconfigurationchannelsignal1
+CC2 2 2 I/O Type-Cconfigurationchannelsignal2
+Tri-levelinputpintoindicateportmode.ThestateofthispinissampledwhenTUSB320L's
+EN_Nisassertedlow,TUSB320H'sENisassertedhigh,andVDDisactive.Thispinisalso
+sampledfollowingaI2C_SOFT_RESET.
+PORT(1) 3 3 I
+H-DFP(Pull-uptoV ifDFPmodeisdesired)
+DD
+NC-DRP(LeaveunconnectedifDRPmodeisdesired)
+L-UFP(Pull-downortietoGNDifUFPmodeisdesired)
+VBUS_DET(1) 4 4 I 5-to28-VVBUSinputvoltage.VBUSdetectiondeterminesUFPattachment.One900-kΩ
+externalresistorrequiredbetweensystemVBUSandVBUS_DETpin.
+Tri-levelinputpintoindicateI2CaddressorGPIOmode:
+H-I2CisenabledandI2C7-bitaddressis0x67.
+ADDR(1) 5 5 I NC-GPIOmode(I2Cisdisabled)
+L-I2CisenabledandI2C7-bitaddressis0x47.
+ADDRpinshouldbepulleduptoVDDifhighconfigurationisdesired
+TheINT_N/OUT3isadual-functionpin.WhenusedastheINT_N,thepinisanopendrain
+INT_N/OUT3(1) 6 6 O
+outputinI2CcontrolmodeandisanactivelowinterruptsignalforindicatingchangesinI2C
+registers.WhenusedasOUT3,thepinisinaudioaccessorydetectinGPIOmode:no
+detection(H),audioaccessoryconnectiondetected(L).
+TheSDA/OUT1isadual-functionpin.WhenI2Cisenabled(ADDRpinishighorlow),thispin
+SDA/OUT1(1)(2) 7 7 I/O istheI2Ccommunicationdatasignal.WheninGPIOmode(ADDRpinisNC),thispinisan
+opendrainoutputforcommunicatingType-CcurrentmodedetectwhenthedeviceisinUFP
+mode:RefertoTable3formoredetails.
+TheSCL/OUT2isadualfunctionpin.WhenI2Cisenabled(ADDRpinishighorlow),thispin
+SCL/OUT2(1)(2) 8 8 I/O istheI2Ccommunicationclocksignal.WheninGPIOmode(ADDRpinisNC),thispinisan
+opendrainoutputforcommunicatingType-CcurrentmodedetectwhenthedeviceisinUFP
+mode:RefertoTable3formoredetails.
+ID(1) 9 9 O Opendrainoutput;assertedlowwhentheCCpinsdetectdeviceattachmentwhenportisa
+source(DFP),ordual-role(DRP)actingassource(DFP).
+GND 10 10 G Ground
+(1) WhenV isoff,theTUSB320non-failsafepins(VBUS_DET,ADDR,PORT,ID,OUT[3:1]pins)couldback-drivetheTUSB320deviceif
+DD
+nothandledproperly.Whennecessarytopullthesepinsup,itisrecommendedtopullupPORT,ADDR,INT_N/OUT3,andIDtothe
+deviceV supply.TheVBUS_DETmustbepulleduptoVBUSthrougha900-kΩresistor.
+DD
+(2) Whenusingthe3.3VsupplyforI2C,theendusermustensurethattheV is3Vandabove.OtherwisetheI2Cmaybackpowerthe
+DD
+device.
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 3
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 4 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+PinFunctions (continued)
+PIN
+NO. TYPE DESCRIPTION
+NAME
+TUSB320L TUSB320H
+Enablesignal;activelow.PulleduptoVDDinternallytodisabletheTUSB320Ldevice.If
+EN_N 11 — I controlledexternally,mustbeheldlowatleastfor50msafterVDDhasreacheditsvalid
+voltagelevel.
+Enablesignal;activehigh.PulleddowntoGNDinternallytodisabletheTUSB320Hdevice.If
+EN — 11 I controlledexternally,mustbeheldlowatleastfor50msafterVDDhasreacheditsvalid
+voltagelevel.
+VDD 12 12 P Positivesupplyvoltage.VDDmustrampwithin25msorless
+6 Specifications
+6.1 Absolute Maximum Ratings
+overoperatingfree-airtemperaturerange(unlessotherwisenoted)(1)
+MIN MAX UNIT
+Supplyvoltage V –0.3 6.0 V
+DD
+CC1,CC2,PORT,ADDR,ID,EN_N,INT_N/OUT3 –0.3 V +0.3
+DD
+CC1,CC2 –0.3 6
+Controlpins V
+SDA/OUT1,SCL/OUT2 –0.3 V +0.3
+DD
+VBUS_DET,EN –0.3 4
+Storagetemperature,T –65 150 °C
+stg
+(1) StressesbeyondthoselistedunderAbsoluteMaximumRatingsmaycausepermanentdamagetothedevice.Thesearestressratings
+only,whichdonotimplyfunctionaloperationofthedeviceattheseoranyotherconditionsbeyondthoseindicatedunderRecommended
+OperatingConditions.Exposuretoabsolute-maximum-ratedconditionsforextendedperiodsmayaffectdevicereliability.
+6.2 ESD Ratings
+VALUE UNIT
+Human-bodymodel(HBM),perANSI/ESDA/JEDECJS-001(1) ±5000
+V (ESD) Electrostaticdischarge Charged-devicemodel(CDM),perJEDECspecificationJESD22- V
+C101(2) ±1500
+(1) JEDECdocumentJEP155statesthat500-VHBMallowssafemanufacturingwithastandardESDcontrolprocess.
+(2) JEDECdocumentJEP157statesthat250-VCDMallowssafemanufacturingwithastandardESDcontrolprocess.
+6.3 Recommended Operating Conditions
+overoperatingfree-airtemperaturerange(unlessotherwisenoted)
+MIN NOM MAX UNIT
+V Supplyvoltagerange 2.7 5 V
+DD
+V SystemV voltage 4 5 28 V
+BUS BUS
+T TUSB320HIandTUSB320LIOperatingfreeairtemperaturerange –40 25 85 °C
+A
+6.4 Thermal Information
+TUSB320
+THERMALMETRIC(1) RWB(X2QFN) UNIT
+12PINS
+R θJA Junction-to-ambientthermalresistance 169.3 °C/W
+R θJC(top) Junction-to-case(top)thermalresistance 68.1 °C/W
+R θJB Junction-to-boardthermalresistance 83.4 °C/W
+ψJT Junction-to-topcharacterizationparameter 2.2 °C/W
+ψJB Junction-to-boardcharacterizationparameter 83.4 °C/W
+R θJC(bot) Junction-to-case(bottom)thermalresistance N/A
+(1) Formoreinformationabouttraditionalandnewthermalmetrics,seetheSemiconductorandCPackageThermalMetricsapplication
+report,SPRA953.
+4 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 5 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+6.5 Electrical Characteristics
+overoperatingfree-airtemperaturerange(unlessotherwisenoted)
+TEST
+PARAMETER MIN TYP MAX UNIT
+CONDITIONS
+PowerConsumption
+Currentconsumptioninunattachedmodewhenportis
+IUNATTACHED_UFP u
+E
+n
+N
+c
+_
+o
+N
+nn
+(
+e
+T
+c
+U
+te
+S
+d
+B3
+a
+2
+n
+0
+d
+L
+w
+)
+a
+=
+it
+L
+in
+,
+g
+E
+f
+N
+or
+(T
+co
+U
+n
+S
+n
+B
+e
+3
+c
+2
+tio
+0
+n
+H
+.
+)
+[
+=
+VD
+H
+D
+,
+=
+AD
+4.
+D
+5
+R
+V,
+=NC,
+100 µA
+PORT=L]
+Currentconsumptioninactivemode.(VDD=4.5V,EN_N
+IACTIVE_UFP (TUSB320L)=L,EN(TUSB320H)=H,ADDR=NC, 100 µA
+PORT=L)
+LeakagecurrentwhenVDDissupplied,buttheTUSB320
+ISHUTDOWN deviceisnotenabled.(VDD=4.5V,EN_N(TUSB320L)= 0.040 µA
+H,EN(TUSB320H)=L)
+CC1andCC2Pins
+RCC_DB Pulldownresistorwhenindead-batterymode. 4.1 5.1 6.1 kΩ
+RCC_D PulldownresistorwheninUFPorDRPmode. 4.6 5.1 5.6 kΩ
+VoltagethresholdfordetectingaDFPattachwhen
+VTH_UFP_CC_USB configuredasaUFPandDFPisadvertisingdefaultcurrent 0.15 0.2 0.25 V
+sourcecapability.
+VoltagethresholdfordetectingaDFPattachwhen
+VTH_UFP_CC_MED configuredasaUFPandDFPisadvertisingmedium(1.5 0.61 0.66 0.7 V
+A)currentsourcecapability.
+VoltagethresholdfordetectingaDFPattachwhen
+VTH_UFP_CC_HIGH configuredasaUFPandDFPisadvertisinghigh(3A) 1.169 1.23 1.29 V
+currentsourcecapability.
+VoltagethresholdfordetectingaUFPattachwhen
+VTH_DFP_CC_USB configuredasaDFPandadvertisingdefaultcurrentsource 1.51 1.6 1.64 V
+capability.
+VoltagethresholdfordetectingaUFPattachwhen
+VTH_DFP_CC_MED configuredasaDFPandadvertisingmediumcurrent(1.5 1.51 1.6 1.64 V
+A)sourcecapability.
+VoltagethresholdfordetectingaUFPattachwhen
+VTH_DFP_CC_HIGH configuredasaDFPandadvertisinghighcurrent(3.0A) 2.46 2.6 2.74 V
+sourcecapability.
+DefaultmodepullupcurrentsourcewhenoperatinginDFP
+ICC_DEFAULT_P
+orDRPmode.
+64 80 96 µA
+Medium(1.5A)modepullupcurrentsourcewhen
+ICC_MED_P
+operatinginDFPorDRPmode.
+166 180 194 µA
+High(3A)modepullupcurrentsourcewhenoperatingin
+ICC_HIGH_P DFPorDRPmode.(1) 304 330 356 µA
+ControlPins:PORT,ADDR,INT/OUT3,EN_N,EN,ID
+Low-levelcontrolsignalinputvoltage(PORT,ADDR,
+VIL
+EN_N,EN)
+0.4 V
+VIM Mid-levelcontrolsignalinputvoltage(PORT,ADDR) 0.28×VDD 0.56×VDD V
+High-levelcontrolsignalinputvoltage(PORT,ADDR,
+VIH
+EN_N)
+VDD-0.3 VDD V
+High-LevelcontrolsignalinputvoltageforENfor
+VIH_EN
+TUSB320H
+1.05 3.65 V
+IIH High-levelinputcurrent –20 20 µA
+IIL Low-levelinputcurrent –10 10 µA
+REN_N InternalpullupresistanceforEN_NforTUSB320L 1.1 MΩ
+REN InternalpulldownresistanceforENforTUSB320H 500 kΩ
+Rpu (2) Internalpullupresistance(PORT,ADDR) 588 kΩ
+Rpd (2) Internalpulldownresistance(PORT,ADDR) 1.1 MΩ
+Low-levelsignaloutputvoltage(open-drain)(INT_N/OUT3,
+VOL
+ID)
+IOL=–1.6mA 0.4 V
+ExternalpullupresistoronopendrainIOs(INT_N/OUT3,
+Rp_ODext
+ID)
+200 kΩ
+Rp_TLext Tri-levelinputexternalpullupresistor(PORT,ADDR) 4.7 kΩ
+(1) V mustbe3.5Vorgreatertoadvertise3Acurrent.
+DD
+(2) InternalpullupandpulldownforPORTandADDRareremovedafterthedevicehassampledEN=highorEN_N=low.
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 5
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 6 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+Electrical Characteristics (continued)
+overoperatingfree-airtemperaturerange(unlessotherwisenoted)
+TEST
+PARAMETER MIN TYP MAX UNIT
+CONDITIONS
+I2C-SDA/OUT1,SCL/OUT2canoperatefrom1.8or3.3V(±10%)(3)
+VDD_I2C SupplyrangeforI2C(SDA/OUT1,SCL/OUT2) 1.65 1.8 3.6 V
+VIH High-levelsignalvoltage 1.05 3.6 V
+VIL Low-levelsignalvoltage 0.4 V
+VOL Low-levelsignaloutputvoltage(opendrain) IOL=–1.6mA 0.4 V
+VBUS_DETIOPins(ConnectedtoSystemVBUSsignal)
+VBUS_THR VBUSthresholdrange SeeFigure1 2.95 3.30 3.80 V
+RVBUS ExternalresistorbetweenVBUSandVBUS_DETpin 855 887 920 KΩ
+RVBUS_PD InternalpulldownresistanceforVBUS_DET 95 KΩ
+(3) Whenusing3.3VforI2C,customermustensureV isabove3Vatalltimes.
+DD
+6.6 Timing Requirements
+MIN NOM MAX UNIT
+I2C(SDA,SCL)
+t Datasetuptime 100 ns
+SU:DAT
+t Dataholdtime 10 ns
+HD;DAT
+t Set-uptime,SCLtostartcondition 0.6 µs
+SU:STA
+t Holdtime(repeated),startconditiontoSCL 0.6 µs
+HD:STA
+t Setuptimeforstopcondition 0.6 µs
+SU:STO
+t Busfreetimebetweenastopandstartcondition 1.3 µs
+BUF
+t Datavalidtime 0.9 µs
+VD;DAT
+t Datavalidacknowledgetime 0.9 µs
+VD;ACK
+f SCLclockfrequency;I2CmodeforlocalI2Ccontrol 400 kHz
+SCL
+t RisetimeofbothSDAandSCLsignals 300 ns
+r
+t FalltimeofbothSDAandSCLsignals 300 ns
+f
+C Totalcapacitiveloadforeachbuslinewhenoperatingat≤100kHz 400 pF
+BUS_100KHZ
+C Totalcapacitiveloadforeachbuslinewhenoperatingat400kHz 100 pF
+BUS_400KHz
+6.7 Switching Characteristics
+overoperatingfree-airtemperaturerange(unlessotherwisenoted)
+PARAMETER TESTCONDITIONS MIN TYP MAX UNIT
+PowerondefaultofCC1andCC2voltagedebounce
+t DEBOUCEregister=2'b00 168 ms
+CCCB_DEFAULT time
+t DebounceofVBUS_DETpinaftervalidV 2 ms
+VBUS_DB BUS_THR
+t Power-ondefaultofpercentageoftimeDRPadvertises DRP_DUTY_CYCLEregister
+DRP_DUTY_CY 30%
+DFPduringaT =2'b00
+CLE DRP
+TheperiodduringwhichtheTUSB320inDFPmode
+t 50 75 100 ms
+DRP completesaDFPtoUFPandbackadvertisement.
+TimefromTUSB320L'sEN_NloworTUSB320H'sEN
+t I2C_EN highandV activetoI2Caccessavailable 100 ms
+DD
+t Softresetduration 26 49 95 ms
+SOFT_RESET
+6 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 8 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+7 Detailed Description
+7.1 Overview
+The USB Type-C ecosystem operates around a small form factor connector and cable that is flippable and
+reversible. Because of the nature of the connector, a scheme is needed to determine the connector orientation.
+Additional schemes are needed to determine when a USB port is attached and the acting role of the USB port
+(DFP, UFP, DRP), as well as to communicate Type-C current capabilities. These schemes are implemented over
+the CC pins according to the USB Type-C specifications. The TUSB320 devices provide Configuration Channel
+(CC) logic for determining USB port attach and detach, role detection, cable orientation, and Type-C current
+mode.TheTUSB320devicesalsocontainsseveralfeaturessuchasmodeconfigurationandlowstandbycurrent
+whichmakethesedevicesidealforsourceorsinksinUSB2.0applications.
+D
+D
+V
+ADDR
+3-State Buffer
+PORT
+CC1
+Connection and
+Digital Controller cable detection
+SDA/OUT1 I2C CSR
+C T
+RL_I N T
+C T
+RL_I D
+C T
+RL_
+E N_ N
+V B U
+S_ O N
+C T
+RL_I N T
+C T
+RL_I D
+N
+CC2
+SCL/OUT2 O
+S_
+U
+Open Drain V B
+Output
+EN_N EN_N Logic CTRL_EN VBUS Detection
+G N D
+I
+N T/ O U T3 I D S_ D E T 900 K ±1% SYS_VBUS
+U
+B
+V
+Copyright © 2016,Texas Instruments Incorporated
+Figure2. Functional BlockDiagramofTUSB320
+7.1.1 Cables, Adapters,andDirectConnect Devices
+Type-C Specification 1.1 defines several cables, plugs and receptacles to be used to attach ports. The TUSB320
+devicesupportsallcables,receptacles,andplugs. TheTUSB320devicedoesnotsupport e-marking.
+7.1.1.1 USBType-CReceptaclesandPlugs
+Belowislist ofType-CreceptaclesandplugssupportedbytheTUSB320device:
+• USBType-CreceptacleforUSB2.0platformsanddevices
+• USBfull-featuredType-Cplug
+• USB2.0Type-Cplug
+8 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 9 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+Overview (continued)
+7.1.1.2 USBType-CCables
+Belowisalist ofType-CcablestypessupportedbytheTUSB320device:
+• USBfull-featuredType-Ccable
+• USB2.0Type-CcablewithUSB2.0plug
+• CaptivecableonremotedevicewitheitheraUSBfull-featuredplugorUSB2.0plug
+7.1.1.3 LegacyCablesandAdapters
+The TUSB320 device supports legacy cable adapters as defined by the Type-C Specification. The cable adapter
+mustcorrespondtothemodeconfigurationoftheTUSB320device.
+To System VBUS detection
+VBUS
+900 kΩ ±1%
+Rp (56k ±5%)
+VBUS_DET
+TUSB320
+CC CC
+Legacy HostAdapter Rd (5.1k ±10%)
+Copyright © 2016,Texas Instruments Incorporated
+Figure3. LegacyAdapterImplementationCircuit
+7.1.1.4 DirectConnectDevices
+TheTUSB320devicesupportstheattachinganddetachingofadirect-connect device.
+7.1.1.5 AudioAdapters
+Additionally,theTUSB320devicesupportsaudioadaptersfor audioaccessorymode, including:
+• PassiveAudioAdapter
+• ChargeThroughAudioAdapter
+7.2 Feature Description
+7.2.1 Port RoleConfiguration
+The TUSB320 device can be configured as a downstream facing port (DFP), upstream facing port (UFP), or
+dualrole port (DRP) using the tri-level PORT pin. The PORT pin should be pulled high to V using a pullup
+DD
+resistance, low to GND or left as floated on the PCB to achieve the desired mode. This flexibility allows the
+TUSB320 device to be used in a variety of applications. The TUSB320 device samples the PORT pin after reset
+and maintains the desired mode until the TUSB320 device is reset again. The port role can also be selected
+throughI2Cregisters.Table1liststhesupportedfeaturesineachmode:
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 9
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 10 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+Feature Description (continued)
+Table1.SupportedFeaturesfortheTUSB320DevicebyMode
+PORTPIN
+HIGH LOW NC
+SUPPORTED (DFPONLY) (UFPONLY) (DRP)
+FEATURES
+Portattachand
+Yes Yes Yes
+detach
+Cableorientation
+(throughI2C) Yes Yes Yes
+Currentadvertisement Yes - Yes(DFP)
+Currentdetection - Yes Yes(UFP)
+Accessorymodes
+Yes Yes Yes
+(audioanddebug)
+Try.SRC - - Yes
+Try.SNK - - Yes
+Activecabledetection Yes - Yes(DFP)
+I2C/GPIO Yes Yes Yes
+Legacycables Yes Yes Yes
+V detection - Yes Yes(UFP)
+BUS
+7.2.1.1 DownstreamFacingPort(DFP)-Source
+The TUSB320 device can be configured as a DFP only by pulling the PORT pin high through a resistance to
+V . In DFP mode, the TUSB320 device constantly presents Rps on both CC. In DFP mode, the TUSB320
+DD
+device initially advertises default USB Type-C current. The Type-C current can be adjusted through I2C if the
+system needs to increase the amount advertised. The TUSB320 device adjusts the Rps to match the desired
+Type-C currentadvertisement.InGPIOmode,theTUSB320deviceonlyadvertisesdefaultType-Ccurrent.
+When configured as a DFP, the TUSB320 can operate with older USB Type-C 1.0 devices except for a USB
+Type-C 1.0 DRP device. A USB Type-C 1.1 compliant DFP can not connect to a Type-C 1.0 DRP. Because the
+TUSB320 is compliant to Type-C 1.1, the TUSB320 can not operate with a USB Type-C 1.0 DRP device. This
+limitation is a result of a backwards compatibility problem between USB Type-C 1.1 DFP and a USB Type-C 1.0
+DRP.
+7.2.1.2 UpstreamFacingPort(UFP)-Sink
+The TUSB320 device can be configured as a UFP only by pulling the PORT pin low to GND. In UFP mode, the
+TUSB320 device constantly presents pulldown resistors (Rd) on both CC pins. The TUSB320 device monitors
+the CC pins for the voltage level corresponding to the Type-C mode current advertisement by the connected
+DFP. The TUSB320 device debounces the CC pins and wait for V detection before successfully attaching. As
+BUS
+a UFP, the TUSB320 device detects and communicates the advertised current level of the DFP to the system
+through the OUT1 and OUT2 GPIOs (if in GPIO mode) or through the I2C CURRENT_MODE_DETECT register
+onetimeintheAttached.SNK state.
+7.2.1.3 Dual RolePort(DRP)
+The TUSB320 device can be configured to operate as a DRP when the PORT pin is left floated on the PCB. In
+DRPmode,theTUSB320devicetogglesbetweenoperatingasaDFPandaUFP.WhenfunctioningasaDFPin
+DRP mode, the TUSB320 device complies with all operations as defined for a DFP according to the Type-C
+Specification. When presenting as a UFP in DRP mode, the TUSB320 device operates as defined for a UFP
+accordingtotheType-CSpecification.
+10 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 11 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+The TUSB320 supports two optional Type-C DRP features called Try.SRC and Try.SNK. Products supporting
+dual-role functionality may have a need to be a source (DFP) or a sink (UFP) when connected to another dual-
+rolecapableproduct.Forexample,adual-rolecapablenotebookmaydesiretobeasourcewhenconnected to a
+tablet, or a cell phone would prefer to be a sink when connected to a notebook or tablet. When standard DRP
+products (products which don’t support either Try.SRC or Try.SNK) are connected together, the role (UFP or
+DFP) outcome is not predetermined. These two optional DRP features provide a means for dual-role capable
+products to connect to another dual-role capable product in the role desired. Try.SRC and Try.SNK are only
+available when TUSB320 is configured in I2C mode. When operating in GPIO mode, the TUSB320 will always
+operateasastandardDRP.
+The TUSB320’s Try.SRC feature provides a means for a DRP product to connect as a DFP when connected to
+another DRP product that doesn’t implement Try.SRC. When two products which implement Try.SRC are
+connected together, the role outcome of either UFP or DFP is the same as a standard DRP. Try.SRC is enabled
+by changing I2C register SOURCE_PREF to 2’b11. Once this register is changed to 2’b11, the TUSB320 will
+alwaysattemptto connectasaDFPwhenattachedtoanotherDRPcapabledevice.
+The TUSB320’s Try.SNK feature provides a method for a DRP product to connect as a UFP when connected to
+another DRP product that doesn’t implement Try.SNK. When two products which implement Try.SNK are
+connected together, the role outcome of either UFP or DFP is the same as a standard DRP. Try.SNK is enabled
+by changing I2C register SOURCE_PREF to 2’b01. Once this register is changed to 2’b01, the TUSB320 will
+alwaysattemptto connectasaUFPwhenattachedtoanotherDRPcapabledevice.
+7.2.2 Type-CCurrentMode
+When a valid cable detection and attach have been completed, the DFP has the option to advertise the level of
+Type-C currentaUFPcansink.Thedefaultcurrent advertisement for theTUSB320deviceismaxof500 mA(for
+USB2.0) or max of 900 mA (for USB3.1). If a higher level of current is available, the I2C registers can be written
+to provide medium current at 1.5 A or high current at 3 A. When the CURRENT_MODE_ADVERTISE register
+has been written to advertise higher than default current, the DFP adjusts the Rps for the specified current level.
+If a DFP advertises 3 A, system designer must ensure that the V of the TUSB320 device is 3.5 V or greater.
+DD
+Table2liststheType-CcurrentadvertisementsinGPIO anI2Cmodes.
+Table2.Type-CCurrentAdvertisementforGPIO andI2CModes
+GPIOMODE(ADDRPININNC) I2CMODE(ADDRPINH,L)
+TYPE-CCURRENT
+UFP(PORTPINL) DFP(PORTPINH) UFP DFP
+maxof500
+mA(USB2.0) I2Cregisterdefaultis500
+Default Onlyadvertisement
+maxof900 Currentmodedetected Currentmodedetected or900mA(max)
+mA(USB3.1) andoutputthroughOUT1 andreadthroughI2C
+Medium-1.5A(max) /OUT2 register Advertisementselected
+N/A throughwritingI2C
+High-3A(max) register
+7.2.3 AccessorySupport
+The TUSB320 device supports audio and debug accessories in UFP, DFP mode and DRP mode. Audio and
+debug accessory support is provided through reading of I2C registers. Audio accessory is also supported through
+GPIOmodewithINT_N/OUT3pin(audioaccessoryisdetectedwhenINT_N/OUT3pinislow).
+7.2.3.1 AudioAccessory
+Audio accessory mode is supported through two types of adapters. First, the passive audio adapter can be used
+to convert the Type-C connector into an audio port. In order to effectively detect the passive audio adapter, the
+TUSB320devicemustdetectaresistance< RaonbothoftheCCpins.
+Secondly, a charge through audio adapter may be used. The primary difference between a passive and charge
+through adapter is that the charge through adapter supplies 500 mA of current over VBUS. The charge through
+adapter contains a receptacle and a plug. The plug acts as a DFP and supply V when the plug detects a
+BUS
+connection.
+When the TUSB320 device is configured in GPIO mode, OUT3 pin determines if an audio accessory is
+connected.Whenanaudioaccessoryisdetected, theOUT3pinispulledlow.
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 11
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 12 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+7.2.3.2 DebugAccessory
+Debug is an additional state supported by USB Type-C. The specification does not define a specific user
+scenario for this state, but it is important because the end user could use debug accessory mode to enter a test
+state for production specific to the application. Charge through debug accessory is not supported by TUSB320
+wheninDRPorUFPmode.
+7.2.4 I2Cand GPIOControl
+The TUSB320 device can be configured for I2C communication or GPIO outputs using the ADDR pin. The ADDR
+pin is a tri-level control pin. When the ADDR pin is left floating (NC), the TUSB320 device is in GPIO output
+mode.WhentheADDRpinispulledhighorpulledlow,theTUSB320deviceisinI2Cmode.
+Alloutputsforthe TUSB320deviceareopendrainconfiguration.
+The OUT1 and OUT2 pins are used to output the Type-C current mode when in GPIO mode. Additionally, the
+OUT3pinisusedtocommunicatetheaudioaccessorymodeinGPIOmode.Table3liststheoutput pin settings.
+Seeformoreinformation.
+Table3.SimplifiedOperationforOUT1andOUT2
+OUT1 OUT2 ADVERTISEMENT
+H H DefaultCurrentinUnattachedState
+H L DefaultCurrentinAttachedState
+L H MediumCurrent(1.5A)inAttachedState
+L L HighCurrent(3.0A)inAttachedState
+When operating in I2C mode, the TUSB320 device uses the SCL and SDA lines for clock and data and the
+INT_N pin to communicate a change in I2C registers, or an interrupt, to the system. The INT_N pin is pulled low
+when the TUSB320 device updates the registers with new information. The INT_N pin is open drain. The
+INTERRUPT_STATUS register will be set when the INT_N pin is pulled low. To clear the INTERRUPT_STATUS
+register,theenduserwritestoI2C.
+When operating in GPIO mode, the OUT3 pin is used in place of the INT_N pin to determine if an audio
+accessoryisdetectedandattached.TheOUT3pinispulledlowwhenanaudioaccessoryisdetected.
+NOTE
+When using the 3.3 V supply for I2C, the end user must ensure that the V is 3 V and
+DD
+above.OtherwisetheI2Cmaybackpower thedevice.
+7.2.5 V Detection
+BUS
+The TUSB320 device supports V detection according to the Type-C Specification. V detection is used to
+BUS BUS
+determine the attachment and detachment of a UFP and to determine the entering and exiting of accessary
+modes.V detectionisalsousedtosuccessfullyresolvetheroleinDRPmode.
+BUS
+The system V voltage must be routed through a 900-kΩ resistor to the VBUS_DET pin on the TUSB320
+BUS
+deviceifthePORTpinisconfiguredasaDRPoraUFP.If theTUSB320deviceisconfiguredasaDFPandonly
+everusedinDFPmode,theVBUS_DET pincanbeleftunconnected.
+12 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 13 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+7.3 Device Functional Modes
+TheTUSB320devicehasfourfunctionalmodes. Table4liststhesemodes:
+Table4.USBType-CStatesAccordingtoTUSB320Functional Modes
+MODES GENERALBEHAVIOR PORTPIN STATES(1)
+Unattached.SNK
+UFP
+AttachWait.SNK
+USBportunattached.ID,PORT ToggleUnattached.SNK→Unattached.SRC
+Unattached operational.I2Con.CCpins DRP
+configureaccordingtoPORTpin. AttachedWait.SRCorAttachedWait.SNK
+Unattached.SRC
+DFP
+AttachWait.SRC
+Attached.SNK
+UFP Audioaccessory
+Debugaccessory
+Attached.SNK
+USBportattached.AllGPIOs Attached.SRC
+Active operational.I2Con. DRP
+Audioaccessory
+Debugaccessory
+Attached.SRC
+DFP Audioaccessory
+Debugaccessory
+Nooperation.
+Deadbattery UFP/DRP/DFP DefaultdevicestatetoUFP/SNKwithRd.
+V notavailable.
+DD
+V available.
+DD
+Shutdown TUSB320L'sEN_Npinhigh. UFP/DRP/DFP DefaultdevicestatetoUFP/SNKwithRd.
+TUSB320H'sENpinlow.
+(1) Required;notinsequentialorder.
+7.3.1 UnattachedMode
+Unattached mode is the primary mode of operation for the TUSB320 device, because a USB port can be
+unattached for a lengthy period of time. In unattached mode, V is available, and all IOs and I2C are
+DD
+operational. After the TUSB320 device is powered up, the part enters unattached mode until a successful attach
+has been determined. Initially, right after power up, the TUSB320 device comes up as an Unattached.SNK. The
+TUSB320 device checks the PORT pin and operates according to the mode configuration. The TUSB320 device
+toggles between the UFP and the DFP if configured as a DRP. In unattached mode, I2C can be used to change
+the mode configuration or port role if the board configuration of the PORT pin is not the desired mode. Writing to
+the I2C MODE_SELECT register can override the PORT pin in unattached mode. The PORT pin is only sampled
+at reset (TUSB320L's EN_N high to low transition or TUSB320H's EN low to high transition), after
+I2C_SOFT_RESET,orpowerup.I2Cmustbeusedafterreset tochangethedevicemodeconfiguration.
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 13
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 14 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+7.3.2 ActiveMode
+Active mode is defined as the port being attached. In active mode, all GPIOs are operational, and I2C is read /
+write (R/W). When in active mode, the TUSB320 device communicates to the AP that the USB port is attached.
+This happens through the ID pin if TUSB320 is configured as a DFP or DRP connect as source. If TUSB320 is
+configured as a UFP or a DRP connected as a sink, the OUT1/OUT2 and INT_N/OUT3 pins are used. The
+TUSB320deviceexitsactivemodeunderthefollowingconditions:
+• Cableunplug
+• V removalifattachedasaUFP
+BUS
+• Deadbattery;systembatteryorsupplyisremoved
+• TUSB320LEN_Npinfloatedorpulledhigh
+• TUSB320HENpinfloatedorpulledlow.
+During active mode, I2C be used to change the mode configuration. This can be done by following the sequence
+below.ThissamesequenceisvalidwhenTUSB320isinunattachedmode.
+• SetDISABLE_TERMregister(address0x0Abit0)toa1'b1.
+• ChangeMODE_SELECT register(address0x0Abits5:4)todesiredmodeofoperation.
+• Wait5ms.
+• ClearDISABLE_TERMregister(address0x0Abit0)to1'b0.
+7.3.3 DeadBatteryMode
+During dead battery mode, V is not available. CC pins always default to pulldown resistors in dead battery
+DD
+mode.Deadbatterymodemeans:
+• TUSB320inUFPwith5.1-kΩ± 20%Rd;cableconnectedandprovidingcharge
+• TUSB320 in UFP with 5.1-kΩ ± 20% Rd; nothing connected (application could be off or have a discharged
+battery)
+NOTE
+When V is off, the TUSB320 non-failsafe pins (VBUS_DET, ADDR, PORT, ID, OUT[3:1]
+DD
+pins) could back-drive the TUSB320 device if not handled properly. When necessary to
+pull these pins up, it is recommended to pullup PORT, ADDR, INT_N/OUT3, and ID to the
+device’s V supply. The VBUS_DET must be pulled up to V through a 900-kΩ
+DD BUS
+resistor.
+7.3.4 ShutdownMode
+ShutdownmodeforTUSB320Ldeviceisdefinedasfollows:
+• SupplyvoltageavailableandEN_Npinis pulledhighorfloating.
+• EN_Npinhasinternalpullupresistor.
+• TheTUSB320Ldeviceisoff,butstillmaintainstheRdontheCCpins
+ShutdownmodeforTUSB320Hdeviceisdefinedasfollows:
+• SupplyvoltageavailableandENpinispulledloworfloating.
+• ENpinhasinternalpulldownresistor.
+• TheTUSB320Hdeviceisoff,butstillmaintainstheRdontheCCpins
+14 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 15 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+7.4 Programming
+For further programmability, the TUSB320 device can be controlled using I2C. The TUSB320 device local I2C
+interfaceisavailableforreading/writingafterT whenthedeviceispoweredup.TheSCLandSDAterminals
+I2C_EN
+are used for I2C clock and I2C data respectively. If I2C is the preferred method of control, the ADDR pin must be
+setaccordingly.
+Table5.TUSB320I2CAddresses
+TUSB320I2CTargetAddress
+ADDRpin Bit7(MSB) Bit6 Bit5 Bit4 Bit3 Bit2 Bit1 Bit0(W/R)
+H 1 1 0 0 1 1 1 0/1
+L 1 0 0 0 1 1 1 0/1
+ThefollowingprocedureshouldbefollowedtowritetoTUSB320I2Cregisters:
+1. The master initiates a write operation by generating a start condition (S), followed by the TUSB320 7-bit
+addressandazero-valueR/Wbittoindicateawritecycle
+2. TheTUSB320deviceacknowledgestheaddresscycle
+3. The master presents the sub-address (I2C register within the TUSB320 device) to be written, consisting of
+onebyteofdata,MSB-first
+4. TheTUSB320deviceacknowledgesthesub-addresscycle
+5. ThemasterpresentsthefirstbyteofdatatobewrittentotheI2Cregister
+6. TheTUSB320deviceacknowledgesthebytetransfer
+7. Themastermaycontinuepresentingadditionalbytesofdatatobewritten,witheachbytetransfercompleting
+withanacknowledgefromtheTUSB320device
+8. Themasterterminatesthewriteoperationbygeneratingastopcondition(P)
+ThefollowingprocedureshouldbefollowedtoreadtheTUSB320I2Cregisters:
+1. The master initiates a read operation by generating a start condition (S), followed by the TUSB320 7-bit
+addressandaone-valueR/Wbittoindicateareadcycle
+2. TheTUSB320deviceacknowledgestheaddresscycle
+3. The TUSB320 device transmits the contents of the memory registers MSB-first starting at register 00h or last
+read sub-address+1. If a write to the T I2C register occurred prior to the read, then the TUSB320 device
+startsatthesub-addressspecifiedinthewrite.
+4. The TUSB320 device waits for either an acknowledge (ACK) or a not-acknowledge (NACK) from the master
+aftereachbytetransfer;theI2Cmasteracknowledgesreceptionofeachdatabytetransfer
+5. IfanACKisreceived,theTUSB320devicetransmitsthenextbyteofdata
+6. Themasterterminatesthereadoperationbygeneratingastopcondition(P)
+Thefollowingprocedureshouldbefollowedfor settingastartingsub-addressfor I2Creads:
+1. The master initiates a write operation by generating a start condition (S), followed by the TUSB320 7-bit
+addressandazero-valueR/Wbittoindicateareadcycle
+2. TheTUSB320deviceacknowledgestheaddresscycle
+3. The master presents the sub-address (I2C register within the TUSB320 device) to be read, consisting of one
+byteofdata,MSB-first
+4. TheTUSB320deviceacknowledgesthesub-addresscycle
+5. Themasterterminatesthereadoperationbygeneratingastopcondition(P)
+NOTE
+If no sub-addressing is included for the read procedure, then the reads start at register
+offset 00h and continue byte-by-byte through the registers until the I2C master terminates
+the read operation. If a I2C address write occurred prior to the read, then the reads start at
+thesub-addressspecifiedbytheaddresswrite.
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 15
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 18 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+7.5.3 CSR Registers(address=0x09)
+Figure6. CSRRegisters(address=0x09)
+7 6 5 4 3 2 1 0
+DISABLE_UFP_
+ATTACHED_STATE CABLE_DIR INTERRUPT_STATUS — DRP_DUTY_CYCLE
+ACCESSORY
+RU RU RCU R RW RW
+LEGEND:R/W=Read/Write;R=Readonly;-n=valueafterreset
+Table9.CSRRegisters(address=0x09)
+Bit Field Type Reset Description
+Thisisanadditionalmethodtocommunicateattachotherthan
+theIDpin.Thesebitscanbereadbytheapplicationto
+determinewhatwasattached.
+00–Notattached(default)
+7:6 ATTACHED_STATE RU 00
+01–Attached.SRC(DFP)
+10–Attached.SNK(UFP)
+11–Attachedtoanaccessory
+Cableorientation.Theapplicationcanreadthesebitsforcable
+orientationinformation.
+5 CABLE_DIR RU 1 0–CC1
+1–CC2(default)
+TheINTpinispulledlowwheneveraCSRwithRUinAccess
+fieldchanges.WhenaCSRchangehasoccurredthisbitshould
+beheldat1untiltheapplicationclearsit.Awriteof1'b1is
+requiredtoclearthisfield.
+4 INTERRUPT_STATUS RCU 0 0–Clear
+1–Interrupt(WhenINT_Nispulledlow,thisbitwillbe1.)
+Note:SWmustmakesuretheINTERRUPT_STATUShasbeen
+cleared to zero. Rewrites to this register are needed for the
+INT_Ntobecorrectlyassertedforallinterruptevents.
+3 Reserved R 0 Reserved
+PercentageoftimethataDRPadvertisesDFPduringtDRP
+00–30%(default)
+2:1 DRP_DUTY_CYCLE RW 00 01–40%
+10–50%
+11–60%
+SettingsthisfieldwilldisableUFPaccessorysupport.
+0 DISABLE_UFP_ACCESSORY RW 0 0–UFPaccessorysupportenabled(Default)
+1–UFPaccessorysupportdisabled
+18 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 19 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+7.5.4 CSR Registers(address=0x0A)
+Figure7. CSRRegisters(address=0x0A)
+7 6 5 4 3 2 1 0
+DEBOUNCE MODE_SELECT I2C_SOFT_RESET SOURCE_PREF DISABLE_TERM
+RW RW RSU RW RW
+LEGEND:R/W=Read/Write;R=Readonly;-n=valueafterreset
+Table10.CSRRegisters(address=0x0A)
+Bit Field Type Reset Description
+ThenominalamountoftimetheTUSB320devicedebounces
+thevoltagesontheCCpins.
+00–168ms(default)
+7:6 DEBOUNCE RW 00 01–118ms
+10–134ms
+11–152ms
+ThisregistercanbewrittentosettheTUSB320devicemode
+operation.TheADDRpinmustbesettoI2Cmode.Ifthedefault
+ismaintained,theTUSB320deviceoperatesaccordingtothe
+PORTpinlevelsandmodes.
+5:4 MODE_SELECT RW 00 00–MaintainmodeaccordingtoPORTpinselection(default)
+01–UFPmode(unattached.SNK)
+10–DFPmode(unattached.SRC)
+11–DRPmode(startfromunattached.SNK)
+Thisresetsthedigitallogic.Thebitisself-clearing.Awriteof1
+startsthereset.Thefollowingregistersmaybeaffectedafter
+settingthisbit:
+CURRENT_MODE_DETECT
+3 I2C_SOFT_RESET RSU 0 ACTIVE_CABLE_DETECTION
+ACCESSORY_CONNECTED
+ATTACHED_STATE
+CABLE_DIR
+ThisfieldcontrolstheTUSB320behaviorwhenconfiguredasa
+DRP.
+00–StandardDRP(default)
+2:1 SOURCE_PREF RW 00
+01–DRPwillperformTry.SNK.
+10–Reserved.
+11–DRPwillperformTry.SRC.
+ThisfieldwilldisabletheterminationontheCCpinsand
+transitiontheTUSB320'sCCstatemachinetotheDisableState.
+0 DISABLE_TERM RW 0 0–TerminationenabledaccordingtoPort(Default)
+1 – Termination disabled and state machine held in Disabled
+state.
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 19
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 21 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+8 Application and Implementation
+NOTE
+Information in the following applications sections is not part of the TI component
+specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+responsible for determining suitability of components for their purposes. Customers should
+validateandtesttheirdesignimplementationtoconfirmsystem functionality.
+8.1 Application Information
+The TUSB320 device is a Type-C configuration channel logic and port controller. The TUSB320 device can
+detectwhenaType-Cdeviceisattached,what typeofdeviceisattached,theorientationofthecable, and power
+capabilities(both detectionandbroadcast).TheTUSB320devicecanbeusedinasourceapplication(DFP),ina
+sinkapplication(UFP),oracombinationsource/sinkapplication(DRP).
+8.2 Typical Application
+8.2.1 DRP in I2CMode
+Figure10andFigure11showaType-Cconfigurationfor theDRPmode.
+5 V Lega S c w y i t T ch ypeA VBUS PMIC VBUS
+VPH PORT
+ID
+Processor
+2
+G
+.7
+I P 2
+-
+I C O
+5
+s
+V
+P
+V
+O
+D
+R
+D
+T C C o C n /M tro o l d le e r
+V
+C
+C B
+C
+C U
+2
+1 S
+D D M P
+U S B TypeC
+P ort Processor G I P 2 I C Os
+VD
+I
+D
+D C C o C n /M tro o l d le e r
+V
+C
+C B
+C
+C U
+2
+1 S
+D D M P
+U S B TypeC
+P ort
+TUSB320 TUSB320
+Copyright © 2016, Texas Instruments Incorporated Copyright © 2016, Texas Instruments Incorporated
+Figure10.TUSB320inDRPModeSupportingDefault Figure11.TUSB320inDRPModeSupportingAdvanced
+Implementation PowerDelivery
+Figure12showstheTUSB320deviceconfiguredasaDRPinI2Cmode.
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 21
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 22 ---
+USB VBUS Switch
+(optional BC 1.2 support for legacy)
+DM_OUT DM_IN
+DP_OUT DP_IN
+VIN VOUT
+DM
+DP
+VBUS
+900K A1 B12
+VBUS_DET A2 B11
+A3 B10
+CC1 CC1 A A 4 5 B B 8 9 TUSB320L CC2 CC2 A A 6 7 B B 6 7
+A8 B5
+A9 B4 A10 B3
+A11 B2
+A12 B1
+DNG
+150uF
+VDD
+System VBUS
+PORT
+N_NE
+USB2 VBAT
+OTG
+and
+PMIC 100nF
+RDDA
+SCL
+SDA
+DM
+DP
+PS_EN EN
+PS_FAULT# FAULT#
+VBUS
+I2C I/O
+1.8V or 3.3V
+4.7K 4.7K 200K 200K
+INT# INT_N/OUT3 ID ID
+SCL SCL/OUT2
+SDA SDA/OUT1
+C epyT
+elcatpeceR
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+Typical Application (continued)
+1uF
+Copyright © 2016, Texas Instruments Incorporated
+Figure12. DRPinI2CModeSchematic
+8.2.1.1 DesignRequirements
+Forthisdesignexample,usetheparameterslistedinTable13:
+Table13.DesignRequirementsforDRPinI2CMode
+DESIGNPARAMETER VALUE
+V (2.75Vto5V) VBAT(lessthan5V)
+DD
+Mode(I2CorGPIO) I2C:ADDRpinmustbepulleddownorpulledup
+I2Caddress(0x67or0x47) 0x47:ADDRpinmustbepulledlowortiedtoGND
+Type-Cporttype(UFP,DFP,orDRP) DRP:PORTpinisNC
+Shutdownsupport No
+8.2.1.2 DetailedDesignProcedure
+The TUSB320 device supports a V in the range of 2.75 V to 5 V. In this particular use case, VBAT which must
+DD
+beintherequiredV rangeisconnectedtotheV pin. A100-nFcapacitorisplacednearV .
+DD DD DD
+The TUSB320 device is placed into I2C mode by either pulling the ADDR pin high or low. In this case, the ADDR
+pin is tied to GND which results in a I2C address of 0x47. The SDA and SCL must be pulled up to either 1.8 V or
+3.3V.Whenpulledupto3.3V,theV supplymust beatleast 3Vtokeepfromback-drivingtheI2Cinterface.
+DD
+TheTUSB320LdevicecanentershutdownmodebypullingtheEN_Npinhigh, whichputstheTUSB320Ldevice
+into a low power state. In this case, external control of the EN_N pin is not implemented and therefore the EN_N
+pin is tied to GND. The TUSB320H device can enter shutdown mode by pulling the EN pin low, which puts the
+TUSB320H device into a low power state. In this case, external control of the EN pin is not implemented and
+thereforetheEN pinistiedto1.8Vor3.3V.
+The INT_N/OUT3 pin is used to notify the PMIC when a change in the TUSB320 I2C registers occurs. This pin is
+an open drain output and requires an external pullup resistor. The pin should be pulled up to V using a 200-kΩ
+DD
+resistor.
+22 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 23 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+The ID pin is used to indicate when a connection has occurred if the TUSB320 device is a DFP while configured
+for DRP. An OTG USB controller can use this pin to determine when to operate as a USB Host or USB Device.
+When this pin is driven low, the OTG USB controller functions as a host and then enables V . The Type-C
+BUS
+standard requires that a DFP not enable V until it is in the Attached.SRC state. If the ID pin is not low but
+BUS
+V is detected, then OTG USB controller functions as a device. The ID pin is open drain output and requires
+BUS
+anexternalpullupresistor.ItshouldbepulleduptoV usinga200-kΩ resistor.
+DD
+The Type-C port mode is determined by the state of the PORT pin. When the PORT pin is not connected, the
+TUSB320 device is in DRP mode. The Type-C port mode can also be controlled by the MODE_SELECT register
+throughtheI2Cinterface.
+The VBUS_DET pin must be connected through a 900-kΩ resistor to V on the Type-C that is connected. This
+BUS
+large resistor is required to protect the TUSB320 device from large V voltage that is possible in present day
+BUS
+systems. This resistor along with internal pulldown keeps the voltage observed by the TUSB320 device in the
+recommendedrange.
+The USB2 specification requires the bulk capacitance on V based on UFP or DFP. When operating the
+BUS
+TUSB320 device in a DRP mode, it alternates between UFP and DFP. If the TUSB320 device connects as a
+UFP,thelargebulkcapacitancemustberemoved.
+Table14.USB2BulkCapacitanceRequirements
+PORTCONFIGURATION MIN MAX UNIT
+Downstreamfacingport(DFP) 120 µF
+Upstreamfacingport(UFP) 1 10 µF
+8.2.1.3 ApplicationCurves
+Figure13. ApplicationCurveforDRPinI2CMode
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 23
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 24 ---
+USB VBUS Switch
+(optional BC 1.2 support for legacy)
+DM_OUT DM_IN
+DP_OUT DP_IN
+VIN VOUT
+DM
+DP
+VBUS
+900K A1 B12
+VBUS_DET A2 B11
+A3 B10
+CC1 CC1 A A 4 5 B B 8 9
+TUSB320L CC2 CC2 A A 6 7 B B 6 7
+A8 B5
+A9 B4 A10 B3
+A11 B2
+A12 B1
+DNG
+150uF
+VDD
+System VBUS
+PORT
+N_NE
+USB2 VDD_5V
+OTG
+and
+100nF
+PMIC
+RDDA
+SCL
+SDA
+DM
+DP
+PS_EN EN
+PS_FAULT# FAULT#
+VBUS
+I2C I/O
+1.8V or 3.3V
+4.7K 4.7K 200K 200K
+INT# INT_N/OUT3
+ID ID
+SCL SCL/OUT2
+SDA SDA/OUT1
+C epyT
+elcatpeceR
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+8.2.2 DFPin I2CMode
+Figure14andFigure15showaType-Cconfigurationfor theDFPmode.
+5 V Legacy TypeA VBUS
+Switch PMIC VBUS
+VDD
+VPH PORT
+ID U
+VDD VBUS S B VBUS U S
+Processor
+2.7
+G
+-
+I P 2
+5
+I C O
+V
+s
+PO
+VD
+R
+D
+T C C o C n /M tro o l d le e r
+C
+C
+C
+C
+1
+2
+D D M P
+TypeC
+P ort
+Processor G I P 2 I C Os
+VD
+ID
+D
+C C o C n /M tro o l d le e r
+C
+C
+C
+C
+1
+2
+D D M P
+B TypeC
+P
+ort
+TUSB320 TUSB320
+Copyright © 2016, Texas Instruments Incorporated
+Copyright © 2016, Texas Instruments Incorporated
+Figure14.TUSB320inDFPModeSupportingDefault
+Figure15.TUSB320inDFPModeSupportingAdvanced
+Implementation
+PowerDelivery
+Figure16showstheTUSB320deviceconfiguredasaDFPinI2Cmode.
+200K
+Copyright © 2016, Texas Instruments Incorporated
+Figure16. DFPinI2CModeSchematic
+24 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 25 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+8.2.2.1 DesignRequirements
+Forthisdesignexample,usetheparameterslistedinTable15:
+Table15.DesignRequirementsforDFPinI2CMode
+DESIGNPARAMETER VALUE
+V (2.75Vto5V) 5V
+DD
+Mode(I2CorGPIO) I2C:ADDRpinmustbepulleddownorpulledup
+I2Caddress(0x67or0x47) 0x47:ADDRpinmustbepulledlowortiedtoGND
+Type-Cporttype(UFP,DFP,orDRP) DFP:PORTpinispulledup
+Shutdownsupport No
+8.2.2.2 DetailedDesignProcedure
+The TUSB320 device supports a V in the range of 2.75 V to 5 V. In this particular case, V is set to 5 V. A
+DD DD
+100-nF capacitorisplacednearV .
+DD
+The TUSB320 device is placed into I2C mode by either pulling the ADDR pin high or low. In this particular case,
+the ADDR pin is tied to GND which results in a I2C address of 0x47. The SDA and SCL must be pulled up to
+either 1.8 V or 3.3 V. When pulled up to 3.3 V, the V supply must be at least 3 V to keep from back-driving the
+DD
+I2Cinterface.
+TheTUSB320LdevicecanentershutdownmodebypullingtheEN_Npinhigh, whichputstheTUSB320Ldevice
+into a low power state. In this case, external control of the EN_N pin is not implemented and therefore the EN_N
+pin is tied to GND. The TUSB320H device can enter shutdown mode by pulling the EN pin low, which puts the
+TUSB320H device into a low power state. In this case, external control of the EN pin is not implemented and
+thereforetheEN pinistiedto1.8Vor3.3V.
+The INT_N/OUT3 pin is used to notify the PMIC when a change in the TUSB320 I2C registers occurs. This pin is
+an open drain output and requires an external pullup resistor. The pin should be pulled up to V using a 200-kΩ
+DD
+resistor.
+The Type-C port mode is determined by the state of the PORT pin. When the PORT pin is pulled high, the
+TUSB320 device is in DFP mode. The Type-C port mode can also be controlled by the MODE_SELECT register
+throughtheI2Cinterface.
+The VBUS_DET pin must be connected through a 900-kΩ resistor to V on the Type-C that is connected. This
+BUS
+large resistor is required to protect the TUSB320 device from large V voltage that is possible in present day
+BUS
+systems. This resistor along with internal pulldown keeps the voltage observed by the TUSB320 device in the
+recommendedrange.
+The USB2 specification requires the bulk capacitance on V based on UFP or DFP. When operating the
+BUS
+TUSB320 device in a DFP mode, a bulk capacitance of at least 120µF is required. In this particular case, a 150-
+µFcapacitorwaschosen.
+8.2.2.3 ApplicationCurves
+Figure17. ApplicationCurveforDFPinI2CMode
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 25
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 26 ---
+DM
+DP
+VBUS
+900K A1 B12
+VBUS_DET A2 B11
+A3 B10
+CC1 CC1 A A 4 5 B B 8 9
+TUSB320L CC2 A6 B7 CC2 A7 B6
+A8 B5
+A9 B4 A10 B3
+A11 B2
+A12 B1
+VDD
+DNG
+PORT
+N_NE
+VDD_5V
+USB2
+Device
+and
+100nF
+PMIC
+4.7K
+RDDA
+Optional power
+TUSB320 with VBUS
+less than 5.5V
+DM
+DP
+VBUS
+D1
+I2C I/O
+1.8V or 3.3V
+4.7K 4.7K 200K 200K
+INT# INT_N/OUT3
+ID
+SCL SCL/OUT2
+SDA SDA/OUT1
+1uF
+C
+epyT
+elcatpeceR
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+8.2.3 UFPin I2CMode
+Figure18andFigure19showaType-Cconfigurationfor theUFPmode.
+5 V VBUS
+PMIC VBUS
+VPH PORT
+Processor 2.7 G - I P 5 2 I C V Os P V O D R D T C C o C n /M tro o l d le
+I
+e
+D
+r
+V
+C C
+B
+C C
+U
+1 2
+S
+D D M P
+U S B
+T ypeC P ort Processor G I P 2 I C Os VD I D D C C o C n /M tro o l d le e r
+VB
+C C
+U
+C C
+S
+2 1 D D M P
+U S
+B TypeC P ort
+GND TUSB320 TUSB320
+Copyright © 2016, Texas Instruments Incorporated Copyright © 2016, Texas Instruments Incorporated
+Figure18.TUSB320inUFPModeSupportingDefault Figure19.TUSB320inUFPModeSupportingAdvanced
+Implementation PowerDelivery
+Figure20showstheTUSB320deviceconfiguredasaUFPinI2Cmode.
+Copyright © 2016, Texas Instruments Incorporated
+Figure20. UFPinI2CModeSchematic
+26 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 27 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+8.2.3.1 DesignRequirements
+Forthisdesignexample,usetheparameterslistedinTable16:
+Table16.DesignRequirementsforUFPinI2CMode
+DESIGNPARAMETER VALUE
+V (2.75Vto5V) 5V
+DD
+Mode(I2CorGPIO) I2C:ADDRpinmustbepulleddownorpulledup
+I2Caddress(0x67or0x47) 0x47:ADDRpinmustbepulledlowortiedtoGND
+Type-Cporttype(UFP,DFP,orDRP) UFP:PORTpinispulleddown
+Shutdownsupport No
+8.2.3.2 DetailedDesignProcedure
+The TUSB320 device supports a V in the range of 2.75 V to 5 V. In this particular case, V is set to 5 V. A
+DD DD
+100-nF capacitor is placed near V . If V is guaranteed to be less than 5.5 V, powering the TUSB320 device
+DD BUS
+throughadiodecanbeimplemented.
+The TUSB320 device is placed into I2C mode by either pulling the ADDR pin high or low. In this case, the ADDR
+pin is tied to GND which results in a I2C address of 0x47. The SDA and SCL must be pulled up to either 1.8 V or
+3.3V.Whenpulledupto3.3V,theV supplymust beatleast 3Vtokeepfromback-drivingtheI2Cinterface.
+DD
+TheTUSB320LdevicecanentershutdownmodebypullingtheEN_Npinhigh, whichputstheTUSB320Ldevice
+into a low power state. In this case, external control of the EN_N pin is not implemented and therefore the EN_N
+pin is tied to GND. The TUSB320H device can enter shutdown mode by pulling the EN pin low, which puts the
+TUSB320H device into a low power state. In this case, external control of the EN pin is not implemented and
+thereforetheEN pinistiedto1.8Vor3.3V.
+The INT_N/OUT3 pin is used to notify the PMIC when a change in the TUSB320 I2C registers occurs. This pin is
+an open drain output and requires an external pullup resistor. The pin should be pulled up to V using a 200-kΩ
+DD
+resistor.
+The Type-C port mode is determined by the state of the PORT pin. When the PORT pin is pulled low, the
+TUSB320 device is in UFP mode. The Type-C port mode can also be controlled by the MODE_SELECT register
+throughtheI2Cinterface.
+The VBUS_DET pin must be connected through a 900-kΩ resistor to V on the Type-C that is connected. This
+BUS
+large resistor is required to protect the TUSB320 device from large V voltage that is possible in present day
+BUS
+systems. This resistor along with internal pulldown keeps the voltage observed by the TUSB320 device in the
+recommendedrange.
+The USB2 specification requires the bulk capacitance on V based on UFP or DFP. When operating the
+BUS
+TUSB320 device in a UFP mode, a bulk capacitance between 1 to 10µF is required. In this particular case, a 1-
+µFcapacitorwaschosen.
+8.2.3.3 ApplicationCurves
+Figure21. ApplicationCurveforUFPinI2CMode
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 27
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 28 ---
+TUSB320HI,TUSB320LI
+SLLSEP2D–AUGUST2015–REVISEDMAY2017 www.ti.com
+8.3 Initialization Set Up
+8.3.1 TUSB320LInitialization Procedure
+Thegeneralpower-upsequencefortheTUSB320Ldevice(EN_Ntiedtoground)isasfollows:
+1. System is powered off (device has no V ). The TUSB320L device is configured internally in UFP mode with
+DD
+RdsonCCpins(deadbattery).
+2. V ramps – POR circuit. V must ramp within 25 ms or less. IO pull-up power rail (i.e. pull up on ID, INT,
+DD DD
+SCL, SDA, ADDR,PORT)mustrampwithV orlagafterV .
+DD DD
+3. I2Csupplyrampsup.
+4. The TUSB320L device enters unattached mode and determines the voltage level from the PORT pin. This
+determinesthemodeinwhichtheTUSB320Ldeviceoperates(DFP,UFP,DRP).
+5. TheTUSB320LdevicemonitorstheCCpinsasaDFPandV for attachasaUFP.
+BUS
+6. TheTUSB320Ldeviceentersactivemodewhenattachhasbeensuccessfullydetected.
+8.3.2 TUSB320HInitialization Procedure
+Thegeneralpower-upsequencefortheTUSB320Hdevice(ENtiedto1.8Vor3.3V)isasfollows:
+1. Systemispoweredoff(devicehasnoV ). TheTUSB320HdeviceisconfiguredinternallyinUFPmodewith
+DD
+RdsonCCpins(deadbattery).
+2. V ramps – POR circuit. V must ramp within 25 ms or less. IO pull-up power rail (i.e. pull up on ID, INT,
+DD DD
+SCL, SDA, ADDR,PORT)mustrampwithV orlagafterV .
+DD DD
+3. I2Csupplyrampsup.
+4. The TUSB320H device enters unattached mode and determines the voltage level from the PORT pin. This
+determinesthemodeinwhichtheTUSB320Hdeviceoperates(DFP,UFP,DRP).
+5. TheTUSB320HdevicemonitorstheCCpinsasaDFPandV for attachasaUFP.
+BUS
+6. TheTUSB320Hdeviceentersactivemodewhenattachhasbeensuccessfullydetected.
+9 Power Supply Recommendations
+The TUSB320 device has a wide power supply range from 2.7 to 5 V. The TUSB320 device can be run off of a
+systempowersuchasabattery.
+28 SubmitDocumentationFeedback Copyright©2015–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 29 ---
+TUSB320HI,TUSB320LI
+www.ti.com SLLSEP2D–AUGUST2015–REVISEDMAY2017
+10 Layout
+10.1 Layout Guidelines
+1. Anextratrace(orstub)iscreatedwhenconnectingbetweenmore thantwopoints.Atraceconnecting pin A6
+topinB6willcreateastubbecausethetracealsohastogototheUSBHost.Ensurethat:
+– AstubcreatedbyshortonpinA6(DP)andpinB6(DP) atType-Creceptacledoesnotexceed3.5mm.
+– AstubcreatedbyshortonpinA7(DM)andpinB7(DM)atType-Creceptacledoesnotexceed3.5mm.
+2. A100-nF capacitorshouldbeplacedascloseaspossibletotheTUSB320V pin.
+DD
+10.2 Layout Example
+SCL/OUT2
+Figure22. TUSB320Layout
+Copyright©2015–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 29
+ProductFolderLinks:TUSB320HI TUSB320LI
+--- page 31 ---
+PACKAGE OPTION ADDENDUM
+www.ti.com 10-Nov-2025
+PACKAGING INFORMATION
+Orderable part number Status Material type Package | Pins Package qty | Carrier RoHS Lead finish/ MSL rating/ Op temp (°C) Part marking
+(1) (2) (3) Ball material Peak reflow (6)
+(4) (5)
+TUSB320HIRWBR Active Production X2QFN (RWB) | 12 3000 | LARGE T&R Yes NIPDAU Level-2-260C-1 YEAR -40 to 85 5H
+TUSB320HIRWBR.A Active Production X2QFN (RWB) | 12 3000 | LARGE T&R Yes NIPDAU Level-2-260C-1 YEAR -40 to 85 5H
+TUSB320LIRWBR Active Production X2QFN (RWB) | 12 3000 | LARGE T&R Yes NIPDAU Level-2-260C-1 YEAR -40 to 85 5L
+TUSB320LIRWBR.A Active Production X2QFN (RWB) | 12 3000 | LARGE T&R Yes NIPDAU Level-2-260C-1 YEAR -40 to 85 5L
+(1) Status: For more details on status, see our product life cycle.
+(2) Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+(3) RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+(4) Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+(5) MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+(6) Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+Addendum-Page 1
+--- page 32 ---
+PACKAGE MATERIALS INFORMATION
+www.ti.com 3-Sep-2026
+TAPE AND REEL INFORMATION
+REEL DIMENSIONS TAPE DIMENSIONS
+K0 P1
+W
+B0
+Reel
+Diameter
+Cavity A0
+A0 Dimension designed to accommodate the component width
+B0 Dimension designed to accommodate the component length
+K0 Dimension designed to accommodate the component thickness
+W Overall width of the carrier tape
+P1 Pitch between successive cavity centers
+Reel Width (W1)
+QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+Sprocket Holes
+Q1 Q2 Q1 Q2
+Q3 Q4 Q3 Q4 User Direction of Feed
+Pocket Quadrants
+*All dimensions are nominal
+Device Package Package Pins SPQ Reel Reel A0 B0 K0 P1 W Pin1
+Type Drawing Diameter Width (mm) (mm) (mm) (mm) (mm) Quadrant
+(mm) W1 (mm)
+TUSB320HIRWBR X2QFN RWB 12 3000 180.0 8.4 1.8 1.8 0.48 4.0 8.0 Q2
+TUSB320LIRWBR X2QFN RWB 12 3000 180.0 8.4 1.8 1.8 0.48 4.0 8.0 Q2
+Pack Materials-Page 1
+--- page 33 ---
+PACKAGE MATERIALS INFORMATION
+www.ti.com 3-Sep-2026
+TAPE AND REEL BOX DIMENSIONS
+Width (mm) H
+W L
+*All dimensions are nominal
+Device Package Type Package Drawing Pins SPQ Length (mm) Width (mm) Height (mm)
+TUSB320HIRWBR X2QFN RWB 12 3000 210.0 185.0 35.0
+TUSB320LIRWBR X2QFN RWB 12 3000 210.0 185.0 35.0
+Pack Materials-Page 2
+--- page 34 ---
+PACKAGE OUTLINE
+RWB0012A X2QFN - 0.4 mm max height
+SCALE 6.500
+PLASTIC QUAD FLATPACK - NO LEAD
+1.65
+B 1.55 A
+PIN 1 INDEX AREA
+1.65
+1.55
+C
+0.4 MAX
+SEATING PLANE
+0.05 C
+2X 1.2
+(0.13)
+TYP
+SYMM 0.05
+6X 0.4
+0.00
+3 6
+2
+7
+2X SYMM
+0.4
+1 8X 0.4
+8 0.2
+12 9
+0.25
+4X 0.6 12X 0.15
+0.4
+0.07 C B A
+0.05 C
+4221631/B 07/2017
+NOTES:
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+www.ti.com
+
+
+######## tps22918 ########
+--- page 1 ---
+Input Voltage (V)
+):m(
+ecnatsiseR-nO
+Product Order Technical Tools & Support &
+Folder Now Documents Software Community
+TPS22918
+SLVSD76C–FEBRUARY2016–REVISEDJULY2017
+TPS22918 5.5-V, 2-A, 52-mΩ On-Resistance Load Switch
+1 Features 3 Description
+• IntegratedSingleChannelLoadSwitch The TPS22918 is a single-channel load switch with
+1 configurable rise time and configurable quick output
+• AmbientOperatingTemperature: –40°Cto
+discharge. The device contains an N-channel
++105°C
+MOSFET that can operate over an input voltage
+• InputVoltageRange:1Vto5.5V range of 1 V to 5.5 V and can support a maximum
+• On-Resistance(R ) continuous current of 2 A. The switch is controlled by
+ON
+an on and off input, which is capable of interfacing
+– R =52mΩ (typical)atV =5V
+ON IN directlywithlow-voltagecontrolsignals.
+– R =53mΩ (typical)atV =3.3V
+ON IN
+The configurable rise time of the device greatly
+• 2-AMaximumContinuousSwitchCurrent
+reduces inrush current caused by large bulk load
+• LowQuiescentCurrent capacitances, thereby reducing or eliminating power
+– 8.3 µA(typical)atV =3.3V supply droop. The TPS22918 features a configurable
+IN
+quick output discharge (QOD) pin, which controls the
+• Low-ControlInput-ThresholdEnablesUseof1V
+fall time of the device to allow design flexibility for
+orHigherGPIO
+power downandsequencing.
+• AdjustableQuick-OutputDischarge(QOD)
+TheTPS22918isavailableinasmall, leadedSOT-23
+• ConfigurableRiseTimeWithCTPin
+package (DBV) which allows visual inspection of
+• SmallSOT23-6Package(DBV) solder joints. The device is characterized for
+– 2.90-mm ×2.80-mm,0.95-mmPitch, operation over the free-air temperature range of
+–40°Cto+105°C.
+1.45mmHeight(withleads)
+• ESDPerformanceTestedperJESD22 DeviceInformation (1)
+– ±2-kVHBMand ±1-kVCDM
+PARTNUMBER PACKAGE BODYSIZE(NOM)
+TPS22918 SOT-23(6) 2.90mm×1.60mm
+2 Applications
+(1) For all available packages, see the orderable addendum at
+• IndustrialSystems theendofthedatasheet.
+• SetTopBox
+• BloodGlucoseMeters
+• ElectronicPointofSale
+SimplifiedSchematic On-ResistancevsInputVoltage
+Typical Values
+Power VIN VOUT 100
+Supply
+-40qC
+C IN R EXT 90 2 8 5 5 q q C C
+GND QOD R 105qC
+L 80
+C
+L
+ON
+ON CT 70
+TPS22918
+OFF
+60
+50
+40
+30
+1 1.5 2 2.5 3 3.5 4 4.5 5 5.5
+D001
+I =–200mA
+OUT
+1
+An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+intellectualpropertymattersandotherimportantdisclaimers.PRODUCTIONDATA.
+--- page 2 ---
+TPS22918
+SLVSD76C–FEBRUARY2016–REVISEDJULY2017 www.ti.com
+Table of Contents
+1 Features.................................................................. 1 8.3 FeatureDescription.................................................13
+2 Applications........................................................... 1 8.4 DeviceFunctionalModes........................................15
+3 Description............................................................. 1 9 ApplicationandImplementation........................ 16
+4 RevisionHistory..................................................... 2 9.1 ApplicationInformation............................................16
+9.2 TypicalApplication .................................................16
+5 PinConfigurationandFunctions......................... 3
+10 PowerSupplyRecommendations..................... 20
+6 Specifications......................................................... 4
+11 Layout................................................................... 20
+6.1 AbsoluteMaximumRatings......................................4
+6.2 ESDRatings ............................................................4 11.1 LayoutGuidelines.................................................20
+6.3 RecommendedOperatingConditions.......................4 11.2 LayoutExample....................................................21
+6.4 ThermalInformation..................................................4 11.3 ThermalConsiderations........................................21
+6.5 ElectricalCharacteristics...........................................5 12 DeviceandDocumentationSupport................. 22
+6.6 SwitchingCharacteristics..........................................6 12.1 DeviceSupport......................................................22
+6.7 TypicalDCCharacteristics........................................7 12.2 DocumentationSupport........................................22
+6.8 TypicalACCharacteristics........................................9 12.3 CommunityResources..........................................22
+7 ParameterMeasurementInformation................11 12.4 Trademarks...........................................................22
+12.5 ElectrostaticDischargeCaution............................22
+8 DetailedDescription............................................ 12
+12.6 Glossary................................................................22
+8.1 Overview.................................................................12
+13 Mechanical,Packaging,andOrderable
+8.2 FunctionalBlockDiagram.......................................12
+Information........................................................... 22
+4 Revision History
+NOTE:Pagenumbersforpreviousrevisionsmaydifferfrompagenumbersinthecurrentversion.
+ChangesfromRevisionA(March2016)toRevisionB Page
+• UpdatedtheconstantvalueinEquation3inAdjustableRiseTime(CT)section................................................................ 14
+ChangesfromRevisionB(June2016)toRevisionC Page
+• UpdatedtheApplicationsSectionchangedµFtopFinFigure30,Figure31,andSection9.2.2.5...................................... 1
+ChangesfromOriginal(February2016)toRevisionA Page
+• ChangeddevicestatusfromProductPreviewtoProductionData........................................................................................ 1
+2 SubmitDocumentationFeedback Copyright©2016–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS22918
+--- page 3 ---
+TPS22918
+www.ti.com SLVSD76C–FEBRUARY2016–REVISEDJULY2017
+5 Pin Configuration and Functions
+DBVPackage
+6-PinSOT-23
+TopView
+VIN 1 6 VOUT
+GND 2 5 QOD
+ON 3 4 CT
+PinFunctions
+PIN
+I/O DESCRIPTION
+NO. NAME
+Switchinput.Placeceramicbypasscapacitor(s)betweenthispinandGND.Seethe
+1 VIN I
+DetailedDescriptionsectionformoreinformation.
+2 GND — Deviceground.
+3 ON I Activehighswitchcontrolinput.Donotleavefloating.
+Switchslewratecontrol.Canbeleftfloating.SeetheFeatureDescriptionsectionfor
+4 CT O
+moreinformation.
+QuickOutputDischargepin.Thisfunctionalitycanbeenabledinoneofthreeways.
+• PlacinganexternalresistorbetweenVOUTandQOD
+5 QOD O • TyingQODdirectlytoVOUTandusingtheinternalresistorvalue(R )
+PD
+• DisablingQODbyleavingpinfloating
+SeetheQuickOutputDischarge(QOD)sectionformoreinformation.
+6 VOUT O Switchoutput.
+Copyright©2016–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 3
+ProductFolderLinks:TPS22918
+--- page 4 ---
+TPS22918
+SLVSD76C–FEBRUARY2016–REVISEDJULY2017 www.ti.com
+6 Specifications
+6.1 Absolute Maximum Ratings
+Overoperatingfree-airtemperaturerange(unlessotherwisenoted) (1) (2)
+MIN MAX UNIT
+V Inputvoltage –0.3 6 V
+IN
+V Outputvoltage –0.3 6 V
+OUT
+V ONvoltage –0.3 6 V
+ON
+I Maximumcontinuousswitchcurrent,ambienttemperature=70°C 2 A
+MAX
+I Maximumpulsedswitchcurrent,pulse<300µs,2%dutycycle 2.5 A
+PLS
+T Maximumjunctiontemperature 125 °C
+J
+T Storagetemperature –65 150 °C
+stg
+(1) StressesbeyondthoselistedunderAbsoluteMaximumRatingsmaycausepermanentdamagetothedevice.Thesearestressratings
+only,whichdonotimplyfunctionaloperationofthedeviceattheseoranyotherconditionsbeyondthoseindicatedunderRecommended
+OperatingConditions.Exposuretoabsolute-maximum-ratedconditionsforextendedperiodsmayaffectdevicereliability.
+(2) Allvoltagevaluesarewithrespecttonetworkgroundterminal.
+6.2 ESD Ratings
+VALUE UNIT
+Human-bodymodel(HBM),perANSI/ESDA/JEDECJS-001 (1) ±2000
+V Electrostaticdischarge V
+(ESD) Charged-devicemodel(CDM),perJEDECspecificationJESD22-C101 (2) ±1000
+(1) JEDECdocumentJEP155statesthat500-VHBMallowssafemanufacturingwithastandardESDcontrolprocess.
+(2) JEDECdocumentJEP157statesthat250-VCDMallowssafemanufacturingwithastandardESDcontrolprocess.
+6.3 Recommended Operating Conditions
+Overoperatingfree-airtemperaturerange(unlessotherwisenoted)
+MIN MAX UNIT
+VIN Inputvoltage 0 5.5 V
+VON ONvoltage 0 5.5 V
+VOUT Outputvoltage VIN V
+VIH,ON High-levelinputvoltage,ON VIN=1Vto5.5V 1 5.5 V
+VIL,ON Low-levelinputvoltage,ON VIN=1Vto5.5V 0 0.5 V
+TA Operatingfree-airtemperature(1) –40 105 °C
+CIN InputCapacitor 1(2) µF
+(1) Inapplicationswherehighpowerdissipationand/orpoorpackagethermalresistanceispresent,themaximumambienttemperaturemay
+havetobederated.Maximumambienttemperature[T ]isdependentonthemaximumoperatingjunctiontemperature[T ],the
+A(max) J(MAX)
+maximumpowerdissipationofthedeviceintheapplication[P ],andthejunction-to-ambientthermalresistanceofthepart/package
+D(MAX)
+intheapplication(θ ),asgivenbythefollowingequation:T =T –(θ ×P ).
+JA A(MAX) J(MAX) JA D(MAX)
+(2) RefertoApplicationandImplementationsection
+6.4 Thermal Information
+TPS22918
+THERMALMETRIC (1) DBV(SOT-23) UNIT
+6PINS
+R Junction-to-ambientthermalresistance 183.2 °C/W
+θJA
+R Junction-to-case(top)thermalresistance 151.6 °C/W
+θJC(top)
+R Junction-to-boardthermalresistance 34.1 °C/W
+θJB
+ψ Junction-to-topcharacterizationparameter 37.2 °C/W
+JT
+ψ Junction-to-boardcharacterizationparameter 33.6 °C/W
+JB
+(1) Formoreinformationabouttraditionalandnewthermalmetrics,seetheSemiconductorandICPackageThermalMetricsapplication
+report.
+4 SubmitDocumentationFeedback Copyright©2016–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS22918
+--- page 5 ---
+TPS22918
+www.ti.com SLVSD76C–FEBRUARY2016–REVISEDJULY2017
+6.5 Electrical Characteristics
+Unlessotherwisenoted,thespecificationinthefollowingtableappliesoverthefullambientoperatingtemperature
+–40°C≤T ≤+105°C.TypicalvaluesareforT =25°C.
+A A
+PARAMETER TESTCONDITIONS T MIN TYP MAX UNIT
+A
+V =5.5V 9.2 16
+IN
+V =5V 8.7 16
+IN
+V =3.3V 8.3 15
+IN
+I Quiescentcurrent V =5V,I =0A –40°Cto+105°C µA
+Q,VIN ON OUT
+V =1.8V 10.2 17
+IN
+V =1.2V 9.3 16
+IN
+V =1V 8.9 15
+IN
+V =5.5V 0.5 5
+IN
+V =5V 0.5 4.5
+IN
+V =3.3V 0.5 3.5
+IN
+I Shutdowncurrent V =0V,V =0V –40°Cto+105°C µA
+SD,VIN ON OUT
+V =1.8V 0.5 2.5
+IN
+V =1.2V 0.4 2
+IN
+V =1V 0.4 2
+IN
+ONpininput
+I V =5.5V,I =0A –40°Cto+105°C 0.1 µA
+ON leakagecurrent IN OUT
+25°C 51 59
+V =5.5V,I =–200mA –40°Cto+85°C 71 mΩ
+IN OUT
+–40°Cto+105°C 78
+25°C 52 59
+V =5.0V,I =–200mA –40°Cto+85°C 71 mΩ
+IN OUT
+–40°Cto+105°C 79
+25°C 52 59
+V =4.2V,I =–200mA –40°Cto+85°C 71 mΩ
+IN OUT
+–40°Cto+105°C 79
+25°C 53 59
+V =3.3V,I =–200mA –40°Cto+85°C 71 mΩ
+IN OUT
+–40°Cto+105°C 80
+R On-Resistance
+ON
+25°C 53 61
+V =2.5V,I =–200mA –40°Cto+85°C 75 mΩ
+IN OUT
+–40°Cto+105°C 80
+25°C 55 65
+V =1.8V,I =–200mA –40°Cto+85°C 79 mΩ
+IN OUT
+–40°Cto+105°C 88
+25°C 64 77
+V =1.2V,I =–200mA –40°Cto+85°C 88 mΩ
+IN OUT
+–40°Cto+105°C 104
+25°C 71 85
+V =1.0V,I =–200mA –40°Cto+85°C 100 mΩ
+IN OUT
+–40°Cto+105°C 116
+V ONpinhysteresis V =1Vto5.5V –40°Cto+105°C 107 mV
+HYS IN
+25°C 24
+V =5.0V,V =0V
+IN ON
+–40°Cto+105°C 30
+Outputpulldown 25°C 25
+R PD resistance(1) V IN =3.3V,V ON =0V
+–40°Cto+105°C 35
+Ω
+25°C 45
+V =1.8V,V =0V
+IN ON
+–40°Cto+105°C 60
+(1) Outputpulldownresistancevarieswithinputvoltage.PleaseseeFigure7formoreinformation.
+Copyright©2016–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 5
+ProductFolderLinks:TPS22918
+--- page 6 ---
+TPS22918
+SLVSD76C–FEBRUARY2016–REVISEDJULY2017 www.ti.com
+6.6 Switching Characteristics
+RefertothetimingtestcircuitinFigure21(unlessotherwisenoted)forreferencestoexternalcomponentsusedforthetest
+conditionintheswitchingcharacteristicstable.Switchingcharacteristicsshownbelowareonlyvalidforthepower-up
+sequencewhereV isalreadyinsteadystateconditionbeforetheONpinisassertedhigh.V =5V,T =25°C,QOD=
+IN ON A
+Open.
+PARAMETER TESTCONDITIONS MIN TYP MAX UNIT
+VIN=5V
+tON Turn-ontime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 1950
+tOFF Turn-offtime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 2
+tR VOUTrisetime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 2540 µs
+tF VOUTfalltime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 2
+tD Delaytime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 690
+VIN=3.3V
+tON Turn-ontime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 1430
+tOFF Turn-offtime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 2
+tR VOUTrisetime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 1680 µs
+tF VOUTfalltime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 2
+tD Delaytime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 590
+VIN=1.8V
+tON Turn-ontime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 965
+tOFF Turn-offtime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 2
+tR VOUTrisetime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 960 µs
+tF VOUTfalltime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 2
+tD Delaytime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 480
+VIN=1V
+tON Turn-ontime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 725
+tOFF Turn-offtime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 3
+tR VOUTrisetime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 560 µs
+tF VOUTfalltime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 2
+tD Delaytime RL=10Ω,CIN=1µF,CL=0.1µF,CT=1000pF 430
+6 SubmitDocumentationFeedback Copyright©2016–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS22918
+--- page 12 ---
+TPS22918
+SLVSD76C–FEBRUARY2016–REVISEDJULY2017 www.ti.com
+8 Detailed Description
+8.1 Overview
+The TPS22918 is a 5.5-V, 2-A load switch in a 6-pin SOT-23 package. To reduce voltage drop for low voltage
+and high current rails, the device implements a low resistance N-channel MOSFET which reduces the drop out
+voltageacrossthedevice.
+The device has a configurable slew rate which helps reduce or eliminate power supply droop because of large
+inrushcurrents. Furthermore,thedevicefeaturesaQODpin, whichallowstheconfigurationofthedischargerate
+of VOUT once the switch is disabled. During shutdown, the device has very low leakage currents, thereby
+reducing unnecessary leakages for downstream modules during standby. Integrated control logic, driver, charge
+pump, and output discharge FET eliminates the need for any external components which reduces solution size
+andbillofmaterials(BOM)count.
+8.2 Functional Block Diagram
+VIN
+Charge Pump
+Control
+ON
+Logic
+CT
+VOUT
+QOD
+GND
+Copyright © 2016, Texas Instruments Incorporated
+12 SubmitDocumentationFeedback Copyright©2016–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS22918
+--- page 13 ---
+TPS22918
+www.ti.com SLVSD76C–FEBRUARY2016–REVISEDJULY2017
+8.3 Feature Description
+8.3.1 On and OffControl
+The ON pin controls the state of the switch. ON is active high and has a low threshold, making it capable of
+interfacing with low-voltage signals. The ON pin is compatible with standard GPIO logic threshold. It can be used
+with any microcontroller with 1 V or higher GPIO voltage. This pin cannot be left floating and must be driven
+eitherhighorlowforproperfunctionality.
+8.3.2 QuickOutputDischarge(QOD)
+TheTPS22918includesaQODfeature.TheQODpincanbeconfiguredinoneofthreeways:
+• QOD pin shorted to VOUT pin. Using this method, the discharge rate after the switch becomes disabled is
+controlled with the value of the internal resistance R . The value of this resistance is listed in the Electrical
+PD
+Characteristicstable.
+• QOD pin connected to VOUT pin using an external resistor R . After the switch becomes disabled, the
+EXT
+discharge rate is controlled by the value of the total resistance of the QOD. To adjust the total QOD
+resistance,Equation1canbeused:
+R =R +R
+QOD PD EXT
+Where:
+• R =Totaloutputdischargeresistance
+QOD
+• R =Internalpulldownresistance
+PD
+• R =ExternalresistanceplacedbetweentheVOUTandQODpin. (1)
+EXT
+• QOD pin is unused and left floating. Using this method, there will be no quick output discharge functionality,
+andtheoutputwillremainfloatingaftertheswitchisdisabled.
+The fall times of the device depend on many factors including the total resistance of the QOD, V , and the
+IN
+output capacitance. When QOD is shorted to VOUT, the fall time will change over V as the internal R varies
+IN PD
+overV .TocalculatetheapproximatefalltimeofV for agivenR ,useEquation2andTable1.
+IN OUT QOD
+V =V ×e-t/τ
+CAP IN
+Where:
+• V =Voltageacrossthecapacitor(V)
+CAP
+• t=Timesincepowersupplyremoval(s)
+• τ=TimeconstantequaltoR ×C (2)
+QOD L
+The fall times' dependency on V becomes minimal as the QOD value increases with additional external
+IN
+resistance.SeeTable1forQODfalltimes.
+Table1.QODFallTimes
+(1)FALLTIME(μs)90%-10%,C =1μF,I =0A,V =0V
+IN OUT ON
+V (V) T =25°C T =85°C
+IN A A
+C =1μF C =10μF C =100μF C =1μF C =10μF C =100μF
+L L L L L L
+5.5 42 190 1880 40 210 2150
+5 43 200 1905 45 220 2200
+3.3 47 230 2150 50 260 2515
+2.5 58 300 2790 60 345 3290
+1.8 75 430 4165 80 490 4950
+1.2 135 955 9910 135 1035 10980
+1 230 1830 19625 210 1800 19270
+(1) TYPICALVALUESWITHQODSHORTEDTOVOUT
+Copyright©2016–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 13
+ProductFolderLinks:TPS22918
+--- page 14 ---
+TPS22918
+SLVSD76C–FEBRUARY2016–REVISEDJULY2017 www.ti.com
+8.3.2.1 QODwhen SystemPowerisRemoved
+The adjustable QOD can be used to control the power down sequencing of a system even when the system
+power supply is removed. When the power is removed, the input capacitor discharges at V . Past a certain V
+IN IN
+level, the strength of the R will be reduced. If there is still remaining charge on the output capacitor, this will
+PD
+result in longer fall times. For further information regarding this condition, see the Shutdown Sequencing During
+UnexpectedSystemPowerLosssection.
+8.3.2.2 InternalQODConsiderations
+SpecialconsiderationsmustbetakenwhenusingtheinternalR byshortingtheQODpintotheVOUTpin.The
+PD
+internal R is a pulldown resistance designed to quickly discharge a load after the switch has been disabled.
+PD
+Care must be used to ensure that excessive current does not flow through R during discharge so that the
+PD
+maximum T of 125°C is not exceeded. When using only the internal R to discharge a load, the total capacitive
+J PD
+load must not exceed 200 µF. Otherwise, an external resistor, R , must be used to ensure the amount of
+EXT
+current flowing through R is properly limited and the maximum T is not exceeded. To ensure the device is not
+PD J
+damaged, the remaining charge from C must decay naturally through the internal QOD resistance and should
+L
+notbedriven.
+8.3.3 AdjustableRiseTime(CT)
+A capacitor to GND on the CT pin sets the slew rate of V . The CT capacitor will charge up until shortly after
+OUT
+the switch is turned on and V becomes stable. Once V become stable, the capactior will discharge to
+OUT OUT
+ground. AnapproximateformulafortherelationshipbetweenCTandtheslewrateisshowninEquation 3:
+SR=0.55×CT+30
+where
+• SR=slewrate(inµs/V)
+• CT=thecapacitancevalueontheCTpin(inpF)
+• Theunitsfortheconstant30areµs/V.Theunitsfortheconstant0.55areµs/(V×pF). (3)
+This equation accounts for 10% to 90% measurement on V and does not apply for CT = 0 pF. Use Table 2 to
+OUT
+determinerisetimesforwhenCT=0pF.
+Rise time can be calculated by multiplying the input voltage by the slew rate. Table 2 contains rise time values
+measuredonatypicaldevice.
+Table2.RiseTimeTable
+RISETIME(µs)10%-90%,C =0.1µF,C =1µF,R =10Ω
+L IN L
+(1)
+CT×(pF)
+VIN=5V VN=3.3V VIN=2.5V VIN=1.8V VIN=1.5V VIN=1.2V VIN=1V
+0 135 95 75 60 50 45 40
+220 650 455 350 260 220 185 160
+470 1260 850 655 480 415 340 300
+1000 2540 1680 1300 960 810 660 560
+2200 5435 3580 2760 2020 1715 1390 1220
+4700 12050 7980 6135 4485 3790 3120 2735
+10000 26550 17505 13460 9790 8320 6815 5950
+(1) Typicalvaluesat25°Cwitha25VX7R10%ceramiccapacitoronCT.
+As the voltage across the capacitor approaches the capacitor rated voltage, the effective capacitance reduces.
+Depending on the dielectric material used, the voltage coefficient changes. See Table 3 for the recommended
+minimum voltage rating for the CT capacitor. If using V = 1.2 V or 4 V, it is recommended to use the higher of
+IN
+thetwoCTVoltageratingsspecified.
+14 SubmitDocumentationFeedback Copyright©2016–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS22918
+--- page 15 ---
+TPS22918
+www.ti.com SLVSD76C–FEBRUARY2016–REVISEDJULY2017
+Table3.RecommendedCTCapacitor VoltageRating
+RECOMMENDEDCTCAPACITORVOLTAGE
+V (V)
+IN RATING(V)
+1Vto1.2V 10
+1.2Vto4V 16
+4Vto5.5V 20
+8.4 Device Functional Modes
+Table4describestheconnectionoftheVOUTpindependingonthestateoftheONpin.
+Table4.VOUTConnection
+QOD
+ON TPS22918VOUT
+CONFIGURATION
+QODpinconnectedto
+L GND(viaR +R )
+VOUTwithR EXT PD
+EXT
+QODpintiedtoVOUT
+L GND(viaR )
+directly PD
+L QODpinleftopen Open
+AnyvalidQOD
+H VIN
+configuration
+Copyright©2016–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 15
+ProductFolderLinks:TPS22918
+--- page 16 ---
+TPS22918
+SLVSD76C–FEBRUARY2016–REVISEDJULY2017 www.ti.com
+9 Application and Implementation
+NOTE
+Information in the following applications sections is not part of the TI component
+specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+responsible for determining suitability of components for their purposes. Customers should
+validateandtesttheirdesignimplementationtoconfirmsystem functionality.
+9.1 Application Information
+This section highlights some of the design considerations when implementing this device in various applications.
+A PSPICE model for this device is also available in the product page of this device on www.ti.com (See the
+DeviceSupportsectionformoreinformation).
+9.2 Typical Application
+ThistypicalapplicationdemonstrateshowtheTPS22918canbeusedtopower downstreammodules.
+Figure23. Typical ApplicationSchematic
+9.2.1 Design Requirements
+Forthisdesignexample,usethevalueslistedinTable5asthedesignparameters:
+Table5.DesignParameters
+DESIGNPARAMETER EXAMPLEVALUE
+V 5V
+IN
+LoadCurrent 2A
+C 22µF
+L
+DesiredFallTime 4ms
+MaximumAcceptableInrushCurrent 400mA
+16 SubmitDocumentationFeedback Copyright©2016–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS22918
+--- page 17 ---
+TPS22918
+www.ti.com SLVSD76C–FEBRUARY2016–REVISEDJULY2017
+9.2.2 DetailedDesignProcedure
+9.2.2.1 Input Capacitor(C )
+IN
+To limit the voltage drop on the input supply caused by transient in-rush currents when the switch turns on into a
+dischargedloadcapacitororshort-circuit,acapacitorneedstobeplacedbetweenVINandGND. A1 µFceramic
+capacitor, C , placed close to the pins, is usually sufficient. Higher values of C can be used to further reduce
+IN IN
+the voltage drop during high-current application. When switching heavy loads, it is recommended to have an
+inputcapacitorabout10timeshigherthantheoutputcapacitortoavoidexcessivevoltagedrop.
+9.2.2.2 OutputCapacitor(C )(Optional)
+L
+Becuase of the integrated body diode in the MOSFET, a C greater than C is highly recommended. A C
+IN L L
+greater than C can cause V to exceed V when the system supply is removed. This could result in current
+IN OUT IN
+flow through the body diode from VOUT to VIN. A C to C ratio of 10 to 1 is recommended for minimizing V
+IN L IN
+dipcausedbyinrushcurrentsduringstartup.
+9.2.2.3 ShutdownSequencingDuring UnexpectedSystemPowerLoss
+Microcontrollers and processors often have a specific shutdown sequence in which power needs to be removed.
+Using the adjustable Quick Output Discharge function of the TPS22918, adding a load switch to each power rail
+can be used to manage the power down sequencing in the event of an unexpected system power loss (i.e.
+battery removal). To determine the QOD values for each load switch, first confirm the power down order of the
+device you wish to power sequence. Be sure to check if there are voltage or timing margins that must be
+maintainedduringpowerdown.Next,consultQODFallTimeTableintheQuickOutputDischarge(QOD) feature
+description to determine appropriate C and R values for each power rail's load switch so that the load
+OUT QOD
+switches' fall times correspond to the order in which they need to be powered down. In the above example, we
+would like this power rail's fall time to be 4 ms. Using Equation 2, to determine the appropriate R to achieve
+QOD
+ourdesiredfalltime.
+Becausefalltimesaremeasuredfrom90%ofV to10%ofV ,theequationbecomes:
+OUT OUT
+.5V=4.5V×e-(4ms)/(R×(22µF)) (4)
+R =83.333Ω (5)
+QOD
+Refer to Figure 7, R at V = 5 V is approximately 25 Ω. Using Equation 1, the required external QOD
+PD IN
+resistancecanbecalculated:
+83.333Ω=25Ω+R (6)
+EXT
+R =58.333Ω (7)
+EXT
+Figure 24 through Figure 29 are scope shots demonstrating an example of the QOD functionality when power is
+removed from the device (both ON and VIN are disconnected simultaneously). The input voltage is decaying in
+allscopeshotsbelow.
+• InitialV =3.3V
+IN
+• QOD=Open,500 Ω,orshortedtoVOUT
+• C =1 μF, 10 μF
+L
+• V isleft floating
+OUT
+NOTE: V may appear constant in some figures. This is because the time scale of the scope shot is too small to
+IN
+showthedecayofC .
+IN
+Copyright©2016–2017,TexasInstrumentsIncorporated SubmitDocumentationFeedback 17
+ProductFolderLinks:TPS22918
+--- page 20 ---
+TPS22918
+SLVSD76C–FEBRUARY2016–REVISEDJULY2017 www.ti.com
+9.2.3 ApplicationCurves
+V =5V C =22pF CT=0pF V =5V C =22pF CT=220pF
+IN L IN L
+Figure30.TPS22918InrushCurrent Figure31.TPS22918InrushCurrent
+10 Power Supply Recommendations
+The device is designed to operate from a V range of 1 V to 5.5 V. This supply must be well regulated and
+IN
+placed as close to the device terminal as possible with the recommended 1-µF bypass capacitor. If the supply is
+located more than a few inches from the device terminals, additional bulk capacitance may be required in
+addition to the ceramic bypass capacitors. If additional bulk capacitance is required, an electrolytic, tantalum, or
+ceramiccapacitorof1µFmaybesufficient.
+The TPS22918 operates regardless of power sequencing order. The order in which voltages are applied to VIN
+and ON will not damage the device as long as the voltages do not exceed the absolute maximum operating
+conditions. IfvoltageisappliedtoONbeforeVIN, theslewrateofVOUTwillnotbecontrolled.
+11 Layout
+11.1 Layout Guidelines
+VINandVOUTtracesshouldbeasshortandwideaspossibletoaccommodatefor highcurrent.
+The VIN pin should be bypassed to ground with low ESR ceramic bypass capacitors. The typical recommended
+bypass capacitance is 1-µF ceramic with X5R or X7R dielectric. This capacitor must be placed as close to the
+devicepinsaspossible.
+20 SubmitDocumentationFeedback Copyright©2016–2017,TexasInstrumentsIncorporated
+ProductFolderLinks:TPS22918
+--- page 23 ---
+PACKAGE OPTION ADDENDUM
+www.ti.com 15-Jul-2026
+PACKAGING INFORMATION
+Orderable part number Status Material type Package | Pins Package qty | Carrier RoHS Lead finish/ MSL rating/ Op temp (°C) Part marking
+(1) (2) (3) Ball material Peak reflow (6)
+(4) (5)
+TPS22918DBVR Active Production SOT-23 (DBV) | 6 3000 | LARGE T&R Yes NIPDAU | SN Level-2-260C-1 YEAR -40 to 105 13MW
+TPS22918DBVR.A Active Production SOT-23 (DBV) | 6 3000 | LARGE T&R Yes NIPDAU Level-2-260C-1 YEAR -40 to 105 13MW
+TPS22918DBVT Active Production SOT-23 (DBV) | 6 250 | SMALL T&R Yes NIPDAU | SN Level-2-260C-1 YEAR -40 to 105 13MW
+TPS22918DBVT.A Active Production SOT-23 (DBV) | 6 250 | SMALL T&R Yes NIPDAU Level-2-260C-1 YEAR -40 to 105 13MW
+TPS22918DBVTG4 Active Production SOT-23 (DBV) | 6 250 | SMALL T&R Yes NIPDAU Level-2-260C-1 YEAR -40 to 105 13MW
+TPS22918DBVTG4.A Active Production SOT-23 (DBV) | 6 250 | SMALL T&R Yes NIPDAU Level-2-260C-1 YEAR -40 to 105 13MW
+(1) Status: For more details on status, see our product life cycle.
+(2) Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+(3) RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+(4) Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+(5) MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+(6) Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+Addendum-Page 1
+--- page 25 ---
+PACKAGE MATERIALS INFORMATION
+www.ti.com 18-Jun-2025
+TAPE AND REEL INFORMATION
+REEL DIMENSIONS TAPE DIMENSIONS
+K0 P1
+W
+B0
+Reel
+Diameter
+Cavity A0
+A0 Dimension designed to accommodate the component width
+B0 Dimension designed to accommodate the component length
+K0 Dimension designed to accommodate the component thickness
+W Overall width of the carrier tape
+P1 Pitch between successive cavity centers
+Reel Width (W1)
+QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+Sprocket Holes
+Q1 Q2 Q1 Q2
+Q3 Q4 Q3 Q4 User Direction of Feed
+Pocket Quadrants
+*All dimensions are nominal
+Device Package Package Pins SPQ Reel Reel A0 B0 K0 P1 W Pin1
+Type Drawing Diameter Width (mm) (mm) (mm) (mm) (mm) Quadrant
+(mm) W1 (mm)
+TPS22918DBVR SOT-23 DBV 6 3000 180.0 8.4 3.2 3.2 1.4 4.0 8.0 Q3
+TPS22918DBVT SOT-23 DBV 6 250 180.0 8.4 3.2 3.2 1.4 4.0 8.0 Q3
+TPS22918DBVTG4 SOT-23 DBV 6 250 180.0 8.4 3.2 3.2 1.4 4.0 8.0 Q3
+Pack Materials-Page 1
+--- page 26 ---
+PACKAGE MATERIALS INFORMATION
+www.ti.com 18-Jun-2025
+TAPE AND REEL BOX DIMENSIONS
+Width (mm) H
+W L
+*All dimensions are nominal
+Device Package Type Package Drawing Pins SPQ Length (mm) Width (mm) Height (mm)
+TPS22918DBVR SOT-23 DBV 6 3000 210.0 185.0 35.0
+TPS22918DBVT SOT-23 DBV 6 250 210.0 185.0 35.0
+TPS22918DBVTG4 SOT-23 DBV 6 250 210.0 185.0 35.0
+Pack Materials-Page 2
+--- page 27 ---
+PACKAGE OUTLINE
+DBV0006A SOT-23 - 1.45 mm max height
+SCALE 4.000
+SMALL OUTLINE TRANSISTOR
+3.0 C
+2.6
+1.75 0.1 C
+1.45 B A
+PIN 1
+INDEX AREA
+1
+6
+2X 0.95
+3.05
+2.75
+1.9 5
+2
+4
+3
+0.50
+6X
+0.25
+0.15
+0.2 C A B (1.1) TYP
+4X 0 -15 0.00
+1.45
+0.90
+4X 4 -15
+0.25
+GAGE PLANE 0.22
+TYP
+0.08
+8
+TYP 0.6
+0 0.3 TYP SEATING PLANE
+4214840/G 08/2024
+NOTES:
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. Body dimensions do not include mold flash or protrusion. Mold flash and protrusion shall not exceed 0.25 per side.
+4. Leads 1,2,3 may be wider than leads 4,5,6 for package orientation.
+5. Refernce JEDEC MO-178.
+www.ti.com

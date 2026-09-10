@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Code\epdf-hardware\esp32-board-v1.1\probe\Connector_USB_C_Receptacle_USB2.0_16P.kicad_sch</source>
+    <date>2026-09-10T00:34:13</date>
+    <tool>Eeschema 10.0.5</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>ESP32-S3 GDEM102T91 Mainboard</title>
+        <company>EPDF Hardware</company>
+        <rev>V1.1</rev>
+        <date>2026-09-10</date>
+        <source>Connector_USB_C_Receptacle_USB2.0_16P.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>USB_C_Receptacle_USB2.0_16P</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Connector" part="USB_C_Receptacle_USB2.0_16P" description="USB 2.0-only 16P Type-C Receptacle connector"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="esp32-board-v1.1/probe/Connector_USB_C_Receptacle_USB2.0_16P.kicad_sch"/>
+      <property name="ki_keywords" value="usb universal serial bus type-C USB2.0"/>
+      <property name="ki_fp_filters" value="USB*C*Receptacle*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>15df15ef-888d-40ca-8c1e-910473d436dc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="SH"/>
+            <pin num="A1"/>
+            <pin num="A12"/>
+            <pin num="B1"/>
+            <pin num="B12"/>
+            <pin num="A4"/>
+            <pin num="A9"/>
+            <pin num="B4"/>
+            <pin num="B9"/>
+            <pin num="A5"/>
+            <pin num="B5"/>
+            <pin num="A7"/>
+            <pin num="B7"/>
+            <pin num="A6"/>
+            <pin num="B6"/>
+            <pin num="A8"/>
+            <pin num="B8"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="USB_C_Receptacle_USB2.0_16P">
+      <description>USB 2.0-only 16P Type-C Receptacle connector</description>
+      <docs>https://www.usb.org/sites/default/files/documents/usb_type-c.zip</docs>
+      <footprints>
+        <fp>USB*C*Receptacle*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">USB_C_Receptacle_USB2.0_16P</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.usb.org/sites/default/files/documents/usb_type-c.zip</field>
+        <field name="Description">USB 2.0-only 16P Type-C Receptacle connector</field>
+      </fields>
+      <pins>
+        <pin num="A1" name="GND" type="passive"/>
+        <pin num="A4" name="VBUS" type="passive"/>
+        <pin num="A5" name="CC1" type="bidirectional"/>
+        <pin num="A6" name="D+" type="bidirectional"/>
+        <pin num="A7" name="D-" type="bidirectional"/>
+        <pin num="A8" name="SBU1" type="bidirectional"/>
+        <pin num="A9" name="VBUS" type="passive"/>
+        <pin num="A12" name="GND" type="passive"/>
+        <pin num="B1" name="GND" type="passive"/>
+        <pin num="B4" name="VBUS" type="passive"/>
+        <pin num="B5" name="CC2" type="bidirectional"/>
+        <pin num="B6" name="D+" type="bidirectional"/>
+        <pin num="B7" name="D-" type="bidirectional"/>
+        <pin num="B8" name="SBU2" type="bidirectional"/>
+        <pin num="B9" name="VBUS" type="passive"/>
+        <pin num="B12" name="GND" type="passive"/>
+        <pin num="SH" name="SHIELD" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="Net-(U1-GND-PadA1)" class="Default">
+      <node ref="U1" pin="A1" pinfunction="GND_A1" pintype="passive"/>
+      <node ref="U1" pin="A12" pinfunction="GND_A12" pintype="passive"/>
+      <node ref="U1" pin="B1" pinfunction="GND_B1" pintype="passive"/>
+      <node ref="U1" pin="B12" pinfunction="GND_B12" pintype="passive"/>
+    </net>
+    <net code="2" name="Net-(U1-VBUS-PadA4)" class="Default">
+      <node ref="U1" pin="A4" pinfunction="VBUS_A4" pintype="passive"/>
+      <node ref="U1" pin="A9" pinfunction="VBUS_A9" pintype="passive"/>
+      <node ref="U1" pin="B4" pinfunction="VBUS_B4" pintype="passive"/>
+      <node ref="U1" pin="B9" pinfunction="VBUS_B9" pintype="passive"/>
+    </net>
+    <net code="3" name="unconnected-(U1-CC1-PadA5)" class="Default">
+      <node ref="U1" pin="A5" pinfunction="CC1_A5" pintype="bidirectional"/>
+    </net>
+    <net code="4" name="unconnected-(U1-CC2-PadB5)" class="Default">
+      <node ref="U1" pin="B5" pinfunction="CC2_B5" pintype="bidirectional"/>
+    </net>
+    <net code="5" name="unconnected-(U1-D+-PadA6)" class="Default">
+      <node ref="U1" pin="A6" pinfunction="D+_A6" pintype="bidirectional"/>
+    </net>
+    <net code="6" name="unconnected-(U1-D+-PadB6)" class="Default">
+      <node ref="U1" pin="B6" pinfunction="D+_B6" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="unconnected-(U1-D--PadA7)" class="Default">
+      <node ref="U1" pin="A7" pinfunction="D-_A7" pintype="bidirectional"/>
+    </net>
+    <net code="8" name="unconnected-(U1-D--PadB7)" class="Default">
+      <node ref="U1" pin="B7" pinfunction="D-_B7" pintype="bidirectional"/>
+    </net>
+    <net code="9" name="unconnected-(U1-SBU1-PadA8)" class="Default">
+      <node ref="U1" pin="A8" pinfunction="SBU1_A8" pintype="bidirectional"/>
+    </net>
+    <net code="10" name="unconnected-(U1-SBU2-PadB8)" class="Default">
+      <node ref="U1" pin="B8" pinfunction="SBU2_B8" pintype="bidirectional"/>
+    </net>
+    <net code="11" name="unconnected-(U1-SHIELD-PadSH)" class="Default">
+      <node ref="U1" pin="SH" pinfunction="SHIELD_SH" pintype="passive"/>
+    </net>
+  </nets>
+</export>

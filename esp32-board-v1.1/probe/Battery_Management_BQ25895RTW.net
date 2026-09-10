@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Code\epdf-hardware\esp32-board-v1.1\probe\Battery_Management_BQ25895RTW.kicad_sch</source>
+    <date>2026-09-10T00:34:11</date>
+    <tool>Eeschema 10.0.5</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>ESP32-S3 GDEM102T91 Mainboard</title>
+        <company>EPDF Hardware</company>
+        <rev>V1.1</rev>
+        <date>2026-09-10</date>
+        <source>Battery_Management_BQ25895RTW.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>BQ25895RTW</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Battery_Management" part="BQ25895RTW" description="I2C Controlled Single Cell (Li-Ion / Li-Polymer) 5A Fast Charger with MaxCharge, USB BC1.2 Detection, 3.9..14V VBUS, 3.840..4.608V charge voltage range, 1.5 MHz (buck mode) and 500 kHz /1.5 MHz (boost mode), WQFN-24"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="esp32-board-v1.1/probe/Battery_Management_BQ25895RTW.kicad_sch"/>
+      <property name="ki_keywords" value="1-cell Battery-Charger Power-Path-Management OTG"/>
+      <property name="ki_fp_filters" value="*WQFN*4x4mm*P0.5mm*EP2.7*x2.7*mm*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c9dfa158-6d52-4d8c-830f-ac7b551c1b7b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="12"/>
+            <pin num="10"/>
+            <pin num="17"/>
+            <pin num="18"/>
+            <pin num="25"/>
+            <pin num="4"/>
+            <pin num="24"/>
+            <pin num="23"/>
+            <pin num="19"/>
+            <pin num="20"/>
+            <pin num="21"/>
+            <pin num="15"/>
+            <pin num="16"/>
+            <pin num="13"/>
+            <pin num="14"/>
+            <pin num="22"/>
+            <pin num="11"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Battery_Management" part="BQ25895RTW">
+      <description>I2C Controlled Single Cell (Li-Ion / Li-Polymer) 5A Fast Charger with MaxCharge, USB BC1.2 Detection, 3.9..14V VBUS, 3.840..4.608V charge voltage range, 1.5 MHz (buck mode) and 500 kHz /1.5 MHz (boost mode), WQFN-24</description>
+      <docs>http://www.ti.com/lit/ds/symlink/bq25895.pdf</docs>
+      <footprints>
+        <fp>*WQFN*4x4mm*P0.5mm*EP2.7*x2.7*mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">BQ25895RTW</field>
+        <field name="Footprint">Package_DFN_QFN:Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias</field>
+        <field name="Datasheet">http://www.ti.com/lit/ds/symlink/bq25895.pdf</field>
+        <field name="Description">I2C Controlled Single Cell (Li-Ion / Li-Polymer) 5A Fast Charger with MaxCharge, USB BC1.2 Detection, 3.9..14V VBUS, 3.840..4.608V charge voltage range, 1.5 MHz (buck mode) and 500 kHz /1.5 MHz (boost mode), WQFN-24</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBUS" type="power_in"/>
+        <pin num="2" name="D+" type="bidirectional"/>
+        <pin num="3" name="D-" type="bidirectional"/>
+        <pin num="4" name="STAT" type="open_collector"/>
+        <pin num="5" name="SCL" type="input"/>
+        <pin num="6" name="SDA" type="bidirectional"/>
+        <pin num="7" name="~{INT}" type="open_collector"/>
+        <pin num="8" name="OTG" type="input"/>
+        <pin num="9" name="~{CE}" type="input"/>
+        <pin num="10" name="ILIM" type="passive"/>
+        <pin num="11" name="TS" type="passive"/>
+        <pin num="12" name="~{QON}" type="input"/>
+        <pin num="13" name="BAT" type="passive"/>
+        <pin num="14" name="BAT" type="passive"/>
+        <pin num="15" name="SYS" type="passive"/>
+        <pin num="16" name="SYS" type="passive"/>
+        <pin num="17" name="PGND" type="power_in"/>
+        <pin num="18" name="PGND" type="passive"/>
+        <pin num="19" name="SW" type="power_out"/>
+        <pin num="20" name="SW" type="passive"/>
+        <pin num="21" name="BTST" type="passive"/>
+        <pin num="22" name="REGN" type="power_out"/>
+        <pin num="23" name="PMID" type="power_out"/>
+        <pin num="24" name="DSEL" type="open_collector"/>
+        <pin num="25" name="PGND" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="Net-(U1-BAT-Pad13)" class="Default">
+      <node ref="U1" pin="13" pinfunction="BAT_13" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="BAT_14" pintype="passive"/>
+    </net>
+    <net code="2" name="Net-(U1-PGND-Pad17)" class="Default">
+      <node ref="U1" pin="17" pinfunction="PGND_17" pintype="power_in"/>
+      <node ref="U1" pin="18" pinfunction="PGND_18" pintype="passive"/>
+      <node ref="U1" pin="25" pinfunction="PGND_25" pintype="passive"/>
+    </net>
+    <net code="3" name="Net-(U1-SW-Pad19)" class="Default">
+      <node ref="U1" pin="19" pinfunction="SW_19" pintype="power_out"/>
+      <node ref="U1" pin="20" pinfunction="SW_20" pintype="passive"/>
+    </net>
+    <net code="4" name="Net-(U1-SYS-Pad15)" class="Default">
+      <node ref="U1" pin="15" pinfunction="SYS_15" pintype="passive"/>
+      <node ref="U1" pin="16" pinfunction="SYS_16" pintype="passive"/>
+    </net>
+    <net code="5" name="unconnected-(U1-BTST-Pad21)" class="Default">
+      <node ref="U1" pin="21" pinfunction="BTST_21" pintype="passive"/>
+    </net>
+    <net code="6" name="unconnected-(U1-D+-Pad2)" class="Default">
+      <node ref="U1" pin="2" pinfunction="D+_2" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="unconnected-(U1-D--Pad3)" class="Default">
+      <node ref="U1" pin="3" pinfunction="D-_3" pintype="bidirectional"/>
+    </net>
+    <net code="8" name="unconnected-(U1-DSEL-Pad24)" class="Default">
+      <node ref="U1" pin="24" pinfunction="DSEL_24" pintype="open_collector"/>
+    </net>
+    <net code="9" name="unconnected-(U1-ILIM-Pad10)" class="Default">
+      <node ref="U1" pin="10" pinfunction="ILIM_10" pintype="passive"/>
+    </net>
+    <net code="10" name="unconnected-(U1-OTG-Pad8)" class="Default">
+      <node ref="U1" pin="8" pinfunction="OTG_8" pintype="input"/>
+    </net>
+    <net code="11" name="unconnected-(U1-PMID-Pad23)" class="Default">
+      <node ref="U1" pin="23" pinfunction="PMID_23" pintype="power_out"/>
+    </net>
+    <net code="12" name="unconnected-(U1-REGN-Pad22)" class="Default">
+      <node ref="U1" pin="22" pinfunction="REGN_22" pintype="power_out"/>
+    </net>
+    <net code="13" name="unconnected-(U1-SCL-Pad5)" class="Default">
+      <node ref="U1" pin="5" pinfunction="SCL_5" pintype="input"/>
+    </net>
+    <net code="14" name="unconnected-(U1-SDA-Pad6)" class="Default">
+      <node ref="U1" pin="6" pinfunction="SDA_6" pintype="bidirectional"/>
+    </net>
+    <net code="15" name="unconnected-(U1-STAT-Pad4)" class="Default">
+      <node ref="U1" pin="4" pinfunction="STAT_4" pintype="open_collector"/>
+    </net>
+    <net code="16" name="unconnected-(U1-TS-Pad11)" class="Default">
+      <node ref="U1" pin="11" pinfunction="TS_11" pintype="passive"/>
+    </net>
+    <net code="17" name="unconnected-(U1-VBUS-Pad1)" class="Default">
+      <node ref="U1" pin="1" pinfunction="VBUS_1" pintype="power_in"/>
+    </net>
+    <net code="18" name="unconnected-(U1-~{CE}-Pad9)" class="Default">
+      <node ref="U1" pin="9" pinfunction="~{CE}_9" pintype="input"/>
+    </net>
+    <net code="19" name="unconnected-(U1-~{INT}-Pad7)" class="Default">
+      <node ref="U1" pin="7" pinfunction="~{INT}_7" pintype="open_collector"/>
+    </net>
+    <net code="20" name="unconnected-(U1-~{QON}-Pad12)" class="Default">
+      <node ref="U1" pin="12" pinfunction="~{QON}_12" pintype="input"/>
+    </net>
+  </nets>
+</export>

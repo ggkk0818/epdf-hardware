@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Code\epdf-hardware\esp32-board-v1.1\probe\power_GND.kicad_sch</source>
+    <date>2026-09-10T00:34:17</date>
+    <tool>Eeschema 10.0.5</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>ESP32-S3 GDEM102T91 Mainboard</title>
+        <company>EPDF Hardware</company>
+        <rev>V1.1</rev>
+        <date>2026-09-10</date>
+        <source>power_GND.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>GND</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="power" part="GND" description="Power symbol creates a global label with name &quot;GND&quot; , ground"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="esp32-board-v1.1/probe/power_GND.kicad_sch"/>
+      <property name="ki_keywords" value="global power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1ebe9a44-3655-4fc0-be72-0b591c795642</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="power" part="GND">
+      <description>Power symbol creates a global label with name "GND" , ground</description>
+      <fields>
+        <field name="Reference">#PWR</field>
+        <field name="Value">GND</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Power symbol creates a global label with name "GND" , ground</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="GND" class="Default">
+      <node ref="U1" pin="1" pintype="power_in"/>
+    </net>
+  </nets>
+</export>

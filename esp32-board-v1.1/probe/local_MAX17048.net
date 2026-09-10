@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Code\epdf-hardware\esp32-board-v1.1\probe\local_MAX17048.kicad_sch</source>
+    <date>2026-09-10T00:34:16</date>
+    <tool>Eeschema 10.0.5</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>ESP32-S3 GDEM102T91 Mainboard</title>
+        <company>EPDF Hardware</company>
+        <rev>V1.1</rev>
+        <date>2026-09-10</date>
+        <source>local_MAX17048.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>MAX17048</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="local" part="MAX17048" description=""/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="esp32-board-v1.1/probe/local_MAX17048.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>52b56a21-2d8d-45b1-9d9f-d19ca3a7def1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="local" part="MAX17048">
+      <docs>https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17048-MAX17049.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MAX17048</field>
+        <field name="Footprint">Package_DFN_QFN:MAX17048_TDFN-8_2x2mm_P0.5mm</field>
+        <field name="Datasheet">https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17048-MAX17049.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="CTG" type="input"/>
+        <pin num="2" name="CELL" type="passive"/>
+        <pin num="3" name="VDD" type="power_in"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="ALRT" type="output"/>
+        <pin num="6" name="QSTRT" type="input"/>
+        <pin num="7" name="SCL" type="input"/>
+        <pin num="8" name="SDA" type="bidirectional"/>
+        <pin num="9" name="EP" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="unconnected-(U1-ALRT-Pad5)" class="Default">
+      <node ref="U1" pin="5" pinfunction="ALRT_5" pintype="output"/>
+    </net>
+    <net code="2" name="unconnected-(U1-CELL-Pad2)" class="Default">
+      <node ref="U1" pin="2" pinfunction="CELL_2" pintype="passive"/>
+    </net>
+    <net code="3" name="unconnected-(U1-CTG-Pad1)" class="Default">
+      <node ref="U1" pin="1" pinfunction="CTG_1" pintype="input"/>
+    </net>
+    <net code="4" name="unconnected-(U1-EP-Pad9)" class="Default">
+      <node ref="U1" pin="9" pinfunction="EP_9" pintype="power_in"/>
+    </net>
+    <net code="5" name="unconnected-(U1-GND-Pad4)" class="Default">
+      <node ref="U1" pin="4" pinfunction="GND_4" pintype="power_in"/>
+    </net>
+    <net code="6" name="unconnected-(U1-QSTRT-Pad6)" class="Default">
+      <node ref="U1" pin="6" pinfunction="QSTRT_6" pintype="input"/>
+    </net>
+    <net code="7" name="unconnected-(U1-SCL-Pad7)" class="Default">
+      <node ref="U1" pin="7" pinfunction="SCL_7" pintype="input"/>
+    </net>
+    <net code="8" name="unconnected-(U1-SDA-Pad8)" class="Default">
+      <node ref="U1" pin="8" pinfunction="SDA_8" pintype="bidirectional"/>
+    </net>
+    <net code="9" name="unconnected-(U1-VDD-Pad3)" class="Default">
+      <node ref="U1" pin="3" pinfunction="VDD_3" pintype="power_in"/>
+    </net>
+  </nets>
+</export>

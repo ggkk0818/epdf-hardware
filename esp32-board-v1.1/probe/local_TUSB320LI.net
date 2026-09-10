@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Code\epdf-hardware\esp32-board-v1.1\probe\local_TUSB320LI.kicad_sch</source>
+    <date>2026-09-10T00:34:17</date>
+    <tool>Eeschema 10.0.5</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>ESP32-S3 GDEM102T91 Mainboard</title>
+        <company>EPDF Hardware</company>
+        <rev>V1.1</rev>
+        <date>2026-09-10</date>
+        <source>local_TUSB320LI.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>TUSB320LI</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="local" part="TUSB320LI" description=""/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="esp32-board-v1.1/probe/local_TUSB320LI.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f8dfd70a-6992-4bdb-bf71-3cab21671b77</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="local" part="TUSB320LI">
+      <docs>https://www.ti.com/lit/ds/symlink/tusb320li.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TUSB320LI</field>
+        <field name="Footprint">Package_DFN_QFN:Texas_RWB0012A_1.6x1.6mm_P0.4mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tusb320li.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="CC1" type="passive"/>
+        <pin num="2" name="CC2" type="passive"/>
+        <pin num="3" name="PORT" type="input"/>
+        <pin num="4" name="VBUS_DET" type="input"/>
+        <pin num="5" name="ADDR" type="input"/>
+        <pin num="6" name="INT_N" type="output"/>
+        <pin num="7" name="SDA" type="bidirectional"/>
+        <pin num="8" name="SCL" type="input"/>
+        <pin num="9" name="ID" type="output"/>
+        <pin num="10" name="GND" type="power_in"/>
+        <pin num="11" name="EN_N" type="input"/>
+        <pin num="12" name="VDD" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="unconnected-(U1-ADDR-Pad5)" class="Default">
+      <node ref="U1" pin="5" pinfunction="ADDR_5" pintype="input"/>
+    </net>
+    <net code="2" name="unconnected-(U1-CC1-Pad1)" class="Default">
+      <node ref="U1" pin="1" pinfunction="CC1_1" pintype="passive"/>
+    </net>
+    <net code="3" name="unconnected-(U1-CC2-Pad2)" class="Default">
+      <node ref="U1" pin="2" pinfunction="CC2_2" pintype="passive"/>
+    </net>
+    <net code="4" name="unconnected-(U1-EN_N-Pad11)" class="Default">
+      <node ref="U1" pin="11" pinfunction="EN_N_11" pintype="input"/>
+    </net>
+    <net code="5" name="unconnected-(U1-GND-Pad10)" class="Default">
+      <node ref="U1" pin="10" pinfunction="GND_10" pintype="power_in"/>
+    </net>
+    <net code="6" name="unconnected-(U1-ID-Pad9)" class="Default">
+      <node ref="U1" pin="9" pinfunction="ID_9" pintype="output"/>
+    </net>
+    <net code="7" name="unconnected-(U1-INT_N-Pad6)" class="Default">
+      <node ref="U1" pin="6" pinfunction="INT_N_6" pintype="output"/>
+    </net>
+    <net code="8" name="unconnected-(U1-PORT-Pad3)" class="Default">
+      <node ref="U1" pin="3" pinfunction="PORT_3" pintype="input"/>
+    </net>
+    <net code="9" name="unconnected-(U1-SCL-Pad8)" class="Default">
+      <node ref="U1" pin="8" pinfunction="SCL_8" pintype="input"/>
+    </net>
+    <net code="10" name="unconnected-(U1-SDA-Pad7)" class="Default">
+      <node ref="U1" pin="7" pinfunction="SDA_7" pintype="bidirectional"/>
+    </net>
+    <net code="11" name="unconnected-(U1-VBUS_DET-Pad4)" class="Default">
+      <node ref="U1" pin="4" pinfunction="VBUS_DET_4" pintype="input"/>
+    </net>
+    <net code="12" name="unconnected-(U1-VDD-Pad12)" class="Default">
+      <node ref="U1" pin="12" pinfunction="VDD_12" pintype="power_in"/>
+    </net>
+  </nets>
+</export>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Code\epdf-hardware\esp32-board-v1.1\probe\local_TPS63070.kicad_sch</source>
+    <date>2026-09-10T00:34:16</date>
+    <tool>Eeschema 10.0.5</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>ESP32-S3 GDEM102T91 Mainboard</title>
+        <company>EPDF Hardware</company>
+        <rev>V1.1</rev>
+        <date>2026-09-10</date>
+        <source>local_TPS63070.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>TPS63070</value>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="local" part="TPS63070" description=""/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="esp32-board-v1.1/probe/local_TPS63070.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>36303f6f-6a87-46d9-bc1d-5b49dba6a4c3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="14"/>
+            <pin num="15"/>
+            <pin num="16"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="local" part="TPS63070">
+      <docs>https://www.ti.com/lit/ds/symlink/tps63070.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS63070</field>
+        <field name="Footprint">Package_DFN_QFN:Texas_RNM0012A_3x3mm_P0.5mm</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps63070.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="PS/SYNC" type="input"/>
+        <pin num="2" name="PG" type="output"/>
+        <pin num="3" name="VAUX" type="passive"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="FB" type="input"/>
+        <pin num="6" name="FB2" type="passive"/>
+        <pin num="7" name="VOUT" type="power_out"/>
+        <pin num="8" name="VOUT" type="power_out"/>
+        <pin num="9" name="L2" type="passive"/>
+        <pin num="10" name="PGND" type="power_in"/>
+        <pin num="11" name="L1" type="passive"/>
+        <pin num="12" name="VIN" type="power_in"/>
+        <pin num="13" name="VIN" type="power_in"/>
+        <pin num="14" name="EN" type="input"/>
+        <pin num="15" name="VSEL" type="input"/>
+        <pin num="16" name="EP" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries/>
+  <nets>
+    <net code="1" name="unconnected-(U1-EN-Pad14)" class="Default">
+      <node ref="U1" pin="14" pinfunction="EN_14" pintype="input"/>
+    </net>
+    <net code="2" name="unconnected-(U1-EP-Pad16)" class="Default">
+      <node ref="U1" pin="16" pinfunction="EP_16" pintype="power_in"/>
+    </net>
+    <net code="3" name="unconnected-(U1-FB-Pad5)" class="Default">
+      <node ref="U1" pin="5" pinfunction="FB_5" pintype="input"/>
+    </net>
+    <net code="4" name="unconnected-(U1-FB2-Pad6)" class="Default">
+      <node ref="U1" pin="6" pinfunction="FB2_6" pintype="passive"/>
+    </net>
+    <net code="5" name="unconnected-(U1-GND-Pad4)" class="Default">
+      <node ref="U1" pin="4" pinfunction="GND_4" pintype="power_in"/>
+    </net>
+    <net code="6" name="unconnected-(U1-L1-Pad11)" class="Default">
+      <node ref="U1" pin="11" pinfunction="L1_11" pintype="passive"/>
+    </net>
+    <net code="7" name="unconnected-(U1-L2-Pad9)" class="Default">
+      <node ref="U1" pin="9" pinfunction="L2_9" pintype="passive"/>
+    </net>
+    <net code="8" name="unconnected-(U1-PG-Pad2)" class="Default">
+      <node ref="U1" pin="2" pinfunction="PG_2" pintype="output"/>
+    </net>
+    <net code="9" name="unconnected-(U1-PGND-Pad10)" class="Default">
+      <node ref="U1" pin="10" pinfunction="PGND_10" pintype="power_in"/>
+    </net>
+    <net code="10" name="unconnected-(U1-PS/SYNC-Pad1)" class="Default">
+      <node ref="U1" pin="1" pinfunction="PS/SYNC_1" pintype="input"/>
+    </net>
+    <net code="11" name="unconnected-(U1-VAUX-Pad3)" class="Default">
+      <node ref="U1" pin="3" pinfunction="VAUX_3" pintype="passive"/>
+    </net>
+    <net code="12" name="unconnected-(U1-VIN-Pad12)" class="Default">
+      <node ref="U1" pin="12" pinfunction="VIN_12" pintype="power_in"/>
+    </net>
+    <net code="13" name="unconnected-(U1-VIN-Pad13)" class="Default">
+      <node ref="U1" pin="13" pinfunction="VIN_13" pintype="power_in"/>
+    </net>
+    <net code="14" name="unconnected-(U1-VOUT-Pad7)" class="Default">
+      <node ref="U1" pin="7" pinfunction="VOUT_7" pintype="power_out"/>
+    </net>
+    <net code="15" name="unconnected-(U1-VOUT-Pad8)" class="Default">
+      <node ref="U1" pin="8" pinfunction="VOUT_8" pintype="power_out"/>
+    </net>
+    <net code="16" name="unconnected-(U1-VSEL-Pad15)" class="Default">
+      <node ref="U1" pin="15" pinfunction="VSEL_15" pintype="input"/>
+    </net>
+  </nets>
+</export>
