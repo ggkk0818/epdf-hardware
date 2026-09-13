@@ -1,5 +1,13 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-12 更新（V1.2 整改）**：按 `..._V1.1_to_V1.2_PCB_Modification_Guide.md`
+> 完成布局类整改——BQ25895 / TPS63070 / USB-ESD-TUSB320 / EPD Booster 四个簇改为
+> 就近聚集（到锚点 courtyard 最大间隙 11.1 mm）；J4/J5 换 **Molex 53261-0271**；
+> U4 改 `MAX17048G+T10`、U5 改 `TUSB320LIRWBR`；**TF 座与 USB-C 座对调**
+> （USB-C 移到板下边中部，紧邻充电器）；Dk 4.2 / 外层 1 oz，USB 90 Ω = 0.24/0.18 mm。
+> ERC = 0，DRC = 0 Error（42 条丝印类 warning，258 条飞线待布线）。
+> 仍待办：**U3 换成 TI RNM0015A 的符号与封装**（缺官方 land pattern）。
+>
 > **2026-09-10 更新（第二轮）**：板框改为竖版 **55 × 84 mm**，定位孔距边 **3 mm**，
 > KEY1/2/3 改用 **Omron B3U-1000P** 且中心距 **27 mm**，USB-C 外凸 1 mm，
 > **取消全部测试点**，叠层按 **Dk = 4.2 / 外层成品铜 1 oz** 重算（USB 90 Ω → W 0.24 / S 0.18）。
@@ -173,7 +181,26 @@ kicad-cli sch erc  →  0 violations
 3. 连接器/按键/电感/MOSFET 的确切 MPN（BOM 中 `PROVISIONAL` 项）。
 4. 最终电池规格（满充电压 / PCM / 线束 / 连接器额定电流）。
 5. MicroSD 位置（现放在板下边缘中央）与按键高度/手感是否有结构限制。
-6. **TF 座不能外凸 1 mm 是否可接受**（原因见 `PCB_LAYOUT_NOTES.md` §6.1）。
+6. ~~TF 座不能外凸 1 mm~~ → **已确认接受**（2026-09-12）。
+7. ~~板框尺寸~~ → **已确认：保持 55 × 84 mm**（2026-09-12）。
+8. **U3 的 RNM0015A land pattern**：KiCad 库中没有该封装，数据手册里只有
+   TI 图纸 4222000 的 "LAND PATTERN EXAMPLE"。请提供 TI 官方 land pattern
+   （或 SnapEDA / Ultra Librarian 导出的封装），或授权我按该图重建（需人工复核）。
+
+## 六之二、V1.2 整改清单执行状态（依 `ESP32S3_GDEM102T91_V1.1_to_V1.2_PCB_Modification_Guide.md`）
+
+| # | 整改项 | 状态 | 说明 |
+|---:|---|---|---|
+| ① | PCB 外形改 77 × 45 | **已决定：保持 55 × 84** | 用户 2026-09-12 确认板框保持 55 × 84；原因：45 mm 高度装不下 27 mm 间距的 3 个按键 |
+| ② | U3 符号 / 封装改 RNM0015A | **部分完成** | 料号已改 `TPS63070RNMT`；符号仍含 Pin16、封装仍是通用 VQFN-16，**待换成 TI RNM0015A 15 脚 land pattern** |
+| ③ | J4/J5 改 Molex 53261-0271 | **已完成** | 封装 `Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal`，BOM 标 RELEASED |
+| ④ | U4 / U5 料号冻结 | **已完成** | `MAX17048G+T10` / `TUSB320LIRWBR`，BOM 标 RELEASED |
+| ⑤⑥⑦⑨ | BQ25895 / TPS63070 / USB-ESD-TUSB / EPD Booster 局部收紧 | **已完成** | 改成"围绕锚点螺旋扩散"放置；实测器件到锚点 courtyard 最大间隙 11.1 mm，多数 < 8 mm |
+| ⑧⑩ | 全板功能分区、布线顺序与规则 | **已完成** | 见 `PCB_LAYOUT_NOTES.md` §6 与 §9 |
+| ⑪ | 布线 | **未开始** | — |
+
+附加要求（用户）：**TF 座与 USB-C 座位置对调** —— **已完成**：
+USB-C 移到板下边中部 (24.0, 81.33)，TF 座移到右下 (42.0, 75.20)，VBUS 现在紧邻充电器。
 
 ## 七、继续任务时的建议顺序
 

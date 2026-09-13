@@ -170,60 +170,62 @@ HARD = {
     # ref: (x, y, rot)   rot CCW, 0 = as drawn in the KiCad library
     # --- mechanically constrained (user requirements) ---------------------
     "U1": (27.5, 12.75, 0),     # module body flush with the top edge, antenna out
-    # USB-C lower right, opening down.  The footprint's board edge reference is
-    # local y = +3.675, so keeping that 1 mm past the outline makes the shell
-    # overhang the board edge by exactly 1 mm.
-    "J1": (45.5, 81.33, 0),
+    # USB-C and the microSD socket are swapped (user request): USB-C now sits on
+    # the bottom edge centre so VBUS lands right next to the charger, the card
+    # socket moved to the bottom right.  USB-C keeps its 1 mm edge overhang.
+    "J1": (24.0, 81.33, 0),
     "J2": (4.0, 42.0, 90),      # 24P EPD FPC left side centre, opening left
-    "J3": (20.0, 75.20, 0),     # microSD bottom edge, card exits +Y
-    "J4": (5.0, 71.15, 90),     # BAT1 lower left, opening left
-    "J5": (5.0, 76.45, 90),     # BAT2 lower left, opening left
+    "J3": (42.0, 75.20, 0),     # microSD bottom right, card exits +Y
+    # Molex PicoBlade: the mating cavity is on the local +Y side, so rot 270 is
+    # what actually points the opening at the left board edge.
+    "J4": (6.0, 62.0, 270),     # BAT1 left side, opening left
+    "J5": (6.0, 72.0, 270),     # BAT2 left side, opening left
     "SW3": (52.85, 15.0, 90),   # KEY1  (centres 27 mm apart)
     "SW4": (52.85, 42.0, 90),   # KEY2
     "SW5": (52.85, 69.0, 90),   # KEY3
-    "SW1": (24.0, 29.0, 0),     # RESET (position free)
-    "SW2": (31.0, 29.0, 0),     # BOOT  (position free)
+    "SW1": (22.0, 29.0, 0),     # RESET (position free)
+    "SW2": (30.0, 29.0, 0),     # BOOT  (position free)
+    # --- power chain anchors (placement V1.2) -----------------------------
+    "U2": (34.0, 60.0, 0),      # BQ25895, centre-right, above USB-C
+    "U3": (34.0, 45.0, 0),      # TPS63070, downstream of SYS
+    "U4": (13.5, 62.0, 0),      # MAX17048, next to the battery connectors
+    "U5": (31.5, 73.0, 0),      # TUSB320LI, next to USB-C
 }
 
-# functional regions used to place everything that is not hard placed.
-# They must not overlap hard-placed courtyards - the placer treats those as
-# obstacles anyway, but a clean partition keeps the result readable.
-REGIONS = {
-    "top_l":  (9.2, 7.2, 17.4, 31.4),     # left of the ESP32 module
-    "top_r":  (37.8, 7.2, 50.6, 31.4),    # right of the ESP32 module
-    "epd":    (9.4, 32.0, 27.4, 51.0),    # EPD booster, right of the FPC
-    "pwr":    (28.0, 32.0, 50.6, 66.2),   # power / charger block (right half)
-    "low":    (9.4, 51.4, 27.6, 66.2),    # below the FPC, above the microSD
-    "bat":    (7.4, 66.6, 11.8, 80.0),    # battery branch fuses, next to J4/J5
-    "low_r":  (28.3, 66.6, 42.6, 76.0),   # right of the microSD
-    "bot":    (28.3, 76.2, 42.6, 83.4),   # between microSD and USB-C
+# Orbit centres that differ from the anchor's own courtyard centre.  The EPD FPC
+# sits hard against the left board edge, so its cluster is grown into the free
+# area to the right of the connector instead of around the connector itself.
+ANCHOR_CENTRE = {
+    "J2": (13.5, 42.0),
 }
 
-REGION_ORDER = ["epd", "pwr", "top_l", "top_r", "low", "bat", "low_r", "bot"]
-
-GROUP_ORDER = [
-    # EPD load switch + booster cluster: tight, adjacent to the 24P FPC
-    ("epd", ["U6", "L3", "Q1", "R29", "R30", "R31",
-             "D6", "D7", "D8",
-             "C25", "C26", "C27", "C28", "C29", "C30",
-             "C31", "C32", "C33", "C34", "C35", "C36"]),
-    # charger / regulator / fuel gauge / Type-C block
-    ("pwr", ["U2", "U3", "L1", "L2", "U4", "U5",
-             "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17",
-             "C18", "C19", "C20", "C21", "C22", "C23", "C24",
-             "R13", "R14", "R15", "R16", "R17", "R18", "R19", "R20", "R21",
-             "R22", "R23", "R24", "R25", "R26", "R27", "R28", "NTC1"]),
-    # ESP32 supply decoupling + reset/boot network
-    ("top_l", ["C1", "C2", "C3", "C4", "C5", "R1", "R2"]),
-    # USB front end (ESD, series R, shield)
-    ("top_r", ["D1", "D2", "D3", "D4", "D5", "C6", "C7", "C8",
-               "R8", "R9", "R10", "R11", "R12", "F1",
-               "R3", "R4", "R5"]),
-    # I2C pull-ups next to the PMIC cluster
-    ("pwr", ["R6", "R7"]),
-    # MicroSD + battery branch protection
-    ("low", ["C37", "C38", "R32", "R33", "R34", "R35", "R36"]),
-    ("bat", ["F2", "F3"]),
+# Anchor -> satellites, listed closest-first.  The placer spirals outwards from
+# the anchor, so the parts that must sit hard against the IC (switching loops,
+# ESD, feedback divider, booster caps) are placed first and land nearest.
+# This implements the V1.2 review items 5-7 and 9:
+#   * BQ25895: BTST / REGN / PMID / VBUS / BAT / SYS caps + SW inductor adjacent
+#   * TPS63070: inductor, VIN/VOUT caps, VAUX cap, FB divider adjacent
+#   * USB: ESD + TVS + fuse + shield next to the connector; 22R series next to U1
+#   * EPD: L3/Q1/D6-D8 and every high voltage cap clustered on the FPC
+ANCHORS = [
+    ("J2", ["U6", "L3", "C28", "C30", "C31", "C32", "C33", "C35", "C36", "C29"]),
+    # the booster switching loop is grown around the inductor so L3/Q1/D6-D8 stay
+    # physically tight (EPD_SW area and GDR/RESE length are the critical items)
+    ("L3", ["Q1", "D6", "D7", "D8", "R30", "R31"]),
+    ("U6", ["C25", "C26", "C27", "C34", "R29"]),
+    ("J1", ["D2", "D3", "D4", "D5", "D1", "F1", "C6", "C7", "R8"]),
+    ("U5", ["R11", "R12", "C8"]),
+    ("U2", ["C11", "C10", "C15", "C9", "L1", "C12", "C13", "C14",
+            "R13", "R16", "R17", "NTC1", "R14", "R15", "R18", "R19",
+            "R20", "R21", "C16", "R6", "R7"]),
+    ("U3", ["L2", "C18", "C19", "C20", "C24", "R23", "R24",
+            "C21", "C22", "C23", "R25", "R26", "R27", "R28"]),
+    ("U4", ["C17", "R22"]),
+    ("U1", ["C1", "C2", "C3", "C4", "C5", "R1", "R2",
+            "R3", "R4", "R5", "R9", "R10"]),
+    ("J3", ["C37", "C38", "R32", "R33", "R34", "R35", "R36"]),
+    ("J4", ["F2"]),
+    ("J5", ["F3"]),
 ]
 
 
@@ -289,48 +291,103 @@ def build_placement(comps):
         grid.mark(hx - 1.7, hy - 1.7, hx + 1.7, hy + 1.7)
 
     place = {}
+    centres = {}
+    anchor_rect = {}
     for ref, (x, y, rot) in HARD.items():
         place[ref] = (x, y, rot)
-        for r in occupancy(ref, comps[ref], x, y, rot):
+        rects = occupancy(ref, comps[ref], x, y, rot)
+        for r in rects:
             grid.mark(r[0] - GAP, r[1] - GAP, r[2] + GAP, r[3] + GAP)
+        # Anchor centre: for the module the courtyard is a T shape (antenna band +
+        # body); orbit from the body rectangle, not the overall bounding box.
+        body = rects[-1]
+        centre = ANCHOR_CENTRE.get(ref, ((body[0] + body[2]) / 2.0, (body[1] + body[3]) / 2.0))
+        centres[ref] = centre
+        anchor_rect[ref] = body
 
     overflow = []
+    distances = {}
+    fallback = []
 
-    THT = ("Connector", "Switch", "RF_Module", "Battery_Management", "Package_DFN",
-           "Package_TO_SOT", "Inductor", "Diode", "Fuse", "MountingHole", "TestPoint")
+    def try_at(x, y, lib, rot):
+        dx0, dy0, dx1, dy1 = rotated_bbox(lib, rot)
+        w, h = dx1 - dx0, dy1 - dy0
+        if x < 0.5 or y < 0.5 or x + w > BOARD_W - 0.5 or y + h > BOARD_H - 0.5:
+            return None
+        if not grid.free(x - GAP, y - GAP, x + w + GAP, y + h + GAP):
+            return None
+        grid.mark(x - GAP, y - GAP, x + w + GAP, y + h + GAP)
+        return (x - dx0, y - dy0, rot)
 
-    def try_place(ref, lib, region_order, rotations=(0, 90)):
-        for rot in rotations:
+    def orbit(ref, anchor, max_r=18.0):
+        """Spiral outwards from the anchor, so a satellite stays as close as it can."""
+        lib = comps[ref]
+        ax, ay = centres[anchor]
+        for rot in (0, 90):
             dx0, dy0, dx1, dy1 = rotated_bbox(lib, rot)
             w, h = dx1 - dx0, dy1 - dy0
-            for reg in region_order:
-                x0, y0, x1, y1 = REGIONS[reg]
-                y = y0
-                while y + h <= y1:
-                    x = x0
-                    while x + w <= x1:
-                        if grid.free(x - GAP, y - GAP, x + w + GAP, y + h + GAP):
-                            grid.mark(x - GAP, y - GAP, x + w + GAP, y + h + GAP)
-                            return (x - dx0, y - dy0, rot)
-                        x += grid.res
-                    y += grid.res
+            ccx, ccy = (dx0 + dx1) / 2.0, (dy0 + dy1) / 2.0
+            r = 0.0
+            while r <= max_r:
+                n = max(12, int(2 * math.pi * max(r, 1.2) / 0.45))
+                for k in range(n):
+                    ang = 2 * math.pi * k / n + (0.37 if rot else 0.0)
+                    cx = ax + r * math.cos(ang)
+                    cy = ay + r * math.sin(ang)
+                    pos = try_at(cx - ccx, cy - ccy, lib, rot)
+                    if pos:
+                        return pos, math.dist((cx, cy), (ax, ay))
+                r += 0.3
+        return None, None
+
+    def scan(ref):
+        """Fallback: first free slot anywhere on the board."""
+        lib = comps[ref]
+        for rot in (0, 90):
+            dx0, dy0, dx1, dy1 = rotated_bbox(lib, rot)
+            w, h = dx1 - dx0, dy1 - dy0
+            y = 0.5
+            while y + h <= BOARD_H - 0.5:
+                x = 0.5
+                while x + w <= BOARD_W - 0.5:
+                    pos = try_at(x, y, lib, rot)
+                    if pos:
+                        return pos
+                    x += grid.res
+                y += grid.res
         return None
 
-    for primary, refs in GROUP_ORDER:
-        for ref in refs:
-            if ref not in comps:
+    for anchor, sats in ANCHORS:
+        # an anchor may itself have been placed as a satellite of an earlier
+        # anchor (L3 under J2, for example) - derive its centre on demand
+        if anchor not in centres and anchor in place:
+            ax0, ay0, ax1, ay1 = abs_bbox(comps[anchor], *place[anchor])
+            centres[anchor] = ((ax0 + ax1) / 2.0, (ay0 + ay1) / 2.0)
+            anchor_rect[anchor] = (ax0, ay0, ax1, ay1)
+        for ref in sats:
+            if ref in place or ref not in comps:
                 continue
-            order = [primary] + [r for r in REGION_ORDER if r != primary]
-            pos = try_place(ref, comps[ref], order)
+            pos, dist = orbit(ref, anchor)
+            if pos is None:
+                # widen the search before giving up on staying near the anchor
+                pos, dist = orbit(ref, anchor, max_r=48.0)
+            if pos is None:
+                pos = scan(ref)
+                dist = None
+                fallback.append(ref)
             if pos is None:
                 overflow.append(ref)
-            else:
-                place[ref] = pos
+                continue
+            place[ref] = pos
+            if dist is not None:
+                bb = abs_bbox(comps[ref], pos[0], pos[1], pos[2])
+                ar = anchor_rect[anchor]
+                dx = max(ar[0] - bb[2], bb[0] - ar[2], 0.0)
+                dy = max(ar[1] - bb[3], bb[1] - ar[3], 0.0)
+                distances[ref] = (anchor, math.hypot(dx, dy))
 
-    # test points: last, smallest priority - spread them in whatever is left
-    tp_refs = [r for r in comps if r.startswith("TP") and r not in place]
-    for ref in sorted(tp_refs, key=lambda s: int(re.sub(r"\D", "", s) or 0)):
-        pos = try_place(ref, comps[ref], REGION_ORDER)
+    for ref in [r for r in comps if r not in place]:
+        pos = scan(ref)
         if pos is None:
             overflow.append(ref)
         else:
@@ -344,7 +401,7 @@ def build_placement(comps):
                 free = grid.free(ix, iy, ix + step - 0.01, iy + step - 0.01)
                 row += "." if free else "#"
             print(f"{iy:4d}  {row}")
-    return place, overflow
+    return place, overflow, distances, fallback
 
 
 # ---------------------------------------------------------------------------
@@ -500,7 +557,7 @@ def zone_keepout(layers, name, x0, y0, x1, y1):
 
 def main():
     comps, net_ids, padnets = load_netlist()
-    place, overflow = build_placement(comps)
+    place, overflow, distances, fallback = build_placement(comps)
 
     missing = [r for r in comps if r not in place]
     if missing or overflow:
@@ -529,6 +586,13 @@ def main():
     print("placed:", len(place), "courtyard collisions:", len(collisions))
     for c in collisions[:80]:
         print(f"   collide {c[0]:5s} {[round(v,2) for v in c[2]]}  x  {c[1]:5s} {[round(v,2) for v in c[3]]}")
+
+    if distances:
+        worst = sorted(distances.items(), key=lambda kv: -kv[1][1])[:10]
+        print("largest courtyard gap satellite -> anchor (mm):")
+        for ref, (anchor, d) in worst:
+            print(f"   {ref:5s} -> {anchor:4s} {d:5.1f} mm")
+        print("   fallback (no close slot):", fallback if fallback else "none")
 
     lines = []
     lines.append("(kicad_pcb")

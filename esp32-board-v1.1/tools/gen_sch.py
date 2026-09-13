@@ -634,14 +634,15 @@ def build_schematic():
 
     b.comp("local:TUSB320LI", "U", "TUSB320LI",
            "Package_DFN_QFN:Texas_X2QFN-12_1.6x1.6mm_P0.4mm",
-           (182.88, 260.35, 0), TUSB_PINS, status=PROVISIONAL, mpn="TUSB320LI", ref="U5")
+           (182.88, 260.35, 0), TUSB_PINS, status=RELEASED,
+           mpn="TUSB320LIRWBR", ref="U5")
 
     # ---- 03 BQ25895 -------------------------------------------------------
     sch.add_text("03  BQ25895 NVDC charger / power path (/CE defaults HIGH = charge disabled)",
                  (236.22, 45.72), 2.5)
     b.comp("Battery_Management:BQ25895RTW", "U", "BQ25895RTW",
            "Package_DFN_QFN:Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias",
-           (287.02, 88.9, 0), BQ_PINS, mpn="BQ25895RTW", ref="U2")
+           (287.02, 88.9, 0), BQ_PINS, mpn="BQ25895RTWT", ref="U2")
 
     lay = Layout(236.22, 127.0)
     bq_parts = [
@@ -676,16 +677,16 @@ def build_schematic():
     sch.add_text("04  Battery inputs (either or both) + MAX17048 fuel gauge",
                  (236.22, 180.34), 2.5)
     b.comp("Connector_Generic:Conn_01x02", "J", "BAT1",
-           "Connector_Hirose:Hirose_DF13-02P-1.25DS_1x02_P1.25mm_Horizontal",
+           "Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal",
            (269.24, 213.36, 0), {"1": "BAT1_RAW", "2": "GND"},
-           status=PROVISIONAL, mpn="Hirose DF13A-2P-1.25H(21)", ref="J4")
+           status=RELEASED, mpn="Molex 53261-0271", ref="J4")
     b.comp("Connector_Generic:Conn_01x02", "J", "BAT2",
-           "Connector_Hirose:Hirose_DF13-02P-1.25DS_1x02_P1.25mm_Horizontal",
+           "Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal",
            (269.24, 243.84, 0), {"1": "BAT2_RAW", "2": "GND"},
-           status=PROVISIONAL, mpn="Hirose DF13A-2P-1.25H(21)", ref="J5")
+           status=RELEASED, mpn="Molex 53261-0271", ref="J5")
     b.comp("local:MAX17048", "U", "MAX17048",
            "Package_DFN_QFN:TDFN-8-1EP_2x2mm_P0.5mm_EP0.8x1.2mm",
-           (320.04, 213.36, 0), MAX_PINS, mpn="MAX17048", ref="U4")
+           (320.04, 213.36, 0), MAX_PINS, mpn="MAX17048G+T10", ref="U4")
 
     lay = Layout(236.22, 251.46, cols=4)
     bat_parts = [
@@ -704,7 +705,11 @@ def build_schematic():
                  (419.1, 45.72), 2.5)
     b.comp("local:TPS63070", "U", "TPS63070",
            "Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.45x1.45mm_ThermalVias",
-           (469.9, 88.9, 0), TPS_PINS, mpn="TPS63070", ref="U3")
+           # NOTE: symbol still carries pin 16 (EP) and the footprint is the generic
+           # VQFN-16.  The V1.2 review requires the TI RNM0015A land pattern (15 pins,
+           # no EP) - symbol and footprint must be replaced together.  See agent.md.
+           (469.9, 88.9, 0), TPS_PINS, status=PROVISIONAL,
+           mpn="TPS63070RNMT", ref="U3")
 
     lay = Layout(419.1, 127.0, cols=7)
     tps_parts = [
