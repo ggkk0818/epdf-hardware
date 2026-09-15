@@ -10,9 +10,13 @@ import uuid
 from pathlib import Path
 
 FP_ROOT = Path("C:/Program Files/KiCad/10.0/share/kicad/footprints")
+LOCAL_FP_ROOT = Path("C:/Code/epdf-hardware/esp32-board-v1.1/lib")
 
 
 def read_mod(lib_nick: str, name: str) -> str:
+    local = LOCAL_FP_ROOT / f"{lib_nick}.pretty" / f"{name}.kicad_mod"
+    if local.exists():
+        return local.read_text(encoding="utf-8")
     p = FP_ROOT / f"{lib_nick}.pretty" / f"{name}.kicad_mod"
     return p.read_text(encoding="utf-8")
 
@@ -133,7 +137,9 @@ DROP_TOP = {"version", "generator", "generator_version", "layer", "uuid", "tstam
 
 
 def place(footprint_text: str, lib_id: str, ref: str, value: str, x: float, y: float,
-          rot: float, nets: dict, layer: str = "F.Cu") -> str:
+          rot: float, nets: dict, layer: str = "F.Cu", ref_at=None,
+          footprint_uuid: str = None, ref_size: float = None,
+          ref_hide: bool = False) -> str:
     """Return a .kicad_pcb footprint block."""
     _, children = split_children(footprint_text)
     # Keep the original property blocks (they carry Reference/Value placement).
@@ -141,18 +147,33 @@ def place(footprint_text: str, lib_id: str, ref: str, value: str, x: float, y: f
     attr = [c for c in children if child_key(c) == "attr"]
     meta = [c for c in children if child_key(c) in ("descr", "tags")]
     rest = [c for c in children if child_key(c) not in
-            ("version", "generator", "generator_version", "layer", "uuid", "tstamp",
-             "property", "attr", "embedded_fonts", "descr", "tags",
-             # Some libraries (e.g. the Hirose microSD socket) embed rule areas in
-             # the footprint.  KiCad keeps those polygons in the footprint's local
-             # frame for DRC and they then punch phantom keep-outs across the board,
-             # so they are dropped here and reproduced as board level rule areas.
-             "zone")]
+            ("layer", "uuid", "tstamp",
+             "property", "attr", "descr", "tags",
+             # Footprint-embedded rule areas (the microSD socket's five card-slot
+             # keep-outs and the ESP32 module's antenna keep-out) are kept: KiCad
+             # stores their polygons in the footprint's own frame, so they travel
+             # with the part and give real DRC protection.  Dropping them also made
+             # the "footprint doesn't match library" check fire for J3 and U1.
+             )]
 
     def fix_prop(p):
         if re.match(r'\(property\s+"Reference"', p):
             p = re.sub(r'\(property\s+"Reference"\s+"[^"]*"',
                        f'(property "Reference" "{ref}"', p)
+            if ref_at is not None:
+                p = re.sub(r"\(at\s+-?[\d.]+\s+-?[\d.]+(?:\s+-?[\d.]+)?\)",
+                           f"(at {ref_at[0]:g} {ref_at[1]:g} 0)", p, count=1)
+            if ref_size:
+                # keep the stroke/height ratio of the library text
+                p = re.sub(r"\(size [\d.]+ [\d.]+\)",
+                           f"(size {ref_size:g} {ref_size:g})", p, count=1)
+                p = re.sub(r"\(thickness [\d.]+\)",
+                           f"(thickness {0.15 * ref_size:g})", p, count=1)
+            if ref_hide:
+                # No room on the silkscreen within 3 mm of the part: move the
+                # reference to the fabrication layer (review 11.5).  It stays
+                # visible for the assembly drawing and disappears from the silk.
+                p = p.replace('(layer "F.SilkS")', '(layer "F.Fab")', 1)
         elif re.match(r'\(property\s+"Value"', p):
             p = re.sub(r'\(property\s+"Value"\s+"[^"]*"',
                        f'(property "Value" "{value}"', p)
@@ -161,7 +182,7 @@ def place(footprint_text: str, lib_id: str, ref: str, value: str, x: float, y: f
 
     lines = [f'\t(footprint "{lib_id}"']
     lines.append(f'\t\t(layer "{layer}")')
-    lines.append(f'\t\t(uuid "{uuid.uuid4()}")')
+    lines.append(f'\t\t(uuid "{footprint_uuid or uuid.uuid4()}")')
     lines.append(f"\t\t(at {x:.4f} {y:.4f}{'' if rot == 0 else f' {rot:g}'})")
     lines.extend(meta)
     for p in props:
@@ -179,4 +200,9 @@ def place(footprint_text: str, lib_id: str, ref: str, value: str, x: float, y: f
             ch = set_pad_angle(ch, rot)
         lines.append(ch)
     lines.append("\t)")
-    return fresh_uuids("\n".join(lines))
+    out = fresh_uuids("\n".join(lines))
+    if footprint_uuid:
+        # fresh_uuids() randomises the footprint UUID too - put the requested
+        # stable one back so DRC exclusions stay valid across regenerations
+        out = re.sub(r'\(uuid "[^"]*"\)', f'(uuid "{footprint_uuid}")', out, count=1)
+    return out

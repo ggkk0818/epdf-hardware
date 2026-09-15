@@ -346,11 +346,12 @@ STD_LIBS = [
     ("RF_Module:ESP32-S3-WROOM-1", "RF_Module.kicad_sym", "ESP32-S3-WROOM-1"),
     ("power:GND", "power.kicad_sym", "GND"),
     ("power:PWR_FLAG", "power.kicad_sym", "PWR_FLAG"),
-    ("local:TPS63070", "__local__", "TPS63070"),
+    ("local:TPS63070RNM", "__local__", "TPS63070RNM"),
     ("local:MAX17048", "__local__", "MAX17048"),
     ("local:TUSB320LI", "__local__", "TUSB320LI"),
     ("local:TPS22918", "__local__", "TPS22918"),
     ("local:EPD_FPC24", "__local__", "EPD_FPC24"),
+    ("local:CONN_01X02_PICO", "__local__", "CONN_01X02_PICO"),
 ]
 
 RELEASED = "RELEASED"
@@ -475,7 +476,7 @@ TPS_PINS = {
     "1": "TPS_PS_SYNC", "2": "TPS_PG", "3": "TPS_VAUX", "4": "GND",
     "5": "TPS_FB", "6": "NC", "7": "3V3_MAIN", "8": "3V3_MAIN",
     "9": "TPS_L2", "10": "GND", "11": "TPS_L1", "12": "SYS",
-    "13": "SYS", "14": "TPS_EN", "15": "TPS_VSEL", "16": "GND",
+    "13": "SYS", "14": "TPS_EN", "15": "TPS_VSEL",
 }
 
 TPS22918_PINS = {
@@ -569,7 +570,12 @@ def build_schematic():
     sch.add_text("01  ESP32-S3-WROOM-1-N16R8 core, reset, boot, keys, I2C pull-ups",
                  (25.4, 45.72), 2.5)
     b.comp("RF_Module:ESP32-S3-WROOM-1", "U", "ESP32-S3-WROOM-1-N16R8",
-           "RF_Module:ESP32-S3-WROOM-1", (76.2, 88.9, 0), U1_PINS,
+           # project copy of the vendor land pattern: its 48 x 21 mm RF keep-out
+           # courtyard overlaps the two upper locating holes on a 55 mm board, so
+           # the board uses a local footprint whose courtyard is the module body
+           # and whose top silkscreen no longer crosses Edge.Cuts.  Using a local
+           # copy keeps the board consistent with the library (review item 14).
+           "esp32-board-v1.1:ESP32-S3-WROOM-1_EPDF", (76.2, 88.9, 0), U1_PINS,
            mpn="ESP32-S3-WROOM-1-N16R8", ref="U1")
 
     lay = Layout(27.94, 127.0)
@@ -640,6 +646,19 @@ def build_schematic():
     # ---- 03 BQ25895 -------------------------------------------------------
     sch.add_text("03  BQ25895 NVDC charger / power path (/CE defaults HIGH = charge disabled)",
                  (236.22, 45.72), 2.5)
+    # V1.3 design note (review list 2.2 / 2.3): the connector is not changed, the
+    # current is constrained in firmware, and the charger stays off until the MCU
+    # has written and verified its configuration.  Placed above the section title
+    # so it does not collide with the BQ25895 symbol or its pin labels.
+    for i, line in enumerate([
+        "Charge policy (V1.3, review list 2.2 / 2.3)",
+        "ICHG default = 896 mA (14 x 64 mA) - keeps the Molex 53261-0271 connector, 26 AWG harness and terminals inside their thermal budget.",
+        "/CE = CHG_CE (GPIO47), 10k pull-up to 3V3_MAIN -> charge DISABLED at power-up.",
+        "Start-up: MCU boot -> I2C init -> write ICHG / IINLIM / ITERM / VREG -> read back and verify -> drive /CE LOW -> charging enabled.",
+        "Bench test at peak load (Wi-Fi TX + EPD refresh + TF card + CPU) required: measure J4/J5 peak current and connector /",
+        "terminal / harness temperature rise; limit concurrent load in firmware if the design target is exceeded.",
+    ]):
+        sch.add_text(line, (236.22, 20.5 + 4.3 * i), 1.6)
     b.comp("Battery_Management:BQ25895RTW", "U", "BQ25895RTW",
            "Package_DFN_QFN:Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias",
            (287.02, 88.9, 0), BQ_PINS, mpn="BQ25895RTWT", ref="U2")
@@ -676,11 +695,14 @@ def build_schematic():
     # ---- 04 battery + fuel gauge -----------------------------------------
     sch.add_text("04  Battery inputs (either or both) + MAX17048 fuel gauge",
                  (236.22, 180.34), 2.5)
-    b.comp("Connector_Generic:Conn_01x02", "J", "BAT1",
+    # local symbol: the generic Conn_01x02 footprint filter (Connector*:*_1x??_*)
+    # rejects the Molex land pattern name, so the battery connectors use a local
+    # symbol whose ki_fp_filters also accepts Connector_Molex:*1x02*
+    b.comp("local:CONN_01X02_PICO", "J", "BAT1",
            "Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal",
            (269.24, 213.36, 0), {"1": "BAT1_RAW", "2": "GND"},
            status=RELEASED, mpn="Molex 53261-0271", ref="J4")
-    b.comp("Connector_Generic:Conn_01x02", "J", "BAT2",
+    b.comp("local:CONN_01X02_PICO", "J", "BAT2",
            "Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal",
            (269.24, 243.84, 0), {"1": "BAT2_RAW", "2": "GND"},
            status=RELEASED, mpn="Molex 53261-0271", ref="J5")
@@ -703,13 +725,9 @@ def build_schematic():
     # ---- 05 TPS63070 ------------------------------------------------------
     sch.add_text("05  TPS63070 3V3 buck-boost (VOUT8 = Passive, no power-output clash)",
                  (419.1, 45.72), 2.5)
-    b.comp("local:TPS63070", "U", "TPS63070",
-           "Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.45x1.45mm_ThermalVias",
-           # NOTE: symbol still carries pin 16 (EP) and the footprint is the generic
-           # VQFN-16.  The V1.2 review requires the TI RNM0015A land pattern (15 pins,
-           # no EP) - symbol and footprint must be replaced together.  See agent.md.
-           (469.9, 88.9, 0), TPS_PINS, status=PROVISIONAL,
-           mpn="TPS63070RNMT", ref="U3")
+    b.comp("local:TPS63070RNM", "U", "TPS63070RNMT",
+           "esp32-board-v1.1:RNM0015A",
+           (469.9, 88.9, 0), TPS_PINS, mpn="TPS63070RNMT", ref="U3")
 
     lay = Layout(419.1, 127.0, cols=7)
     tps_parts = [
@@ -738,9 +756,9 @@ def build_schematic():
     sch.add_text("06  EPD GDEM102T91 24P FPC + SSD1677 HV network "
                  "(locked to panel typical application circuit)", (419.1, 180.34), 2.5)
     b.comp("local:EPD_FPC24", "J", "GDEM102T91 24P FPC",
-           "Connector_FFC-FPC:Hirose_FH12-24S-0.5SH_1x24-1MP_P0.50mm_Horizontal",
+           "Connector_FFC-FPC:Amphenol_F32Q-1A7x1-11024_1x24-1MP_P0.5mm_Horizontal",
            (431.8, 245.11, 0), EPD_PINS, status=PROVISIONAL,
-           mpn="24P 0.5mm Top-Contact low profile", ref="J2")
+           mpn="Amphenol F32Q-1A7x1-11024 (24P 0.5mm TOP contact)", ref="J2")
     b.comp("local:TPS22918", "U", "TPS22918",
            "Package_TO_SOT_SMD:SOT-23-6", (533.4, 245.11, 0), TPS22918_PINS,
            mpn="TPS22918", ref="U6")
@@ -781,7 +799,9 @@ def build_schematic():
     sch.add_text("07  MicroSD (SPI, shared SCLK/MOSI with EPD, independent CS)",
                  (236.22, 299.72), 2.5)
     b.comp("Connector:Micro_SD_Card_Det2", "J", "MicroSD",
-           "Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5",
+           # project copy of the vendor land pattern (keeps board and library
+           # identical, review item 14)
+           "esp32-board-v1.1:microSD_DM3AT-SF-PEJM5_EPDF",
            (287.02, 340.36, 0), SD_PINS, status=PROVISIONAL,
            mpn="Hirose DM3AT-SF-PEJM5", ref="J3")
 

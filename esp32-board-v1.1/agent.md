@@ -1,5 +1,72 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-15 更新（V1.5 整改）**：按
+> `ESP32S3_GDEM102T91_Current_Layout_Optimization_Plan.md` 完成 ①~⑬，
+> **不含布线**。要点：
+> - **右侧按键墙改为全高**（X 49–51，Y 0–84）：V1.4 时只挡到 Y73，R33 从下方
+>   绕进按键列；现在 X>51 只剩 SW3/4/5 与四个定位孔（已验证规则会真实报错）。
+>   `RIGHT_SWITCH_COLUMN` 只保留 `Dwgs.User` 机械说明，不再建 keepout 区。
+> - **R33 / R34 移到 U1 SPI 输出端**（2.84 / 2.34 mm），SW1/SW2 下移 3 mm 让位。
+> - **U1 周边重排**：C1~C4、R1/C5、R3~R5 全部移到模块左侧两列，C4 距 3V3 引脚
+>   2.33 mm、R1 距 RESET 3.63 mm。
+> - **C12 回到 U2 BAT 引脚**（3.64 mm）、C15 PMID 2.37 mm、C10 REGN 4.65 mm；
+>   **C29 进入 EPD Booster 岛**（距 EPD_SW/EPD_X 焊盘 4.5 / 3.3 mm）；R24 上移
+>   至 R23 下方 1.81 mm。
+> - **全板丝印重排**：位号只在自身轮廓外 0.25–3.3 mm 内，空间不足则隐藏
+>   （本轮隐藏 5 个）；`silk_overlap` 10 → **0**，被器件遮挡 14 → **0**。
+> - **U1 / J3 library mismatch 已消除**：改用项目本地封装、把封装内嵌 rule area
+>   提升为板级规则区、U1 顶部丝印不再越板边。
+> - 最终：**ERC = 0，DRC = 0 Error / 0 Warning**，排除项 0，unconnected = 255。
+>
+> **2026-09-14 更新（V1.4 收尾）**：
+> 1. **顶部两个安装孔确定使用塑料柱**（用户确认）：孔位保持不动，板内
+>    `Dwgs.User` 已标注 `NYLON / PLASTIC POST ONLY / NO METAL IN ANTENNA AREA`；
+>    整机 RF 实测仍建议做。
+> 2. **丝印全面优化**：位号摆放算法重写（遮挡感知评分、环绕基准改用实体轮廓、
+>    贪心 + 迭代爬坡 + 个别救援三遍求解），小尺寸无源器件位号字号改 0.8 mm。
+>    结果：`silk_over_copper` 0、**位号被器件遮挡 0 个**（原 14 个，含 3 个被
+>    J2 座体盖住）、`silk_overlap` **1**（原 10）。
+> 3. 当前：**ERC = 0，DRC = 0 Error / 5 Warning**（1 丝印压字 + 2 模块丝印压板边 +
+>    2 含规则区封装的固有 mismatch），排除项 0，unconnected = 255（未布线）。
+>
+> **2026-09-14 更新（V1.4 整改）**：按
+> `ESP32S3_GDEM102T91_V1.3_to_V1.4_Placement_and_Checklist.md` 完成
+> ①②③④⑤⑥⑦⑧(文档)⑩⑪⑫，**不含布线**。要点：
+> - **J2 EPD FPC 换成上接点连接器** `Amphenol F32Q-1A7x1-11024`（24P／0.5mm／
+>   Top contact，官方库 land pattern），位置改 (5.0, 42.0)。
+> - **`RIGHT_SWITCH_COLUMN`（X 49–55）** 成为正式机械列：命名规则区 +
+>   `Dwgs.User` 说明框 + 自定义 DRC 规则（SW3/4/5 为例外）。实测列内只剩三颗按键。
+> - **C37 / R32 / R35 移出右侧**并围绕 J3 重排：C38 2.97 mm、C37 4.24 mm、
+>   R35 4.45 mm、R32 7.04 mm（到各自 J3 引脚）。
+> - **BQ25895 收紧**：C9 VBUS 2.09 mm、C15 PMID 4.18 mm、C10 REGN 6.61 mm、
+>   R21/C16 Snubber 成对（2.19 mm）且紧贴 L1；C12 移到电池端、C14 移到 U3 输入组。
+> - **USB ESD 四颗改成 90° 同一行镜像排列**（CC1/D−/D+/CC2），离连接器 2.6–3.5 mm。
+> - **EPD 高压电容改 3×2 紧凑矩阵**（占 X 8.3–19.8），比原单排短约 9.5 mm；
+>   R30 移到 Q1 侧。
+> - **ERC 策略恢复**：`footprint_link_issues`、`footprint_filter` 重新启用（error）→
+>   抓出并修掉 J4/J5 符号↔封装过滤不匹配（新增本地符号 `CONN_01X02_PICO`）。
+> - **DRC 策略恢复**：`missing_courtyard`（error，0 条）、`lib_footprint_mismatch`
+>   （warning，2 条固有）；安装孔改用官方库封装；ESP32 天线禁布区补上"禁器件"。
+> - 最终：**ERC = 0，DRC = 0 Error / 14 Warning，排除项 0**，unconnected = 255（未布线）。
+> - 详细逐项对照见 `PCB_LAYOUT_NOTES.md` §0 与 §10。
+>
+> **2026-09-14 更新（V1.3 整改）**：按
+> `ESP32S3_GDEM102T91_V1.2_to_V1.3_Next_Round_Modifications.md` 完成 P1 + P2
+> （**不含布线**）。要点：
+> - 建立两个正式 DRC 规则区：`ESP32_ANT_KEEP_OUT`（天线，四层全禁）、
+>   `KEY_RIGHT_MECH_KEEP_OUT`（右侧按键机械区，只禁器件）。
+> - 放置引擎由 0.2 mm 栅格改为**精确矩形判断**（GAP = 0.50 mm），新增
+>   **29 个引脚级对齐放置**：L1 与 U2 SW 引脚 Center-Y 完全一致、C11 BTST 1.95 mm、
+>   C18 SYS 1.90 mm、R23 FB 3.63 mm、R23/R24 同 Center-X 分压列、
+>   EPD 五颗高压电容同一 Center-Y = 37.25 mm、USB ESD 两列镜像对。
+> - 卫星器件到锚点最大间隙 **34.9 mm → 7.6 mm**；最紧 courtyard 间距 0.50 mm。
+> - 新增**丝印位号自动摆放**：silk_over_copper **63 → 0**，丝印类告警 **121 → 15**。
+> - MD §2 充电策略（ICHG = 896 mA、/CE 启动时序）已写入原理图注释区（无电路改动）。
+> - 最终：**ERC = 0，DRC = 0 Error / 15 Warning**（11 文字互搭 + 2 定位孔 + 2 模块丝印压板边），
+>   unconnected = 255（未布线）。
+> - 定位孔（含天线区、按键区）按用户要求**保持不变**；板框仍 55 × 84 mm。
+> - 详细逐项对照见 `PCB_LAYOUT_NOTES.md` §0 与 §10（含未满足项与原因）。
+>
 > **2026-09-12 更新（V1.2 整改）**：按 `..._V1.1_to_V1.2_PCB_Modification_Guide.md`
 > 完成布局类整改——BQ25895 / TPS63070 / USB-ESD-TUSB320 / EPD Booster 四个簇改为
 > 就近聚集（到锚点 courtyard 最大间隙 11.1 mm）；J4/J5 换 **Molex 53261-0271**；
@@ -99,9 +166,11 @@
 9. 已生成 `esp32-board-v1.1.kicad_pcb`：**55×84 mm 竖版**、R2 圆角、
    4×Ø2.2 mm 定位孔（距边 3 mm）、4 层叠层（Dk 4.2 / 外层 1 oz）、
    4 个 Net Class（Default / USB90 0.24-0.18 / POWER / HV_EPD）、
-   天线禁布规则区，106 个器件全部摆放完毕。
-10. PCB DRC：**0 Error**（86 条告警全部为丝印/天线 courtyard 类 warning；
-    258 条未连接飞线＝尚未布线，本阶段预期）。
+   天线禁布规则区 `ESP32_ANT_KEEP_OUT`、按键机械禁布区
+   `KEY_RIGHT_MECH_KEEP_OUT`，106 个器件全部摆放完毕（其中 29 个为引脚级对齐放置）。
+10. PCB DRC：**0 Error / 15 Warning**（11 条位号文字互搭 + 2 条定位孔在天线 courtyard
+    内 + 2 条模块丝印压板边；均无功能影响）。255 条未连接飞线＝尚未布线，本阶段预期。
+    丝印位号已由 `gen_pcb.py` 的 `build_silk()` 自动避让焊盘（silk_over_copper = 0）。
 
 ### 当前 ERC 结果
 
@@ -163,10 +232,13 @@ kicad-cli sch erc  →  0 violations
    （DRC unconnected = 258）。
 4. USB 90 Ω 已按 Dk 4.2 / 外层 1 oz 计算为 **W 0.24 / S 0.18 mm** 并写入 Net Class；
    仍建议板厂按实际材料复算确认。
-5. 丝印未人工整理（86 条告警，全部为丝印/天线 courtyard 类 warning）。
+5. 丝印位号已自动避让焊盘（silk_over_copper = 0）；U2/U3 电源岛内仍有 11 处
+   **位号文字互搭**（纯外观）。如需进一步减少，可把该处字号从 1.0 缩到 0.8 mm。
 6. 投板前需完成全部布线、重跑 DRC（目标 unconnected = 0）、生成 Gerber/钻孔/坐标文件。
 7. **TF 座未能外凸 1 mm**（前部固定焊盘在本体最前端），需用户确认是否接受，见
    `PCB_LAYOUT_NOTES.md` §6.1。
+8. **U3 脚位三方核对**（符号 ↔ TI 数据手册 ↔ RNM0015A 封装，尤其 1 脚方向）仍需人工确认一次。
+9. 天线区两个上角定位孔保持原位，用金属螺钉还是塑料柱需结构评审确认（MD §7.3）。
 
 ## 六、待用户确认的问题
 
@@ -183,16 +255,17 @@ kicad-cli sch erc  →  0 violations
 5. MicroSD 位置（现放在板下边缘中央）与按键高度/手感是否有结构限制。
 6. ~~TF 座不能外凸 1 mm~~ → **已确认接受**（2026-09-12）。
 7. ~~板框尺寸~~ → **已确认：保持 55 × 84 mm**（2026-09-12）。
-8. **U3 的 RNM0015A land pattern**：KiCad 库中没有该封装，数据手册里只有
-   TI 图纸 4222000 的 "LAND PATTERN EXAMPLE"。请提供 TI 官方 land pattern
-   （或 SnapEDA / Ultra Librarian 导出的封装），或授权我按该图重建（需人工复核）。
+8. ~~U3 的 RNM0015A land pattern~~ → **已提供并导入**（2026-09-14，
+   `Downloads/ul_TPS630701RNMR`）。投板前仍需按 §六之二 做三方脚位核对。
+9. **U3 脚位三方核对**：Ultra Librarian 封装已导入，但 `Symbol ↔ TI 数据手册 ↔
+   Footprint` 的一一对应（特别是 1 脚方向、顶视/底视）必须人工确认一次。
 
 ## 六之二、V1.2 整改清单执行状态（依 `ESP32S3_GDEM102T91_V1.1_to_V1.2_PCB_Modification_Guide.md`）
 
 | # | 整改项 | 状态 | 说明 |
 |---:|---|---|---|
 | ① | PCB 外形改 77 × 45 | **已决定：保持 55 × 84** | 用户 2026-09-12 确认板框保持 55 × 84；原因：45 mm 高度装不下 27 mm 间距的 3 个按键 |
-| ② | U3 符号 / 封装改 RNM0015A | **部分完成** | 料号已改 `TPS63070RNMT`；符号仍含 Pin16、封装仍是通用 VQFN-16，**待换成 TI RNM0015A 15 脚 land pattern** |
+| ② | U3 符号 / 封装 / 3D 模型改 RNM0015A | **已完成** | 采用用户提供的 Ultra Librarian 导出：符号 `local:TPS63070RNM`（15 脚、无 EP），封装 `esp32-board-v1.1:RNM0015A`，3D 模型 `lib/3dmodels/RNM0015A.stp`。见 `SCHEMATIC_NOTES.md` §4.6 |
 | ③ | J4/J5 改 Molex 53261-0271 | **已完成** | 封装 `Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal`，BOM 标 RELEASED |
 | ④ | U4 / U5 料号冻结 | **已完成** | `MAX17048G+T10` / `TUSB320LIRWBR`，BOM 标 RELEASED |
 | ⑤⑥⑦⑨ | BQ25895 / TPS63070 / USB-ESD-TUSB / EPD Booster 局部收紧 | **已完成** | 改成"围绕锚点螺旋扩散"放置；实测器件到锚点 courtyard 最大间隙 11.1 mm，多数 < 8 mm |
@@ -201,6 +274,62 @@ kicad-cli sch erc  →  0 violations
 
 附加要求（用户）：**TF 座与 USB-C 座位置对调** —— **已完成**：
 USB-C 移到板下边中部 (24.0, 81.33)，TF 座移到右下 (42.0, 75.20)，VBUS 现在紧邻充电器。
+
+## 六之三、V1.3 整改清单执行状态（依 `ESP32S3_GDEM102T91_V1.2_to_V1.3_Next_Round_Modifications.md`）
+
+| # | 整改项 | 状态 | 说明 |
+|---:|---|---|---|
+| ① | ESP32 天线正式 Keepout | **已完成** | 规则区 `ESP32_ANT_KEEP_OUT`，X 16–39 / Y 0–6，L1–L4 禁铜、禁走线、禁过孔、禁焊盘、禁器件 |
+| ② | KEY1/2/3 机械禁布区 | **已完成** | 规则区 `KEY_RIGHT_MECH_KEEP_OUT`，X 49–51 / Y 11–73，只禁器件；走线/过孔/铜皮/定位孔按 MD §8.5 允许。另加放置障碍带 `KEY_PLACEMENT_BAN`（X 49–55）保证右侧整条带内只剩三颗按键 |
+| ③ | BQ25895 功率岛压缩 | **已完成** | SW→L1 为最高优先，**L1 输入焊盘与 U2 SW19/20 的 Center-Y 完全相同（58.04）**；C11 BTST 1.95 mm；C10/C15 同列、ΔY 2.6 mm；C12/C13/C14 同行等间距 |
+| ④ | TPS63070 功率岛 | **已完成** | L2 焊盘 Center-Y = U3 L1/L2 引脚中心线；C18 SYS 1.90 mm；C20 VOUT 5.22 mm；R23/R24 同 Center-X 垂直分压列，FB 3.63 mm |
+| ⑤ | USB D±/ESD/串阻成对 | **已完成** | D2/D3 同 X = 25.15，D4/D5 同 X = 21.42，全部 0°；R9/R10 同 X = 14.18 镜像、等长 |
+| ⑥ | EPD 高压电容对齐 + Booster 岛 | **已完成** | C36/C30/C33/C28/C32 五颗统一 Center-Y = 37.25、间距 4.0 mm；L3/Q1/D6–D8/R30/R31 单独成簇 |
+| ⑦ | 3 mm 对齐规则 | **已完成** | 29 个器件改为引脚级对齐；相邻器件 ΔX/ΔY ≤ 3 mm 处统一 Center 线 |
+| ⑧ | 单电池限流策略（ICHG 896 mA + /CE 时序） | **已完成（文档）** | 写入原理图 03 区注释；硬件无改动（/CE 已有 10 kΩ 上拉，默认禁充）。§2.4 实机峰值测试待做 |
+| ⑨ | Placement Review | **已完成** | 见 `PCB_LAYOUT_NOTES.md` §6、§9、§10 |
+| ⑩ | 正式布线 | **未开始** | 按用户要求：先确认布局，再布线 |
+
+用户附带约束：**天线区与轻触开关区的定位孔保持现状** —— 已遵守，孔径与坐标均未改动。
+
+## 六之四、V1.4 整改清单执行状态（依 `ESP32S3_GDEM102T91_V1.3_to_V1.4_Placement_and_Checklist.md`）
+
+| # | 整改项 | 状态 | 说明 |
+|---:|---|---|---|
+| ① | 建立完整 `RIGHT_SWITCH_COLUMN`（X 49–55） | **已完成** | 命名规则区 + 自定义规则（SW3/4/5 例外）+ `Dwgs.User` 说明框；实测列内只有三颗按键。已验证规则会真实报错 |
+| ② | C37 / R32 / R35 移出右侧 Column | **已完成** | 三者现全部位于 X < 49 |
+| ③ | C37 / R32 / R35 围绕 J3 重排 | **已完成** | C38→VDD 2.97 mm、C37→VDD 4.24 mm、R35→MISO 4.45 mm、R32→CS 7.04 mm |
+| ④ | J2 换成 Top / Top&Bottom Contact | **已完成** | `Amphenol F32Q-1A7x1-11024`（上接点）；位置 (5.0, 42.0)。FPC 厚度/Mated Height 待数据手册确认 |
+| ⑤ | BQ25895 收紧（C15/C10/C9/SYS/R21-C16） | **已完成** | C9 2.09、C15 4.18、C10 6.61、C13 4.39 mm；R21/C16 成对 2.19 mm 紧贴 L1 |
+| ⑥ | TPS63070 收紧（L2 / R23-R24） | **已完成** | L2 焊盘在 L1/L2 引脚中心线；R23/R24 同 Center-X 分压列，FB 3.63 mm |
+| ⑦ | USB D2/D3/D4/D5 成对靠近 J1 | **已完成** | 四颗 90° 同一行镜像（CC1/D−/D+/CC2），2.64–3.50 mm |
+| ⑧ | EPD 高压电容改矩阵、R30 靠 Q1 | **已完成** | 3×2 矩阵占 X 8.3–19.8（原单排到 29.3）；R30 移到 Q1 侧 4.30 mm |
+| ⑨ | ESP32 顶部安装孔 RF/机械判断 | **已决** | **塑料柱**，孔位保持不动；`Dwgs.User` 已标注；整机 RF 实测仍建议做 |
+| ⑩ | ERC 恢复 footprint 检查 | **已完成** | `footprint_link_issues`、`footprint_filter` = error，0 violation；顺带修掉 J4/J5 过滤不匹配 |
+| ⑪ | DRC 恢复 courtyard / library 检查 | **已完成** | `missing_courtyard` = error（0 条）；`lib_footprint_mismatch` = warning（2 条，含规则区封装的固有差异） |
+| ⑫ | Placement Review | **已完成** | 见 `PCB_LAYOUT_NOTES.md` §6 / §9 / §10 |
+| ⑬ | 正式布线 | **未开始** | 按用户要求先确认布局 |
+
+## 六之五、V1.5 整改清单执行状态（依 `ESP32S3_GDEM102T91_Current_Layout_Optimization_Plan.md`）
+
+| # | 整改项 | 状态 | 说明 |
+|---:|---|---|---|
+| ① | KEY_RIGHT_MECH_KEEP_OUT 改 X49–51 / Y0–84 | **已完成** | 全高阻挡墙；已验证规则会真实触发（去掉例外后报 H2/H4） |
+| ② | RIGHT_SWITCH_COLUMN 只留机械说明 | **已完成** | 删除该 keepout 区，仅保留 Dwgs.User 虚线框与文字 |
+| ③ | R33 移出右侧 Column | **已完成** | X>51 一侧只剩 SW3/4/5 |
+| ④ | SW1/SW2 下移 2.5~3 mm | **已完成** | y 29 → 32 |
+| ⑤ | R33/R34 放到 U1 SPI 输出端 | **已完成** | 距 SPI_MOSI/SCLK 2.34 / 2.84 mm |
+| ⑥ | R35 保留 J3 MISO 侧 | **已完成** | 2.96 mm |
+| ⑦ | U1 周边 C1~C4 / R1+C5 / R3~R5 重排 | **已完成** | 左侧两列；C4 2.33 mm、R1 3.63 mm |
+| ⑧ | C12 搬到 U2 BAT pins | **已完成** | 3.64 mm |
+| ⑨ | C10 / C15 / R21-C16 收紧 | **已完成** | C15 2.37、C10 4.65、R21/C16 成对紧贴 L1 |
+| ⑩ | U3 R23/R24 FB divider 收紧 | **已完成** | R24 上移，间距 1.81 mm |
+| ⑪ | C29 搬进 EPD Booster Island | **已完成** | 距 D6 EPD_SW 4.51 mm、D8 EPD_X 3.34 mm |
+| ⑫ | U1 / J3 library mismatch | **已解决** | 项目本地封装 + rule area 提升 + 顶部丝印裁剪 + 保留 version 字段 |
+| ⑬ | Placement Review | **已完成** | 见 `PCB_LAYOUT_NOTES.md` §6 / §9 / §10 |
+| ⑭ | 统一重做全板丝印 | **已完成** | ≤3.3 mm，空间不足隐藏 5 个；silk_overlap 0 |
+| ⑮ | Run DRC | **已完成** | 0 Error / 0 Warning |
+| ⑯ | 开始正式 Routing | **未开始** | 按用户要求先确认布局 |
 
 ## 七、继续任务时的建议顺序
 

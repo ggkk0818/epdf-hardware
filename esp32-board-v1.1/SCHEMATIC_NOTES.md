@@ -132,8 +132,88 @@ kicad-cli sch erc  →  0 violations
 > 该器件为**侧按**型，PCB 上按 90° 放置（按压方向沿板面 X 轴、朝板右外侧）。
 > 装配前请对照外壳按键柱确认按压方向与中心距（PCB 上 KEY1/2/3 中心距 27 mm）。
 
+### 5.1 充电限流与 /CE 启动时序（2026-09-14，V1.3 清单 §2）
+
+J4/J5 继续使用 `Molex 53261-0271`（配 51021-0200 胶壳 / 50079-8001 端子 / 26 AWG），
+不更换连接器；电流由**软件限流 + 系统功耗策略**控制在安全范围内。该策略已作为
+文字注释写入原理图 03 区（BQ25895 旁），**硬件无改动**：
+
+```
+ICHG 默认      = 896 mA   （896 = 14 × 64 mA，给连接器/线束/接触电阻/温升留余量）
+/CE 默认       = HIGH     （CHG_CE = GPIO47 经 10 kΩ 上拉到 3V3_MAIN）
+
+启动时序： MCU Boot → I2C Init → 写 ICHG / IINLIM / ITERM / VREG
+          → 寄存器 Read-back 确认 → /CE = LOW → Enable Charging
+```
+
+目的：避免 BQ25895 上电后在 MCU 尚未配置前使用较高默认充电电流。
+
+**仍必须做实机验证**（MD §2.4，属实物测试，本阶段未做）：单电池 + Wi-Fi TX 峰值 +
+EPD 刷新 + TF 卡读写 + CPU 高负载并发时，测量 J4/J5 实际峰值电流、连接器/端子/线束
+温升与 BAT_BUS 压降；若超出设计目标，需在 firmware 中限制并发负载。
+
+### 5.2 EPD FPC 连接器（2026-09-14，V1.4 清单 §3）
+
+J2 由 **Hirose FH12-24S-0.5SH（下接点）** 改为
+**Amphenol F32Q-1A7x1-11024（24P / 0.5 mm / Top-side contact）**，
+封装 `Connector_FFC-FPC:Amphenol_F32Q-1A7x1-11024_1x24-1MP_P0.5mm_Horizontal`
+（KiCad 官方库自带 land pattern），BOM 状态仍为 PROVISIONAL。
+
+原因：MD 要求改为上接点（或上下接点）连接器。MD 建议的 Hirose
+`FH34SRJ-24S-0.5SH(50)` 不在 KiCad 官方库中，改用同为 24P / 0.5 mm、
+官方库明确标注 "24 top-side contacts" 的 Amphenol F32Q 系列，避免自行创建
+未经核对的封装。
+
+符号仍为 `local:EPD_FPC24`（24 脚 + 2×MP），引脚编号 1–24 与接点顺序不变，
+因此 FPC 各网络对应关系未变。引脚 1 仍在连接器上端（与原来一致）。
+
+**待确认**（需要 Amphenol 数据手册）：FPC 厚度范围、Locking Direction、
+Mated Height、3D 机械间隙。
+
+### 5.3 电池连接器符号（同批修改）
+
+J4/J5 原先使用通用符号 `Connector_Generic:Conn_01x02`，其封装过滤条件
+`Connector*:*_1x??_*` 与 Molex land pattern 名 `…_1x02-1MP_…` 不匹配。
+启用 ERC `footprint_filter` 检查后暴露该问题，现改用本地符号
+`local:CONN_01X02_PICO`（`ki_fp_filters` 额外接受 `Connector_Molex:*1x02*`），
+电气连接与封装均不变。
+
 已复核无误的项：TPS63070 反馈网络 470 kΩ / 150 kΩ 对应 VREF = 800 mV → 3.3 V，
 与数据手册 Table 4 完全一致。
+
+### 4.6 U3 符号与封装（2026-09-14 更新）
+
+采用用户提供的 Ultra Librarian 导出包 `Downloads/ul_TPS630701RNMR/KiCADv6/`：
+
+| 项 | 值 |
+|---|---|
+| 符号 | `lib/esp32-board-v1.1.kicad_sym` 中的 `TPS63070RNM`（15 脚、**无 EP**） |
+| 封装 | `lib/esp32-board-v1.1.pretty/RNM0015A.kicad_mod`，lib_id `esp32-board-v1.1:RNM0015A` |
+| 3D 模型 | `lib/3dmodels/RNM0015A.stp`（供应商 STEP，毫米单位），封装内以 `${KIPRJMOD}/lib/3dmodels/RNM0015A.stp` 引用，offset/rotate 全为 0 |
+| 料号 | `TPS63070RNMT`（VQFN-HR / RNM0015A，15 pin，3.0 × 2.5 mm） |
+| 状态 | RELEASED |
+
+导入时做了三处处理（`tools/import_rnm_symbol.py` / `tools/import_ul_footprint.py`）：
+
+1. **符号引脚电气类型修正**（供应商给的类型会让 ERC 失真）：
+   Pin7 `VOUT` → `power_out`（3V3_MAIN 的唯一驱动源）、Pin8 `VOUT` → `passive`、
+   Pin5 `FB` → `input`、Pin3/9/11 `VAUX`/`L2`/`L1` → `passive`。其余保持供应商类型。
+2. **封装语法现代化**：Ultra Librarian 导出的是 KiCad v6 语法（`fp_text reference`、
+   `(width ..)`、`(fill solid)`），已转换为当前语法（`property`、`stroke`、`fill yes/no`），
+   否则 KiCad 10 读板时会报 `Expecting yes, no, solid...` 而拒绝加载。
+3. **补 F.CrtYd**：原封装没有 courtyard，会让摆放器退化到焊盘包围盒；已按本体外扩补上
+   （x ±1.62 / y ±1.87 mm），并把位号文字移到本体外以免压焊盘。
+
+原始导出文件也保留一份在 `lib/UL_TPS630701RNMR.kicad_sym` 作为来源凭证。
+3D 模型经 3D 渲染验证：本体居中于焊盘、贴板面高度正确、1 脚标记可见。
+
+> **投板前必须人工核对**：`Symbol ↔ TI TPS63070 数据手册 Pin Functions ↔ RNM0015A
+> Footprint` 的逐脚对应，重点是 1 脚方向以及供应商图纸的顶视/底视约定。
+> ERC/DRC 无法发现这一类镜像或脚序错误。
+
+> 另注：`kicad-cli sch erc` 只读取全局库表、不读取工程 `fp-lib-table`，因此对项目本地
+> 封装库会误报 `footprint_link_issues`。该检查已在工程 ERC 设置中置为 ignore；
+> KiCad GUI 会正常加载工程库表，无需处理。
 
 另外：BQ25895 `SW` 节点的 RC snubber（`R21` 2.2 Ω + `C16` 470 pF，网络 `CHG_SNUB`）
 在原理图中标记为 **DNP**（`(dnp yes)`），仅在 EMI 实测需要时装配，与设计文档

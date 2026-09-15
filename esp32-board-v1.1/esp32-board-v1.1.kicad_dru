@@ -1,0 +1,17 @@
+(version 1)
+
+# ---------------------------------------------------------------------------
+# KEY_RIGHT_MECH_KEEP_OUT - right hand switch column (review item 1)
+#
+# X = 49..51 mm, Y = 0..84 mm is a full height blocking wall: the whole right
+# strip belongs to the enclosure (keys, locating holes, copper, tracks, vias)
+# and no ordinary component may enter it from any side.  A KiCad zone keepout
+# cannot exempt an individual footprint, so the wall is a rule area and the
+# permitted occupants are listed here explicitly: SW3/SW4/SW5 and the four
+# locating holes H1..H4 (the two lower holes sit at X = 52 and their courtyards
+# reach into the wall).
+# ---------------------------------------------------------------------------
+(rule "KEY_RIGHT_MECH_KEEP_OUT: keys and locating holes only"
+	(constraint disallow footprint)
+	(condition "A.insideArea('KEY_RIGHT_MECH_KEEP_OUT') && !(A.Reference == 'SW3') && !(A.Reference == 'SW4') && !(A.Reference == 'SW5') && !(A.Reference == 'H1') && !(A.Reference == 'H2') && !(A.Reference == 'H3') && !(A.Reference == 'H4')")
+)
