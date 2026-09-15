@@ -1,5 +1,29 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-15 更新（V1.6，Routing 前最后一轮）**：按
+> `ESP32S3_GDEM102T91_V1.5_to_V1.6_PreRouting_Remaining_Items.md` 完成全部 P0/P1
+> 及 P2 的版本统一，**未布线**。要点：
+> - **Q1 = Si1304BDL-T1-GE3 + SC-70-3**（原 SOT-23）。不再列出 Si1308EDL 作为
+>   互换料（同封装但 Pin1 是 S，与符号映射相反）。Booster 岛随之收紧，
+>   R30 距 Gate 4.30 → **3.81 mm**。
+> - **L2 = Sunlord MWSA0402S-1R2MT**（1.2 µH / DCR 27 mΩ / Isat≈5.2 A），
+>   封装用 KiCad 官方库 `Inductor_SMD:L_Sunlord_MWSA0402S`。电感**中心落在
+>   U3 L1/L2 引脚中心线上**，两条 switching trace 各 **4.38 mm（等长）**。
+> - **J2 = XKB X05B20U24T**（24P / 0.5 mm / 上接点 / 抽屉锁扣）。
+>   FPC 厚度已从屏幕机械图确认 **0.30 ± 0.03 mm**，与连接器规格一致。
+>   封装 `esp32-board-v1.1:X05B20U24T` 由 XKB 官方图纸（焊盘 0.30×1.60、
+>   安装盘 2.40×3.50）+ 立创官方 CAD 数据（位置交叉核对）生成，
+>   脚本 `tools/import_xkb_fpc.py`；Pin1/Pin24 未反序（J2 焊盘仍在 X=2.10 列）。
+> - **NTC1 = Vishay NTCS0603E3103FLT**（10 kΩ、B25/85 = 3435 K，匹配 103AT）；
+>   J1 = GCT USB4105-15-A-120、J3 = Hirose DM3AT-SF-PEJM5、SW1-5 = Omron
+>   B3U-1000P 一并冻结（RELEASED）。
+> - **版本统一**：PCB / 原理图 Title Block Rev = **V1.6**（2026-09-15）；
+>   发布文件命名规则见 `PCB_LAYOUT_NOTES.md` §13。
+> - **ERC 策略说明已修正**：footprint_link_issues / footprint_filter 启用；
+>   single_global_label、four_way_junction、simulation_model_issue 为 Ignore。
+> - 最终：**ERC = 0；DRC = 0 Error / 0 Warning**，排除项 0，unconnected = 255。
+> - **Placement 冻结**：除 J2/Q1 封装已按 MD 完成外，其余距离按 MD §10 接受。
+>
 > **2026-09-15 更新（V1.5 整改）**：按
 > `ESP32S3_GDEM102T91_Current_Layout_Optimization_Plan.md` 完成 ①~⑬，
 > **不含布线**。要点：
@@ -330,6 +354,24 @@ USB-C 移到板下边中部 (24.0, 81.33)，TF 座移到右下 (42.0, 75.20)，V
 | ⑭ | 统一重做全板丝印 | **已完成** | ≤3.3 mm，空间不足隐藏 5 个；silk_overlap 0 |
 | ⑮ | Run DRC | **已完成** | 0 Error / 0 Warning |
 | ⑯ | 开始正式 Routing | **未开始** | 按用户要求先确认布局 |
+
+## 六之六、V1.6 整改清单执行状态（依 `ESP32S3_GDEM102T91_V1.5_to_V1.6_PreRouting_Remaining_Items.md`）
+
+| # | 整改项 | 状态 | 说明 |
+|---:|---|---|---|
+| P0① | Q1 = Si1304BDL-T1-GE3 + SC-70-3 | **已完成** | 封装 `Package_TO_SOT_SMD:SOT-323_SC-70`；符号 `Q_NMOS_GSD` 脚位对应正确；不再列 Si1308EDL |
+| P0② | Booster 岛重新收紧 | **已完成** | R30 → Gate 3.81 mm；C29 仍在岛内 |
+| P0③ | L2 = MWSA0402S-1R2MT | **已完成** | RELEASED；封装取 KiCad 官方库 |
+| P0④ | L2 与 U3 switching path 等长对称 | **已完成** | 两段各 4.38 mm（中心对齐 L1/L2 引脚中心线） |
+| P0⑤ | J2 = X05B20U24T | **已完成** | FPC 厚度 0.30 mm 已确认；封装由厂商图纸 + 立创 CAD 生成 |
+| P0⑥ | J2 Pin1/Pin24/Top Contact/插入方向复核 | **已完成** | 无 1↔24 反序；开口仍朝左；建议投产前实物再核对一次 |
+| P1⑦ | BQ25895 /CE 上电异常验证 | **列入原型测试** | 见 `PCB_LAYOUT_NOTES.md` §12（示波器场景清单） |
+| P1⑧ | NTC1 精确料号 | **已完成** | Vishay NTCS0603E3103FLT（0603 / 10 kΩ / B3435） |
+| P2⑨ | BOM PROVISIONAL 冻结 | **部分完成** | 已冻结 Q1/L2/J2/NTC1/J1/J3/SW1-5；剩 D1、D2-D5、D6-D8、F1-F3、L1、L3、R13 待采购确认 |
+| P2⑩ | 版本 / Rev / 输出文件名统一 | **已完成** | Rev = V1.6；发布命名规则见 `PCB_LAYOUT_NOTES.md` §13 |
+| ⑪⑫ | Run ERC / DRC | **已完成** | ERC 0 / DRC 0 Error 0 Warning |
+| ⑬ | Placement Freeze | **已完成** | 除 J2/Q1 封装外不再重排 |
+| ⑭ | 开始 Routing | **未开始** | 等用户确认 |
 
 ## 七、继续任务时的建议顺序
 

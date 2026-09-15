@@ -298,7 +298,10 @@
     },
     "rule_severities": {
       "footprint_link_issues": "error",
-      "footprint_filter": "error"
+      "footprint_filter": "error",
+      "single_global_label": "ignore",
+      "four_way_junction": "ignore",
+      "simulation_model_issue": "ignore"
     }
   },
   "libraries": {

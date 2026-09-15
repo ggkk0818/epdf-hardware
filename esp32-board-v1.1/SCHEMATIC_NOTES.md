@@ -152,25 +152,36 @@ ICHG 默认      = 896 mA   （896 = 14 × 64 mA，给连接器/线束/接触电
 EPD 刷新 + TF 卡读写 + CPU 高负载并发时，测量 J4/J5 实际峰值电流、连接器/端子/线束
 温升与 BAT_BUS 压降；若超出设计目标，需在 firmware 中限制并发负载。
 
-### 5.2 EPD FPC 连接器（2026-09-14，V1.4 清单 §3）
+### 5.2 EPD FPC 连接器（2026-09-15，V1.6 清单 §3）
 
-J2 由 **Hirose FH12-24S-0.5SH（下接点）** 改为
-**Amphenol F32Q-1A7x1-11024（24P / 0.5 mm / Top-side contact）**，
-封装 `Connector_FFC-FPC:Amphenol_F32Q-1A7x1-11024_1x24-1MP_P0.5mm_Horizontal`
-（KiCad 官方库自带 land pattern），BOM 状态仍为 PROVISIONAL。
+J2 现冻结为 **XKB X05B20U24T**（24P / 0.5 mm / **上接点** / 抽屉式锁扣 / H≈2.0 mm），
+封装 `esp32-board-v1.1:X05B20U24T`，BOM 状态 **RELEASED**。
 
-原因：MD 要求改为上接点（或上下接点）连接器。MD 建议的 Hirose
-`FH34SRJ-24S-0.5SH(50)` 不在 KiCad 官方库中，改用同为 24P / 0.5 mm、
-官方库明确标注 "24 top-side contacts" 的 Amphenol F32Q 系列，避免自行创建
-未经核对的封装。
+历程：Hirose FH12-24S-0.5SH（下接点）→ Amphenol F32Q（上接点，来自 KiCad 官方库）
+→ **XKB X05B20U24T**（按 V1.6 清单 §3 冻结）。
+
+**FPC 厚度确认**：GDEM102T91 机械图第 6 页侧视图给出排线插入端
+**0.30 ± 0.03 mm**（排线本体 0.12 ± 0.03 mm）——与 X05B20U24T 的 0.30 mm 规格一致，
+满足清单 §3.2 的放行条件。
+
+**封装来源**：XKB 官方图纸（推荐 PCB layout：焊盘 0.30 × 1.60 mm、间距 0.5 mm、
+安装焊盘 2.40 × 3.50 mm）+ 立创官方 CAD 数据（C437036，交叉核对焊盘位置）。
+生成脚本 `tools/import_xkb_fpc.py`，源文件保存在 `datasheets/`。
 
 符号仍为 `local:EPD_FPC24`（24 脚 + 2×MP），引脚编号 1–24 与接点顺序不变，
-因此 FPC 各网络对应关系未变。引脚 1 仍在连接器上端（与原来一致）。
+引脚 1 仍在连接器上端（板内 X = 2.10 mm 同一列），**未出现 1 ↔ 24 反序**。
 
-**待确认**（需要 Amphenol 数据手册）：FPC 厚度范围、Locking Direction、
-Mated Height、3D 机械间隙。
+**仍建议**：投产前用实物或厂商 3D 模型再核对一次 Locking Direction 与插拔间隙。
 
-### 5.3 电池连接器符号（同批修改）
+### 5.3 Q1 / L2 / NTC1（2026-09-15，V1.6 清单 §1/§2/§6）
+
+| 器件 | 变更 |
+|---|---|
+| Q1 | **Si1304BDL-T1-GE3 + SC-70-3**（原 SOT-23）。不再把 Si1308EDL 列为互换料：同封装但 Pin1 = S、Pin2 = G，与 `Q_NMOS_GSD` 符号映射相反 |
+| L2 | **Sunlord MWSA0402S-1R2MT**（1.2 µH / DCR 27 mΩ max / Isat≈5.2 A），封装 `Inductor_SMD:L_Sunlord_MWSA0402S` |
+| NTC1 | **Vishay NTCS0603E3103FLT**（0603 / 10 kΩ @25 °C / B25/85 = 3435 K，与 BQ25895 TS 网络设计的 103AT 同 B 值）。板上 NTC 测量的是 PCB/电池附近环境温度，不是电芯内部温度 |
+
+### 5.4 电池连接器符号（同批修改）
 
 J4/J5 原先使用通用符号 `Connector_Generic:Conn_01x02`，其封装过滤条件
 `Connector*:*_1x??_*` 与 Molex land pattern 名 `…_1x02-1MP_…` 不匹配。

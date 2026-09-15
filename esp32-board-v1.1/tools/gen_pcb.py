@@ -243,7 +243,10 @@ HARD = {
     # the bottom edge centre so VBUS lands right next to the charger, the card
     # socket moved to the bottom right.  USB-C keeps its 1 mm edge overhang.
     "J1": (24.0, 81.33, 0),
-    "J2": (5.0, 42.0, 90),      # 24P EPD FPC left side centre, opening left
+    # 24P EPD FPC (XKB X05B20U24T) left side centre, opening left.  Chosen so
+    # the signal pads land on board X = 2.10 - the same row the previous
+    # footprint used, so the J2 pad-to-net mapping is unchanged (no 1<->24 swap).
+    "J2": (3.275, 42.0, 90),
     "J3": (40.0, 75.20, 0),     # microSD bottom right, card exits +Y
     # Molex PicoBlade: the mating cavity is on the local +Y side, so rot 270 is
     # what actually points the opening at the left board edge.
@@ -343,13 +346,16 @@ PIN_ALIGN = [
     # (C14 is placed after C18/C19 so the two original input caps keep the spots
     #  hard against U3 - see below)
     # --- TPS63070 island: inductor on the L1/L2 pin centre line -------------
-    ("L2", "TPS_L1", "U3", "TPS_L1", 3.60, 0.50, 90, 0.40),
+    # V1.6: L2 is the Sunlord MWSA0402S.  The inductor is centred on the U3
+    # L1/L2 pin centre line so both switching traces come out the same length
+    # (review 2.3), instead of putting one pad on the line and leaving the far
+    # pad 5.7 mm out.
+    ("L2", "TPS_L1", "U3", "TPS_L1", 3.70, 2.35, 90),
     ("C18", "SYS", "U3", "SYS", 0.00, -3.90, 90, 0.55),
     ("C19", "SYS", "U3", "SYS", -3.70, -3.90, 90, 0.55),
     ("C14", "SYS", "U3", "SYS", 2.45, -3.90, 90),
     ("C20", "3V3_MAIN", "U3", "3V3_MAIN", 2.50, 3.70, 90, 0.45),
     ("C21", "3V3_MAIN", "U3", "3V3_MAIN", 6.70, 3.70, 90, 0.45),
-    ("C22", "3V3_MAIN", "U3", "3V3_MAIN", 11.88, 3.70, 90, 0.45),
     ("C23", "3V3_MAIN", "U3", "3V3_MAIN", 6.70, 8.10, 90, 0.45),
     ("C24", "TPS_VAUX", "U3", "TPS_VAUX", -2.30, 0.00, 0, 0.45),
     # --- FB divider: same centre-X vertical column, FB node on the FB pin ---
@@ -404,7 +410,9 @@ PIN_ALIGN = [
     ("D5", "USB_CC2", "J1", "USB_CC2", 1.85, -2.60, 90),
     # gate pull-down R30 belongs next to Q1 (review 7.2), not in the J2 -> Q1
     # corridor where it was acting as a series element
-    ("R30", "EPD_GDR", "Q1", "EPD_GDR", 4.06, 1.43, 0),
+    # V1.6: Q1 is now SC-70-3, so R30 (gate pull-down) sits 1.07 mm from the
+    # smaller body instead of 2.4 mm (review 1.3)
+    ("R30", "EPD_GDR", "Q1", "EPD_GDR", 3.69, 0.93, 0),
     # --- J3 microSD row -------------------------------------------------------
     # The 3.75 mm band between U2 and the socket now also has to host the BAT
     # bulk cap (C12), so the row is re-ordered to keep every part as close to
@@ -1356,8 +1364,8 @@ def main():
     lines.append('\t(paper "A4")')
     lines.append("\t(title_block")
     lines.append('\t\t(title "ESP32-S3 GDEM102T91 Mainboard")')
-    lines.append('\t\t(date "2026-09-10")')
-    lines.append('\t\t(rev "V1.1")')
+    lines.append('\t\t(date "2026-09-15")')
+    lines.append('\t\t(rev "V1.6")')
     lines.append('\t\t(company "EPDF Hardware")')
     lines.append("\t)")
     lines.append("\t(layers")
