@@ -616,18 +616,21 @@ def build_schematic():
 
     lay = Layout(27.94, 302.26)
     usb_parts = [
+        # Procurement frozen 2026-09-15 on hqchip stock (numbers in brackets are
+        # the hqchip part numbers).  D1 clamps VBUS, D2/D3 sit on the USB data
+        # pair and therefore need the 1 pF part, D4/D5 are the CC lines.
         ("Device:Fuse", "F", "2A PTC", "Fuse:Fuse_0805_2012Metric",
-         {"1": "USB_VBUS_RAW", "2": "USB_VBUS_PROT"}, PROVISIONAL, ""),
+         {"1": "USB_VBUS_RAW", "2": "USB_VBUS_PROT"}, RELEASED, "BSMD0805L-200（华秋 G5053245）"),
         ("Device:D_TVS", "D", "TVS 5.6V", "Diode_SMD:D_SOD-323",
-         {"1": "USB_VBUS_PROT", "2": "GND"}, PROVISIONAL, ""),
+         {"1": "USB_VBUS_PROT", "2": "GND"}, RELEASED, "PESD5V0S1BA,115（华秋 G0089294）"),
         ("Device:D_TVS", "D", "ESD", "Diode_SMD:D_SOD-323",
-         {"1": "USB_DP_CONN", "2": "GND"}, PROVISIONAL, ""),
+         {"1": "USB_DP_CONN", "2": "GND"}, RELEASED, "GBLC05C（华秋 G5954860）"),
         ("Device:D_TVS", "D", "ESD", "Diode_SMD:D_SOD-323",
-         {"1": "USB_DN_CONN", "2": "GND"}, PROVISIONAL, ""),
+         {"1": "USB_DN_CONN", "2": "GND"}, RELEASED, "GBLC05C（华秋 G5954860）"),
         ("Device:D_TVS", "D", "ESD", "Diode_SMD:D_SOD-323",
-         {"1": "USB_CC1", "2": "GND"}, PROVISIONAL, ""),
+         {"1": "USB_CC1", "2": "GND"}, RELEASED, "LESD3Z5.0CMT1G（华秋 G4193578）"),
         ("Device:D_TVS", "D", "ESD", "Diode_SMD:D_SOD-323",
-         {"1": "USB_CC2", "2": "GND"}, PROVISIONAL, ""),
+         {"1": "USB_CC2", "2": "GND"}, RELEASED, "LESD3Z5.0CMT1G（华秋 G4193578）"),
         ("Device:C", "C", "1uF", FP_C0603, {"1": "USB_VBUS_PROT", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "1nF", FP_C0603, {"1": "USB_SHIELD", "2": "GND"}, RELEASED, ""),
         ("Device:R", "R", "0", FP_R0603, {"1": "USB_SHIELD", "2": "GND"}, RELEASED, ""),
@@ -674,9 +677,14 @@ def build_schematic():
         ("Device:C", "C", "22uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "22uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "10uF", FP_C0805, {"1": "CHG_PMID", "2": "GND"}, RELEASED, ""),
-        ("Device:L", "L", "1.0uH", "Inductor_SMD:L_Coilcraft_XAL5030-XXX",
-         {"1": "CHG_SW", "2": "SYS"}, PROVISIONAL, "Coilcraft XAL5030 / Isat>=4.5A"),
-        ("Device:R", "R", "180", FP_R0603, {"1": "CHG_ILIM", "2": "GND"}, PROVISIONAL, ""),
+        # BQ25895 buck inductor, frozen to Sunlord MWSA0503S-1R0MT (1.0 uH,
+        # DCR 14 mOhm, Irms 7.8 A, Isat 10 A, 5.4 x 5.2 x 3.0 mm).  KiCad ships
+        # the manufacturer land pattern as Inductor_SMD:L_Sunlord_MWSA0503S.
+        ("Device:L", "L", "1.0uH", "Inductor_SMD:L_Sunlord_MWSA0503S",
+         {"1": "CHG_SW", "2": "SYS"}, RELEASED, "Sunlord MWSA0503S-1R0MT（华秋 G4719678）"),
+        # R13 = BQ25895 KILIM resistor, 1 % thin/thick film 0603.
+        ("Device:R", "R", "180", FP_R0603, {"1": "CHG_ILIM", "2": "GND"}, RELEASED,
+         "0603WAF1800T5E（华秋 G3705022）"),
         ("Device:R", "R", "10k", FP_R0603, {"1": "CHG_INT_N", "2": "3V3_MAIN"}, RELEASED, ""),
         ("Device:R", "R", "10k", FP_R0603, {"1": "CHG_STAT", "2": "3V3_MAIN"}, RELEASED, ""),
         ("Device:R", "R", "5.23k", FP_R0603, {"1": "CHG_REGN", "2": "CHG_TS"}, RELEASED, ""),
@@ -719,9 +727,9 @@ def build_schematic():
     lay = Layout(236.22, 251.46, cols=4)
     bat_parts = [
         ("Device:Fuse", "F", "2A PTC", "Fuse:Fuse_0805_2012Metric",
-         {"1": "BAT1_RAW", "2": "BAT_BUS"}, PROVISIONAL, ""),
+         {"1": "BAT1_RAW", "2": "BAT_BUS"}, RELEASED, "BSMD0805L-200（华秋 G5053245）"),
         ("Device:Fuse", "F", "2A PTC", "Fuse:Fuse_0805_2012Metric",
-         {"1": "BAT2_RAW", "2": "BAT_BUS"}, PROVISIONAL, ""),
+         {"1": "BAT2_RAW", "2": "BAT_BUS"}, RELEASED, "BSMD0805L-200（华秋 G5053245）"),
         ("Device:C", "C", "0.1uF", FP_C0603, {"1": "BAT_BUS", "2": "GND"}, RELEASED, ""),
         ("Device:R", "R", "10k", FP_R0603, {"1": "3V3_MAIN", "2": "FG_ALRT_N"}, RELEASED, ""),
     ]
@@ -780,8 +788,13 @@ def build_schematic():
         ("Device:R", "R", "100k", FP_R0603, {"1": "EPD_PWR_EN", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "10uF", FP_C0805, {"1": "EPD_3V3", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "0.1uF", FP_C0603, {"1": "EPD_3V3", "2": "GND"}, RELEASED, ""),
-        ("Device:L", "L", "47uH", "Inductor_SMD:L_Taiyo-Yuden_NR-40xx",
-         {"1": "EPD_3V3", "2": "EPD_SW"}, PROVISIONAL, "47uH >=500mA, low profile"),
+        # EPD booster inductor, frozen to cjiang FHD4020S-470MT (47 uH,
+        # DCR 0.95 Ohm typ, Isat 1.10 A max / 1.30 A typ, Irms 0.56 A max,
+        # 4.0 x 4.0 x 2.0 mm).  Its recommended land pattern is the one KiCad
+        # ships as Inductor_SMD:L_Changjiang_FNR4020S (pads 1.1 x 3.7 mm at
+        # +/-1.50 mm), so the old NR-40xx footprint is replaced by that one.
+        ("Device:L", "L", "47uH", "Inductor_SMD:L_Changjiang_FNR4020S",
+         {"1": "EPD_3V3", "2": "EPD_SW"}, RELEASED, "cjiang FHD4020S-470MT（华秋 G6635066）"),
         # V1.6: frozen to Si1304BDL (SC-70-3).  Pin 1 = G, 2 = S, 3 = D, which
         # is exactly what Q_NMOS_GSD provides.  Si1308EDL is NOT a drop-in
         # alternative (its pin 1 is the source), so it is no longer listed.
@@ -792,11 +805,11 @@ def build_schematic():
         ("Device:R", "R", "1M", FP_R0603, {"1": "EPD_GDR", "2": "GND"}, RELEASED, ""),
         ("Device:R", "R", "2.2", FP_R0805, {"1": "EPD_RESE", "2": "GND"}, RELEASED, ""),
         ("Device:D_Schottky", "D", "MBR0530", "Diode_SMD:D_SOD-123",
-         {"2": "EPD_SW", "1": "EPD_VGH"}, PROVISIONAL, "MBR0530"),
+         {"2": "EPD_SW", "1": "EPD_VGH"}, RELEASED, "MBR0530T1G（华秋 G3325533）"),
         ("Device:D_Schottky", "D", "MBR0530", "Diode_SMD:D_SOD-123",
-         {"2": "EPD_X", "1": "GND"}, PROVISIONAL, "MBR0530"),
+         {"2": "EPD_X", "1": "GND"}, RELEASED, "MBR0530T1G（华秋 G3325533）"),
         ("Device:D_Schottky", "D", "MBR0530", "Diode_SMD:D_SOD-123",
-         {"2": "EPD_VGL", "1": "EPD_X"}, PROVISIONAL, "MBR0530"),
+         {"2": "EPD_VGL", "1": "EPD_X"}, RELEASED, "MBR0530T1G（华秋 G3325533）"),
         ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_3V3", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VGH", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_SW", "2": "EPD_X"}, RELEASED, ""),

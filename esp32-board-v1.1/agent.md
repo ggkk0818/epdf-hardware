@@ -1,5 +1,26 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-15 更新（采购冻结，Rev 仍为 V1.6）**：把 BOM 里最后一组
+> `PROVISIONAL` 器件全部落到华秋商城（hqchip）**国内现货**料号并冻结。
+> 本轮**不改变电路拓扑与器件摆放**，只改 L1/L3 的封装和 MPN/Status 字段，
+> 因此 Title Block Rev 保持 **V1.6** 不变。要点：
+> - **D1** = PESD5V0S1BA,115（安世，SOD-323 双向 5 V，VBUS）；
+> - **D2/D3** = GBLC05C（台舟，**1 pF 低容**，USB D+/D−）；
+> - **D4/D5** = LESD3Z5.0CMT1G（乐山无线电，USB CC1/CC2）；
+> - **D6~D8** = MBR0530T1G（安森美，SOD-123，EPD 整流）；
+> - **F1~F3** = BSMD0805L-200（佰宏，0805 PTC，保持 2 A / 跳闸 4 A / 6 V）；
+> - **L1** = Sunlord MWSA0503S-1R0MT（1.0 µH / DCR 14 mΩ / Isat 10 A），
+>   封装由 Coilcraft XAL5030 改为 `Inductor_SMD:L_Sunlord_MWSA0503S`；
+> - **L3** = cjiang FHD4020S-470MT（47 µH / 4×4×2.0 mm / Isat 1.10 A），
+>   封装由 Taiyo-Yuden NR-40xx 改为 `Inductor_SMD:L_Changjiang_FNR4020S`；
+> - **R13** = 0603WAF1800T5E（厚声，180 Ω ±1 %，BQ25895 KILIM）。
+> - MPN 字段统一写作 `MPN（华秋 Gxxxxxxxx）`，已同时写进**原理图字段**与生成
+>   脚本 `tools/gen_sch.py`；`bom.csv` 重新导出后 **PROVISIONAL = 0，51 行全部
+>   RELEASED**。完整冻结清单见 `SCHEMATIC_NOTES.md` §7。
+> - 验证：**ERC = 0；DRC = 0 Error / 0 Warning**，unconnected = 255（未布线状态的
+>   预期值，与冻结前一致）。
+> - 结构提示：L3 高度 1.8 → **2.0 mm**、L1 高度 3.1 → 3.0 mm。
+>
 > **2026-09-15 更新（V1.6，Routing 前最后一轮）**：按
 > `ESP32S3_GDEM102T91_V1.5_to_V1.6_PreRouting_Remaining_Items.md` 完成全部 P0/P1
 > 及 P2 的版本统一，**未布线**。要点：
@@ -186,7 +207,8 @@
    - MicroSD SPI（改用 `Micro_SD_Card_Det2` 符号：DAT3=CS、CMD=MOSI、DAT0=MISO、DET_B=DET_A=卡检测）。
 6. 原理图已用全局标签方式建立连接，**ERC = 0 Error / 0 Warning，且无任何 Exclusion**。
 7. EPD SSD1677 高压外围已按 GDEM102T91 第 20 页典型应用电路逐节点锁定（见 `SCHEMATIC_NOTES.md` §4）。
-8. 已生成 `bom.csv`（含 `Status` = RELEASED / PROVISIONAL 与 `MPN` 列）。
+8. 已生成 `bom.csv`（含 `Status` = RELEASED / PROVISIONAL 与 `MPN` 列）；
+   2026-09-15 采购冻结后**全部 51 行均为 `RELEASED`**，MPN 后附华秋编号。
 9. 已生成 `esp32-board-v1.1.kicad_pcb`：**55×84 mm 竖版**、R2 圆角、
    4×Ø2.2 mm 定位孔（距边 3 mm）、4 层叠层（Dk 4.2 / 外层 1 oz）、
    4 个 Net Class（Default / USB90 0.24-0.18 / POWER / HV_EPD）、
@@ -240,9 +262,12 @@ kicad-cli sch erc  →  0 violations
    投板前仍需人工逐节点复核。
 2. 原理图仍为单页（按 8 个功能区标注）。正式发布前建议按 MD 分页
    `00_System_Block` 至 `08_Buttons_Debug_Testpoints`。
-3. USB、MicroSD、FPC、电池连接器、按键的最终料号和 3D 模型未确定
-   （BOM 中已标 `PROVISIONAL`）。
-4. BOM 已生成（`bom.csv`），候选器件已标 `PROVISIONAL / 待采购复核`。
+3. ~~USB、MicroSD、FPC、电池连接器、按键的最终料号未确定~~
+   → **已全部冻结**（2026-09-15 采购冻结轮，`bom.csv` 51 行全部 `RELEASED`，
+   清单见 `SCHEMATIC_NOTES.md` §7）；3D 模型除本项目自制封装外均取自
+   KiCad 官方库。
+4. BOM 已生成（`bom.csv`），**所有器件均为 `RELEASED`**，MPN 后附华秋编号
+   （格式 `MPN（华秋 Gxxxxxxxx）`）。
 5. 与旧版设计文档的有意差异（例如 BQ25895 /CE 默认禁止充电、
    改用 GPIO47 作为 `CHG_CE`）需用户确认，见 `SCHEMATIC_NOTES.md` §5。
 
@@ -253,7 +278,7 @@ kicad-cli sch erc  →  0 violations
    天线禁布规则区：**已完成**。
 2. 106 个器件摆放完成，接口约束（USB-C 外凸 1 mm / FPC / 电池 / KEY 27 mm）：**已完成**。
 3. **尚未布线**：电源路径、USB 差分、SPI/I2C/GPIO、EPD HV 目前只有飞线
-   （DRC unconnected = 258）。
+   （DRC unconnected = 255）。
 4. USB 90 Ω 已按 Dk 4.2 / 外层 1 oz 计算为 **W 0.24 / S 0.18 mm** 并写入 Net Class；
    仍建议板厂按实际材料复算确认。
 5. 丝印位号已自动避让焊盘（silk_over_copper = 0）；U2/U3 电源岛内仍有 11 处
@@ -274,7 +299,9 @@ kicad-cli sch erc  →  0 violations
    （/CE 默认 HIGH = 禁止充电；`CHG_CE` 使用 GPIO47；TPS63070 PS/SYNC 上拉）。
 2. 板厂对 7628 半固化片实际 Dk/Df、外层成品铜厚、阻焊参数的确认，
    以及按实际叠层**复算** USB 90 Ω 差分线宽/间距（当前计算值 0.24 / 0.18 mm）。
-3. 连接器/按键/电感/MOSFET 的确切 MPN（BOM 中 `PROVISIONAL` 项）。
+3. ~~连接器/按键/电感/MOSFET 的确切 MPN（BOM 中 `PROVISIONAL` 项）~~
+   → **已冻结**（2026-09-15；D1/D2-D5/D6-D8/F1-F3/L1/L3/R13 落到华秋国内现货
+   料号，L1/L3 同步换封装，清单见 `SCHEMATIC_NOTES.md` §7）。
 4. 最终电池规格（满充电压 / PCM / 线束 / 连接器额定电流）。
 5. MicroSD 位置（现放在板下边缘中央）与按键高度/手感是否有结构限制。
 6. ~~TF 座不能外凸 1 mm~~ → **已确认接受**（2026-09-12）。
@@ -367,7 +394,7 @@ USB-C 移到板下边中部 (24.0, 81.33)，TF 座移到右下 (42.0, 75.20)，V
 | P0⑥ | J2 Pin1/Pin24/Top Contact/插入方向复核 | **已完成** | 无 1↔24 反序；开口仍朝左；建议投产前实物再核对一次 |
 | P1⑦ | BQ25895 /CE 上电异常验证 | **列入原型测试** | 见 `PCB_LAYOUT_NOTES.md` §12（示波器场景清单） |
 | P1⑧ | NTC1 精确料号 | **已完成** | Vishay NTCS0603E3103FLT（0603 / 10 kΩ / B3435） |
-| P2⑨ | BOM PROVISIONAL 冻结 | **部分完成** | 已冻结 Q1/L2/J2/NTC1/J1/J3/SW1-5；剩 D1、D2-D5、D6-D8、F1-F3、L1、L3、R13 待采购确认 |
+| P2⑨ | BOM PROVISIONAL 冻结 | **已完成** | 2026-09-15：D1/D2-D5/D6-D8/F1-F3/L1/L3/R13 全部落到华秋国内现货料号，L1（MWSA0503S）与 L3（FHD4020S-470MT）同步换封装；`bom.csv` 51 行全 `RELEASED`，清单见 `SCHEMATIC_NOTES.md` §7 |
 | P2⑩ | 版本 / Rev / 输出文件名统一 | **已完成** | Rev = V1.6；发布命名规则见 `PCB_LAYOUT_NOTES.md` §13 |
 | ⑪⑫ | Run ERC / DRC | **已完成** | ERC 0 / DRC 0 Error 0 Warning |
 | ⑬ | Placement Freeze | **已完成** | 除 J2/Q1 封装外不再重排 |

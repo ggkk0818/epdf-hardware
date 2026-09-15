@@ -261,36 +261,57 @@ EPD：`SPI_SCLK` `SPI_MOSI` `EPD_CS_N` `EPD_DC` `EPD_RST_N` `EPD_BUSY`
 
 ---
 
-## 7. BOM
+## 7. BOM（2026-09-15 采购冻结）
 
-`bom.csv`（kicad-cli 导出，含 `Status` / `MPN` 两列）：
-
-```
-RELEASED     : 已冻结的 IC、标准阻容、测试点
-PROVISIONAL  : 连接器、按键、电感、MOSFET、TVS、保险丝、NTC  → 待采购复核
-```
-
-（本版已取消测试点，`RELEASED` 仅剩 IC 与标准阻容。）
-
-`PROVISIONAL` 清单（投板前必须落到确切 MPN 与封装）：
+`bom.csv` 由 kicad-cli 导出，列为 `Reference,Value,Footprint,Status,MPN`：
 
 ```
-J1  USB-C        GCT USB4105-15-A-120 类
-J2  24P FPC      24P / 0.5 mm / Top Contact / 低背
-J3  MicroSD      Hirose DM3AT-SF-PEJM5 类
-J4/J5 电池接口    Hirose DF13A-2P-1.25H(21) 类
-SW1~SW5          Omron B3U-1000P（侧按，3.0×2.5×1.6 mm）
-                 https://item.hqchip.com/2500240009.html
-L1 1.0 µH        Isat ≥ 4.5 A（Coilcraft XAL5030 级）
-L2 1.2 µH        Isat ≥ 3 A（Coilcraft XAL4030 级）
-L3 47 µH         ≥500 mA 低背
-Q1               Si1304BDL / Si1308EDL 或等效
-D1/D2~D5         VBUS TVS / ESD
-D6~D8            MBR0530
-F1~F3            2 A 级 PTC/保险
-R13 ILIM         180 Ω（按 KILIM 误差复核）
-NTC1             103AT-2 类 10 kΩ
+RELEASED     : 全部器件（51 行）
+PROVISIONAL  : 无 —— 2026-09-15 采购冻结轮清零
 ```
+
+导出命令（保持工程既有列/分组格式）：
+
+```powershell
+& 'C:\Program Files\KiCad\10.0\bin\kicad-cli.exe' sch export bom `
+  --fields "Reference,Value,Footprint,Status,MPN" `
+  --labels "Reference,Value,Footprint,Status,MPN" `
+  --group-by "Value,Footprint,Status,MPN" `
+  -o "C:\Code\epdf-hardware\esp32-board-v1.1\bom.csv" `
+  "C:\Code\epdf-hardware\esp32-board-v1.1\esp32-board-v1.1.kicad_sch"
+```
+
+### 7.1 2026-09-15 冻结的器件（华秋商城国内现货）
+
+MPN 字段格式统一为 `MPN（华秋 Gxxxxxxxx）`，同时写入原理图字段与生成脚本
+`tools/gen_sch.py`。
+
+| 位号 | MPN | 华秋编号 | 封装 | 关键参数 / 现货 |
+|---|---|---|---|---|
+| D1 | PESD5V0S1BA,115（Nexperia 安世） | G0089294 | SOD-323 | 双向 5 V，VC 14 V，41,823 片 @5+ ￥0.52512 |
+| D2、D3 | GBLC05C（TECH PUBLIC 台舟） | G5954860 | SOD-323 | 双向 5 V，**CJ 1 pF**，4,660 片 @10+ ￥0.31123 |
+| D4、D5 | LESD3Z5.0CMT1G（LRC 乐山无线电） | G4193578 | SOD-323 | 双向 5 V，Ipp 9.4 A，31,823 片 @50+ ￥0.15304 |
+| D6~D8 | MBR0530T1G（ON 安森美） | G3325533 | SOD-123 | 30 V / 500 mA，7,447 片 @10+ ￥0.48998 |
+| F1~F3 | BSMD0805L-200（BHFUSE 佰宏） | G5053245 | 0805 PTC | 保持 2 A / 跳闸 4 A / 6 V，8,029 片 @5+ ￥0.58883 |
+| L1 | Sunlord MWSA0503S-1R0MT | G4719678 | `Inductor_SMD:L_Sunlord_MWSA0503S` | 1.0 µH / DCR 14 mΩ / Isat 10 A，1,560 片 @5+ ￥0.79133 |
+| L3 | cjiang FHD4020S-470MT | G6635066 | `Inductor_SMD:L_Changjiang_FNR4020S` | 47 µH / 4×4×**2.0 mm** / Isat 1.10 A / Irms 0.56 A，2,905 片 @10+ ￥0.41683 |
+| R13 | 0603WAF1800T5E（Uniohm 厚声） | G3705022 | 0603 | 180 Ω ±1 %，5,000 片 @100+ ￥0.01625 |
+
+此前已冻结（V1.5/V1.6 轮次）：J1 = GCT USB4105-15-A-120、J2 = XKB X05B20U24T、
+J3 = Hirose DM3AT-SF-PEJM5、J4/J5 = Molex 53261-0271、SW1~SW5 = Omron B3U-1000P、
+NTC1 = Vishay NTCS0603E3103FLT、Q1 = Si1304BDL-T1-GE3、L2 = Sunlord MWSA0402S-1R2MT。
+
+### 7.2 本轮封装变更（不影响电气拓扑）
+
+| 位号 | 原封装 | 现封装 | 变更原因 |
+|---|---|---|---|
+| L1 | `Inductor_SMD:L_Coilcraft_XAL5030-XXX` | `Inductor_SMD:L_Sunlord_MWSA0503S` | 原设计料 XAL5030-102MEC 在华秋**无现货**（仅订货/代购，￥19.44 起）；顺络件 5.4×5.2×3.0 mm 与原 5.48×5.28×3.1 mm 基本一致，焊盘按厂商推荐 land pattern（KiCad 官方库）更新 |
+| L3 | `Inductor_SMD:L_Taiyo-Yuden_NR-40xx` | `Inductor_SMD:L_Changjiang_FNR4020S` | 原 47 µH/4×4 现货款余量偏紧（500 mA 额定 / Isat 570 mA）；改 cjiang FHD4020S-470MT（Isat 1.10 A / Irms 0.56 A），其推荐焊盘 1.10×3.7 mm @ ±1.50 mm 与 KiCad 官方 FNR4020S 封装一致 |
+
+两处替换均保留原 uuid、原坐标与焊盘网络；替换后 **ERC = 0、
+DRC = 0 Error / 0 Warning**（unconnected = 255，未布线状态的预期值）。
+
+> 结构提示：L3 高度 1.8 → **2.0 mm**；L1 高度 3.1 → 3.0 mm。
 
 ---
 

@@ -7871,7 +7871,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 27.9400 302.2600 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BSMD0805L-200（华秋 G5053245）"
 			(at 27.9400 302.2600 0)
 			(hide yes)
 			(effects
@@ -7938,7 +7947,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 44.4500 302.2600 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "PESD5V0S1BA,115（华秋 G0089294）"
 			(at 44.4500 302.2600 0)
 			(hide yes)
 			(effects
@@ -8005,7 +8023,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 60.9600 302.2600 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "GBLC05C（华秋 G5954860）"
 			(at 60.9600 302.2600 0)
 			(hide yes)
 			(effects
@@ -8072,7 +8099,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 77.4700 302.2600 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "GBLC05C（华秋 G5954860）"
 			(at 77.4700 302.2600 0)
 			(hide yes)
 			(effects
@@ -8139,7 +8175,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 93.9800 302.2600 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "LESD3Z5.0CMT1G（华秋 G4193578）"
 			(at 93.9800 302.2600 0)
 			(hide yes)
 			(effects
@@ -8206,7 +8251,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 110.4900 302.2600 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "LESD3Z5.0CMT1G（华秋 G4193578）"
 			(at 110.4900 302.2600 0)
 			(hide yes)
 			(effects
@@ -9511,7 +9565,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_Coilcraft_XAL5030-XXX"
+		(property "Footprint" "Inductor_SMD:L_Sunlord_MWSA0503S"
 			(at 351.7900 127.0000 0)
 			(hide yes)
 			(effects
@@ -9529,7 +9583,7 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
 			(at 351.7900 127.0000 0)
 			(hide yes)
 			(effects
@@ -9538,7 +9592,7 @@
 				)
 			)
 		)
-		(property "MPN" "Coilcraft XAL5030 / Isat>=4.5A"
+		(property "MPN" "Sunlord MWSA0503S-1R0MT（华秋 G4719678）"
 			(at 351.7900 127.0000 0)
 			(hide yes)
 			(effects
@@ -9605,7 +9659,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 236.2200 140.9700 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "0603WAF1800T5E（华秋 G3705022）"
 			(at 236.2200 140.9700 0)
 			(hide yes)
 			(effects
@@ -10600,7 +10663,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 236.2200 251.4600 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BSMD0805L-200（华秋 G5053245）"
 			(at 236.2200 251.4600 0)
 			(hide yes)
 			(effects
@@ -10667,7 +10739,16 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
+			(at 252.7300 251.4600 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BSMD0805L-200（华秋 G5053245）"
 			(at 252.7300 251.4600 0)
 			(hide yes)
 			(effects
@@ -12343,7 +12424,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_Taiyo-Yuden_NR-40xx"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR4020S"
 			(at 468.6300 280.6700 0)
 			(hide yes)
 			(effects
@@ -12361,7 +12442,7 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
 			(at 468.6300 280.6700 0)
 			(hide yes)
 			(effects
@@ -12370,7 +12451,7 @@
 				)
 			)
 		)
-		(property "MPN" "47uH >=500mA, low profile"
+		(property "MPN" "cjiang FHD4020S-470MT（华秋 G6635066）"
 			(at 468.6300 280.6700 0)
 			(hide yes)
 			(effects
@@ -12650,7 +12731,7 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
 			(at 534.6700 280.6700 0)
 			(hide yes)
 			(effects
@@ -12659,7 +12740,7 @@
 				)
 			)
 		)
-		(property "MPN" "MBR0530"
+		(property "MPN" "MBR0530T1G（华秋 G3325533）"
 			(at 534.6700 280.6700 0)
 			(hide yes)
 			(effects
@@ -12726,7 +12807,7 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
 			(at 419.1000 294.6400 0)
 			(hide yes)
 			(effects
@@ -12735,7 +12816,7 @@
 				)
 			)
 		)
-		(property "MPN" "MBR0530"
+		(property "MPN" "MBR0530T1G（华秋 G3325533）"
 			(at 419.1000 294.6400 0)
 			(hide yes)
 			(effects
@@ -12802,7 +12883,7 @@
 				)
 			)
 		)
-		(property "Status" "PROVISIONAL"
+		(property "Status" "RELEASED"
 			(at 435.6100 294.6400 0)
 			(hide yes)
 			(effects
@@ -12811,7 +12892,7 @@
 				)
 			)
 		)
-		(property "MPN" "MBR0530"
+		(property "MPN" "MBR0530T1G（华秋 G3325533）"
 			(at 435.6100 294.6400 0)
 			(hide yes)
 			(effects

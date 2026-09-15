@@ -17,7 +17,7 @@
 | P0 §3 | J2 → **XKB X05B20U24T** | 已完成（含 FPC 厚度确认 + 官方 CAD 数据） |
 | P1 §5 | BQ25895 /CE 上电异常状态验证 | 列入原型测试计划（见 §13） |
 | P1 §6 | NTC1 精确料号冻结 | 已完成（Vishay NTCS0603E3103FLT） |
-| P2 §7 | BOM PROVISIONAL 继续冻结 | 部分完成（Q1/L2/J2/NTC1/J1/J3/SW1-5 已冻结） |
+| P2 §7 | BOM PROVISIONAL 继续冻结 | **已完成**（2026-09-15：全部 51 行 `RELEASED`） |
 | P2 §8 | 版本号 / Rev / 输出文件名统一 | 已完成（Rev = **V1.6**，命名规则见 §14） |
 | §9 | ERC 说明同步 | 已完成（§9） |
 | §10 | Placement 不再为 1~2 mm 重排 | 遵守 |
@@ -131,6 +131,19 @@ min track 0.15 / clearance 0.15 / via 0.40-0.20 / 铜到板边 0.30。
 > **PCB / 电池附近环境温度**，不是电芯内部温度。若产品需要真正的电芯温度保护，
 > 需要 3Pin 电池接口或电池包内置 NTC。
 
+### 5.5 采购冻结轮（2026-09-15）的封装变更
+
+| 位号 | 原封装 | 现封装 | 变更原因 |
+|---|---|---|---|
+| L1 | `Inductor_SMD:L_Coilcraft_XAL5030-XXX` | **`Inductor_SMD:L_Sunlord_MWSA0503S`** | 原设计料 Coilcraft XAL5030-102MEC 在华秋**无现货**（仅订货/代购，￥19.44 起 @400+）；改用顺络 MWSA0503S-1R0MT（1.0 µH / DCR 14 mΩ / Isat 10 A / 5.4×5.2×3.0 mm），外形与原 5.48×5.28×3.1 mm 基本一致 |
+| L3 | `Inductor_SMD:L_Taiyo-Yuden_NR-40xx` | **`Inductor_SMD:L_Changjiang_FNR4020S`** | 原 47 µH/4×4 现货款余量偏紧（500 mA 额定 / Isat 570 mA）；改用 cjiang FHD4020S-470MT（Isat 1.10 A / Irms 0.56 A / 4.0×4.0×2.0 mm），其推荐焊盘 1.10×3.7 mm @ ±1.50 mm 与 KiCad 官方 FNR4020S 封装一致 |
+
+两处替换均保留原 uuid、原坐标与焊盘网络（L1：CHG_SW / SYS；L3：EPD_3V3 /
+EPD_SW），仅封装图形与焊盘尺寸更新；替换后 **DRC = 0 Error / 0 Warning**、
+**ERC = 0**。L1 中心仍落在 U2 SW 引脚中心线上（§6 的对称约束不变）。
+
+> 结构提示：**L3 高度 1.8 → 2.0 mm**（+0.2 mm），L1 高度 3.1 → 3.0 mm。
+
 ---
 
 ## 6. 器件放置
@@ -190,7 +203,7 @@ DRC Exclusions: 0
 | §1.3 | R30 贴 Q1 Gate | 3.81 mm | 岛上 D6/D7/D8/R28 已占满，这是当前最近空位 |
 | §1.3 | R31 靠 Q1 Source/RESE | 5.24 mm | Q1 下方整排被 D6（EPD_SW→VGH）与 D8 占据，再近需拆开关环路 |
 | §2.2 | 新建本地封装 `esp32-board-v1.1:MWSA0402S` | 改用 KiCad 官方库 `Inductor_SMD:L_Sunlord_MWSA0402S` | 该库封装即由顺络推荐 land pattern 生成，避免多一份需维护的本地副本，且库一致性检查为 0 |
-| §7 | BOM PROVISIONAL 全部冻结 | 剩 D1、D2-D5、D6-D8、F1-F3、L1、L3、R13 | 这些需要最终采购渠道确认（同一 MPN 多厂可选），属 MD 分类 B/C，需在下单前冻结 |
+| §7 | BOM PROVISIONAL 全部冻结 | **已完成（2026-09-15）** | D1 / D2-D5 / D6-D8 / F1-F3 / L1 / L3 / R13 已全部落到华秋商城国内现货料号，L1、L3 顺带换成 KiCad 官方库封装；`bom.csv` 51 行全 `RELEASED`，清单见 `SCHEMATIC_NOTES.md` §7 |
 | §8 | 输出文件名统一 | 已统一 Rev/Title Block；工程文件仍名 `esp32-board-v1.1.*` | 见 §14 的发布命名规则；重命名工程会破坏工具链与既有引用 |
 | §3.4 | J2 逐项复核 | 已核对 Pin1/Pin24/Top Contact/插入方向/固定焊盘位置 | **建议投产前再用实物或厂商 3D 模型核对一次**（本封装由官方图纸+CAD 数据生成，未经实物比对） |
 
@@ -241,7 +254,8 @@ R23→FB 3.63 / R24→R23 1.81 / R33·R34→U1 2.84·2.34 / R35→J3 MISO 2.96 m
 | 项 | 值 |
 |---|---|
 | PCB Revision | **V1.6**（PCB 与原理图 Title Block 均已更新，日期 2026-09-15） |
-| BOM | `bom.csv` 随工程生成，含 Status / MPN 列 |
+| 采购冻结 | **2026-09-15**：BOM 全部 51 行 `RELEASED`；L1 → Sunlord MWSA0503S-1R0MT、L3 → cjiang FHD4020S-470MT（两者均改用 KiCad 官方库封装）。本轮不改拓扑与摆放，**Rev 保持 V1.6** |
+| BOM | `bom.csv` 随工程生成，含 Status / MPN 列；MPN 格式为 `MPN（华秋 Gxxxxxxxx）`，导出命令见 `SCHEMATIC_NOTES.md` §7 |
 | 发布文件命名建议 | `ESP32S3_EPD_V1.6_PCB.gbr`、`..._PTH.drl`、`..._NPTH.drl`、`..._BOM.csv`、`..._CPL.csv` |
 
 工程文件名仍为 `esp32-board-v1.1.*`（工具链与历史引用依赖它）；**版本以 Title Block
