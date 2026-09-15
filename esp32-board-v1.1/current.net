@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Code\epdf-hardware\esp32-board-v1.1\esp32-board-v1.1.kicad_sch</source>
-    <date>2026-09-15T15:16:21</date>
+    <date>2026-09-15T20:21:06</date>
     <tool>Eeschema 10.0.5</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -29,18 +29,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">TCC0805X5R226K250FT（华秋 G14559843）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="TCC0805X5R226K250FT（华秋 G14559843）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e91404fe-aefb-40eb-aa0a-7ea9f4e2d04a</tstamps>
+      <tstamps>62d86da3-0537-4063-a81e-6c57d9391211</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -55,18 +59,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A106KAYNNNE（华秋 G0022684）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A106KAYNNNE（华秋 G0022684）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d9c55b42-dea2-46f3-a830-68b92790e871</tstamps>
+      <tstamps>0ff232f5-2684-40cc-850c-74ab8d383f49</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -81,18 +89,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7429b1b5-fbbe-4721-88a6-dce83b556cd7</tstamps>
+      <tstamps>d162abae-b876-4b89-b2c5-eeb88a574355</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -107,18 +117,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>80b21fd1-c2ac-4bd8-a0f2-9f780e9ee118</tstamps>
+      <tstamps>950cb162-d04b-4b78-95f4-cea7bb126687</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -133,18 +145,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>509d0b68-5ffd-4c67-bd31-22671ad544cb</tstamps>
+      <tstamps>9822432b-5c2f-44a9-a011-103e206c0213</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -159,18 +173,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0fbaaa4f-253d-4c8b-bfd6-95c0b71359c7</tstamps>
+      <tstamps>31841bb5-c6b5-4df8-921f-26ddf4f2d14b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -185,18 +201,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d585a0f8-b425-48d2-ab7e-ac5966b64186</tstamps>
+      <tstamps>fbf2849e-b996-4053-8953-954321d32ec7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -211,18 +229,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>720a63c7-1a04-4b04-be62-b7a393244df0</tstamps>
+      <tstamps>1730ee11-cad9-4397-a0bf-8245afd034a3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -237,18 +257,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2974d3a9-d23b-41ca-8aa0-fd98a564277c</tstamps>
+      <tstamps>85ce526a-cf00-4ed4-8a8b-629481013b01</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -263,18 +285,20 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4ef08323-8c87-4d6f-a103-b28b888781d6</tstamps>
+      <tstamps>ec49ce74-feb3-4ec4-9feb-aada241d5a76</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -289,18 +313,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>503e4843-501d-4396-a84a-91c990fc37be</tstamps>
+      <tstamps>f0ddc09e-5c28-44cf-9128-00e7b9196935</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -315,18 +341,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A106KAYNNNE（华秋 G0022684）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A106KAYNNNE（华秋 G0022684）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6a52929e-9e95-4227-ad72-ab71b77d13d7</tstamps>
+      <tstamps>eca7f15e-439d-4266-b663-616fc2178a28</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -341,18 +371,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">TCC0805X5R226K250FT（华秋 G14559843）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="TCC0805X5R226K250FT（华秋 G14559843）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>28723038-aecc-4b15-8bfb-53394c307e7f</tstamps>
+      <tstamps>5327d46c-e5dc-442c-a2ba-0bd560b25e5c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -367,18 +401,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">TCC0805X5R226K250FT（华秋 G14559843）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="TCC0805X5R226K250FT（华秋 G14559843）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7255c4ba-6f22-4de1-8a26-d53f39e23689</tstamps>
+      <tstamps>10de720f-949a-4e15-820e-d4c5d36ebacf</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -393,18 +431,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A106KAYNNNE（华秋 G0022684）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A106KAYNNNE（华秋 G0022684）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f1ea0899-8006-4fb9-97f3-8c0d16df55bd</tstamps>
+      <tstamps>b69e598f-4f3a-442d-b3ae-20c3b29d7278</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -419,19 +461,21 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">DNP</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="DNP"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="dnp"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ea14317a-d480-4671-872c-5c4a746b7f3c</tstamps>
+      <tstamps>bafaa609-5d46-4c90-b474-bdebd27aac56</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -446,18 +490,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>cfeb0f04-b715-4548-9134-685a00757caa</tstamps>
+      <tstamps>fdb9c2cb-a1e0-4602-aa65-09a01b75a9a4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -472,18 +518,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A106KAYNNNE（华秋 G0022684）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A106KAYNNNE（华秋 G0022684）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>68db11dc-ca58-4afa-a6d1-d001dff3d85c</tstamps>
+      <tstamps>8b53c620-fec0-4ed3-ba14-e06666f25524</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -498,18 +548,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A106KAYNNNE（华秋 G0022684）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A106KAYNNNE（华秋 G0022684）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>64555d78-c62b-4b7d-bc35-b514622bcc4a</tstamps>
+      <tstamps>e7b5bb8f-76d3-4c93-a5b4-95aaab640b44</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -524,18 +578,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A106KAYNNNE（华秋 G0022684）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A106KAYNNNE（华秋 G0022684）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>76800ebe-58a9-4911-a588-1bee37c6b40a</tstamps>
+      <tstamps>7db97ccd-b4ea-4359-8138-60fa8a691f00</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -550,18 +608,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">TCC0805X5R226K250FT（华秋 G14559843）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="TCC0805X5R226K250FT（华秋 G14559843）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e3333359-e76c-43c0-a66d-ec42e3b273a4</tstamps>
+      <tstamps>23d31076-21f3-4746-a573-836c7e2b419f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -576,18 +638,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">TCC0805X5R226K250FT（华秋 G14559843）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="TCC0805X5R226K250FT（华秋 G14559843）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9badac6a-b747-4fce-bd1f-2ecd78a29623</tstamps>
+      <tstamps>78b40de7-c242-4f56-926f-eb65deb0709e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -602,18 +668,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">TCC0805X5R226K250FT（华秋 G14559843）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="TCC0805X5R226K250FT（华秋 G14559843）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>27ee9384-49a2-4f1a-8166-fb92bab279e5</tstamps>
+      <tstamps>4d264510-2951-4321-b489-2c2f47abe201</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -628,18 +698,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a7461cfd-5362-469f-81c5-261f442f63c4</tstamps>
+      <tstamps>d7410349-c086-4fd5-9887-dad4d41bbcbc</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -654,18 +726,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A106KAYNNNE（华秋 G0022684）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A106KAYNNNE（华秋 G0022684）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>63a4ad67-ef63-44ae-a7cb-934fc9b12487</tstamps>
+      <tstamps>fef6387d-7e00-4c1d-a947-ccc5cc8f3f4d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -680,18 +756,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e99a8cde-5205-48f6-aa3f-112235834f09</tstamps>
+      <tstamps>995c365f-ea87-4a3e-959b-9f277909db53</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -706,18 +784,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A475KAQNNNG（华秋 G0936665）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A475KAQNNNG（华秋 G0936665）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>16192fa7-3775-4218-9f35-f32cd64a1487</tstamps>
+      <tstamps>4e2318b0-0b09-4206-a7b4-4d6ba744d162</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -732,18 +814,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A475KAQNNNG（华秋 G0936665）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A475KAQNNNG（华秋 G0936665）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>19192a15-d4ba-43f9-a81e-f2557dff9d99</tstamps>
+      <tstamps>9f6bb189-8ac9-4b36-951b-a98123ac5af5</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -758,18 +844,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A475KAQNNNG（华秋 G0936665）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A475KAQNNNG（华秋 G0936665）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fd2c294d-ddc5-4440-9419-971b0e2cd146</tstamps>
+      <tstamps>f0d6ae12-0c43-4941-827f-bfb7928acda4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -784,18 +874,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A475KAQNNNG（华秋 G0936665）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A475KAQNNNG（华秋 G0936665）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>0becdcb4-18cd-4027-ac7d-14aea84c6c39</tstamps>
+      <tstamps>f87491a5-abbb-44aa-bac8-0d6c1e97539e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -810,18 +904,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A475KAQNNNG（华秋 G0936665）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A475KAQNNNG（华秋 G0936665）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f41ef04a-f830-42e6-92f2-e012855028c2</tstamps>
+      <tstamps>c53204c1-b053-4fdd-aca3-817b1c6f304f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -836,18 +934,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A475KAQNNNG（华秋 G0936665）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A475KAQNNNG（华秋 G0936665）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d03c5696-e18b-45b1-971b-4380929eb9b1</tstamps>
+      <tstamps>69d3b452-dc34-4cb3-98e5-41953f957d8a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -862,18 +964,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A475KAQNNNG（华秋 G0936665）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A475KAQNNNG（华秋 G0936665）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fdc45bb1-07f4-4e0c-9685-853e22dfa9fc</tstamps>
+      <tstamps>85d19cb9-125d-45d7-8f6c-2859c350eab7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -888,18 +994,22 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL10B105KA8NNNC（华秋 G0021698）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL10B105KA8NNNC（华秋 G0021698）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6e4b0deb-fec9-4691-a4d4-e4588d3428df</tstamps>
+      <tstamps>72557ea2-47c7-40a2-95c1-be8d5ca1ea5a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -914,18 +1024,22 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL10B105KA8NNNC（华秋 G0021698）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL10B105KA8NNNC（华秋 G0021698）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>11b7c28a-cbdc-4f8e-997d-9972b68adc11</tstamps>
+      <tstamps>536135e1-5a03-4b13-be02-db2ea50dd079</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -940,18 +1054,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">0805B105K250AT（华秋 G4185910）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="0805B105K250AT（华秋 G4185910）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>706344a7-082d-4b5b-b022-72fc66402ea8</tstamps>
+      <tstamps>84d16b0a-2973-4262-a038-c75ab9ee2e78</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -966,18 +1084,22 @@
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">CL21A106KAYNNNE（华秋 G0022684）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="CL21A106KAYNNNE（华秋 G0022684）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b173b1e1-09a2-4961-9b9b-d860b521fea0</tstamps>
+      <tstamps>9ffd45a4-d181-4163-a50a-6b1c9c02333d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -992,18 +1114,20 @@
       <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <property name="ki_fp_filters" value="C_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4c3ffa98-5315-4322-97e3-02150d51291f</tstamps>
+      <tstamps>9527a1f8-c740-4489-bb98-8a08a52886da</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1017,19 +1141,23 @@
       <value>TVS 5.6V</value>
       <footprint>Diode_SMD:D_SOD-323</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">PESD5V0S1BA,115（华秋 G0089294）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Diode_SMD:D_SOD-323</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="D_TVS" description="Bidirectional transient-voltage-suppression diode"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="PESD5V0S1BA,115（华秋 G0089294）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="diode TVS thyrector"/>
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>103d4fd9-d053-4e3e-9f99-d6d27f6b523e</tstamps>
+      <tstamps>24ffc89d-28d5-4955-a8ee-66d0dd52d70e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1043,19 +1171,23 @@
       <value>ESD</value>
       <footprint>Diode_SMD:D_SOD-323</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">GBLC05C（华秋 G5954860）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Diode_SMD:D_SOD-323</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="D_TVS" description="Bidirectional transient-voltage-suppression diode"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="GBLC05C（华秋 G5954860）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="diode TVS thyrector"/>
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>1a80fa80-c3e2-454a-b3cb-d57e28ea5a74</tstamps>
+      <tstamps>f6872984-1175-4dc8-b4a3-9d6f90e570e8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1069,19 +1201,23 @@
       <value>ESD</value>
       <footprint>Diode_SMD:D_SOD-323</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">GBLC05C（华秋 G5954860）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Diode_SMD:D_SOD-323</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="D_TVS" description="Bidirectional transient-voltage-suppression diode"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="GBLC05C（华秋 G5954860）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="diode TVS thyrector"/>
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>acc763cc-526d-4a9c-aac7-56f49395e124</tstamps>
+      <tstamps>44bc0858-bb63-41dd-8396-def15ac7e328</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1095,19 +1231,23 @@
       <value>ESD</value>
       <footprint>Diode_SMD:D_SOD-323</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">LESD3Z5.0CMT1G（华秋 G4193578）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Diode_SMD:D_SOD-323</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="D_TVS" description="Bidirectional transient-voltage-suppression diode"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="LESD3Z5.0CMT1G（华秋 G4193578）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="diode TVS thyrector"/>
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3625dda2-eea0-4680-bf7f-40c53c9f6bb1</tstamps>
+      <tstamps>8e042b02-a06f-4e23-a727-da5f8c018221</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1121,19 +1261,23 @@
       <value>ESD</value>
       <footprint>Diode_SMD:D_SOD-323</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">LESD3Z5.0CMT1G（华秋 G4193578）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Diode_SMD:D_SOD-323</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="D_TVS" description="Bidirectional transient-voltage-suppression diode"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="LESD3Z5.0CMT1G（华秋 G4193578）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="diode TVS thyrector"/>
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>480115de-049b-4ac0-9043-ed8a8465b929</tstamps>
+      <tstamps>c82537ae-aaee-4fa1-a9dc-72fe32189e7a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1147,21 +1291,23 @@
       <value>MBR0530</value>
       <footprint>Diode_SMD:D_SOD-123</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
-        <field name="MPN">MBR0530</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">MBR0530T1G（华秋 G3325533）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Diode_SMD:D_SOD-123</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="D_Schottky" description="Schottky diode"/>
-      <property name="Status" value="PROVISIONAL"/>
-      <property name="MPN" value="MBR0530"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="MBR0530T1G（华秋 G3325533）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="diode Schottky"/>
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e09d31b8-66bc-4295-917d-7d3d5806b8ea</tstamps>
+      <tstamps>09f7b78d-ff4d-4202-bdae-fa45aa361f5c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1175,21 +1321,23 @@
       <value>MBR0530</value>
       <footprint>Diode_SMD:D_SOD-123</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
-        <field name="MPN">MBR0530</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">MBR0530T1G（华秋 G3325533）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Diode_SMD:D_SOD-123</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="D_Schottky" description="Schottky diode"/>
-      <property name="Status" value="PROVISIONAL"/>
-      <property name="MPN" value="MBR0530"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="MBR0530T1G（华秋 G3325533）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="diode Schottky"/>
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5543ea5c-27f8-4946-a367-58a4087ce4c7</tstamps>
+      <tstamps>4b24060e-34df-4a7f-bd27-4171d2eca19a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1203,21 +1351,23 @@
       <value>MBR0530</value>
       <footprint>Diode_SMD:D_SOD-123</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
-        <field name="MPN">MBR0530</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">MBR0530T1G（华秋 G3325533）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Diode_SMD:D_SOD-123</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="D_Schottky" description="Schottky diode"/>
-      <property name="Status" value="PROVISIONAL"/>
-      <property name="MPN" value="MBR0530"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="MBR0530T1G（华秋 G3325533）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="diode Schottky"/>
       <property name="ki_fp_filters" value="TO-???* *_Diode_* *SingleDiode* D_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>66d463bf-ed33-47fa-9293-730fcdd03154</tstamps>
+      <tstamps>b8de8419-ad98-4bb3-b6a0-3f113ddbad60</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1231,19 +1381,23 @@
       <value>2A PTC</value>
       <footprint>Fuse:Fuse_0805_2012Metric</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">BSMD0805L-200（华秋 G5053245）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Fuse:Fuse_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="Fuse" description="Fuse"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="BSMD0805L-200（华秋 G5053245）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="fuse"/>
       <property name="ki_fp_filters" value="*Fuse*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8c13d703-e9ef-4f45-985a-637af1c4671b</tstamps>
+      <tstamps>def46430-4bf8-424d-9583-27655862e8d6</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1257,19 +1411,23 @@
       <value>2A PTC</value>
       <footprint>Fuse:Fuse_0805_2012Metric</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">BSMD0805L-200（华秋 G5053245）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Fuse:Fuse_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="Fuse" description="Fuse"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="BSMD0805L-200（华秋 G5053245）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="fuse"/>
       <property name="ki_fp_filters" value="*Fuse*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>064b7009-b375-47d4-a454-29d766f360aa</tstamps>
+      <tstamps>7ef0ec53-cd56-4d6b-9d50-e98b7662d4ad</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1283,19 +1441,23 @@
       <value>2A PTC</value>
       <footprint>Fuse:Fuse_0805_2012Metric</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">BSMD0805L-200（华秋 G5053245）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Fuse:Fuse_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="Fuse" description="Fuse"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="BSMD0805L-200（华秋 G5053245）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="fuse"/>
       <property name="ki_fp_filters" value="*Fuse*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>bec0361e-8df7-4f4a-9970-a98144762ff9</tstamps>
+      <tstamps>632c22f7-bbe8-49ae-a5f8-4761cea68575</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1311,6 +1473,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">GCT USB4105-15-A-120</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -1318,12 +1481,13 @@
       <libsource lib="Connector" part="USB_C_Receptacle_USB2.0_16P" description="USB 2.0-only 16P Type-C Receptacle connector"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="GCT USB4105-15-A-120"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="usb universal serial bus type-C USB2.0"/>
       <property name="ki_fp_filters" value="USB*C*Receptacle*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e7cca767-333c-4620-92c5-3e9536707155</tstamps>
+      <tstamps>f3b53f9a-8c65-4466-b0a5-f8f88e0a88ad</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1354,6 +1518,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">XKB X05B20U24T</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">esp32-board-v1.1:X05B20U24T</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -1361,10 +1526,11 @@
       <libsource lib="local" part="EPD_FPC24" description=""/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="XKB X05B20U24T"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>12491958-39b4-4f76-8e22-e03275d0fbc2</tstamps>
+      <tstamps>499621b0-0ba5-43ff-ad16-66eff9b47827</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1402,6 +1568,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Hirose DM3AT-SF-PEJM5</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">esp32-board-v1.1:microSD_DM3AT-SF-PEJM5_EPDF</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -1409,12 +1576,13 @@
       <libsource lib="Connector" part="Micro_SD_Card_Det2" description="Micro SD Card Socket with two card detection pins"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Hirose DM3AT-SF-PEJM5"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="connector SD microsd"/>
       <property name="ki_fp_filters" value="microSD*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ead6bceb-fc47-4e16-b3a7-7ba9883b8dd2</tstamps>
+      <tstamps>564a601e-58dc-4ded-9dfc-242f8233f0b7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1439,6 +1607,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Molex 53261-0271</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -1446,11 +1615,12 @@
       <libsource lib="local" part="CONN_01X02_PICO" description=""/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Molex 53261-0271"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_fp_filters" value="Connector*:*_1x??_* Connector_Molex:*1x02*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d72d4bd0-7f92-4d27-b511-51b035c3684b</tstamps>
+      <tstamps>6d09c959-fb5d-4330-92b5-4aebaa09eff7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1466,6 +1636,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Molex 53261-0271</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -1473,11 +1644,12 @@
       <libsource lib="local" part="CONN_01X02_PICO" description=""/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Molex 53261-0271"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_fp_filters" value="Connector*:*_1x??_* Connector_Molex:*1x02*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>a0808f3d-e0ad-4c7b-be08-965115653db4</tstamps>
+      <tstamps>19e3e133-6d10-4ec1-a7c1-6ebe11ea87d1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1489,23 +1661,25 @@
     </comp>
     <comp ref="L1">
       <value>1.0uH</value>
-      <footprint>Inductor_SMD:L_Coilcraft_XAL5030-XXX</footprint>
+      <footprint>Inductor_SMD:L_Sunlord_MWSA0503S</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
-        <field name="MPN">Coilcraft XAL5030 / Isat&gt;=4.5A</field>
-        <field name="Footprint">Inductor_SMD:L_Coilcraft_XAL5030-XXX</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">Sunlord MWSA0503S-1R0MT（华秋 G4719678）</field>
+        <field name="Populate">FIT</field>
+        <field name="Footprint">Inductor_SMD:L_Sunlord_MWSA0503S</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="L" description="Inductor"/>
-      <property name="Status" value="PROVISIONAL"/>
-      <property name="MPN" value="Coilcraft XAL5030 / Isat&gt;=4.5A"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="Sunlord MWSA0503S-1R0MT（华秋 G4719678）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6cf13039-9616-47f8-b1a0-4c625d852456</tstamps>
+      <tstamps>7bb5b781-58d7-474e-b1e6-28c3ccf226c3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1521,6 +1695,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Sunlord MWSA0402S-1R2MT</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Inductor_SMD:L_Sunlord_MWSA0402S</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -1528,12 +1703,13 @@
       <libsource lib="Device" part="L" description="Inductor"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Sunlord MWSA0402S-1R2MT"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7532f734-c7e3-4ab8-98a1-56ab85db9fb1</tstamps>
+      <tstamps>a1d8d6c2-596b-4db0-ba33-baf14129703d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1545,23 +1721,25 @@
     </comp>
     <comp ref="L3">
       <value>47uH</value>
-      <footprint>Inductor_SMD:L_Taiyo-Yuden_NR-40xx</footprint>
+      <footprint>Inductor_SMD:L_Changjiang_FNR4020S</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
-        <field name="MPN">47uH &gt;=500mA, low profile</field>
-        <field name="Footprint">Inductor_SMD:L_Taiyo-Yuden_NR-40xx</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">cjiang FHD4020S-470MT（华秋 G6635066）</field>
+        <field name="Populate">FIT</field>
+        <field name="Footprint">Inductor_SMD:L_Changjiang_FNR4020S</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="L" description="Inductor"/>
-      <property name="Status" value="PROVISIONAL"/>
-      <property name="MPN" value="47uH &gt;=500mA, low profile"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="cjiang FHD4020S-470MT（华秋 G6635066）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
       <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>284b3387-397f-4746-a008-62ecfe22be4c</tstamps>
+      <tstamps>eed306e4-2636-4678-9531-3bb1a25c2b31</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1577,6 +1755,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Vishay NTCS0603E3103FLT</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -1584,12 +1763,13 @@
       <libsource lib="Device" part="Thermistor_NTC" description="Temperature dependent resistor, negative temperature coefficient"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Vishay NTCS0603E3103FLT"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="thermistor NTC resistor sensor RTD"/>
       <property name="ki_fp_filters" value="R_* RV_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2124c116-149e-45bc-a31a-30fc14635f44</tstamps>
+      <tstamps>ea34cd96-44cc-4104-bbc0-d0bf7ac97dd7</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1605,6 +1785,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Si1304BDL-T1-GE3</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Package_TO_SOT_SMD:SOT-323_SC-70</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -1612,11 +1793,12 @@
       <libsource lib="Transistor_FET" part="Q_NMOS_GSD" description="N-MOSFET transistor, gate/source/drain"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Si1304BDL-T1-GE3"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="transistor NMOS N-MOS N-MOSFET"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>284681d4-7c2b-4bd5-bd9b-fa788ba05d3c</tstamps>
+      <tstamps>dc03d65b-129b-4ee4-ab27-6f4a60af598e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1632,18 +1814,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>1e6c9a83-9a7d-4199-bc7c-da4d39613a90</tstamps>
+      <tstamps>06cd10df-e8ff-4c9e-953d-78ff55eeedf1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1658,18 +1842,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c0f50fbb-4d56-4bc4-b216-b7b96c4c4985</tstamps>
+      <tstamps>1033b104-bb08-4905-a2e8-8d1976faf2b8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1684,18 +1870,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>18297549-cc35-4e1d-a78c-00ad9e9577dc</tstamps>
+      <tstamps>7fd1af16-3210-4946-a35f-5a483244badb</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1710,18 +1898,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>559dce68-cc45-4972-b1f8-78b2d509f51e</tstamps>
+      <tstamps>6686554c-a144-427e-b6ba-49f2e2cb5d9e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1736,18 +1926,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>673900a6-2a97-4915-bffd-4c98ddeccb2a</tstamps>
+      <tstamps>d524a62e-28c5-4206-991d-f7a72e9926bd</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1762,18 +1954,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>60d16497-2b90-4623-8ba1-9ce467473ee9</tstamps>
+      <tstamps>221005ad-736c-4a39-acac-ecd4c74bd429</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1788,18 +1982,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>347c5dfa-e4f2-4b9c-a334-209fc4a7f069</tstamps>
+      <tstamps>465842c6-1a60-46e4-bd9f-f45209c74be4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1814,18 +2010,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3bac9c60-b817-410e-ae38-91f4c253ec36</tstamps>
+      <tstamps>e58d0db3-c65e-4352-b1e4-5faa563f6d9a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1840,18 +2038,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5ab14db1-bcb3-4cad-9f2c-44c4e1237658</tstamps>
+      <tstamps>6edf4caf-1792-4554-9ae9-76199166f961</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1866,18 +2066,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fe82f7ee-903e-45e6-a2f0-e74c9ebadb62</tstamps>
+      <tstamps>3a0be8ce-5058-4984-a7b1-c233a7a9cc63</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1892,18 +2094,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5983b69e-d9ab-4c1d-bdf9-b899bf57072b</tstamps>
+      <tstamps>e45cd22f-f636-4f6e-8532-08548c79b7c0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1918,18 +2122,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2d590b51-7e7f-4320-974d-c3843ab8c68d</tstamps>
+      <tstamps>b8b91b06-243b-49a4-a29a-c342e8e2a8a1</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1943,19 +2149,23 @@
       <value>180</value>
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Status">PROVISIONAL</field>
+        <field name="Status">RELEASED</field>
+        <field name="MPN">0603WAF1800T5E（华秋 G3705022）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
-      <property name="Status" value="PROVISIONAL"/>
+      <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="0603WAF1800T5E（华秋 G3705022）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>aca21057-1db2-4aa5-81b3-bf97336b3f2b</tstamps>
+      <tstamps>6a7e21a0-8db9-4493-a9d6-56a2dea8d9b8</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1970,18 +2180,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>51aaec4a-bc5d-4cbf-8923-4b77477acc2b</tstamps>
+      <tstamps>b05ff594-460f-4f3d-bbfc-40da273e2168</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -1996,18 +2208,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>98c6a938-7f95-43a4-b35b-7667f8c4cbac</tstamps>
+      <tstamps>aea21fe8-c242-4c90-b3ea-2d97ed89681a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2022,18 +2236,22 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">0603WAF5231T5E（华秋 G3705144）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="0603WAF5231T5E（华秋 G3705144）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>9281c7f3-7b9f-4a87-b1da-51427f217b34</tstamps>
+      <tstamps>4dc1c1e3-dbc4-4c61-b9fb-72f089491607</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2048,18 +2266,22 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">RC0603DR-0730K1L（华秋 G4243913）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="RC0603DR-0730K1L（华秋 G4243913）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b62d50e0-9b2a-4477-acb6-708d836d108d</tstamps>
+      <tstamps>d387b857-8068-4527-b5bb-adc0b52aa1e4</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2074,18 +2296,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7f3d3fe0-1d8a-4148-acc2-d2fd7a3e5344</tstamps>
+      <tstamps>9904b278-4671-42df-814a-7921b5707143</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2100,18 +2324,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6ed88a6f-1f51-43e8-939b-1ea1c8e3cf99</tstamps>
+      <tstamps>2cdabc7c-0e12-4ed0-a11b-e50943b97d1c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2126,18 +2352,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>adfaa637-2ee1-42e1-9c4d-8fe7150774c9</tstamps>
+      <tstamps>5057373f-6160-47c5-a860-345893f9cd3c</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2152,19 +2380,21 @@
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">DNP</field>
         <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="DNP"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="dnp"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>46c5b693-ce78-4100-89d3-e07ddd5230ee</tstamps>
+      <tstamps>f9935202-916a-47d2-814c-b90077a8d601</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2179,18 +2409,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>766e2773-fc60-4d82-95e1-f8097001ecff</tstamps>
+      <tstamps>3d69e210-5121-4d3c-b78d-22c36ac6cdec</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2205,18 +2437,22 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">0603WAF4703T5E（华秋 G0064373）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="0603WAF4703T5E（华秋 G0064373）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c55056e9-c90d-494c-8c18-c66b68769460</tstamps>
+      <tstamps>cc41d756-f174-4f62-95b3-4b354f1b9b1b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2231,18 +2467,22 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="MPN">RC0603FR-07150KL（华秋 G0072618）</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="MPN" value="RC0603FR-07150KL（华秋 G0072618）"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3489b2ab-aeb0-4893-a9a4-350d754a8205</tstamps>
+      <tstamps>a53b2910-1fb9-4501-a953-53d592d13e54</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2257,18 +2497,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ef24c7c4-6a9e-4ee9-b609-98d733cf79d3</tstamps>
+      <tstamps>e1ed45f2-91a0-49d2-b0ee-f91b1288cd4f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2283,18 +2525,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>c3af3dfe-2bf1-4785-bb1a-6214f05b5970</tstamps>
+      <tstamps>002a343b-1079-4e4b-a7dc-15ef519f5af3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2309,18 +2553,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fec0b536-a666-4b01-a59f-046b1a544f79</tstamps>
+      <tstamps>0df88553-31b6-4738-8f11-6f4e9862c216</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2335,18 +2581,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2c053b69-ff63-496d-b64d-74478d0a349e</tstamps>
+      <tstamps>579b32a0-0af0-44ed-8946-89ed76ab70e3</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2361,18 +2609,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fc914473-77ec-43dd-a789-89ea10d545e1</tstamps>
+      <tstamps>0997ea0f-439a-4bd1-a71d-83b71a983bc0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2387,18 +2637,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f2c8e908-6f80-446d-b1db-da424f35be58</tstamps>
+      <tstamps>da74dc28-00ec-480a-8aba-3be1ddceeb27</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2413,18 +2665,20 @@
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>7d86ef9b-8ddc-41e9-af6d-d663a53f955a</tstamps>
+      <tstamps>fe3a0c34-a911-4670-83d9-44103e0daadb</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2439,18 +2693,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>8549f450-1ad2-457f-bd0c-5c84803ccdf2</tstamps>
+      <tstamps>95a10668-9316-40fd-a2d5-eac0536b4e6d</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2465,18 +2721,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>42c61644-4af2-4ca0-9e42-b3711dc728f5</tstamps>
+      <tstamps>42e845fc-3fdb-40a1-9540-85efe28bd9e0</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2491,18 +2749,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>29677566-14d7-47bc-926a-65643ec64c0f</tstamps>
+      <tstamps>044c3bac-19cf-406a-80f5-66860d12fa2a</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2517,18 +2777,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>1d5546ba-3615-4c6b-9b45-1262878efee5</tstamps>
+      <tstamps>a3747231-3399-46b9-969b-c520aa555c70</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2543,18 +2805,20 @@
       <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
         <field name="Status">RELEASED</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Status" value="RELEASED"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
       <property name="ki_fp_filters" value="R_*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>dd51a308-acd7-4d00-a490-e126d42d5e1b</tstamps>
+      <tstamps>99e66520-9b86-45e2-933b-beeea196b143</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2570,6 +2834,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Omron B3U-1000P</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Button_Switch_SMD:SW_SPST_B3U-1000P</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2577,11 +2842,12 @@
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Omron B3U-1000P"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d987730d-22b9-4e13-9c2b-30e0b9344938</tstamps>
+      <tstamps>8e862ac2-7440-42d1-a646-bc7ab77b6c33</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2597,6 +2863,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Omron B3U-1000P</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Button_Switch_SMD:SW_SPST_B3U-1000P</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2604,11 +2871,12 @@
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Omron B3U-1000P"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5eb1a3e4-ffd8-437c-8c4e-f3fd6759ef5d</tstamps>
+      <tstamps>3a7e87d1-5faa-473f-a315-25ec092cac7f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2624,6 +2892,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Omron B3U-1000P</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Button_Switch_SMD:SW_SPST_B3U-1000P</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2631,11 +2900,12 @@
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Omron B3U-1000P"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>24690a87-5946-4c54-bb14-ab08d6c3fb9e</tstamps>
+      <tstamps>f443d99c-33d5-42e3-9963-9ffa79bb2a8b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2651,6 +2921,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Omron B3U-1000P</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Button_Switch_SMD:SW_SPST_B3U-1000P</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2658,11 +2929,12 @@
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Omron B3U-1000P"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>21883984-c2cc-4b28-855a-12ebd1f30fa6</tstamps>
+      <tstamps>f37816d1-a4a5-466b-82be-ddd54b81fdda</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2678,6 +2950,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">Omron B3U-1000P</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Button_Switch_SMD:SW_SPST_B3U-1000P</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2685,11 +2958,12 @@
       <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="Omron B3U-1000P"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>5ab9ba56-d4c9-4a18-81a1-c1ec1d5591ea</tstamps>
+      <tstamps>581cc94f-9632-4f6d-ba57-d8a26c247e7e</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2705,6 +2979,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">ESP32-S3-WROOM-1-N16R8</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">esp32-board-v1.1:ESP32-S3-WROOM-1_EPDF</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2712,12 +2987,13 @@
       <libsource lib="RF_Module" part="ESP32-S3-WROOM-1" description="RF Module, ESP32-S3 SoC, Wi-Fi 802.11b/g/n, Bluetooth, BLE, 32-bit, 3.3V, onboard antenna, SMD"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="ESP32-S3-WROOM-1-N16R8"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="RF Radio BT ESP ESP32-S3 Espressif onboard PCB antenna"/>
       <property name="ki_fp_filters" value="ESP32?S3?WROOM?1*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3854e2b7-4ec4-4a6e-8886-05b4b6159032</tstamps>
+      <tstamps>fca8a45c-4aa4-4c32-973e-e984bd8ed551</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2772,6 +3048,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">BQ25895RTWT</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Package_DFN_QFN:Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2779,12 +3056,13 @@
       <libsource lib="Battery_Management" part="BQ25895RTW" description="I2C Controlled Single Cell (Li-Ion / Li-Polymer) 5A Fast Charger with MaxCharge, USB BC1.2 Detection, 3.9..14V VBUS, 3.840..4.608V charge voltage range, 1.5 MHz (buck mode) and 500 kHz /1.5 MHz (boost mode), WQFN-24"/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="BQ25895RTWT"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_keywords" value="1-cell Battery-Charger Power-Path-Management OTG"/>
       <property name="ki_fp_filters" value="*WQFN*4x4mm*P0.5mm*EP2.7*x2.7*mm*"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>fac4d143-4f25-4ced-84b4-4be27a2b2c36</tstamps>
+      <tstamps>c7dba1f8-fedc-4e36-8ba7-7a20137c4321</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2823,6 +3101,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">TPS63070RNMT</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">esp32-board-v1.1:RNM0015A</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2830,11 +3109,12 @@
       <libsource lib="local" part="TPS63070RNM" description=""/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="TPS63070RNMT"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <property name="ki_fp_filters" value="RNM0015A"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>de579719-8e99-4108-932f-9b2a8b887b89</tstamps>
+      <tstamps>f5471274-5154-46c7-a30a-d291a8bf149b</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2863,6 +3143,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">MAX17048G+T10</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Package_DFN_QFN:TDFN-8-1EP_2x2mm_P0.5mm_EP0.8x1.2mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2870,10 +3151,11 @@
       <libsource lib="local" part="MAX17048" description=""/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="MAX17048G+T10"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>6130b6c9-4bf0-4e28-be5c-9ac0fb785adf</tstamps>
+      <tstamps>6cb139fd-9d25-423d-a905-8a6bb0f0154f</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2896,6 +3178,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">TUSB320LIRWBR</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Package_DFN_QFN:Texas_X2QFN-12_1.6x1.6mm_P0.4mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2903,10 +3186,11 @@
       <libsource lib="local" part="TUSB320LI" description=""/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="TUSB320LIRWBR"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>beffb05b-46bd-40df-9dd3-cace3fd6fc31</tstamps>
+      <tstamps>de5ad7c6-2e9a-48b8-b898-038934178714</tstamps>
       <units>
         <unit name="A">
           <pins>
@@ -2932,6 +3216,7 @@
       <fields>
         <field name="Status">RELEASED</field>
         <field name="MPN">TPS22918</field>
+        <field name="Populate">FIT</field>
         <field name="Footprint">Package_TO_SOT_SMD:SOT-23-6</field>
         <field name="Datasheet"/>
         <field name="Description"/>
@@ -2939,10 +3224,11 @@
       <libsource lib="local" part="TPS22918" description=""/>
       <property name="Status" value="RELEASED"/>
       <property name="MPN" value="TPS22918"/>
+      <property name="Populate" value="FIT"/>
       <property name="Sheetname" value="esp32-board-v1.1"/>
       <property name="Sheetfile" value="esp32-board-v1.1.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>88fc67be-a8da-4488-888a-2e9f929147d4</tstamps>
+      <tstamps>ce1f0854-c7c8-4987-8c12-6668aa0e7194</tstamps>
       <units>
         <unit name="A">
           <pins>

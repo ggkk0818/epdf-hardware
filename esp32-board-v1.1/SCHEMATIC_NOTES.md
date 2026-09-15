@@ -12,8 +12,16 @@
 kicad-cli sch erc  →  0 violations
 ```
 
-即 **0 Error / 0 Warning**，且**没有使用任何 ERC Exclusion**，
-也没有关闭任何全局 ERC 检查项。达到 ERC Guide §15 的验收目标。
+即 **0 Error / 0 Warning**，且**没有使用任何 ERC Exclusion**，达到 ERC Guide §15
+的验收目标。
+
+> **当前 V1.6 ERC 策略（统一写法）**：ERC = 0 violations。
+> 启用：`footprint_link_issues`（error）、`footprint_filter`（error）。
+> 按项目设计策略保持 Ignore：`single_global_label`、`four_way_junction`、
+> `simulation_model_issue`。
+>
+> 早期版本曾写成“没有关闭任何全局 ERC 检查项”，该说法已作废；也与
+> `footprint_link_issues` 一度被置为 Ignore 的历史记录不符，见 §5.4 与 §9。
 
 收敛前的问题与处理方式见 §3。
 
@@ -125,14 +133,53 @@ kicad-cli sch erc  →  0 violations
 | TPS63070 PS/SYNC | 未定义 | 100 kΩ 上拉到 SYS（PWM/PFM 省电模式）。如需强制 PWM，把该电阻改到 GND | TPS63070 数据手册 Pin Functions |
 | TPS63070 FB2 (Pin 6) | 未定义 | 悬空（规格书允许 "leave the pin open"） | TPS63070 数据手册 Pin Functions |
 | 测试点 | 原计划 24 个 | **全部取消**（用户要求 "pcb 无需设置测试点"）；GPIO38/39 与调试 UART 改为 No Connect | 本轮用户要求 |
-| BOOT/KEY 开关 | 低背轻触开关（未定型号） | **Omron B3U-1000P**（封装 `Button_Switch_SMD:SW_SPST_B3U-1000P`，3.0×2.5×1.6 mm，侧按） | 本轮用户要求 |
+| BOOT/KEY 开关 | 低背轻触开关（未定型号） | **Omron B3U-1000P**（封装 `Button_Switch_SMD:SW_SPST_B3U-1000P`，3.0×2.5×1.6 mm，**顶部按压 Top-actuated**） | 本轮用户要求 |
 
 > Omron B3U-1000P 采购链接（华秋商城）：
 > <https://item.hqchip.com/2500240009.html>
-> 该器件为**侧按**型，PCB 上按 90° 放置（按压方向沿板面 X 轴、朝板右外侧）。
+> **该器件为顶部按压型（Top-actuated tactile switch）**：外壳按键柱从 **PCB 正面
+> 垂直向下**压开关执行器（`Actuation direction: perpendicular to the PCB surface`）。
+> PCB 上的 **90° 旋转只改变焊盘与丝印方向，不改变按压方向**，不得再把它解释成
+> “把顶部按键变成侧按”。
 > 装配前请对照外壳按键柱确认按压方向与中心距（PCB 上 KEY1/2/3 中心距 27 mm）。
+>
+> 旧文档中出现的“侧按 / 侧面按压 / 按压方向沿 PCB X 轴 / 朝 PCB 右外侧 /
+> Right-angle side-actuated”等描述均**已作废并删除**。
 
-### 5.1 充电限流与 /CE 启动时序（2026-09-14，V1.3 清单 §2）
+### 5.1 系统输入能力定义（2026-09-15，V1.6 清单 §3）
+
+系统规格**不再**写成“任何环境下可连续输入 5 V / 2 A”，正式定义统一为：
+
+> **5 V / 2 A source compatible，非高温连续 2 A 保证。**
+>
+> *Compatible with a 5 V / 2 A power source; continuous 2 A operation at elevated
+> ambient temperature is not guaranteed.*
+
+含义：
+
+```text
+允许使用 5V / 2A 的 USB 电源适配器
+不保证 40 °C / 50 °C 或更高环境温度下长时间接近 2 A
+原因：F1~F3 的 PTC Hold Current 随温度升高而降额
+```
+
+当前系统策略保持 **BQ25895 Charge Current target ≈ 896 mA**；实际 USB 输入电流由
+充电功率 + 系统负载共同决定。因此 BSMD0805L-200 对原型设计仍然可接受。
+
+**原型测试（实物，本阶段未做）**新增：
+
+```text
+[ ] 25 °C 下最大 USB 输入电流
+[ ] 40 °C 环境下持续运行
+[ ] 50 °C 环境下持续运行
+[ ] Wi-Fi TX + EPD refresh + microSD 并发
+[ ] 充电 + 系统最大负载并发
+```
+
+同时记录：F1 温升、USB-C 温升、BQ25895 温升、VBUS 压降、**PTC 两端压降**、
+是否出现误动作 / 热跳闸。
+
+### 5.1.1 充电限流与 /CE 启动时序（2026-09-14，V1.3 清单 §2）
 
 J4/J5 继续使用 `Molex 53261-0271`（配 51021-0200 胶壳 / 50079-8001 端子 / 26 AWG），
 不更换连接器；电流由**软件限流 + 系统功耗策略**控制在安全范围内。该策略已作为
@@ -222,14 +269,22 @@ J4/J5 原先使用通用符号 `Connector_Generic:Conn_01x02`，其封装过滤�
 > Footprint` 的逐脚对应，重点是 1 脚方向以及供应商图纸的顶视/底视约定。
 > ERC/DRC 无法发现这一类镜像或脚序错误。
 
-> 另注：`kicad-cli sch erc` 只读取全局库表、不读取工程 `fp-lib-table`，因此对项目本地
-> 封装库会误报 `footprint_link_issues`。该检查已在工程 ERC 设置中置为 ignore；
-> KiCad GUI 会正常加载工程库表，无需处理。
+> 另注：`kicad-cli sch erc` 只读取全局库表、不读取工程 `fp-lib-table`，历史上因此
+> 对项目本地封装库误报 `footprint_link_issues`。**V1.6 起该检查已重新启用**（见 §1），
+> 当前 0 violation；KiCad GUI 会正常加载工程库表，无需处理。
 
 另外：BQ25895 `SW` 节点的 RC snubber（`R21` 2.2 Ω + `C16` 470 pF，网络 `CHG_SNUB`）
 在原理图中标记为 **DNP**（`(dnp yes)`），仅在 EMI 实测需要时装配，与设计文档
-"留 DNP footprint" 的要求一致。kicad-cli 导出的 `bom.csv` 不会自动剔除 DNP 行，
-采购/贴片前请按原理图 DNP 标记剔除。
+"留 DNP footprint" 的要求一致。
+
+**V1.6 起生产 BOM 增加 `Populate` 字段**（`FIT` / `DNP`），由原理图自定义属性导出：
+
+```text
+R21 = DNP     C16 = DNP     R31 = FIT
+```
+
+这样即使 R21 与 R31 同为 2.2 Ω，导出后也是两行（`R21 DNP` / `R31 FIT`），
+不会出现“按 2.2 Ω 整行删除”而误删必须安装的 R31 的情况。
 
 ---
 
@@ -263,20 +318,22 @@ EPD：`SPI_SCLK` `SPI_MOSI` `EPD_CS_N` `EPD_DC` `EPD_RST_N` `EPD_BUSY`
 
 ## 7. BOM（2026-09-15 采购冻结）
 
-`bom.csv` 由 kicad-cli 导出，列为 `Reference,Value,Footprint,Status,MPN`：
+`bom.csv` 由 kicad-cli 导出，列为
+`Reference,Value,Footprint,Status,MPN,Populate`（`Populate` 为 V1.6 新增）：
 
 ```
-RELEASED     : 全部器件（51 行）
+RELEASED     : 全部器件（52 行；R21 与 R31 已按 Populate 分成两行）
 PROVISIONAL  : 无 —— 2026-09-15 采购冻结轮清零
+FIT / DNP    : R21 = DNP、C16 = DNP，其余全部 FIT
 ```
 
 导出命令（保持工程既有列/分组格式）：
 
 ```powershell
 & 'C:\Program Files\KiCad\10.0\bin\kicad-cli.exe' sch export bom `
-  --fields "Reference,Value,Footprint,Status,MPN" `
-  --labels "Reference,Value,Footprint,Status,MPN" `
-  --group-by "Value,Footprint,Status,MPN" `
+  --fields "Reference,Value,Footprint,Status,MPN,Populate" `
+  --labels "Reference,Value,Footprint,Status,MPN,Populate" `
+  --group-by "Value,Footprint,Status,MPN,Populate" `
   -o "C:\Code\epdf-hardware\esp32-board-v1.1\bom.csv" `
   "C:\Code\epdf-hardware\esp32-board-v1.1\esp32-board-v1.1.kicad_sch"
 ```
@@ -294,7 +351,7 @@ MPN 字段格式统一为 `MPN（华秋 Gxxxxxxxx）`，同时写入原理图字
 | D6~D8 | MBR0530T1G（ON 安森美） | G3325533 | SOD-123 | 30 V / 500 mA，7,447 片 @10+ ￥0.48998 |
 | F1~F3 | BSMD0805L-200（BHFUSE 佰宏） | G5053245 | 0805 PTC | 保持 2 A / 跳闸 4 A / 6 V，8,029 片 @5+ ￥0.58883 |
 | L1 | Sunlord MWSA0503S-1R0MT | G4719678 | `Inductor_SMD:L_Sunlord_MWSA0503S` | 1.0 µH / DCR 14 mΩ / Isat 10 A，1,560 片 @5+ ￥0.79133 |
-| L3 | cjiang FHD4020S-470MT | G6635066 | `Inductor_SMD:L_Changjiang_FNR4020S` | 47 µH / 4×4×**2.0 mm** / Isat 1.10 A / Irms 0.56 A，2,905 片 @10+ ￥0.41683 |
+| L3 | cjiang FHD4020S-470MT | G6635066 | `Inductor_SMD:L_Changjiang_FNR4020S` | 47 µH ±20 % / **Rated 660 mA / Isat 1.3 A / DCR 950 mΩ** / −40…+125 °C / 4×4×**2.0 mm**，2,905 片 @10+ ￥0.41683 |
 | R13 | 0603WAF1800T5E（Uniohm 厚声） | G3705022 | 0603 | 180 Ω ±1 %，5,000 片 @100+ ￥0.01625 |
 
 此前已冻结（V1.5/V1.6 轮次）：J1 = GCT USB4105-15-A-120、J2 = XKB X05B20U24T、
@@ -306,12 +363,44 @@ NTC1 = Vishay NTCS0603E3103FLT、Q1 = Si1304BDL-T1-GE3、L2 = Sunlord MWSA0402S-
 | 位号 | 原封装 | 现封装 | 变更原因 |
 |---|---|---|---|
 | L1 | `Inductor_SMD:L_Coilcraft_XAL5030-XXX` | `Inductor_SMD:L_Sunlord_MWSA0503S` | 原设计料 XAL5030-102MEC 在华秋**无现货**（仅订货/代购，￥19.44 起）；顺络件 5.4×5.2×3.0 mm 与原 5.48×5.28×3.1 mm 基本一致，焊盘按厂商推荐 land pattern（KiCad 官方库）更新 |
-| L3 | `Inductor_SMD:L_Taiyo-Yuden_NR-40xx` | `Inductor_SMD:L_Changjiang_FNR4020S` | 原 47 µH/4×4 现货款余量偏紧（500 mA 额定 / Isat 570 mA）；改 cjiang FHD4020S-470MT（Isat 1.10 A / Irms 0.56 A），其推荐焊盘 1.10×3.7 mm @ ±1.50 mm 与 KiCad 官方 FNR4020S 封装一致 |
+| L3 | `Inductor_SMD:L_Taiyo-Yuden_NR-40xx` | `Inductor_SMD:L_Changjiang_FNR4020S` | 原 47 µH/4×4 现货款余量偏紧（500 mA 额定 / Isat 570 mA）；改 cjiang FHD4020S-470MT（47 µH ±20 % / Rated 660 mA / Isat 1.3 A / DCR 950 mΩ），其推荐焊盘 1.10×3.7 mm @ ±1.50 mm 与 KiCad 官方 FNR4020S 封装一致 |
 
 两处替换均保留原 uuid、原坐标与焊盘网络；替换后 **ERC = 0、
 DRC = 0 Error / 0 Warning**（unconnected = 255，未布线状态的预期值）。
 
 > 结构提示：L3 高度 1.8 → **2.0 mm**；L1 高度 3.1 → 3.0 mm。
+
+### 7.3 关键无源器件 MPN（2026-09-15，V1.6 清单 §6）
+
+`RELEASED` 并不等于 MPN 完整。以下器件此前只写了值 + 封装，本轮已锁到
+**华秋商城国内现货**的具体型号（含厂商 / 介质 / 额定电压 / 精度），并写入原理图
+`MPN` 字段与 `tools/gen_sch.py`。
+
+原因：`4.7 µF / 25 V / 0805` 这类 MLCC 的 **DC Bias 有效容量**在不同厂家、介质与
+额定电压系列之间差异很大，EPD 高压电容不能只靠值 + 封装描述。
+
+| 位号 | 值 | MPN | 华秋编号 | 关键参数 / 国内现货 |
+|---|---|---|---|---|
+| C27–C33 | 4.7 µF / 25 V（0805） | CL21A475KAQNNNG（Samsung 三星） | G0936665 | X5R ±10 % 25 V，现货 6,059 片 @10+ ￥0.32314 起 |
+| C34、C35 | 1 µF / 25 V（0603） | CL10B105KA8NNNC（Samsung 三星） | G0021698 | X7R ±10 % 25 V，现货 68,985 片 @10+ ￥0.12331 起 |
+| C36 | 1 µF / 25 V（0805） | 0805B105K250AT（FH 风华） | G4185910 | X7R ±10 % 25 V，现货 3,160 片 @10+ ￥0.20093 起 |
+| C1、C13、C14、C21–C23 | 22 µF（0805） | TCC0805X5R226K250FT（CCTC 三环） | G14559843 | X5R ±10 % **25 V**，现货 9,870 片 @5+ ￥1.02374 起 |
+| C2、C12、C15、C18–C20、C25、C37 | 10 µF（0805） | CL21A106KAYNNNE（Samsung 三星） | G0022684 | X5R ±10 % **25 V**，现货 275,804 片 @10+ ￥0.37241 起 |
+| R16 | 5.23 kΩ（0603） | 0603WAF5231T5E（Uniohm 厚声） | G3705144 | ±1 % 1/10 W，BQ25895 TS 网络 RT1，现货 3,897 片 @100+ ￥0.01206 |
+| R17 | 30.1 kΩ（0603） | RC0603DR-0730K1L（Yageo 国巨） | G4243913 | **±0.5 %** 1/10 W，BQ25895 TS 网络 RT2，现货 9,170 片 @50+ ￥0.02178 |
+| R23 | 470 kΩ（0603） | 0603WAF4703T5E（Uniohm 厚声） | G0064373 | ±1 % 1/10 W，TPS63070 FB 上臂，现货 54,169 片 @100+ ￥0.02594 |
+| R24 | 150 kΩ（0603） | RC0603FR-07150KL（Yageo 国巨） | G0072618 | ±1 % 1/10 W，TPS63070 FB 下臂，现货 64,968 片 @100+ ￥0.03553 |
+
+备选（任一款缺货时可临时替换，需重新确认 DC Bias）：
+
+```text
+4.7 µF/25 V/0805 备选：CL21A475KACLRNC（三星，G0936951）、CC0805MKX5R8BB475（国巨，G0970124）
+22 µF/0805 备选：     CL21A226MAQNNNE（三星，G0059520，25 V X5R）
+5.23 kΩ 备选：        FRC0603F5231TS（富捷，G6653568）、AC0603FR-075K23L（国巨，G4225788）
+30.1 kΩ 备选：        0603WAD3012T5E（厚声，G5950558，±0.5 %）
+```
+
+> 本节 **不阻塞布线**，但必须在 **SMT 下单前**完成（本轮的结论是：已经完成）。
 
 ---
 

@@ -236,6 +236,11 @@ def gen_symbol_instance(item, pin_map):
         s.append(prop("Status", item["status"], at[0], at[1]))
     if item.get("mpn"):
         s.append(prop("MPN", item["mpn"], at[0], at[1]))
+    # Assembly BOM field: FIT / DNP.  R21 + C16 (BQ25895 SW snubber) are DNP and
+    # everything else is FIT.  Keeping this as its own exported field stops R21
+    # (DNP) from being merged into the R31 (FIT) "2.2 ohm" BOM group, so a single
+    # row can never be deleted without losing a fitted part (V1.6 checklist 7).
+    s.append(prop("Populate", "DNP" if item.get("dnp") else "FIT", at[0], at[1]))
     for p in pins:
         s.append(f'\t\t(pin "{p["number"]}"')
         s.append(f'\t\t\t(uuid "{make_uuid()}")')
@@ -580,8 +585,13 @@ def build_schematic():
 
     lay = Layout(27.94, 127.0)
     core_passives = [
-        ("Device:C", "C", "22uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED),
-        ("Device:C", "C", "10uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED),
+        # V1.6 documentation round: the bulk MLCCs are now locked to hqchip
+        # in-stock MPNs.  22 uF/25 V and 10 uF/25 V in 0805 keep enough
+        # DC-bias headroom on the 3V3_MAIN / SYS rails.
+        ("Device:C", "C", "22uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED,
+         "TCC0805X5R226K250FT（华秋 G14559843）"),
+        ("Device:C", "C", "10uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED,
+         "CL21A106KAYNNNE（华秋 G0022684）"),
         ("Device:C", "C", "1uF", FP_C0603, {"1": "3V3_MAIN", "2": "GND"}, RELEASED),
         ("Device:C", "C", "0.1uF", FP_C0603, {"1": "3V3_MAIN", "2": "GND"}, RELEASED),
         ("Device:R", "R", "10k", FP_R0603, {"1": "3V3_MAIN", "2": "RESET_N"}, RELEASED),
@@ -593,8 +603,9 @@ def build_schematic():
         ("Device:R", "R", "4.7k", FP_R0603, {"1": "3V3_MAIN", "2": "I2C_SDA"}, RELEASED),
         ("Device:R", "R", "4.7k", FP_R0603, {"1": "3V3_MAIN", "2": "I2C_SCL"}, RELEASED),
     ]
-    for lib, prefix, val, fp, nets, status in core_passives:
-        b.comp(lib, prefix, val, fp, lay.cell(), nets, status=status)
+    for lib, prefix, val, fp, nets, status, *extra in core_passives:
+        b.comp(lib, prefix, val, fp, lay.cell(), nets, status=status,
+               mpn=extra[0] if extra else "")
 
     lay = Layout(27.94, 156.21)
     for name, net in [("RESET", "RESET_N"), ("BOOT", "BOOT"), ("KEY1", "KEY1_N"),
@@ -605,6 +616,15 @@ def build_schematic():
                # switches are frozen (review item 7 category C)
                lay.cell(), {"1": net, "2": "GND"}, status=RELEASED,
                mpn="Omron B3U-1000P")
+    # V1.6 mechanical clarification (V1.6 checklist section 1): B3U-1000P is a
+    # TOP-actuated tactile switch.  The 90 degree placement only rotates the
+    # pads / silkscreen; the enclosure post presses straight down onto the
+    # actuator from the PCB front side.  It is NOT a side-actuated part.
+    sch.add_text("SW1-SW5 = Omron B3U-1000P (top-actuated tactile switch)", (25.4, 166.37), 1.8)
+    sch.add_text("Actuation direction: perpendicular to the PCB surface - the enclosure post presses "
+                 "vertically onto the actuator from the PCB front side.", (25.4, 170.18), 1.6)
+    sch.add_text("The 90 degree PCB rotation only turns the pads / silkscreen; it does not convert the "
+                 "switch into a side-actuated part.", (25.4, 173.99), 1.6)
 
     # ---- 02 USB-C + TUSB320LI --------------------------------------------
     sch.add_text("02  USB-C 2.0 sink, VBUS protection, TUSB320LI current advertisement",
@@ -657,13 +677,16 @@ def build_schematic():
     # so it does not collide with the BQ25895 symbol or its pin labels.
     for i, line in enumerate([
         "Charge policy (V1.3, review list 2.2 / 2.3)",
+        "Power input definition (V1.6): compatible with a 5 V / 2 A source; continuous 2 A at elevated "
+        "ambient is NOT guaranteed.",
+        "F1-F3 PTC hold current derates with temperature - verify at 25 / 40 / 50 C before claiming 2 A.",
         "ICHG default = 896 mA (14 x 64 mA) - keeps the Molex 53261-0271 connector, 26 AWG harness and terminals inside their thermal budget.",
         "/CE = CHG_CE (GPIO47), 10k pull-up to 3V3_MAIN -> charge DISABLED at power-up.",
         "Start-up: MCU boot -> I2C init -> write ICHG / IINLIM / ITERM / VREG -> read back and verify -> drive /CE LOW -> charging enabled.",
         "Bench test at peak load (Wi-Fi TX + EPD refresh + TF card + CPU) required: measure J4/J5 peak current and connector /",
         "terminal / harness temperature rise; limit concurrent load in firmware if the design target is exceeded.",
     ]):
-        sch.add_text(line, (236.22, 20.5 + 4.3 * i), 1.6)
+        sch.add_text(line, (236.22, 17.0 + 3.4 * i), 1.6)
     b.comp("Battery_Management:BQ25895RTW", "U", "BQ25895RTW",
            "Package_DFN_QFN:Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias",
            (287.02, 88.9, 0), BQ_PINS, mpn="BQ25895RTWT", ref="U2")
@@ -673,10 +696,15 @@ def build_schematic():
         ("Device:C", "C", "1uF", FP_C0603, {"1": "USB_VBUS_PROT", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "4.7uF/10V", FP_C0805, {"1": "CHG_REGN", "2": "GND"}, RELEASED, ""),
         ("Device:C", "C", "47nF", FP_C0603, {"1": "CHG_BTST", "2": "CHG_SW"}, RELEASED, ""),
-        ("Device:C", "C", "10uF", FP_C0805, {"1": "BAT_BUS", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "22uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "22uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "10uF", FP_C0805, {"1": "CHG_PMID", "2": "GND"}, RELEASED, ""),
+        ("Device:C", "C", "10uF", FP_C0805, {"1": "BAT_BUS", "2": "GND"}, RELEASED,
+         "CL21A106KAYNNNE（华秋 G0022684）"),
+        ("Device:C", "C", "22uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED,
+         "TCC0805X5R226K250FT（华秋 G14559843）"),
+        ("Device:C", "C", "22uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED,
+         "TCC0805X5R226K250FT（华秋 G14559843）"),
+        # PMID needs >= 8.2 uF with OTG unused (BQ25895 Table 6-1)
+        ("Device:C", "C", "10uF", FP_C0805, {"1": "CHG_PMID", "2": "GND"}, RELEASED,
+         "CL21A106KAYNNNE（华秋 G0022684）"),
         # BQ25895 buck inductor, frozen to Sunlord MWSA0503S-1R0MT (1.0 uH,
         # DCR 14 mOhm, Irms 7.8 A, Isat 10 A, 5.4 x 5.2 x 3.0 mm).  KiCad ships
         # the manufacturer land pattern as Inductor_SMD:L_Sunlord_MWSA0503S.
@@ -687,8 +715,12 @@ def build_schematic():
          "0603WAF1800T5E（华秋 G3705022）"),
         ("Device:R", "R", "10k", FP_R0603, {"1": "CHG_INT_N", "2": "3V3_MAIN"}, RELEASED, ""),
         ("Device:R", "R", "10k", FP_R0603, {"1": "CHG_STAT", "2": "3V3_MAIN"}, RELEASED, ""),
-        ("Device:R", "R", "5.23k", FP_R0603, {"1": "CHG_REGN", "2": "CHG_TS"}, RELEASED, ""),
-        ("Device:R", "R", "30.1k", FP_R0603, {"1": "CHG_TS", "2": "GND"}, RELEASED, ""),
+        # BQ25895 TS network: RT1 = 5.23 k, RT2 = 30.1 k (datasheet Table 6-1);
+        # 1 % / 0.5 % parts are locked so the JEITA trip points stay on target.
+        ("Device:R", "R", "5.23k", FP_R0603, {"1": "CHG_REGN", "2": "CHG_TS"}, RELEASED,
+         "0603WAF5231T5E（华秋 G3705144）"),
+        ("Device:R", "R", "30.1k", FP_R0603, {"1": "CHG_TS", "2": "GND"}, RELEASED,
+         "RC0603DR-0730K1L（华秋 G4243913）"),
         # V1.6: real 0603 SMD thermistor with the B value the BQ25895 TS
         # network expects (10 kOhm at 25 C, B25/85 = 3435 K = Semitec 103AT).
         # NTC1 senses PCB ambient next to the battery connectors, not cell
@@ -750,15 +782,25 @@ def build_schematic():
         # manufacturer's recommended land pattern, so no local copy is needed.
         ("Device:L", "L", "1.2uH", "Inductor_SMD:L_Sunlord_MWSA0402S",
          {"1": "TPS_L1", "2": "TPS_L2"}, RELEASED, "Sunlord MWSA0402S-1R2MT"),
-        ("Device:C", "C", "10uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "10uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "10uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "22uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "22uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "22uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED, ""),
+        ("Device:C", "C", "10uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED,
+         "CL21A106KAYNNNE（华秋 G0022684）"),
+        ("Device:C", "C", "10uF", FP_C0805, {"1": "SYS", "2": "GND"}, RELEASED,
+         "CL21A106KAYNNNE（华秋 G0022684）"),
+        ("Device:C", "C", "10uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED,
+         "CL21A106KAYNNNE（华秋 G0022684）"),
+        ("Device:C", "C", "22uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED,
+         "TCC0805X5R226K250FT（华秋 G14559843）"),
+        ("Device:C", "C", "22uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED,
+         "TCC0805X5R226K250FT（华秋 G14559843）"),
+        ("Device:C", "C", "22uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED,
+         "TCC0805X5R226K250FT（华秋 G14559843）"),
         ("Device:C", "C", "100nF", FP_C0603, {"1": "TPS_VAUX", "2": "GND"}, RELEASED, ""),
-        ("Device:R", "R", "470k", FP_R0603, {"1": "3V3_MAIN", "2": "TPS_FB"}, RELEASED, ""),
-        ("Device:R", "R", "150k", FP_R0603, {"1": "TPS_FB", "2": "GND"}, RELEASED, ""),
+        # TPS63070 feedback divider: 470 k / 150 k gives VREF 800 mV -> 3.3 V.
+        # The values set the output tolerance, so the MPNs are locked here.
+        ("Device:R", "R", "470k", FP_R0603, {"1": "3V3_MAIN", "2": "TPS_FB"}, RELEASED,
+         "0603WAF4703T5E（华秋 G0064373）"),
+        ("Device:R", "R", "150k", FP_R0603, {"1": "TPS_FB", "2": "GND"}, RELEASED,
+         "RC0603FR-07150KL（华秋 G0072618）"),
         ("Device:R", "R", "10k", FP_R0603, {"1": "3V3_MAIN", "2": "TPS_PG"}, RELEASED, ""),
         ("Device:R", "R", "10k", FP_R0603, {"1": "SYS", "2": "TPS_EN"}, RELEASED, ""),
         # PS/SYNC pulled to VIN (SYS) = PWM/PFM power-save mode for good light-load
@@ -786,10 +828,11 @@ def build_schematic():
     lay = Layout(419.1, 280.67)
     epd_parts = [
         ("Device:R", "R", "100k", FP_R0603, {"1": "EPD_PWR_EN", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "10uF", FP_C0805, {"1": "EPD_3V3", "2": "GND"}, RELEASED, ""),
+        ("Device:C", "C", "10uF", FP_C0805, {"1": "EPD_3V3", "2": "GND"}, RELEASED,
+         "CL21A106KAYNNNE（华秋 G0022684）"),
         ("Device:C", "C", "0.1uF", FP_C0603, {"1": "EPD_3V3", "2": "GND"}, RELEASED, ""),
-        # EPD booster inductor, frozen to cjiang FHD4020S-470MT (47 uH,
-        # DCR 0.95 Ohm typ, Isat 1.10 A max / 1.30 A typ, Irms 0.56 A max,
+        # EPD booster inductor, frozen to cjiang FHD4020S-470MT (47 uH +/-20 %,
+        # Rated current 660 mA, Isat 1.3 A, DCR 950 mOhm, -40..+125 C,
         # 4.0 x 4.0 x 2.0 mm).  Its recommended land pattern is the one KiCad
         # ships as Inductor_SMD:L_Changjiang_FNR4020S (pads 1.1 x 3.7 mm at
         # +/-1.50 mm), so the old NR-40xx footprint is replaced by that one.
@@ -810,16 +853,31 @@ def build_schematic():
          {"2": "EPD_X", "1": "GND"}, RELEASED, "MBR0530T1G（华秋 G3325533）"),
         ("Device:D_Schottky", "D", "MBR0530", "Diode_SMD:D_SOD-123",
          {"2": "EPD_VGL", "1": "EPD_X"}, RELEASED, "MBR0530T1G（华秋 G3325533）"),
-        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_3V3", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VGH", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_SW", "2": "EPD_X"}, RELEASED, ""),
-        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VGL", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VSH2", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VSH1", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VSL", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "1uF/25V", FP_C0603, {"1": "EPD_3V3", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "1uF/25V", FP_C0603, {"1": "EPD_VDD", "2": "GND"}, RELEASED, ""),
-        ("Device:C", "C", "1uF/25V", FP_C0805, {"1": "EPD_VCOM", "2": "GND"}, RELEASED, ""),
+        # EPD 25 V MLCC block (V1.6 checklist section 6).  Parts like these are
+        # where DC-bias capacitance differs most between vendors, so the MPN /
+        # dielectric / voltage are locked instead of only "4.7uF/25V/0805".
+        # CL21A475KAQNNNG is X5R +/-10 % 25 V in 0805 and in stock at hqchip.
+        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_3V3", "2": "GND"}, RELEASED,
+         "CL21A475KAQNNNG（华秋 G0936665）"),
+        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VGH", "2": "GND"}, RELEASED,
+         "CL21A475KAQNNNG（华秋 G0936665）"),
+        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_SW", "2": "EPD_X"}, RELEASED,
+         "CL21A475KAQNNNG（华秋 G0936665）"),
+        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VGL", "2": "GND"}, RELEASED,
+         "CL21A475KAQNNNG（华秋 G0936665）"),
+        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VSH2", "2": "GND"}, RELEASED,
+         "CL21A475KAQNNNG（华秋 G0936665）"),
+        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VSH1", "2": "GND"}, RELEASED,
+         "CL21A475KAQNNNG（华秋 G0936665）"),
+        ("Device:C", "C", "4.7uF/25V", FP_C0805, {"1": "EPD_VSL", "2": "GND"}, RELEASED,
+         "CL21A475KAQNNNG（华秋 G0936665）"),
+        # 0603 and 0805 1 uF/25 V are two separate BOM lines on purpose.
+        ("Device:C", "C", "1uF/25V", FP_C0603, {"1": "EPD_3V3", "2": "GND"}, RELEASED,
+         "CL10B105KA8NNNC（华秋 G0021698）"),
+        ("Device:C", "C", "1uF/25V", FP_C0603, {"1": "EPD_VDD", "2": "GND"}, RELEASED,
+         "CL10B105KA8NNNC（华秋 G0021698）"),
+        ("Device:C", "C", "1uF/25V", FP_C0805, {"1": "EPD_VCOM", "2": "GND"}, RELEASED,
+         "0805B105K250AT（华秋 G4185910）"),
     ]
     for lib, prefix, val, fp, nets, status, mpn in epd_parts:
         b.comp(lib, prefix, val, fp, lay.cell(), nets, status=status, mpn=mpn)
@@ -836,7 +894,8 @@ def build_schematic():
 
     lay = Layout(236.22, 374.65, cols=7)
     sd_parts = [
-        ("Device:C", "C", "10uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED, ""),
+        ("Device:C", "C", "10uF", FP_C0805, {"1": "3V3_MAIN", "2": "GND"}, RELEASED,
+         "CL21A106KAYNNNE（华秋 G0022684）"),
         ("Device:C", "C", "0.1uF", FP_C0603, {"1": "3V3_MAIN", "2": "GND"}, RELEASED, ""),
         ("Device:R", "R", "10k", FP_R0603, {"1": "3V3_MAIN", "2": "TF_CS_N"}, RELEASED, ""),
         ("Device:R", "R", "0", FP_R0603, {"1": "SPI_SCLK", "2": "TF_SCLK"}, RELEASED, ""),

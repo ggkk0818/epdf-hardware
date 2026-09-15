@@ -1,5 +1,35 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-15 更新（V1.6 文档 / BOM / 生产资料收尾）**：按
+> `ESP32S3_GDEM102T91_V1.6_Final_Documentation_and_BOM_Fixes.md` 完成文档与生产
+> 资料修正，**仍未开始布线**。要点：
+> - **SW1–SW5 = Omron B3U-1000P 为顶部按压型（Top-actuated）**：外壳按键柱从
+>   PCB **正面垂直向下**压执行器。全文删除“侧按 / 侧面按压 / 按压方向沿 PCB X 轴 /
+>   朝板右外侧 / Right-angle side-actuated”等旧描述；90° 摆放只影响焊盘与丝印方向，
+>   不改变按压方向。`RIGHT_SWITCH_COLUMN`（X 49–55）与
+>   `KEY_RIGHT_MECH_KEEP_OUT`（X 49–51 / Y 0–84）保持不变。
+> - **系统输入能力定义为 “5 V / 2 A source compatible，非高温连续 2 A 保证”**：
+>   允许使用 5 V/2 A 适配器，但不承诺 40 °C / 50 °C 环境下长时间接近 2 A（PTC 保持
+>   电流随温度降额）。充电目标仍为 ICHG ≈ 896 mA。原型测试新增 25 / 40 / 50 °C、
+>   并发负载，并记录 F1 温升与 PTC 两端压降。
+> - **L3 = cjiang FHD4020S-470MT** 参数统一为 47 µH ±20 % / Rated 660 mA /
+>   Isat 1.3 A / DCR 950 mΩ / −40…+125 °C / H ≈ 2.0 mm（删除旧的 Isat 1.10 A、
+>   Irms 0.56 A）。本轮**只改参数记录，不动 EPD Booster 摆放**。
+> - **生产 BOM 新增 `Populate` 字段（FIT / DNP）**：R21 = DNP、C16 = DNP、
+>   R31 = FIT。R21 与 R31 同值但已落到不同 BOM 行，不会再出现“整行删除误删 R31”
+>   的风险。
+> - **补齐关键无源器件 MPN（华秋国内现货）**：C27–C33 = CL21A475KAQNNNG（G0936665）、
+>   C34/C35 = CL10B105KA8NNNC（G0021698）、C36 = 0805B105K250AT（G4185910）、
+>   10 µF = CL21A106KAYNNNE（G0022684）、22 µF = TCC0805X5R226K250FT（G14559843）、
+>   R16 = 0603WAF5231T5E（G3705144）、R17 = RC0603DR-0730K1L（G4243913）、
+>   R23 = 0603WAF4703T5E（G0064373）、R24 = RC0603FR-07150KL（G0072618）。
+> - **ERC 说明统一**：V1.6 为 0 violations；`footprint_link_issues` 与
+>   `footprint_filter` 启用，`single_global_label` / `four_way_junction` /
+>   `simulation_model_issue` 按项目设计策略保持 Ignore。删除“没有关闭任何全局 ERC
+>   检查项”的旧说法。
+> - 验证：**ERC = 0 violations；DRC = 0 Error / 0 Warning**（unconnected = 255，
+>   未布线状态的预期值）。
+>
 > **2026-09-15 更新（采购冻结，Rev 仍为 V1.6）**：把 BOM 里最后一组
 > `PROVISIONAL` 器件全部落到华秋商城（hqchip）**国内现货**料号并冻结。
 > 本轮**不改变电路拓扑与器件摆放**，只改 L1/L3 的封装和 MPN/Status 字段，
@@ -11,12 +41,14 @@
 > - **F1~F3** = BSMD0805L-200（佰宏，0805 PTC，保持 2 A / 跳闸 4 A / 6 V）；
 > - **L1** = Sunlord MWSA0503S-1R0MT（1.0 µH / DCR 14 mΩ / Isat 10 A），
 >   封装由 Coilcraft XAL5030 改为 `Inductor_SMD:L_Sunlord_MWSA0503S`；
-> - **L3** = cjiang FHD4020S-470MT（47 µH / 4×4×2.0 mm / Isat 1.10 A），
+> - **L3** = cjiang FHD4020S-470MT（47 µH ±20 % / Rated 660 mA / Isat 1.3 A /
+>   DCR 950 mΩ / 4×4×2.0 mm），
 >   封装由 Taiyo-Yuden NR-40xx 改为 `Inductor_SMD:L_Changjiang_FNR4020S`；
 > - **R13** = 0603WAF1800T5E（厚声，180 Ω ±1 %，BQ25895 KILIM）。
 > - MPN 字段统一写作 `MPN（华秋 Gxxxxxxxx）`，已同时写进**原理图字段**与生成
->   脚本 `tools/gen_sch.py`；`bom.csv` 重新导出后 **PROVISIONAL = 0，51 行全部
->   RELEASED**。完整冻结清单见 `SCHEMATIC_NOTES.md` §7。
+>   脚本 `tools/gen_sch.py`；`bom.csv` 重新导出后 **PROVISIONAL = 0，全部
+>   RELEASED**（当时 51 行；V1.6 文档轮拆出 R21/R31 后为 **52 行**）。
+>   完整冻结清单见 `SCHEMATIC_NOTES.md` §7。
 > - 验证：**ERC = 0；DRC = 0 Error / 0 Warning**，unconnected = 255（未布线状态的
 >   预期值，与冻结前一致）。
 > - 结构提示：L3 高度 1.8 → **2.0 mm**、L1 高度 3.1 → 3.0 mm。
@@ -208,14 +240,16 @@
 6. 原理图已用全局标签方式建立连接，**ERC = 0 Error / 0 Warning，且无任何 Exclusion**。
 7. EPD SSD1677 高压外围已按 GDEM102T91 第 20 页典型应用电路逐节点锁定（见 `SCHEMATIC_NOTES.md` §4）。
 8. 已生成 `bom.csv`（含 `Status` = RELEASED / PROVISIONAL 与 `MPN` 列）；
-   2026-09-15 采购冻结后**全部 51 行均为 `RELEASED`**，MPN 后附华秋编号。
+   2026-09-15 采购冻结后**全部行均为 `RELEASED`**，MPN 后附华秋编号。
+   V1.6 文档轮新增 `Populate` 列（FIT / DNP）后共 **52 行**（R21 与 R31 拆行）。
 9. 已生成 `esp32-board-v1.1.kicad_pcb`：**55×84 mm 竖版**、R2 圆角、
    4×Ø2.2 mm 定位孔（距边 3 mm）、4 层叠层（Dk 4.2 / 外层 1 oz）、
    4 个 Net Class（Default / USB90 0.24-0.18 / POWER / HV_EPD）、
    天线禁布规则区 `ESP32_ANT_KEEP_OUT`、按键机械禁布区
    `KEY_RIGHT_MECH_KEEP_OUT`，106 个器件全部摆放完毕（其中 29 个为引脚级对齐放置）。
-10. PCB DRC：**0 Error / 15 Warning**（11 条位号文字互搭 + 2 条定位孔在天线 courtyard
-    内 + 2 条模块丝印压板边；均无功能影响）。255 条未连接飞线＝尚未布线，本阶段预期。
+10. ~~PCB DRC：0 Error / 15 Warning~~ → **已清零**：V1.6 起 **0 Error / 0 Warning**
+    （历史 15 条为位号文字互搭、定位孔在天线 courtyard 内、模块丝印压板边，已在
+    丝印重做与规则区调整中消除）。255 条未连接飞线＝尚未布线，本阶段预期。
     丝印位号已由 `gen_pcb.py` 的 `build_silk()` 自动避让焊盘（silk_over_copper = 0）。
 
 ### 当前 ERC 结果
@@ -263,9 +297,9 @@ kicad-cli sch erc  →  0 violations
 2. 原理图仍为单页（按 8 个功能区标注）。正式发布前建议按 MD 分页
    `00_System_Block` 至 `08_Buttons_Debug_Testpoints`。
 3. ~~USB、MicroSD、FPC、电池连接器、按键的最终料号未确定~~
-   → **已全部冻结**（2026-09-15 采购冻结轮，`bom.csv` 51 行全部 `RELEASED`，
-   清单见 `SCHEMATIC_NOTES.md` §7）；3D 模型除本项目自制封装外均取自
-   KiCad 官方库。
+   → **已全部冻结**（2026-09-15 采购冻结轮 `bom.csv` 全部 `RELEASED`；V1.6 文档轮
+   补齐关键 MLCC / 精密电阻 MPN 后为 52 行，清单见 `SCHEMATIC_NOTES.md` §7、§7.3）；
+   3D 模型除本项目自制封装外均取自 KiCad 官方库。
 4. BOM 已生成（`bom.csv`），**所有器件均为 `RELEASED`**，MPN 后附华秋编号
    （格式 `MPN（华秋 Gxxxxxxxx）`）。
 5. 与旧版设计文档的有意差异（例如 BQ25895 /CE 默认禁止充电、
@@ -394,11 +428,29 @@ USB-C 移到板下边中部 (24.0, 81.33)，TF 座移到右下 (42.0, 75.20)，V
 | P0⑥ | J2 Pin1/Pin24/Top Contact/插入方向复核 | **已完成** | 无 1↔24 反序；开口仍朝左；建议投产前实物再核对一次 |
 | P1⑦ | BQ25895 /CE 上电异常验证 | **列入原型测试** | 见 `PCB_LAYOUT_NOTES.md` §12（示波器场景清单） |
 | P1⑧ | NTC1 精确料号 | **已完成** | Vishay NTCS0603E3103FLT（0603 / 10 kΩ / B3435） |
-| P2⑨ | BOM PROVISIONAL 冻结 | **已完成** | 2026-09-15：D1/D2-D5/D6-D8/F1-F3/L1/L3/R13 全部落到华秋国内现货料号，L1（MWSA0503S）与 L3（FHD4020S-470MT）同步换封装；`bom.csv` 51 行全 `RELEASED`，清单见 `SCHEMATIC_NOTES.md` §7 |
+| P2⑨ | BOM PROVISIONAL 冻结 | **已完成** | 2026-09-15：D1/D2-D5/D6-D8/F1-F3/L1/L3/R13 全部落到华秋国内现货料号，L1（MWSA0503S）与 L3（FHD4020S-470MT）同步换封装；`bom.csv` 全 `RELEASED`（V1.6 文档轮拆行后 52 行），清单见 `SCHEMATIC_NOTES.md` §7 / §7.3 |
 | P2⑩ | 版本 / Rev / 输出文件名统一 | **已完成** | Rev = V1.6；发布命名规则见 `PCB_LAYOUT_NOTES.md` §13 |
 | ⑪⑫ | Run ERC / DRC | **已完成** | ERC 0 / DRC 0 Error 0 Warning |
 | ⑬ | Placement Freeze | **已完成** | 除 J2/Q1 封装外不再重排 |
 | ⑭ | 开始 Routing | **未开始** | 等用户确认 |
+
+## 六之七、V1.6 文档 / BOM 收尾状态（依 `ESP32S3_GDEM102T91_V1.6_Final_Documentation_and_BOM_Fixes.md`）
+
+| # | 清单条目 | 状态 | 说明 |
+|---:|---|---|---|
+| ① | SW3/4/5 机械说明改为顶部按压 | **已完成** | B3U-1000P = Top-actuated；外壳按键柱从 PCB 正面垂直压下。已清掉“侧按 / 朝右 / 沿 X 轴”描述（`agent.md`、`SCHEMATIC_NOTES.md`、原理图注释） |
+| ② | SW1–SW5 继续使用 B3U-1000P | **已完成** | 封装 `Button_Switch_SMD:SW_SPST_B3U-1000P` 不变；90° 摆放保留 |
+| ③ | 系统输入改写为 5 V/2 A source compatible | **已完成** | 原理图 03 区与三份说明文档统一为“非高温连续 2 A 保证” |
+| ④ | 测试计划增加 PTC 高温验证 | **已完成** | 25 / 40 / 50 °C + 并发负载 + F1 温升 + VBUS / PTC 压降，见 `SCHEMATIC_NOTES.md` §5.1、`PCB_LAYOUT_NOTES.md` §12 |
+| ⑤⑥⑦ | L3 参数在 SCHEMATIC_NOTES / PCB_LAYOUT_NOTES / agent.md 统一 | **已完成** | 47 µH ±20 % / Rated 660 mA / Isat 1.3 A / DCR 950 mΩ / −40…+125 °C / H 2.0 mm；旧 Isat 1.10 A、Irms 0.56 A 已删除 |
+| ⑧ | F1–F3 继续 BSMD0805L-200 | **已完成** | 0805 PTC，保持 2 A / 跳闸 ≈4 A / 6 V，华秋 G5053245 |
+| ⑨ | L3 摆放不重排 | **已完成** | 仅核对 footprint `Inductor_SMD:L_Changjiang_FNR4020S` 与采购件 land pattern 一致；Booster 岛未移动 |
+| ⑩ | BOM 增加 `Populate` 字段 | **已完成** | `bom.csv` 列 = `Reference,Value,Footprint,Status,MPN,Populate` |
+| ⑪ | R21/C16 = DNP、R31 = FIT | **已完成** | 原理图 `(dnp yes)` + `Populate=DNP`；R21 与 R31 已分行为 `R21 DNP` / `R31 FIT` |
+| ⑫ | 补关键 MLCC / 精密电阻 MPN | **已完成** | C27–C33 / C34,C35 / C36 / 10 µF / 22 µF / R16 / R17 / R23 / R24 全部落到华秋国内现货料号 |
+| ⑬ | 清理 ERC 文档旧描述 | **已完成** | 三份文档统一为“0 violations + 两个检查启用 + 三个按策略 Ignore” |
+| ⑭ | 重跑 ERC / DRC | **已完成** | ERC 0 violations；DRC 0 Error / 0 Warning；unconnected 255（未布线） |
+| ⑮ | 开始正式 Routing | **未开始** | 等用户确认布局与文档 |
 
 ## 七、继续任务时的建议顺序
 

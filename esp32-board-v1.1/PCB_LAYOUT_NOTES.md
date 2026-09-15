@@ -1,6 +1,8 @@
 # ESP32-S3 + GDEM102T91 V1.6 — PCB 布局说明与状态
 
 > Routing 前最后一轮（`ESP32S3_GDEM102T91_V1.5_to_V1.6_PreRouting_Remaining_Items.md`）。
+> 2026-09-15 追加 `ESP32S3_GDEM102T91_V1.6_Final_Documentation_and_BOM_Fixes.md`
+> 的文档 / BOM / 生产资料收尾，**仍未开始布线**。
 > 与 `agent.md`、`SCHEMATIC_NOTES.md` 配套阅读。
 > 板框 55 × 84 mm / 4 层 / 1.2 mm；**Placement 已冻结，布线未开始**。
 
@@ -17,11 +19,16 @@
 | P0 §3 | J2 → **XKB X05B20U24T** | 已完成（含 FPC 厚度确认 + 官方 CAD 数据） |
 | P1 §5 | BQ25895 /CE 上电异常状态验证 | 列入原型测试计划（见 §13） |
 | P1 §6 | NTC1 精确料号冻结 | 已完成（Vishay NTCS0603E3103FLT） |
-| P2 §7 | BOM PROVISIONAL 继续冻结 | **已完成**（2026-09-15：全部 51 行 `RELEASED`） |
+| P2 §7 | BOM PROVISIONAL 继续冻结 | **已完成**（2026-09-15：全部 `RELEASED`；V1.6 文档轮拆出 R21/R31 后为 **52 行**） |
 | P2 §8 | 版本号 / Rev / 输出文件名统一 | 已完成（Rev = **V1.6**，命名规则见 §14） |
 | §9 | ERC 说明同步 | 已完成（§9） |
 | §10 | Placement 不再为 1~2 mm 重排 | 遵守 |
 | §11 ⑭ | 正式布线 | **未开始** |
+| V1.6 清单 §1 | SW1–SW5 机械说明改为**顶部按压** | 已完成（删除全部“侧按 / 朝右”表述） |
+| V1.6 清单 §3 | 系统输入写为 5 V/2 A source compatible | 已完成（§12 测试项同步） |
+| V1.6 清单 §4/§5 | L3 参数统一 + 摆放不动 | 已完成（§5.5、§13） |
+| V1.6 清单 §6 | 关键 MLCC / 精密电阻 MPN | 已完成（`SCHEMATIC_NOTES.md` §7.3） |
+| V1.6 清单 §7 | BOM 增加 `Populate`（R21/C16 DNP、R31 FIT） | 已完成（§13） |
 
 RF 净空决策：ESP32 天线保持 `ESP32_ANT_KEEP_OUT`（X 16–39 / Y 0–6，四层禁铜/走线/
 过孔/器件）+ 顶部定位孔**塑料柱**，状态记为 **RF LIMITED-CLEARANCE ACCEPTED**，
@@ -136,7 +143,7 @@ min track 0.15 / clearance 0.15 / via 0.40-0.20 / 铜到板边 0.30。
 | 位号 | 原封装 | 现封装 | 变更原因 |
 |---|---|---|---|
 | L1 | `Inductor_SMD:L_Coilcraft_XAL5030-XXX` | **`Inductor_SMD:L_Sunlord_MWSA0503S`** | 原设计料 Coilcraft XAL5030-102MEC 在华秋**无现货**（仅订货/代购，￥19.44 起 @400+）；改用顺络 MWSA0503S-1R0MT（1.0 µH / DCR 14 mΩ / Isat 10 A / 5.4×5.2×3.0 mm），外形与原 5.48×5.28×3.1 mm 基本一致 |
-| L3 | `Inductor_SMD:L_Taiyo-Yuden_NR-40xx` | **`Inductor_SMD:L_Changjiang_FNR4020S`** | 原 47 µH/4×4 现货款余量偏紧（500 mA 额定 / Isat 570 mA）；改用 cjiang FHD4020S-470MT（Isat 1.10 A / Irms 0.56 A / 4.0×4.0×2.0 mm），其推荐焊盘 1.10×3.7 mm @ ±1.50 mm 与 KiCad 官方 FNR4020S 封装一致 |
+| L3 | `Inductor_SMD:L_Taiyo-Yuden_NR-40xx` | **`Inductor_SMD:L_Changjiang_FNR4020S`** | 原 47 µH/4×4 现货款余量偏紧（500 mA 额定 / Isat 570 mA）；改用 cjiang FHD4020S-470MT（**47 µH ±20 % / Rated 660 mA / Isat 1.3 A / DCR 950 mΩ** / 4.0×4.0×2.0 mm），其推荐焊盘 1.10×3.7 mm @ ±1.50 mm 与 KiCad 官方 FNR4020S 封装一致 |
 
 两处替换均保留原 uuid、原坐标与焊盘网络（L1：CHG_SW / SYS；L3：EPD_3V3 /
 EPD_SW），仅封装图形与焊盘尺寸更新；替换后 **DRC = 0 Error / 0 Warning**、
@@ -203,7 +210,7 @@ DRC Exclusions: 0
 | §1.3 | R30 贴 Q1 Gate | 3.81 mm | 岛上 D6/D7/D8/R28 已占满，这是当前最近空位 |
 | §1.3 | R31 靠 Q1 Source/RESE | 5.24 mm | Q1 下方整排被 D6（EPD_SW→VGH）与 D8 占据，再近需拆开关环路 |
 | §2.2 | 新建本地封装 `esp32-board-v1.1:MWSA0402S` | 改用 KiCad 官方库 `Inductor_SMD:L_Sunlord_MWSA0402S` | 该库封装即由顺络推荐 land pattern 生成，避免多一份需维护的本地副本，且库一致性检查为 0 |
-| §7 | BOM PROVISIONAL 全部冻结 | **已完成（2026-09-15）** | D1 / D2-D5 / D6-D8 / F1-F3 / L1 / L3 / R13 已全部落到华秋商城国内现货料号，L1、L3 顺带换成 KiCad 官方库封装；`bom.csv` 51 行全 `RELEASED`，清单见 `SCHEMATIC_NOTES.md` §7 |
+| §7 | BOM PROVISIONAL 全部冻结 | **已完成（2026-09-15）** | D1 / D2-D5 / D6-D8 / F1-F3 / L1 / L3 / R13 已全部落到华秋商城国内现货料号，L1、L3 顺带换成 KiCad 官方库封装；`bom.csv` 全 `RELEASED`（V1.6 文档轮拆出 R21/R31 后 52 行），清单见 `SCHEMATIC_NOTES.md` §7 / §7.3 |
 | §8 | 输出文件名统一 | 已统一 Rev/Title Block；工程文件仍名 `esp32-board-v1.1.*` | 见 §14 的发布命名规则；重命名工程会破坏工具链与既有引用 |
 | §3.4 | J2 逐项复核 | 已核对 Pin1/Pin24/Top Contact/插入方向/固定焊盘位置 | **建议投产前再用实物或厂商 3D 模型核对一次**（本封装由官方图纸+CAD 数据生成，未经实物比对） |
 
@@ -242,10 +249,21 @@ R23→FB 3.63 / R24→R23 1.81 / R33·R34→U1 2.84·2.34 / R35→J3 MISO 2.96 m
 [ ] /CE 异常启动时序（BAT-only 冷启动 / 仅 VBUS / 同时接入 / 极低电量插 USB /
     充电中 MCU 复位 / Brownout / 反复插拔 USB）——同时观察 CE、3V3_MAIN、
     VBUS、BAT 电压与充电电流，确认 MCU 配置完成前无高充电电流窗口
+[ ] 25 °C 下最大 USB 输入电流
+[ ] 40 °C 环境下持续运行
+[ ] 50 °C 环境下持续运行
+[ ] Wi-Fi TX + EPD refresh + microSD 并发
+[ ] 充电 + 系统最大负载并发
 [ ] 单电池最大系统电流 / J4-J5 与线束温升 / BAT_BUS 压降
 [ ] ESP32 Wi-Fi / BLE RSSI、吞吐、距离、装壳前后对比（有限净空验证）
 [ ] EPD Booster 高压波形 / TPS63070 3V3 ripple / USB 枚举 / microSD 高速读写
+[ ] 外壳按键柱垂直按压 SW3 / SW4 / SW5 的装配公差
 ```
+
+> **系统输入能力（V1.6 清单 §3）**：`5 V / 2 A source compatible，非高温连续 2 A
+> 保证`。允许使用 5 V/2 A 适配器，但不承诺 40 / 50 °C 环境下长时间接近 2 A ——
+> 原因是 F1~F3（BSMD0805L-200）的 PTC Hold Current 随温度降额。高温工况需同时记录
+> **F1 温升、USB-C 温升、BQ25895 温升、VBUS 压降、PTC 两端压降**，并确认无热跳闸。
 
 ---
 
@@ -254,8 +272,9 @@ R23→FB 3.63 / R24→R23 1.81 / R33·R34→U1 2.84·2.34 / R35→J3 MISO 2.96 m
 | 项 | 值 |
 |---|---|
 | PCB Revision | **V1.6**（PCB 与原理图 Title Block 均已更新，日期 2026-09-15） |
-| 采购冻结 | **2026-09-15**：BOM 全部 51 行 `RELEASED`；L1 → Sunlord MWSA0503S-1R0MT、L3 → cjiang FHD4020S-470MT（两者均改用 KiCad 官方库封装）。本轮不改拓扑与摆放，**Rev 保持 V1.6** |
-| BOM | `bom.csv` 随工程生成，含 Status / MPN 列；MPN 格式为 `MPN（华秋 Gxxxxxxxx）`，导出命令见 `SCHEMATIC_NOTES.md` §7 |
+| 采购冻结 | **2026-09-15**：BOM 全部 52 行 `RELEASED`（R21 与 R31 已按 `Populate` 拆行）；L1 → Sunlord MWSA0503S-1R0MT、L3 → cjiang FHD4020S-470MT（两者均改用 KiCad 官方库封装）。本轮不改拓扑与摆放，**Rev 保持 V1.6** |
+| BOM | `bom.csv` 随工程生成，列为 `Reference,Value,Footprint,Status,MPN,Populate`；`Populate` = FIT / DNP（**R21 = DNP、C16 = DNP、R31 = FIT**）；MPN 格式为 `MPN（华秋 Gxxxxxxxx）`，导出命令见 `SCHEMATIC_NOTES.md` §7 |
+| 开关机械动作 | **SW1~SW5 = Omron B3U-1000P 为顶部按压型（Top-actuated）**：外壳按键柱从 PCB 正面垂直压下。90° 摆放只影响焊盘/丝印方向；`RIGHT_SWITCH_COLUMN`（X 49–55）与 `KEY_RIGHT_MECH_KEEP_OUT`（X 49–51 / Y 0–84）保持不变 |
 | 发布文件命名建议 | `ESP32S3_EPD_V1.6_PCB.gbr`、`..._PTH.drl`、`..._NPTH.drl`、`..._BOM.csv`、`..._CPL.csv` |
 
 工程文件名仍为 `esp32-board-v1.1.*`（工具链与历史引用依赖它）；**版本以 Title Block
