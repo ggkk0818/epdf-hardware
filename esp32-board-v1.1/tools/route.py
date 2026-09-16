@@ -73,11 +73,13 @@ BOARD_CX, BOARD_CY, BOARD_HX, BOARD_HY, BOARD_R = 27.5, 42.0, 27.5, 42.0, 2.0
 # clean corridor), then power, then everything else shortest-span-first.
 TIERS = [
     ["CHG_SW", "CHG_SNUB", "CHG_BTST", "CHG_PMID", "CHG_REGN", "CHG_ILIM"],
-    ["TPS_L1", "TPS_L2", "TPS_VAUX", "TPS_FB", "TPS_PG", "TPS_EN",
+    ["TPS_L1", "TPS_VAUX", "TPS_FB", "TPS_PG", "TPS_EN",
      "TPS_VSEL", "TPS_PS_SYNC"],
     ["EPD_SW", "EPD_GDR", "EPD_RESE", "EPD_X"],
-    ["USB_DP_CONN", "USB_DN_CONN"],
-    ["EPD_VGH", "EPD_VGL", "EPD_VSH1", "EPD_VSH2", "EPD_VSL", "EPD_VDD",
+    # MD §6: after the local switching loops, the highest-constraint nets get
+    # the first pick of the remaining board
+    ["TPS_L2", "SYS", "USB_DP_CONN", "USB_DN_CONN", "EPD_VGH"],
+    ["EPD_VGL", "EPD_VSH1", "EPD_VSH2", "EPD_VSL", "EPD_VDD",
      "EPD_VCOM"],
     ["USB_DP", "USB_DN", "USB_CC1", "USB_CC2", "USB_SHIELD", "USB_VBUS_DET"],
     ["SPI_SCLK", "SPI_MOSI", "SPI_MISO", "I2C_SCL", "I2C_SDA", "TF_CS_N",
@@ -87,7 +89,7 @@ TIERS = [
      "TYPEC_INT_N", "FG_ALRT_N", "BOOT", "RESET_N"],
     # power goes last: those nets may pick any layer or detour, the fine pitch
     # signal pads may not
-    ["BAT_BUS", "BAT1_RAW", "BAT2_RAW", "SYS", "EPD_3V3", "3V3_MAIN",
+    ["BAT_BUS", "BAT1_RAW", "BAT2_RAW", "EPD_3V3", "3V3_MAIN",
      "USB_VBUS_RAW", "USB_VBUS_PROT"],
     [],   # anything left, shortest span first
 ]
@@ -246,6 +248,43 @@ def _cell_range(x0, y0, x1, y1, pad=0.0):
     j0 = max(0, int(math.floor((y0 - pad) / PITCH)))
     j1 = min(H - 1, int(math.ceil((y1 + pad) / PITCH)))
     return i0, i1, j0, j1
+
+
+def _seg_in_box(seg, box):
+    """Does the segment's (inflated) bounding box meet the box?"""
+    x0, y0, x1, y1 = box
+    half = seg["width"] / 2.0
+    sx0 = min(seg["start"][0], seg["end"][0]) - half
+    sx1 = max(seg["start"][0], seg["end"][0]) + half
+    sy0 = min(seg["start"][1], seg["end"][1]) - half
+    sy1 = max(seg["start"][1], seg["end"][1]) + half
+    return not (sx0 > x1 or sx1 < x0 or sy0 > y1 or sy1 < y0)
+
+
+def _seg_seg_gap(a, b):
+    """Exact gap between two segments' copper edges (0 if they touch)."""
+    p0, p1 = np.array(a["start"], float), np.array(a["end"], float)
+    q0, q1 = np.array(b["start"], float), np.array(b["end"], float)
+    if _segments_cross(p0, p1, q0, q1):
+        d = 0.0
+    else:
+        def pt_seg(p, s0, s1):
+            v = s1 - s0
+            den = float(v @ v)
+            t = 0.0 if den <= 1e-12 else float(np.clip((p - s0) @ v / den, 0, 1))
+            return float(np.linalg.norm(s0 + t * v - p))
+        d = min(pt_seg(p0, q0, q1), pt_seg(p1, q0, q1),
+                pt_seg(q0, p0, p1), pt_seg(q1, p0, p1))
+    return d - (a["width"] + b["width"]) / 2.0
+
+
+def _segments_cross(p0, p1, q0, q1):
+    def cr(u, v):
+        return float(u[0] * v[1] - u[1] * v[0])
+
+    d1, d2 = cr(p1 - p0, q0 - p0), cr(p1 - p0, q1 - p0)
+    d3, d4 = cr(q1 - q0, p0 - q0), cr(q1 - q0, p1 - q0)
+    return ((d1 > 0) != (d2 > 0)) and ((d3 > 0) != (d4 > 0))
 
 
 def mark_cells(mask, cells, half_w):
@@ -838,6 +877,7 @@ class Session:
         self.paths = {}
         self.stubs = {}          # (ref, num) -> {"tip": (li,i,j), "cells": [...]}
         self.hist = {lyr: np.zeros((H, W), np.float32) for lyr in ROUTABLE}
+        self.net_keepout = {}    # net -> [(x0, y0, x1, y1)] route-only barriers
         self.span = {}
         for net, pads in board.pads_of.items():
             xs = [p["x"] for p in pads]
@@ -860,6 +900,12 @@ class Session:
         else:
             m = self.rtr.masks(net, width / 2.0, clear)
             pen = None
+        boxes = self.net_keepout.get(net)
+        if boxes:
+            for (bx0, by0, bx1, by1) in boxes:
+                i0, i1, j0, j1 = _cell_range(bx0, by0, bx1, by1)
+                for lyr in ROUTABLE:
+                    m[lyr][0][j0:j1 + 1, i0:i1 + 1] = False
         via_dia, via_drill = params["via_dia"], params["via_drill"]
         if width > 0.45:
             via_dia = max(via_dia, 0.8)
@@ -1518,6 +1564,235 @@ class Session:
             f"({grown})")
         return grown
 
+    # ------------------------------------------------------------------
+    # Mandatory finish-up edits
+    # (ESP32S3_GDEM102T91_V1.6_Post_First_Routing_Next_Steps.md §3/§4/§5)
+    # ------------------------------------------------------------------
+    def snap_marginal_endpoints(self, tol=0.20):
+        """Land marginal track ends firmly on the copper they belong to.
+
+        MD §5: the three 0.1 mm residuals (EPD_BUSY / EPD_RESE / SPI_SCLK) sit
+        on the *edge* of the neighbouring same-net copper, which KiCad reports
+        as "track has unconnected end".  Pulling the end onto the neighbour's
+        centre line makes the joint unambiguous.
+        """
+        moved = 0
+        for net, segs in list(self.b.net_segments.items()):
+            routes = [s for s in segs if s.get("kind") == "route"]
+            others = [s for s in segs]
+            for s in routes:
+                if s["width"] > 0.35:
+                    continue
+                for which in ("start", "end"):
+                    pt = np.array(s[which], float)
+                    best = None
+                    for o in others:
+                        if o is s or o["layer"] != s["layer"]:
+                            continue
+                        a = np.array(o["start"], float)
+                        b = np.array(o["end"], float)
+                        ab = b - a
+                        den = float(ab @ ab)
+                        t = 0.0 if den <= 1e-12 else \
+                            float(np.clip((pt - a) @ ab / den, 0.0, 1.0))
+                        q = a + t * ab
+                        d = float(np.linalg.norm(q - pt))
+                        if 1e-4 < d <= tol and (best is None or d < best[0]):
+                            best = (d, q)
+                    if best is None:
+                        continue
+                    s[which] = [round(float(best[1][0]), 4),
+                                round(float(best[1][1]), 4)]
+                    moved += 1
+        if moved:
+            self.b.rebuild_copper()
+            self.rebuild_necks()
+        return moved
+
+    def deepen_pad_entries(self, depth=0.25, limit=0.20, log=print):
+        """Push marginal track ends properly inside their own pad (MD §5 §20③).
+
+        A track that stops just inside (or just outside) its pad edge is both a
+        "dangling end" and a "connection width" warning.  Every such end is
+        slid towards the pad centre until it is `depth` mm inside the copper -
+        but only when the resulting segment still passes the clearance mask, so
+        the fix can never create a new violation.
+        """
+        fixed = 0
+        masks = {}
+        for net, segs in list(self.b.net_segments.items()):
+            params = net_params(net)
+            pads = [(p, self.b._shape_from_pad(p))
+                    for p in self.b.pads_of.get(net, [])]
+            for s in segs:
+                if s.get("kind") == "stub":
+                    continue
+                for which in ("start", "end"):
+                    pt = np.array(s[which], float)
+                    best = None
+                    for (p, shape) in pads:
+                        if s["layer"] not in p["cu_layers"]:
+                            continue
+                        d = float(shape.dist(pt[:1], pt[1:])[0])   # 0 inside
+                        if d > limit and d != 0.0:
+                            continue
+                        centre = np.array([p["x"], p["y"]], float)
+                        vec = centre - pt
+                        n = float(np.linalg.norm(vec))
+                        if n < 1e-6:
+                            continue
+                        # distance from the endpoint to the pad boundary,
+                        # negative inside the copper
+                        if shape.dist(pt[:1], pt[1:])[0] > 0.0:
+                            inside = -d
+                        else:
+                            inside = abs(d)
+                        move = depth - inside
+                        if move <= 0.02:
+                            continue
+                        new = pt + vec / n * min(move, n)
+                        if best is None or move < best[0]:
+                            best = (move, new, p)
+                    if best is None:
+                        continue
+                    move, new, pad = best
+                    other = np.array(s["end" if which == "start" else "start"], float)
+                    key = round(s["width"], 3)
+                    if key not in masks:
+                        masks[key] = self.rtr.masks(net, s["width"] / 2.0,
+                                                    params["clearance"])
+                    walk = masks[key][s["layer"]][0]
+                    ok = True
+                    nn = max(3, int(np.linalg.norm(new - other) / 0.05))
+                    for t in np.linspace(0.0, 1.0, nn):
+                        x = other[0] + (new[0] - other[0]) * t
+                        y = other[1] + (new[1] - other[1]) * t
+                        i, j = int(round(x / PITCH)), int(round(y / PITCH))
+                        if not (0 <= i < W and 0 <= j < H) or not walk[j, i]:
+                            ok = False
+                            break
+                    if not ok:
+                        continue
+                    s[which] = [round(float(new[0]), 4), round(float(new[1]), 4)]
+                    fixed += 1
+        if fixed:
+            self.b.rebuild_copper()
+            self.rebuild_necks()
+        log(f"  pad entries deepened: {fixed}")
+        return fixed
+
+    def _pair_gap(self, net_a, net_b, layer):
+        """Smallest copper gap between two nets on one layer (None if far apart)."""
+        a = [s for s in self.b.net_segments.get(net_a, []) if s["layer"] == layer]
+        b = [s for s in self.b.net_segments.get(net_b, []) if s["layer"] == layer]
+        best = None
+        for s1 in a:
+            for s2 in b:
+                g = _seg_seg_gap(s1, s2)
+                if best is None or g < best:
+                    best = g
+        return best
+
+    def manual_finish(self, log=print):
+        """Apply the hand edits from MD §3 and §4 (verified, with rollback).
+
+        §3  EPD_GDR / EPD_RESE leave J2 pin 2/3 too early: their first copper
+            sections run 0.4 mm apart vertically (0.125 mm gap).  EPD_RESE's
+            jog out of the connector is re-drawn 0.3 mm higher and narrowed to
+            0.2 mm, and its layer-change via moves with it; EPD_GDR keeps its
+            route.  The edit is verified against the real geometry and rolled
+            back if the pair is still too close.
+        §4  The 0.5 mm EPD_3V3 section next to C31 starts 0.075 mm too close to
+            C31's GND pad; its junction with the diagonal is moved up by 0.3 mm.
+        §5  The three 0.1 mm residuals are snapped onto the end of the copper
+            they belong to (they used to stop on the neighbour's edge).
+        """
+        # --- §3: re-route the two J2 neighbours with route-only barriers
+        st3 = self.state()
+        box = (3.40, 46.20, 4.60, 47.00)      # EPD_RESE's jog next to J2 pin 3
+        keep = []
+        for s in self.b.net_segments.get("EPD_RESE", []):
+            # never touch the fan-out stub: it is the pad's own escape
+            if s.get("kind") == "stub" or s["layer"] != "F.Cu" \
+                    or not _seg_in_box(s, box):
+                keep.append(s)
+                continue
+        self.b.net_segments["EPD_RESE"] = keep
+        # drop the via that used to sit at the end of that jog, keep the rest
+        for v in list(self.b.net_vias.get("EPD_RESE", [])):
+            if box[0] - 0.8 <= v["x"] <= box[2] + 0.8 and \
+                    box[1] - 0.8 <= v["y"] <= box[3] + 0.8:
+                self.b.net_vias["EPD_RESE"].remove(v)
+        # re-draw: straight-ish neck 0.3 mm higher, narrower, via moved with it
+        self.b.net_segments.setdefault("EPD_RESE", []).append(
+            {"layer": "F.Cu", "net": "EPD_RESE", "width": 0.2,
+             "start": [3.6, 46.75], "end": [4.2, 46.5], "kind": "route"})
+        self.b.net_vias.setdefault("EPD_RESE", []).append(
+            {"x": 4.2, "y": 46.5, "dia": 0.6, "drill": 0.3, "net": "EPD_RESE"})
+        for s in self.b.net_segments.get("EPD_RESE", []):
+            if s["layer"] == "B.Cu" and abs(s["start"][0] - 4.2) < 0.3 \
+                    and abs(s["start"][1] - 46.9) < 0.6:
+                s["start"] = [4.2, 46.5]
+        self.b.rebuild_copper()
+        self.rebuild_necks()
+        gap = self._pair_gap("EPD_RESE", "EPD_GDR", "F.Cu")
+        if gap is None or gap >= 0.2 - 0.005:
+            log(f"    §3 EPD_RESE jog re-drawn (RESE↔GDR gap "
+                f"{gap if gap is None else round(gap, 3)} mm)")
+        else:
+            self.restore(st3)
+            log(f"    §3 reverted: gap would be {round(gap, 3)} mm")
+
+        # --- §4 / §5: explicit geometry edits
+        drop = [
+            ("EPD_3V3", "F.Cu", 10.7, 44.7, 10.7, 43.7),
+            ("EPD_3V3", "F.Cu", 10.9, 44.7, 12.2, 46.0),
+        ]
+        add = [
+            ("EPD_3V3", "F.Cu", 0.5, 10.7, 44.4, 10.7, 43.7),
+            ("EPD_3V3", "F.Cu", 0.2, 10.7, 44.4, 12.2, 46.0),
+        ]
+        move_end = [
+            ("EPD_BUSY", "F.Cu", 3.6, 43.8, 3.6, 43.75),
+            ("SPI_SCLK", "F.Cu", 1.2, 41.8, 1.25, 41.75),
+            # EPD_VSH1 used to stop exactly on C32 pad 1's edge (connection
+            # width 0.135 mm); push it 0.3 mm into the pad
+            ("EPD_VSH1", "F.Cu", 11.7, 40.3, 12.0, 40.3),
+        ]
+        def same(s, x0, y0, x1, y1):
+            f = lambda a, b: abs(a[0] - b[0]) < 1e-3 and abs(a[1] - b[1]) < 1e-3
+            return f(s["start"], [x0, y0]) and f(s["end"], [x1, y1]) or \
+                f(s["start"], [x1, y1]) and f(s["end"], [x0, y0])
+
+        removed = 0
+        for (net, layer, x0, y0, x1, y1) in drop:
+            lst = self.b.net_segments.get(net, [])
+            keep = []
+            for s in lst:
+                if s["layer"] == layer and same(s, x0, y0, x1, y1):
+                    removed += 1
+                    continue
+                keep.append(s)
+            self.b.net_segments[net] = keep
+        for (net, layer, w, x0, y0, x1, y1) in add:
+            self.b.net_segments.setdefault(net, []).append(
+                {"layer": layer, "net": net, "width": w,
+                 "start": [x0, y0], "end": [x1, y1], "kind": "route"})
+        moved_via = 0
+        for (net, layer, ox, oy, nx, ny) in move_end:
+            for s in self.b.net_segments.get(net, []):
+                if s["layer"] != layer:
+                    continue
+                for which in ("start", "end"):
+                    if abs(s[which][0] - ox) < 1e-3 and abs(s[which][1] - oy) < 1e-3:
+                        s[which] = [nx, ny]
+                        moved_via += 1
+        self.b.rebuild_copper()
+        self.rebuild_necks()
+        log(f"  manual finish: removed {removed}, added {len(add)} segments, "
+            f"moved {moved_via} endpoints")
+        return removed, moved_via
+
     def extend_into_pads(self, reach=0.35, depth=0.25):
         """Pull marginal track ends properly inside their own pad.
 
@@ -1869,6 +2144,9 @@ def main():
             print(f"endpoint tidy-up: {f} track ends pulled into their pads")
             sess.trim_dangling_stubs()
         sess.fatten_trunks()
+        sess.manual_finish()
+        if sess.failed:
+            print(f"still unrouted: {len(sess.failed)}")
     if sess.failed:
         # a failed net keeps no copper: drop its fan-out stubs as well so the
         # final board has no dangling tracks

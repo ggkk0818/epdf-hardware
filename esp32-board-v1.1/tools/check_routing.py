@@ -29,21 +29,36 @@ def seg_rect(s):
             max(x0, x1) + half, max(y0, y1) + half)
 
 
-def dist_seg_seg(a, b, samples=40):
-    """Minimum distance between two axis aligned/45 degree segments."""
-    ax0, ay0 = a["start"]
-    ax1, ay1 = a["end"]
-    bx0, by0 = b["start"]
-    by1 = b["end"][1]
-    bx1 = b["end"][0]
-    n = max(3, samples)
-    ax = np.linspace(ax0, ax1, n)
-    ay = np.linspace(ay0, ay1, n)
-    bx = np.linspace(bx0, bx1, n)
-    by = np.linspace(by0, by1, n)
-    dx = ax[:, None] - bx[None, :]
-    dy = ay[:, None] - by[None, :]
-    return float(np.min(np.hypot(dx, dy)))
+def _pt_seg(p, a, b):
+    """Exact distance from point p to segment ab (2-D)."""
+    ab = b - a
+    denom = float(ab @ ab)
+    t = 0.0 if denom <= 1e-12 else float(np.clip((p - a) @ ab / denom, 0.0, 1.0))
+    return float(np.linalg.norm(a + t * ab - p))
+
+
+def _seg_seg(a0, a1, b0, b1):
+    """Exact minimum distance between two 2-D segments (0 when they cross)."""
+    def cross(u, v):
+        return float(u[0] * v[1] - u[1] * v[0])
+
+    d1 = cross(a1 - a0, b0 - a0)
+    d2 = cross(a1 - a0, b1 - a0)
+    d3 = cross(b1 - b0, a0 - b0)
+    d4 = cross(b1 - b0, a1 - b0)
+    if ((d1 > 0) != (d2 > 0)) and ((d3 > 0) != (d4 > 0)):
+        return 0.0
+    return min(_pt_seg(a0, b0, b1), _pt_seg(a1, b0, b1),
+               _pt_seg(b0, a0, a1), _pt_seg(b1, a0, a1))
+
+
+def dist_seg_seg(a, b):
+    """Minimum centreline distance between two segments (exact)."""
+    a0 = np.array(a["start"], float)
+    a1 = np.array(a["end"], float)
+    b0 = np.array(b["start"], float)
+    b1 = np.array(b["end"], float)
+    return _seg_seg(a0, a1, b0, b1)
 
 
 def main():
@@ -79,25 +94,29 @@ def main():
                 if items[i][1]["net"] == items[j][1]["net"]:
                     continue
                 a, b = boxes[i], boxes[j]
-                if (a[0] > b[2] or b[0] > a[2] or a[1] > b[3] or b[1] > a[3]):
-                    continue
                 need = max(cls_clear(items[i][1]["net"]),
                            cls_clear(items[j][1]["net"]))
+                # the boxes must be expanded by the clearance before the cheap
+                # rejection test, otherwise near misses are silently skipped
+                if (a[0] > b[2] + need or b[0] > a[2] + need
+                        or a[1] > b[3] + need or b[1] > a[3] + need):
+                    continue
                 if items[i][0] == "seg" and items[j][0] == "seg":
                     d = dist_seg_seg(items[i][1], items[j][1])
                     d -= (items[i][1]["width"] + items[j][1]["width"]) / 2.0
+                elif items[i][0] == "via" and items[j][0] == "via":
+                    va, vb = items[i][1], items[j][1]
+                    d = float(np.hypot(va["x"] - vb["x"], va["y"] - vb["y"]))
+                    d -= (va["dia"] + vb["dia"]) / 2.0
                 else:
                     # one side is a via: use centre distance minus radii
                     if items[i][0] == "via":
                         v, s = items[i][1], items[j][1]
                     else:
                         v, s = items[j][1], items[i][1]
-                    cx = (s["start"][0] + s["end"][0]) / 2.0
-                    cy = (s["start"][1] + s["end"][1]) / 2.0
-                    d = min(abs(v["x"] - x) + abs(v["y"] - y) for x, y in
-                            [(s["start"][0], s["start"][1]),
-                             (s["end"][0], s["end"][1]),
-                             (cx, cy)])
+                    pt = np.array([v["x"], v["y"]], float)
+                    d = _pt_seg(pt, np.array(s["start"], float),
+                                np.array(s["end"], float))
                     d -= v["dia"] / 2.0 + s["width"] / 2.0
                 if d < need - 0.005:
                     problems.append((layer, items[i][1].get("net"),

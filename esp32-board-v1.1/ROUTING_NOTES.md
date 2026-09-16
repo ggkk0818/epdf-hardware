@@ -51,13 +51,24 @@
 ## 3. 结果
 
 ```
-网络 69（不含 GND）：已布线 57，未完成 12
-线段 689，信号过孔 75，GND 缝合过孔 145（30 焊盘 + 115 网格）
+网络 69（不含 GND）：已布线 55，未完成 14
+线段 706，信号过孔 71，GND 缝合过孔 135
 ERC  0 violations
-DRC  5 violations：2 × clearance(error) + 3 × track_dangling(warning)
-     unconnected 93 项（= 15 个未完成网络 + GND 铺铜孤岛）
-tools/check_routing.py：线-线 / 线-过孔间距 0 问题
+DRC  0 Error / 0 Warning     ← 2026-09-16 已清零
+     unconnected 92 项（= 14 个未完成网络 + GND 铺铜孤岛）
+tools/check_routing.py：线-线 / 线-过孔间距 0 问题（精确几何校验）
 ```
+
+### 3.0 DRC 清零记录（MD §2 / §20 ①②③）
+
+| 项 | 处理方式 | 结果 |
+|---|---|---|
+| EPD_GDR ↔ EPD_RESE 间距 0.125 mm | 把 EPD_RESE 在 J2 Pin3 处的过渡重画：抬高 0.25 mm、收颈到 0.20 mm，层间过孔随之内移；EPD_GDR 保持原路径。脚本内自动核对两网最小间隙（0.225 mm）后才接受，否则回滚 | ✅ |
+| EPD_3V3 ↔ C31 GND 间距 0.127 mm | 把该 0.5 mm 段与斜线的交点整体上移 0.3 mm（10.7,44.7 → 10.7,44.4），器件不动 | ✅ |
+| EPD_BUSY / EPD_RESE / SPI_SCLK 0.1 mm 悬空线头 | 把残留端点落到所属短桩的端点上（共享端点即连通）；SPI_SCLK 本身已连通，仅清理残段 | ✅ |
+| EPD_VSH1 ↔ C32 Pad1 connection width 0.135 mm | 端点从焊盘边缘推到焊盘内 0.3 mm | ✅ |
+
+> 清零后：`DRC Error = 0 / Warning = 0`，`unconnected = 92`（保留未完成网络，符合 MD §2 的阶段性目标）。
 
 线宽分布（0.8 mm = 主干加宽段；0.5/0.4 mm = POWER 与 SWITCH_NODE；
 0.3 mm = HV_EPD；0.24 mm = USB 差分；0.2 mm = 默认；0.15–0.25 mm = 焊盘收颈）：
@@ -68,29 +79,30 @@ tools/check_routing.py：线-线 / 线-过孔间距 0 问题
 0.20 mm : 401  0.24 mm : 32   0.15 mm : 25
 ```
 
-### 3.1 未完成的 15 个网络
+### 3.1 未完成的 14 个网络（按 MD §6~§15 的人工收尾顺序排列）
 
 | 网络 | 位置 |
 |---|---|
-| `3V3_MAIN` | 34 个焊盘跨全板，U1/U3/U5 附近引脚被封 |
-| `SYS` | U2 ↔ U3 之间 0.5 mm 间距引出 |
-| `I2C_SCL` / `I2C_SDA` | U2 左列 + U4/U5 |
-| `CHG_CE` / `CHG_INT_N` / `CHG_OTG` / `CHG_DSEL` / `CHG_REGN` | U2 左列与顶行 |
-| `TPS_L2` | U3 10 脚 ↔ L2 |
-| `SPI_SCLK` / `TF_SCLK` | U1 底部焊盘 / R33 |
-| `TF_CS_N` / `TYPEC_INT_N` / `EPD_VGH` / `USB_DN_CONN` | J3 / U5.6 / D6↔J2.21 / J1→D3 |
+| ① `TPS_L2` | U3 Pin9 ↔ L2 Pin2（switching path，要求 F.Cu / 0 Via / 0.5 mm） |
+| ② `SYS` | U2 SYS 岛 → U3（建议 0.8 mm 主干或 In2.Cu 铜皮） |
+| ③ `USB_DN_CONN` | 与 `USB_DP_CONN` 一起人工重整（0.24/0.18、F.Cu、无 Via） |
+| ④ `EPD_VGH` | D6 → C28 → J2 Pin21（HV_EPD 0.3/0.2） |
+| ⑤ `CHG_REGN` | U2 REGN → C10 → R16（本地电源节点，短、无 Via） |
+| ⑥ `CHG_CE` / `CHG_INT_N` / `CHG_OTG` / `CHG_DSEL` | U2 控制线（低速，允许换层） |
+| ⑦ `I2C_SCL` / `I2C_SDA` | U2 左列 + U4/U5（0.2 mm，允许换层） |
+| ⑧ `TF_SCLK` / `TF_CS_N` | U1 → R33 → J3（SPI_SCLK 本身已连通） |
+| ⑨ `TYPEC_INT_N` | U5.6，用剩余通道 |
+| ⑩ `3V3_MAIN` | 最后处理，建议 U3 → In2.Cu 电源铜皮 → 各区域 Via → F.Cu 短支线 |
 
 均位于密集引脚区（BQ25895 左列、TPS63070 左列、TUSB320、ESP32 底部、USB-C / FPC 扇出）的
 最后 1–2 段，部分位置四条 0.2 mm 走线必须共用不到 1 mm 的走廊。建议用 KiCad 交互布线收尾
 （自动布线器已尽量把这些通道留出）。
 
-### 3.2 其余 5 个 DRC 项
+### 3.2 DRC 项（已清零，保留记录）
 
 | 类型 | 位置 | 说明 |
 |---|---|---|
-| clearance (error) | EPD_GDR / EPD_RESE，X≈3.6、Y 46.7–47.5 | 两条 HV 走线并行 0.4 mm，实测 0.125 < 0.2 mm |
-| clearance (error) | EPD_3V3 ↔ C31 Pad2 (GND)，(10.7, 44.7) | 实测 0.127 < 0.2 mm，收尾时把该段移开即可 |
-| track_dangling ×3 | EPD_BUSY / EPD_RESE / SPI_SCLK 的 0.1 mm 残段 | 走线末端停在焊盘外 0.1 mm |
+| — | — | 见 §3.0：4 类共 8 项已全部修复，当前 DRC = 0/0 |
 
 ---
 
@@ -115,19 +127,28 @@ tools/check_routing.py：线-线 / 线-过孔间距 0 问题
 
 仍然存在的差异：
 
-1. **窄颈规则区** `PWR_NECK_1..5`（矩形由真实窄段包围盒 + 0.35 mm 生成），区域内允许
+1. **窄颈规则区** `PWR_NECK_1..8`（矩形由真实窄段包围盒 + 0.35 mm 生成），区域内允许
    POWER / SWITCH_NODE / HV_EPD 网络低于网络类线宽（最小 0.15 mm）。这是 IC 焊盘处的
    常规收颈，规则不会覆盖到窄段以外。
 2. **USB 差分对**：`USB_DP/DN`、`USB_DP/DN_CONN` 全程 L1 微带（0.24 mm），耦合间距因
    0.1 mm 栅格量化为 0.26–0.40 mm，与 0.18 mm 目标略有差异。
-3. **GND** 不布独立走线，靠四层铺铜 + 138 个缝合过孔连通（含每个 GND 焊盘附近的过孔）。
+3. **GND** 不布独立走线，靠四层铺铜 + 135 个缝合过孔连通（含每个 GND 焊盘附近的过孔）。
 
 ---
 
-## 5. 下一步
+## 5. 下一步（依 `..._Post_First_Routing_Next_Steps.md`）
 
-1. 人工收尾 §3.1 的 15 个网络（建议顺序：U2 左列 → U3 左列 → I2C → SPI/TF → 电源）。
-2. 修掉 §3.2 的 2 个间距 + 3 个悬空线头。
-3. 打开 `track_not_centered_on_via`、`tuning_profile_track_geometries` 检查后重跑 DRC。
-4. 板厂按实际叠层复算 USB 90 Ω（当前 0.24 mm 线宽，目标间距 0.18 mm）。
-5. 生成 Gerber / 钻孔 / 贴片坐标（命名见 `PCB_LAYOUT_NOTES.md` §13）。
+已完成 MD 的 ① ② ③（DRC 清零）与 §1（统计统一、网络类调整）。剩余顺序：
+
+1. 按 MD §6 顺序人工收尾 §3.1 的网络：
+   `TPS_L2` → `SYS` → `USB DP/DN` 重整 → `EPD_VGH` → `CHG_REGN`
+   → `CHG_CE/INT_N/OTG/DSEL` → `I2C_SCL/SDA` → `TF_SCLK/TF_CS_N`
+   → `TYPEC_INT_N` → 最后 `3V3_MAIN`（电源分配思路，见 MD §15）。
+2. `Refill All Zones` → 确认 69/69 connected、`Unconnected = 0`。
+3. 打开 `track_not_centered_on_via`、`tuning_profile_track_geometries` 后重跑 DRC。
+4. GND unconnected 若仍存在：先判断是否为孤立铜岛（无 GND Pad/Via），孤岛删除，
+   不要直接 Exclude。
+5. Return Path Review（MD §19）：USB 下方 In1 连续、Switching 节点短小无跨层、
+   SPI/I²C 换层处附近有合理 GND 缝合。
+6. 板厂按实际叠层复算 USB 90 Ω（当前 0.24 mm 线宽，目标间距 0.18 mm）。
+7. 生成 Gerber / 钻孔 / 贴片坐标（命名见 `PCB_LAYOUT_NOTES.md` §13）。

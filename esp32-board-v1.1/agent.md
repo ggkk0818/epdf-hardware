@@ -1,5 +1,18 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-16 更新（按 `ESP32S3_GDEM102T91_V1.6_Post_First_Routing_Next_Steps.md` 收尾）**：
+> 完成 MD §20 的 ①②③ —— **DRC 已清零：0 Error / 0 Warning**（此前 2 Error + 3 Warning）：
+> - EPD_GDR ↔ EPD_RESE 间距（0.125 → 0.225 mm）：把 EPD_RESE 在 J2 Pin3 的过渡重画
+>   （抬高 0.25 mm + 收颈 0.20 mm，层间过孔随移），脚本内自动核对间隙、失败即回滚；
+> - EPD_3V3 ↔ C31 GND 间距：该 0.5 mm 段与斜线的交点整体上移 0.3 mm，器件不动；
+> - EPD_BUSY / EPD_RESE / SPI_SCLK 的 0.1 mm 悬空线头：端点落到所属短桩端点（共享端点）；
+> - EPD_VSH1 ↔ C32 的 connection width：端点推入焊盘 0.3 mm。
+>
+> 同时按 MD §1 统一统计：**69 个非 GND 网络中已布线 55、未完成 14**（线段 706、信号过孔 71、
+> GND 缝合过孔 135；unconnected = 92，即未完成网络 + GND 孤岛）。§3.1 的 14 个未完成网络已按
+> MD §6~§15 的优先级重排（TPS_L2 → SYS → USB DP/DN → EPD_VGH → CHG_REGN → U2 控制线/I²C →
+> TF → TYPEC_INT_N → 最后 3V3_MAIN），细节与操作步骤见 `ROUTING_NOTES.md` §3、§5。
+
 > **2026-09-16 更新（按 `ESP32S3_GDEM102T91_V1.6_Routing_Power_Width_and_R29_Confirmation.md`
 > 执行确认项）**：POWER 默认线宽 **0.80 → 0.50 mm** 正式生效；`CHG_PMID`、`EPD_3V3`、
 > `TPS_L1`、`TPS_L2` 脱离 `Default`（不再按 0.20 mm 布线），并按要求拆出

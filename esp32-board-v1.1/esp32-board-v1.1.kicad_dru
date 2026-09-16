@@ -766,3 +766,238 @@
 	(constraint track_width (min 0.15))
 	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_8')")
 )
+
+# ---------------------------------------------------------------------------
+# Neck areas - published by tools/route.py + tools/apply_routing.py.
+#
+# The IC pad fields are 0.4-0.5 mm pitch.  A wide track cannot
+# physically leave those pads, so the router draws the net class
+# width wherever the geometry allows and necks down only where it
+# must, inside the areas below.  Each area is generated from the
+# necked segments themselves (bounding box + 0.4 mm), so a rule can
+# never cover more copper than the real neck.
+# ---------------------------------------------------------------------------
+(rule "Neck PWR_NECK_1 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_1')")
+)
+(rule "Neck PWR_NECK_2 SWITCH_NODE"
+	(constraint track_width (min 0.29))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_2')")
+)
+(rule "Neck PWR_NECK_3 SWITCH_NODE"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_3')")
+)
+(rule "Neck PWR_NECK_4 HV_EPD"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'HV_EPD' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_4 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_5 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_5')")
+)
+(rule "Neck PWR_NECK_6 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_6')")
+)
+(rule "Neck PWR_NECK_7 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_7')")
+)
+(rule "Neck PWR_NECK_8 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_8')")
+)
+
+# ---------------------------------------------------------------------------
+# Neck areas - published by tools/route.py + tools/apply_routing.py.
+#
+# The IC pad fields are 0.4-0.5 mm pitch.  A wide track cannot
+# physically leave those pads, so the router draws the net class
+# width wherever the geometry allows and necks down only where it
+# must, inside the areas below.  Each area is generated from the
+# necked segments themselves (bounding box + 0.4 mm), so a rule can
+# never cover more copper than the real neck.
+# ---------------------------------------------------------------------------
+(rule "Neck PWR_NECK_1 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_1')")
+)
+(rule "Neck PWR_NECK_2 SWITCH_NODE"
+	(constraint track_width (min 0.29))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_2')")
+)
+(rule "Neck PWR_NECK_3 SWITCH_NODE"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_3')")
+)
+(rule "Neck PWR_NECK_4 HV_EPD"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'HV_EPD' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_4 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_5 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_5')")
+)
+(rule "Neck PWR_NECK_6 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_6')")
+)
+(rule "Neck PWR_NECK_7 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_7')")
+)
+(rule "Neck PWR_NECK_8 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_8')")
+)
+
+# ---------------------------------------------------------------------------
+# Neck areas - published by tools/route.py + tools/apply_routing.py.
+#
+# The IC pad fields are 0.4-0.5 mm pitch.  A wide track cannot
+# physically leave those pads, so the router draws the net class
+# width wherever the geometry allows and necks down only where it
+# must, inside the areas below.  Each area is generated from the
+# necked segments themselves (bounding box + 0.4 mm), so a rule can
+# never cover more copper than the real neck.
+# ---------------------------------------------------------------------------
+(rule "Neck PWR_NECK_1 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_1')")
+)
+(rule "Neck PWR_NECK_2 SWITCH_NODE"
+	(constraint track_width (min 0.29))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_2')")
+)
+(rule "Neck PWR_NECK_3 SWITCH_NODE"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_3')")
+)
+(rule "Neck PWR_NECK_4 HV_EPD"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'HV_EPD' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_4 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_5 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_5')")
+)
+(rule "Neck PWR_NECK_6 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_6')")
+)
+(rule "Neck PWR_NECK_7 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_7')")
+)
+(rule "Neck PWR_NECK_8 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_8')")
+)
+
+# ---------------------------------------------------------------------------
+# Neck areas - published by tools/route.py + tools/apply_routing.py.
+#
+# The IC pad fields are 0.4-0.5 mm pitch.  A wide track cannot
+# physically leave those pads, so the router draws the net class
+# width wherever the geometry allows and necks down only where it
+# must, inside the areas below.  Each area is generated from the
+# necked segments themselves (bounding box + 0.4 mm), so a rule can
+# never cover more copper than the real neck.
+# ---------------------------------------------------------------------------
+(rule "Neck PWR_NECK_1 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_1')")
+)
+(rule "Neck PWR_NECK_2 SWITCH_NODE"
+	(constraint track_width (min 0.29))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_2')")
+)
+(rule "Neck PWR_NECK_3 SWITCH_NODE"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_3')")
+)
+(rule "Neck PWR_NECK_4 HV_EPD"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'HV_EPD' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_4 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_5 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_5')")
+)
+(rule "Neck PWR_NECK_6 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_6')")
+)
+(rule "Neck PWR_NECK_7 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_7')")
+)
+(rule "Neck PWR_NECK_8 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_8')")
+)
+
+# ---------------------------------------------------------------------------
+# Neck areas - published by tools/route.py + tools/apply_routing.py.
+#
+# The IC pad fields are 0.4-0.5 mm pitch.  A wide track cannot
+# physically leave those pads, so the router draws the net class
+# width wherever the geometry allows and necks down only where it
+# must, inside the areas below.  Each area is generated from the
+# necked segments themselves (bounding box + 0.4 mm), so a rule can
+# never cover more copper than the real neck.
+# ---------------------------------------------------------------------------
+(rule "Neck PWR_NECK_1 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_1')")
+)
+(rule "Neck PWR_NECK_2 SWITCH_NODE"
+	(constraint track_width (min 0.29))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_2')")
+)
+(rule "Neck PWR_NECK_3 SWITCH_NODE"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'SWITCH_NODE' && A.insideArea('PWR_NECK_3')")
+)
+(rule "Neck PWR_NECK_4 HV_EPD"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'HV_EPD' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_4 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_4')")
+)
+(rule "Neck PWR_NECK_5 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_5')")
+)
+(rule "Neck PWR_NECK_6 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_6')")
+)
+(rule "Neck PWR_NECK_7 POWER"
+	(constraint track_width (min 0.24))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_7')")
+)
+(rule "Neck PWR_NECK_8 POWER"
+	(constraint track_width (min 0.15))
+	(condition "A.NetClass == 'POWER' && A.insideArea('PWR_NECK_8')")
+)

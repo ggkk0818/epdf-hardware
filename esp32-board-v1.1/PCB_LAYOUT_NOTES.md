@@ -1,9 +1,11 @@
 # ESP32-S3 + GDEM102T91 V1.6 — PCB 布局说明与状态
 
-> **2026-09-15 更新（首次布线）**：§11 的布线顺序已由 `tools/route.py` 执行一轮，
-> 结果、未完成项、窄颈规则区与待确认差异见新增的 **`ROUTING_NOTES.md`**。
-> 摘要：57/69 网络完成、线间间距校验 0 问题、ERC 0、DRC 1 Error / 3 Warning、
-> POWER 网络类线宽由 0.80 调整为 0.50 mm（本版无走廊可通过 0.8 mm）。
+> **2026-09-16 更新（首次布线 + 收尾）**：§11 的布线顺序已由 `tools/route.py` 执行，
+> 并按 `..._Post_First_Routing_Next_Steps.md` 完成 DRC 清零。
+> 摘要：**55/69 网络完成、ERC 0、DRC 0 Error / 0 Warning**、unconnected 92（未完成网络 +
+> GND 孤岛）；线间间距独立校验 0 问题；POWER 网络类线宽 0.80 → **0.50 mm**，
+> 并新增 `SWITCH_NODE`（0.50/0.15）承载 CHG_SW/EPD_SW/TPS_L1/TPS_L2；
+> BAT/SYS/USB_VBUS 主干在收尾阶段加宽到 0.80 mm。详见 **`ROUTING_NOTES.md`**。
 
 > Routing 前最后一轮（`ESP32S3_GDEM102T91_V1.5_to_V1.6_PreRouting_Remaining_Items.md`）。
 > 2026-09-15 追加 `ESP32S3_GDEM102T91_V1.6_Final_Documentation_and_BOM_Fixes.md`
