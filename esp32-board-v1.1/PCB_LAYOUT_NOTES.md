@@ -1,5 +1,10 @@
 # ESP32-S3 + GDEM102T91 V1.6 — PCB 布局说明与状态
 
+> **2026-09-15 更新（首次布线）**：§11 的布线顺序已由 `tools/route.py` 执行一轮，
+> 结果、未完成项、窄颈规则区与待确认差异见新增的 **`ROUTING_NOTES.md`**。
+> 摘要：57/69 网络完成、线间间距校验 0 问题、ERC 0、DRC 1 Error / 3 Warning、
+> POWER 网络类线宽由 0.80 调整为 0.50 mm（本版无走廊可通过 0.8 mm）。
+
 > Routing 前最后一轮（`ESP32S3_GDEM102T91_V1.5_to_V1.6_PreRouting_Remaining_Items.md`）。
 > 2026-09-15 追加 `ESP32S3_GDEM102T91_V1.6_Final_Documentation_and_BOM_Fixes.md`
 > 的文档 / BOM / 生产资料收尾，**仍未开始布线**。
@@ -67,10 +72,22 @@ USB 90 Ω：L1 微带参考 L2，**W 0.24 / S 0.18 mm（≈89.7 Ω）**。
 
 ---
 
-## 4. Net Class（保持）
+## 4. Net Class
 
-Default 0.20/0.15 · **USB90 0.24/0.18** · POWER 0.80/0.20 · HV_EPD 0.30/0.20；
-min track 0.15 / clearance 0.15 / via 0.40-0.20 / 铜到板边 0.30。
+| 网络类 | 线宽 / 间距 | 网络 |
+|---|---|---|
+| Default | 0.20 / 0.15 | 信号、INT、KEY、SPI、I2C、TF |
+| USB90 | 0.24 / 0.15（目标间距 0.18） | `USB_DP*`、`USB_DN*` |
+| POWER | **0.50 / 0.20** | `USB_VBUS_*`、`BAT*`、`SYS`、`3V3_MAIN`、`CHG_PMID`、`EPD_3V3` |
+| SWITCH_NODE | **0.50 / 0.15** | `CHG_SW`、`EPD_SW`、`TPS_L1`、`TPS_L2` |
+| HV_EPD | 0.30 / 0.20 | `EPD_V*`、`EPD_X`、`EPD_GDR`、`EPD_RESE` |
+
+> 2026-09-16（`..._Routing_Power_Width_and_R29_Confirmation.md`）：POWER 默认线宽
+> 0.80 → **0.50 mm**；新增 `CHG_PMID`/`EPD_3V3`/`TPS_L1`/`TPS_L2`（脱离 Default 的
+> 0.20 mm）；按要求拆出 `SWITCH_NODE`（0.50 mm 但保留 0.15 mm 间距，因为 U3 焊盘间隙
+> 只有 0.15 mm）。高电流主干在布线收尾时自动加宽到 **0.80 mm**（BAT/SYS/USB_VBUS，
+> 当前 20 段），R29 保持冻结位置 (12.8648, 49.5497)。
+> min track 0.15 / clearance 0.15 / via 0.40-0.20 / 铜到板边 0.30（不变）。
 
 ---
 

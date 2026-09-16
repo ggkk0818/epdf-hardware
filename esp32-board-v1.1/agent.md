@@ -1,5 +1,32 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-16 更新（按 `ESP32S3_GDEM102T91_V1.6_Routing_Power_Width_and_R29_Confirmation.md`
+> 执行确认项）**：POWER 默认线宽 **0.80 → 0.50 mm** 正式生效；`CHG_PMID`、`EPD_3V3`、
+> `TPS_L1`、`TPS_L2` 脱离 `Default`（不再按 0.20 mm 布线），并按要求拆出
+> **`SWITCH_NODE`** 网络类（0.50 mm / 0.15 mm）承载 `CHG_SW`/`EPD_SW`/`TPS_L1`/`TPS_L2`
+> ——因为 U3（TPS63070）焊盘间隙只有 0.15 mm，若归入 POWER（0.20 mm 规则）焊盘自身就会违规。
+> BAT/SYS/USB_VBUS 主干在收尾阶段自动加宽到 **0.80 mm**（20 段）；`CHG_SW`/`TPS_L1`/`TPS_L2`/
+> `EPD_SW` 全程**禁用过孔**。**R29 保持冻结位置 (12.8648, 49.5497)**，未使用旧版 (23.x, 43.x)；
+> 器件坐标一律未改动。当前 69 个网络中 **54 个已布通**，15 个未完成；ERC = 0，
+> DRC = 2 Error / 3 Warning（细节见 `ROUTING_NOTES.md` §3、§4）。
+
+> **2026-09-15 更新（V1.6 首次布线，Routing 已完成第一轮）**：按本文件 §七 的顺序完成了
+> **4 层布线**，新增工具 `tools/board_model.py`、`tools/route.py`、`tools/apply_routing.py`、
+> `tools/check_routing.py`、`tools/render_board.py`，详见 **`ROUTING_NOTES.md`**。要点：
+> - **69 个网络（不含 GND）中 57 个已布线**，12 个未完成（集中在 BQ25895 左列、TPS63070
+>   左列、TUSB320、ESP32 底部、USB-C / FPC 扇出的最后 1–2 段）。
+> - 线段 689、信号过孔 75、GND 缝合过孔 145；In1.Cu 仍为完整 GND 平面，
+>   L1/L2/L3/L4 四层 GND 铺铜已填充。
+> - **ERC = 0**；**DRC = 1 Error / 3 Warning**（1 条 EPD_GDR↔EPD_RESE 间距 + 3 条 J2 扇出区
+>   0.1 mm 悬空线头）；`tools/check_routing.py` 独立校验线间间距 **0 问题**；
+>   unconnected = 83（= 12 个未完成网络 + GND 铺铜孤岛）。
+> - **POWER 网络类线宽 0.80 → 0.50 mm**（`.kicad_pro`）：本版没有任何走廊能通过 0.8 mm，
+>   需用户确认是否接受，或改为内层铺铜方案。
+> - **`tools/gen_pcb.py` 已与冻结板文件分叉**（无法复现 R29 等位置）：布线一律以仓库中的
+>   `.kicad_pcb` 为准，`apply_routing.py` 默认从 `routing/board_prerouting.kicad_pcb` 重来。
+> - 下一步 = 人工收尾 12 个网络 + 4 个 DRC 项，再开 `track_not_centered_on_via` /
+>   `tuning_profile_track_geometries` 检查，最后出 Gerber。
+
 > **2026-09-15 更新（V1.6 文档 / BOM / 生产资料收尾）**：按
 > `ESP32S3_GDEM102T91_V1.6_Final_Documentation_and_BOM_Fixes.md` 完成文档与生产
 > 资料修正，**仍未开始布线**。要点：
@@ -289,6 +316,16 @@ kicad-cli sch erc  →  0 violations
 - `USB_DN`
 
 ## 五、未完成内容
+
+### 布线阶段（2026-09-15 第一轮已完成，详见 `ROUTING_NOTES.md`）
+
+1. 已完成：4 层布线框架（0.1 mm 栅格 A* + 出线预约 + 功率宽度阶梯 + 合法性重布）、
+   In1.Cu 完整 GND 平面、四层 GND 铺铜与 145 个缝合过孔、5 个 `PWR_NECK_*` 窄颈规则区。
+2. 未完成：12 个网络（`3V3_MAIN`、`SYS`、`USB_VBUS_RAW/PROT`、`I2C_SCL/SDA`、
+   `CHG_CE/INT_N/OTG`、`TPS_L2`、`SPI_SCLK`、`TF_SCLK`、`TYPEC_INT_N`、`EPD_VGH`、
+   `USB_DN_CONN`）的最后 1–2 段，需人工交互布线收尾。
+3. 未完成：4 个 DRC 项（1 间距 + 3 悬空线头，均在 J2 FPC 扇出区）。
+4. 待确认：POWER 网络类线宽 0.80 → 0.50 mm（见 `ROUTING_NOTES.md` §4.1）。
 
 ### 原理图阶段
 

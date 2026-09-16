@@ -264,6 +264,7 @@
       ],
       "zones_allow_external_fillets": false
     },
+    "drc_exclusions": [],
     "ipc2581": {
       "bom_rev": "",
       "dist": "",
@@ -275,8 +276,7 @@
     },
     "layer_pairs": [],
     "layer_presets": [],
-    "viewports": [],
-    "drc_exclusions": []
+    "viewports": []
   },
   "boards": [],
   "component_class_settings": {
@@ -297,11 +297,11 @@
       "version": 0
     },
     "rule_severities": {
-      "footprint_link_issues": "error",
       "footprint_filter": "error",
-      "single_global_label": "ignore",
+      "footprint_link_issues": "error",
       "four_way_junction": "ignore",
-      "simulation_model_issue": "ignore"
+      "simulation_model_issue": "ignore",
+      "single_global_label": "ignore"
     }
   },
   "libraries": {
@@ -365,7 +365,26 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.8,
+        "track_width": 0.5,
+        "tuning_profile": "",
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.2,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "SWITCH_NODE",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.5,
         "tuning_profile": "",
         "via_diameter": 0.8,
         "via_drill": 0.4,
@@ -423,11 +442,11 @@
       },
       {
         "netclass": "POWER",
-        "pattern": "EPD_SW"
+        "pattern": "CHG_PMID"
       },
       {
         "netclass": "POWER",
-        "pattern": "CHG_SW"
+        "pattern": "EPD_3V3"
       },
       {
         "netclass": "HV_EPD",
@@ -444,6 +463,22 @@
       {
         "netclass": "HV_EPD",
         "pattern": "EPD_RESE"
+      },
+      {
+        "netclass": "SWITCH_NODE",
+        "pattern": "CHG_SW"
+      },
+      {
+        "netclass": "SWITCH_NODE",
+        "pattern": "EPD_SW"
+      },
+      {
+        "netclass": "SWITCH_NODE",
+        "pattern": "TPS_L1"
+      },
+      {
+        "netclass": "SWITCH_NODE",
+        "pattern": "TPS_L2"
       }
     ]
   },
