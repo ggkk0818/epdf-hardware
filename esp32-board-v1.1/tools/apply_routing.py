@@ -287,6 +287,12 @@ def relax_gnd_zones(board, clearance=0.20):
         if z.GetIsRuleArea() or z.GetNetname() != "GND":
             continue
         z.SetLocalClearance(int(round(clearance * MM)))
+        # MD §14 / §16: copper slivers with no pad and no via are removed by the
+        # filler instead of being reported as unconnected islands
+        try:
+            z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)
+        except AttributeError:
+            pass
         touched += 1
     return touched
 

@@ -61,6 +61,17 @@ tools/check_routing.py：线-线 / 线-过孔间距 0 问题（精确几何校�
 
 ### 3.0c 最终收敛阶段（2026-09-17，依 `..._Routing_Final_Convergence_Plan.md`）
 
+**第二轮（依 `..._Routing_Final_Convergence_Next_Steps.md`）**——停止全局 reroute，改做局部收敛：
+
+| MD 条目 | 执行情况 |
+|---|---|
+| §11 停止全局自动 reroute，保存基准板 | ✅ 保存 `esp32-board-v1.1_routing_final_convergence_20260917.kicad_pcb`（+ 同名 routing json）；此后只做局部修改 |
+| §2 剩余真实 GND Pad | ✅ **23 → 2 个**：`fix_gnd.py` 逐焊盘放 GND 过孔（0.6/0.5/0.4 mm）或用 0.15~0.3 mm 短 GND 铜接到最近的 GND 铜/铺铜；**只剩 U3 Pad4 / Pad10**（TPS63070 的 GND 引脚，出线走廊被开关节点走线占住，需局部 rip-up 或交互布线） |
+| §14 GND Zone 碎片 | ✅ GND 铺铜启用"自动删除孤立铜岛"（`ISLAND_REMOVAL_MODE_ALWAYS`），并新增 1 颗缝合过孔把仍带 Pad/Via 的碎片接回地平面；纯碎片由填充器直接删除，不再以 unconnected 形式残留 |
+| §3 SYS 闭合 | 部分完成：`SYS_ISLAND_U3` 已锚定，SYS unconnected 8 → 6（`SYS_ISLAND_U2`/`C13` 需在岛内放过孔或人工接线） |
+| §4 3V3_MAIN 闭合 | 部分完成：`3V3_ISLAND_CAPS` 已锚定，剩余 4 项（`3V3_ISLAND_U3` 位于 U3 焊盘阵列内，锚点被自身焊盘挡住） |
+| §12 小循环验证 | ✅ 每轮 `apply_routing → DRC`，中途出现的 3 个新增违规已回退；**DRC 持续 0 Error / 0 Warning** |
+
 阶段定位：**Routing final convergence** —— 主布线结构成型，剩下的是把电源/地/局部控制网络
 真正收敛到 0 unconnected。本轮完成：
 

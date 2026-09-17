@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-09-17T08:35:35",
+    "date": "2026-09-17T09:07:14",
     "ignored_checks": [
         {
             "description": "Track endpoint not centered on via",
@@ -30,7 +30,7 @@
                         "x": 11.3,
                         "y": 17.87
                     },
-                    "uuid": "d947283b-84ac-482e-93c8-e2515068cea5"
+                    "uuid": "9e7d26aa-12df-4491-9d2b-135bfe7a3452"
                 },
                 {
                     "description": "Track [3V3_MAIN] on F.Cu, length 1.9000 mm",
@@ -38,7 +38,7 @@
                         "x": 17.6,
                         "y": 42.1
                     },
-                    "uuid": "42c8e702-f388-4513-ba6a-cb8860e29f56"
+                    "uuid": "4956afe8-ee01-4ab3-8327-491c131aa80e"
                 }
             ],
             "severity": "warning",
@@ -53,7 +53,7 @@
                         "x": 32.1,
                         "y": 47.9
                     },
-                    "uuid": "3983deb5-cc1c-4b00-b421-b58588dc0b55"
+                    "uuid": "3bb21e18-ccfa-47d2-bd93-c8a2f24c1ddf"
                 },
                 {
                     "description": "Zone '3V3_ISLAND_U3' [3V3_MAIN] on F.Cu, priority 20",
@@ -61,7 +61,7 @@
                         "x": 33.9,
                         "y": 45.6
                     },
-                    "uuid": "7e123173-440d-4673-aa7c-42a2d43dc2b5"
+                    "uuid": "c1f491ef-0540-4678-a2bd-64e1570ae604"
                 }
             ],
             "severity": "warning",
@@ -76,7 +76,7 @@
                         "x": 30.9446,
                         "y": 77.1766
                     },
-                    "uuid": "e8a7bf73-f0f2-4a03-be50-35484915c5c1"
+                    "uuid": "ab0604d2-301d-4506-abec-1471fae4989b"
                 },
                 {
                     "description": "Pad 2 [TF_CS_N] of J3 on F.Cu",
@@ -125,12 +125,127 @@
                     "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
                 },
                 {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone 'GND_PLANE_L2' [GND] on In1.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "a186cacb-bd6f-421c-9e6c-5e3c2309ca86"
+                },
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                },
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                },
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                },
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                },
+                {
                     "description": "Zone 'GND_POUR_L3' [GND] on In2.Cu, priority 0",
                     "pos": {
                         "x": 0.4,
                         "y": 0.4
                     },
-                    "uuid": "b1be16e0-9658-4773-a9b9-32265cdb3281"
+                    "uuid": "072c998c-975f-46b0-90d9-c3b92da467d6"
                 }
             ],
             "severity": "warning",
@@ -163,204 +278,66 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 2 [GND] of C32 on F.Cu",
+                    "description": "Track [GND] on F.Cu, length 0.2014 mm",
                     "pos": {
-                        "x": 14.1,
-                        "y": 39.71
-                    },
-                    "uuid": "1217643a-83b9-46b8-83a9-fed33d67f882"
-                },
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                },
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_PLANE_L2' [GND] on In1.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "a186cacb-bd6f-421c-9e6c-5e3c2309ca86"
-                },
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                },
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                },
-                {
-                    "description": "Zone 'GND_PLANE_L2' [GND] on In1.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "a186cacb-bd6f-421c-9e6c-5e3c2309ca86"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                },
-                {
-                    "description": "Pad 3 [GND] of U5 on F.Cu",
-                    "pos": {
-                        "x": 28.9,
+                        "x": 28.7012,
                         "y": 70.325
                     },
-                    "uuid": "e18fb8be-b6d3-4f8b-a99c-d538bc87ed9e"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 3 [GND] of U5 on F.Cu",
-                    "pos": {
-                        "x": 28.9,
-                        "y": 70.325
-                    },
-                    "uuid": "e18fb8be-b6d3-4f8b-a99c-d538bc87ed9e"
+                    "uuid": "2b26a3c8-38f0-4824-82a0-120b7d6c3b42"
                 },
-                {
-                    "description": "Pad 5 [GND] of U5 on F.Cu",
-                    "pos": {
-                        "x": 29.7,
-                        "y": 70.325
-                    },
-                    "uuid": "eb7c3e18-8a8d-4cf8-aebd-1dc7ab124c27"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
                 {
                     "description": "Track [GND] on F.Cu, length 0.4000 mm",
                     "pos": {
                         "x": 29.7,
                         "y": 68.675
                     },
-                    "uuid": "cc8d2a70-24e4-498b-ba9f-3a8938f3b8a3"
+                    "uuid": "1f08838b-79be-4690-bd71-c03922d55b8e"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.2014 mm",
+                    "pos": {
+                        "x": 28.7012,
+                        "y": 70.325
+                    },
+                    "uuid": "2b26a3c8-38f0-4824-82a0-120b7d6c3b42"
                 },
                 {
-                    "description": "Pad 5 [GND] of U5 on F.Cu",
+                    "description": "Track [GND] on F.Cu, length 0.2690 mm",
+                    "pos": {
+                        "x": 27.6,
+                        "y": 72.95
+                    },
+                    "uuid": "757bde54-df95-4f8f-b114-69b6cbcccf8a"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.0343 mm",
                     "pos": {
                         "x": 29.7,
                         "y": 70.325
                     },
-                    "uuid": "eb7c3e18-8a8d-4cf8-aebd-1dc7ab124c27"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 2 [GND] of C13 on F.Cu",
-                    "pos": {
-                        "x": 30.0325,
-                        "y": 64.5
-                    },
-                    "uuid": "f4f6b82c-834f-4d70-b2a8-1a1189a3faed"
+                    "uuid": "3cdc398a-caad-4d1e-a06e-7362174248ec"
                 },
                 {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "description": "Track [GND] on F.Cu, length 0.1988 mm",
                     "pos": {
-                        "x": 0.4,
-                        "y": 0.4
+                        "x": 28.9,
+                        "y": 70.325
                     },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                    "uuid": "f69341c2-e4b5-4d95-83a7-2fd0e55fbde8"
                 }
             ],
             "severity": "warning",
@@ -378,12 +355,35 @@
                     "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
                 },
                 {
-                    "description": "Pad 4 [GND] of U3 on F.Cu",
+                    "description": "Zone 'GND_POUR_L3' [GND] on In2.Cu, priority 0",
                     "pos": {
-                        "x": 32.85,
-                        "y": 45.749998
+                        "x": 0.4,
+                        "y": 0.4
                     },
-                    "uuid": "9b79fefe-10ab-4341-b25d-6f9bba76ecfb"
+                    "uuid": "072c998c-975f-46b0-90d9-c3b92da467d6"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                },
+                {
+                    "description": "Zone 'GND_POUR_L4' [GND] on B.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "31f6c7f3-bf18-4f44-afff-e87218c60943"
                 }
             ],
             "severity": "warning",
@@ -398,15 +398,61 @@
                         "x": 32.85,
                         "y": 45.749998
                     },
-                    "uuid": "9b79fefe-10ab-4341-b25d-6f9bba76ecfb"
+                    "uuid": "4ecf3c32-5326-4d68-abd7-00d7d0600733"
                 },
+                {
+                    "description": "Track [GND] on F.Cu, length 0.3000 mm",
+                    "pos": {
+                        "x": 31.1,
+                        "y": 45.25
+                    },
+                    "uuid": "15fc40b3-a0fc-4ccb-bc2f-9ba2e905ec27"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                },
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                }
+            ],
+            "severity": "warning",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
                 {
                     "description": "Track [GND] on F.Cu, length 0.8000 mm",
                     "pos": {
                         "x": 34.6,
                         "y": 45.0
                     },
-                    "uuid": "9f0befdf-9092-4ed1-a877-5936b6a14fa0"
+                    "uuid": "5d4b3e09-d259-477e-ae8e-1f82a1014032"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 0.1649 mm",
+                    "pos": {
+                        "x": 32.85,
+                        "y": 45.75
+                    },
+                    "uuid": "1013b3df-5189-49f4-8f38-264522eab91a"
                 }
             ],
             "severity": "warning",
@@ -421,15 +467,15 @@
                         "x": 34.599999,
                         "y": 45.0
                     },
-                    "uuid": "928b3c97-f81c-4be4-b402-d82820288a64"
+                    "uuid": "fe9e8768-c62e-45d9-a101-00c1d6df72ec"
                 },
                 {
-                    "description": "Pad 2 [GND] of C18 on F.Cu",
+                    "description": "Track [GND] on F.Cu, length 0.2067 mm",
                     "pos": {
                         "x": 34.525,
                         "y": 39.8
                     },
-                    "uuid": "850c058c-e54a-4089-a9de-8dd3c85073ac"
+                    "uuid": "5e709980-cc4a-4d72-8f06-6895c250e4ed"
                 }
             ],
             "severity": "warning",
@@ -438,6 +484,14 @@
         {
             "description": "Missing connection between items",
             "items": [
+                {
+                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 0.4,
+                        "y": 0.4
+                    },
+                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
+                },
                 {
                     "description": "Zone 'GND_POUR_L4' [GND] on B.Cu, priority 0",
                     "pos": {
@@ -445,14 +499,6 @@
                         "y": 0.4
                     },
                     "uuid": "31f6c7f3-bf18-4f44-afff-e87218c60943"
-                },
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
                 }
             ],
             "severity": "warning",
@@ -461,59 +507,13 @@
         {
             "description": "Missing connection between items",
             "items": [
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                },
                 {
                     "description": "Zone 'GND_POUR_L3' [GND] on In2.Cu, priority 0",
                     "pos": {
                         "x": 0.4,
                         "y": 0.4
                     },
-                    "uuid": "b1be16e0-9658-4773-a9b9-32265cdb3281"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                },
-                {
-                    "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "b92c925e-4281-4b90-8d85-1e10bdeeac7f"
-                }
-            ],
-            "severity": "warning",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_POUR_L4' [GND] on B.Cu, priority 0",
-                    "pos": {
-                        "x": 0.4,
-                        "y": 0.4
-                    },
-                    "uuid": "31f6c7f3-bf18-4f44-afff-e87218c60943"
+                    "uuid": "072c998c-975f-46b0-90d9-c3b92da467d6"
                 },
                 {
                     "description": "Zone 'GND_POUR_L1' [GND] on F.Cu, priority 0",
@@ -559,7 +559,7 @@
                         "x": 10.6673,
                         "y": 43.3041
                     },
-                    "uuid": "2e5ce78d-ee03-41b8-bc30-cadc593c35e7"
+                    "uuid": "b2a7ce08-1969-4e7a-9637-5392d557a6a0"
                 },
                 {
                     "description": "Pad 15 [EPD_3V3] of J2 on F.Cu",
@@ -582,7 +582,7 @@
                         "x": 12.2377,
                         "y": 47.5718
                     },
-                    "uuid": "e46722da-0dba-47e6-83a3-aa0008d22d72"
+                    "uuid": "b5d6932b-0eba-4f43-b511-a3519f5e97a3"
                 },
                 {
                     "description": "Track [EPD_3V3] on F.Cu, length 2.1932 mm",
@@ -590,7 +590,7 @@
                         "x": 10.7,
                         "y": 44.4
                     },
-                    "uuid": "c99dd817-e1a0-4120-8d5c-d1ed2326ef97"
+                    "uuid": "d16b6866-6800-48ea-acfd-666e42c1c281"
                 }
             ],
             "severity": "warning",
@@ -605,7 +605,7 @@
                         "x": 12.2377,
                         "y": 47.5718
                     },
-                    "uuid": "e46722da-0dba-47e6-83a3-aa0008d22d72"
+                    "uuid": "b5d6932b-0eba-4f43-b511-a3519f5e97a3"
                 },
                 {
                     "description": "Pad 1 [EPD_3V3] of L3 on F.Cu",
@@ -636,7 +636,7 @@
                         "x": 16.6875,
                         "y": 42.75
                     },
-                    "uuid": "e8064a35-f092-445d-afb5-ea5c7aa9a53b"
+                    "uuid": "eac3c3e9-7da7-4e41-b2f1-104e91c7eb18"
                 }
             ],
             "severity": "warning",
@@ -651,7 +651,7 @@
                         "x": 18.9885,
                         "y": 43.3488
                     },
-                    "uuid": "a881d485-c4d2-4670-b94c-d8a5132436b4"
+                    "uuid": "ea0b25de-22f7-4967-808e-fd73c5630c3a"
                 },
                 {
                     "description": "Pad 6 [EPD_3V3] of U6 on F.Cu",
@@ -659,7 +659,7 @@
                         "x": 16.6875,
                         "y": 42.75
                     },
-                    "uuid": "e8064a35-f092-445d-afb5-ea5c7aa9a53b"
+                    "uuid": "eac3c3e9-7da7-4e41-b2f1-104e91c7eb18"
                 }
             ],
             "severity": "warning",
@@ -674,7 +674,7 @@
                         "x": 18.9885,
                         "y": 43.3488
                     },
-                    "uuid": "a881d485-c4d2-4670-b94c-d8a5132436b4"
+                    "uuid": "ea0b25de-22f7-4967-808e-fd73c5630c3a"
                 },
                 {
                     "description": "Pad 1 [EPD_3V3] of C27 on F.Cu",
@@ -682,7 +682,7 @@
                         "x": 19.9133,
                         "y": 40.667
                     },
-                    "uuid": "6dc1371d-e023-42a8-bfe9-d689d764e32c"
+                    "uuid": "00a216a0-a509-4c6f-95c4-045db69da72e"
                 }
             ],
             "severity": "warning",
@@ -697,7 +697,7 @@
                         "x": 28.434,
                         "y": 55.2339
                     },
-                    "uuid": "a2ea77f3-de46-41a6-8c3f-6586a57b1455"
+                    "uuid": "54bbed2b-8b30-4fa1-8b36-d3b0b34e6a3c"
                 },
                 {
                     "description": "Pad 9 [CHG_CE] of U2 on F.Cu",
@@ -705,7 +705,7 @@
                         "x": 33.75,
                         "y": 61.9625
                     },
-                    "uuid": "56ef3fff-9439-45ea-b2a1-ab9bfc548446"
+                    "uuid": "a4d2a85c-8915-4067-9861-2e2530008dc6"
                 }
             ],
             "severity": "warning",
@@ -728,7 +728,7 @@
                         "x": 28.434,
                         "y": 55.2339
                     },
-                    "uuid": "a2ea77f3-de46-41a6-8c3f-6586a57b1455"
+                    "uuid": "54bbed2b-8b30-4fa1-8b36-d3b0b34e6a3c"
                 }
             ],
             "severity": "warning",
@@ -743,7 +743,7 @@
                         "x": 14.4875,
                         "y": 61.75
                     },
-                    "uuid": "fc37d367-fa06-4cda-9d9d-3a5ac66113cd"
+                    "uuid": "49f32521-b232-4801-90d1-047b90771240"
                 },
                 {
                     "description": "Pad 8 [I2C_SCL] of U5 on F.Cu",
@@ -751,7 +751,7 @@
                         "x": 30.225,
                         "y": 69.3
                     },
-                    "uuid": "06a464ab-1310-415e-8c40-07f86a315a8e"
+                    "uuid": "2ab962e1-1bbe-4c66-a13f-25fa6e6d6ada"
                 }
             ],
             "severity": "warning",
@@ -766,7 +766,7 @@
                         "x": 30.225,
                         "y": 69.3
                     },
-                    "uuid": "06a464ab-1310-415e-8c40-07f86a315a8e"
+                    "uuid": "2ab962e1-1bbe-4c66-a13f-25fa6e6d6ada"
                 },
                 {
                     "description": "Pad 5 [I2C_SCL] of U2 on F.Cu",
@@ -774,7 +774,7 @@
                         "x": 32.0375,
                         "y": 60.75
                     },
-                    "uuid": "87d798e1-2117-4ef0-aeff-e8e07e921d81"
+                    "uuid": "5941f1ff-2ae8-4704-a677-6e6d2c3335fd"
                 }
             ],
             "severity": "warning",
@@ -789,7 +789,7 @@
                         "x": 32.0375,
                         "y": 60.75
                     },
-                    "uuid": "87d798e1-2117-4ef0-aeff-e8e07e921d81"
+                    "uuid": "5941f1ff-2ae8-4704-a677-6e6d2c3335fd"
                 },
                 {
                     "description": "Pad 23 [I2C_SCL] of U1 on F.Cu",
@@ -812,7 +812,7 @@
                         "x": 46.495,
                         "y": 61.1812
                     },
-                    "uuid": "aefa1cf3-4a0f-4b23-ac56-c7c06112a8ea"
+                    "uuid": "27f9e55c-2a57-4843-9614-80ca9cfb00f6"
                 },
                 {
                     "description": "Pad 5 [I2C_SCL] of U2 on F.Cu",
@@ -820,7 +820,7 @@
                         "x": 32.0375,
                         "y": 60.75
                     },
-                    "uuid": "87d798e1-2117-4ef0-aeff-e8e07e921d81"
+                    "uuid": "5941f1ff-2ae8-4704-a677-6e6d2c3335fd"
                 }
             ],
             "severity": "warning",
@@ -835,7 +835,7 @@
                         "x": 31.35,
                         "y": 63.95
                     },
-                    "uuid": "d7b26337-2077-4d56-952f-dc7a0b5b8714"
+                    "uuid": "a01cac1a-ee0d-4918-8644-17837630da97"
                 },
                 {
                     "description": "Zone 'SYS_ISLAND_U2' [SYS] on F.Cu, priority 20",
@@ -843,7 +843,7 @@
                         "x": 35.3,
                         "y": 58.95
                     },
-                    "uuid": "dba4a808-c444-4e01-b1b3-e19ac2fc8d98"
+                    "uuid": "90de9ea5-05db-4d13-a098-e30c19c9d7ef"
                 }
             ],
             "severity": "warning",
@@ -858,7 +858,7 @@
                         "x": 35.3,
                         "y": 58.95
                     },
-                    "uuid": "dba4a808-c444-4e01-b1b3-e19ac2fc8d98"
+                    "uuid": "90de9ea5-05db-4d13-a098-e30c19c9d7ef"
                 },
                 {
                     "description": "Pad 2 [SYS] of L1 on F.Cu",
@@ -866,7 +866,7 @@
                         "x": 42.16,
                         "y": 58.0375
                     },
-                    "uuid": "2fe69dcb-7746-498d-a175-08c6d745027f"
+                    "uuid": "27a30be5-c9a9-4ab9-940f-93d966b937cc"
                 }
             ],
             "severity": "warning",
@@ -876,12 +876,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [SYS] on In2.Cu, length 0.1414 mm",
+                    "description": "Via [SYS] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 41.2,
-                        "y": 45.8
+                        "x": 41.1,
+                        "y": 45.7
                     },
-                    "uuid": "6ab539e4-b516-47a8-86bb-a39b804fc4ab"
+                    "uuid": "0a468d00-cf89-406a-9f72-ea223097b0ac"
                 },
                 {
                     "description": "Track [SYS] on F.Cu, length 1.1000 mm",
@@ -889,7 +889,7 @@
                         "x": 39.534,
                         "y": 40.851
                     },
-                    "uuid": "19516c20-3585-4cde-ab09-a0efae49eabb"
+                    "uuid": "c9602d51-513f-4fd0-b471-0ac7fadced34"
                 }
             ],
             "severity": "warning",
@@ -904,7 +904,7 @@
                         "x": 28.7153,
                         "y": 47.5288
                     },
-                    "uuid": "96a19fc6-dc3e-48d9-aaee-85375ec09958"
+                    "uuid": "3a6f97c6-361b-4ad8-bafb-ef7bdeaa8792"
                 },
                 {
                     "description": "Pad 15 [TPS_VSEL] of U3 on F.Cu",
@@ -912,7 +912,7 @@
                         "x": 33.275,
                         "y": 43.6
                     },
-                    "uuid": "3666f2cf-96a9-495e-8310-2f5e765d6f95"
+                    "uuid": "7ab35644-99fe-46c5-934c-903eb3cb4fdb"
                 }
             ],
             "severity": "warning",
@@ -927,7 +927,7 @@
                         "x": 12.5125,
                         "y": 61.75
                     },
-                    "uuid": "c1b6cad7-4f5a-4449-b29c-c83e0b2fe3c7"
+                    "uuid": "00ff7b1c-449d-4af1-b59e-e559603bc6b4"
                 },
                 {
                     "description": "Pad 3 [BAT_BUS] of U4 on F.Cu",
@@ -935,7 +935,7 @@
                         "x": 12.5125,
                         "y": 62.25
                     },
-                    "uuid": "826ac8eb-a550-4a73-8c00-a4fa0cd48560"
+                    "uuid": "a67c1e4c-b2c5-4efe-b704-1f3c374d6d67"
                 }
             ],
             "severity": "warning",
@@ -950,7 +950,7 @@
                         "x": 12.5125,
                         "y": 62.25
                     },
-                    "uuid": "826ac8eb-a550-4a73-8c00-a4fa0cd48560"
+                    "uuid": "a67c1e4c-b2c5-4efe-b704-1f3c374d6d67"
                 },
                 {
                     "description": "Pad 1 [BAT_BUS] of C17 on F.Cu",
@@ -958,7 +958,7 @@
                         "x": 14.318,
                         "y": 64.5264
                     },
-                    "uuid": "83b854ff-6e55-468c-9c76-76f3cc9df0fc"
+                    "uuid": "2745f349-5e5a-41ec-a623-e4846944fb77"
                 }
             ],
             "severity": "warning",
@@ -973,7 +973,7 @@
                         "x": 12.8539,
                         "y": 59.2534
                     },
-                    "uuid": "1cdc5b39-d365-42b6-950f-487f7cabc301"
+                    "uuid": "331e7b4e-6433-46b3-ad4f-8dd31fa4aef8"
                 },
                 {
                     "description": "Pad 2 [BAT_BUS] of U4 on F.Cu",
@@ -981,7 +981,7 @@
                         "x": 12.5125,
                         "y": 61.75
                     },
-                    "uuid": "c1b6cad7-4f5a-4449-b29c-c83e0b2fe3c7"
+                    "uuid": "00ff7b1c-449d-4af1-b59e-e559603bc6b4"
                 }
             ],
             "severity": "warning",
@@ -996,7 +996,7 @@
                         "x": 13.1175,
                         "y": 72.95
                     },
-                    "uuid": "8dafd227-242c-4836-88e4-f67868339f53"
+                    "uuid": "753f47da-4186-4365-bd00-874aded50bdb"
                 },
                 {
                     "description": "Pad 1 [BAT_BUS] of C17 on F.Cu",
@@ -1004,7 +1004,7 @@
                         "x": 14.318,
                         "y": 64.5264
                     },
-                    "uuid": "83b854ff-6e55-468c-9c76-76f3cc9df0fc"
+                    "uuid": "2745f349-5e5a-41ec-a623-e4846944fb77"
                 }
             ],
             "severity": "warning",
@@ -1019,7 +1019,7 @@
                         "x": 14.318,
                         "y": 64.5264
                     },
-                    "uuid": "83b854ff-6e55-468c-9c76-76f3cc9df0fc"
+                    "uuid": "2745f349-5e5a-41ec-a623-e4846944fb77"
                 },
                 {
                     "description": "Pad 13 [BAT_BUS] of U2 on F.Cu",
@@ -1027,7 +1027,7 @@
                         "x": 35.9625,
                         "y": 61.25
                     },
-                    "uuid": "4e45248e-fbae-4f6d-9774-7a099f5ad608"
+                    "uuid": "70012039-9d23-411f-bd0e-4e0434f5caa1"
                 }
             ],
             "severity": "warning",
@@ -1042,7 +1042,7 @@
                         "x": 35.9625,
                         "y": 60.75
                     },
-                    "uuid": "7a15d02f-ac95-4d53-a4a7-d6a4d8d94aa6"
+                    "uuid": "e0737285-1acd-43b0-9481-8bb103386017"
                 },
                 {
                     "description": "Pad 13 [BAT_BUS] of U2 on F.Cu",
@@ -1050,7 +1050,7 @@
                         "x": 35.9625,
                         "y": 61.25
                     },
-                    "uuid": "4e45248e-fbae-4f6d-9774-7a099f5ad608"
+                    "uuid": "70012039-9d23-411f-bd0e-4e0434f5caa1"
                 }
             ],
             "severity": "warning",
@@ -1065,7 +1065,7 @@
                         "x": 35.9625,
                         "y": 61.25
                     },
-                    "uuid": "4e45248e-fbae-4f6d-9774-7a099f5ad608"
+                    "uuid": "70012039-9d23-411f-bd0e-4e0434f5caa1"
                 },
                 {
                     "description": "Pad 1 [BAT_BUS] of C12 on F.Cu",
@@ -1073,7 +1073,7 @@
                         "x": 37.5925,
                         "y": 64.5
                     },
-                    "uuid": "e3a6d2eb-4be1-41fc-b55d-3bf0588d06c4"
+                    "uuid": "264514c0-ec78-48ae-860f-0abfe7bb87f0"
                 }
             ],
             "severity": "warning",
@@ -1088,7 +1088,7 @@
                         "x": 24.8472,
                         "y": 62.078
                     },
-                    "uuid": "3c1629a5-be6f-458e-a8d3-7bf77ce6d037"
+                    "uuid": "91620c7a-d236-483c-b552-b274fd662f7e"
                 },
                 {
                     "description": "Pad 8 [CHG_OTG] of U2 on F.Cu",
@@ -1096,7 +1096,7 @@
                         "x": 33.25,
                         "y": 61.9625
                     },
-                    "uuid": "939151ac-1ccd-4d67-bc68-897f8654b4a3"
+                    "uuid": "72250795-fdc1-410a-8e45-d0fd148b5973"
                 }
             ],
             "severity": "warning",
@@ -1111,7 +1111,7 @@
                         "x": 13.35,
                         "y": 22.08
                     },
-                    "uuid": "8b2f42fe-3311-4a08-a00b-5b633e6cbd27"
+                    "uuid": "b108ae7a-77c2-4ad7-8034-1c3d55951951"
                 },
                 {
                     "description": "Pad 1 [USB_DN_CONN] of D3 on F.Cu",
@@ -1180,7 +1180,7 @@
                         "x": 33.75,
                         "y": 53.3875
                     },
-                    "uuid": "2cd70f47-36fa-4290-9a1c-ee72be913a00"
+                    "uuid": "5c901637-52b4-4f7d-9db4-d8a42065cfd5"
                 },
                 {
                     "description": "Pad 22 [CHG_REGN] of U2 on F.Cu",
@@ -1188,7 +1188,7 @@
                         "x": 33.75,
                         "y": 58.0375
                     },
-                    "uuid": "9e6c0c02-b3a3-476c-abdf-bcecc49ae9fe"
+                    "uuid": "9ffaf56d-ec55-4287-814e-e35175b7f5bf"
                 }
             ],
             "severity": "warning",
@@ -1203,7 +1203,7 @@
                         "x": 37.7444,
                         "y": 53.5679
                     },
-                    "uuid": "7968b355-d9bb-44fd-b625-0910ff7d3b6a"
+                    "uuid": "bb8ed49d-74ab-4b90-894c-4e717cd8781f"
                 },
                 {
                     "description": "Pad 1 [CHG_REGN] of C10 on F.Cu",
@@ -1211,7 +1211,7 @@
                         "x": 33.75,
                         "y": 53.3875
                     },
-                    "uuid": "2cd70f47-36fa-4290-9a1c-ee72be913a00"
+                    "uuid": "5c901637-52b4-4f7d-9db4-d8a42065cfd5"
                 }
             ],
             "severity": "warning",
@@ -1226,7 +1226,7 @@
                         "x": 32.85,
                         "y": 44.249999
                     },
-                    "uuid": "6e9e99fb-9a1e-4f92-a502-55234c58b367"
+                    "uuid": "3d6d8d9f-4fcf-487a-8f0a-632ebbf63ddd"
                 },
                 {
                     "description": "Pad 2 [TPS_PS_SYNC] of R27 on F.Cu",
@@ -1234,7 +1234,7 @@
                         "x": 43.805,
                         "y": 45.73
                     },
-                    "uuid": "fa297c60-4e46-408c-930c-6a6f7adcc09b"
+                    "uuid": "12af5e4d-9fa4-4f0a-9111-0518c7ca09aa"
                 }
             ],
             "severity": "warning",
@@ -1249,7 +1249,7 @@
                         "x": 34.775,
                         "y": 45.499999
                     },
-                    "uuid": "5fc8bea9-9d42-4a73-9f7a-f37242ce22f2"
+                    "uuid": "6973a3d0-9754-44be-9549-503753c6b1e0"
                 },
                 {
                     "description": "Pad 2 [TPS_L2] of L2 on F.Cu",
@@ -1257,7 +1257,7 @@
                         "x": 38.475,
                         "y": 43.15
                     },
-                    "uuid": "52a0590b-9f6a-48ca-b0f7-06786996b042"
+                    "uuid": "04350c66-4533-4571-a230-886161a748a4"
                 }
             ],
             "severity": "warning",
@@ -1272,7 +1272,7 @@
                         "x": 33.774999,
                         "y": 43.6
                     },
-                    "uuid": "708b855f-2726-4ec9-bfea-5acb89c802e1"
+                    "uuid": "b2f881c0-cec0-4f98-9e57-5e511336f911"
                 },
                 {
                     "description": "Pad 2 [TPS_EN] of R26 on F.Cu",
@@ -1280,7 +1280,7 @@
                         "x": 41.184,
                         "y": 40.851
                     },
-                    "uuid": "db1efac5-dc2a-49d2-8032-73ea2e942aa1"
+                    "uuid": "e6b10028-d82e-4bc1-8b47-653c80578c2c"
                 }
             ],
             "severity": "warning",
@@ -1303,7 +1303,7 @@
                         "x": 26.8293,
                         "y": 69.1109
                     },
-                    "uuid": "7af47add-4fef-43c8-8d25-1ae2350b70bf"
+                    "uuid": "22c9c38d-d55a-4dd1-8e80-7c8b87b9d747"
                 }
             ],
             "severity": "warning",
@@ -1318,7 +1318,7 @@
                         "x": 26.8293,
                         "y": 69.1109
                     },
-                    "uuid": "7af47add-4fef-43c8-8d25-1ae2350b70bf"
+                    "uuid": "22c9c38d-d55a-4dd1-8e80-7c8b87b9d747"
                 },
                 {
                     "description": "Pad 6 [TYPEC_INT_N] of U5 on F.Cu",
@@ -1326,7 +1326,7 @@
                         "x": 30.1,
                         "y": 70.325
                     },
-                    "uuid": "326f5376-b87c-474a-9a83-fd88fd218e6f"
+                    "uuid": "c20c96f9-0a21-4e1c-8498-f9bc065027c6"
                 }
             ],
             "severity": "warning",
@@ -1341,7 +1341,7 @@
                         "x": 14.4875,
                         "y": 61.25
                     },
-                    "uuid": "ec23975e-5aa5-428d-be51-134dc64ebdd5"
+                    "uuid": "2d77539e-fcfd-4c41-8ac8-7418f75dfaaa"
                 },
                 {
                     "description": "Pad 6 [I2C_SDA] of U2 on F.Cu",
@@ -1349,7 +1349,7 @@
                         "x": 32.0375,
                         "y": 61.25
                     },
-                    "uuid": "7f78958e-774f-44b8-83f9-272253ec5f31"
+                    "uuid": "615af6d6-8a47-4a02-bebd-6f888702440e"
                 }
             ],
             "severity": "warning",
@@ -1364,7 +1364,7 @@
                         "x": 30.225,
                         "y": 69.7
                     },
-                    "uuid": "6551a40d-9e25-4ec0-8ba5-be767382f8b2"
+                    "uuid": "20583829-9e9e-4734-a21a-ab8112f6d619"
                 },
                 {
                     "description": "Pad 6 [I2C_SDA] of U2 on F.Cu",
@@ -1372,7 +1372,7 @@
                         "x": 32.0375,
                         "y": 61.25
                     },
-                    "uuid": "7f78958e-774f-44b8-83f9-272253ec5f31"
+                    "uuid": "615af6d6-8a47-4a02-bebd-6f888702440e"
                 }
             ],
             "severity": "warning",
@@ -1387,7 +1387,7 @@
                         "x": 32.0375,
                         "y": 61.25
                     },
-                    "uuid": "7f78958e-774f-44b8-83f9-272253ec5f31"
+                    "uuid": "615af6d6-8a47-4a02-bebd-6f888702440e"
                 },
                 {
                     "description": "Pad 2 [I2C_SDA] of R6 on F.Cu",
@@ -1395,7 +1395,7 @@
                         "x": 34.2908,
                         "y": 51.0371
                     },
-                    "uuid": "4becbc97-0a84-46ab-a2c4-cbd5a4a89918"
+                    "uuid": "5141333e-b0e8-4e9c-8227-d41acb619932"
                 }
             ],
             "severity": "warning",
@@ -1410,7 +1410,7 @@
                         "x": 34.2908,
                         "y": 51.0371
                     },
-                    "uuid": "4becbc97-0a84-46ab-a2c4-cbd5a4a89918"
+                    "uuid": "5141333e-b0e8-4e9c-8227-d41acb619932"
                 },
                 {
                     "description": "Pad 11 [I2C_SDA] of U1 on F.Cu",
@@ -1433,7 +1433,7 @@
                         "x": 32.75,
                         "y": 58.0375
                     },
-                    "uuid": "b1c1b2ce-163b-42c9-8bc9-ad13ef22c258"
+                    "uuid": "baf3bac4-626b-4aa1-9d26-0754e7cf053b"
                 },
                 {
                     "description": "Pad 2 [CHG_DSEL] of R20 on F.Cu",
@@ -1441,7 +1441,7 @@
                         "x": 47.0199,
                         "y": 51.2085
                     },
-                    "uuid": "0f465901-bb14-46f0-ba53-b8c61f0f6535"
+                    "uuid": "25b4f7ac-2510-40b9-8cf9-dbb50bc29445"
                 }
             ],
             "severity": "warning",

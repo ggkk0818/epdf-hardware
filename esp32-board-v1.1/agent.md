@@ -1,5 +1,21 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-17 更新（最终收敛第二轮，按 `..._Final_Convergence_Next_Steps.md`）**：
+> 按 MD §11 停止全局自动 reroute，转为**局部收敛**，并保存基准板
+> `esp32-board-v1.1_routing_final_convergence_20260917.kicad_pcb`。要点：
+> - **真实 GND 焊盘 23 → 2**：`tools/fix_gnd.py` 逐焊盘放 GND 过孔（0.6/0.5/0.4 mm 递减）
+>   或用 0.15–0.3 mm 短 GND 铜接到最近的 GND 铜 / 铺铜；剩下 **U3 Pad4 / Pad10**
+>   （TPS63070 地引脚，出线走廊被开关节点走线占住，需要在 TPS 区局部 rip-up 或交互布线）。
+> - **GND 铺铜**：启用"自动删除孤立铜岛"，纯碎片由填充器删除（不再算 unconnected），
+>   仍带 Pad/Via 的碎片补 1 颗缝合过孔接回地平面。
+> - **SYS**：`SYS_ISLAND_U3` 已锚定，unconnected 8 → 6（`SYS_ISLAND_U2`/`SYS_ISLAND_C13`
+>   需在岛内放过孔或人工接线）；**3V3_MAIN**：`3V3_ISLAND_CAPS` 已锚定，剩 4 项
+>   （`3V3_ISLAND_U3` 在 U3 焊盘阵列内部，锚点被自身焊盘挡住）。
+> - **ERC 0 / DRC 0 Error 0 Warning** 保持；unconnected 维持在 62
+>   （含 BAT_BUS 14、EPD_3V3 14、I2C 16、SYS 6、USB_DN_CONN 6、3V3_MAIN 4、TPS/BQ/TF/TYPE-C 若干）。
+> - 下一轮按 MD §18：TPS 区（含 U3 两个 GND 引脚的局部收尾）→ BQ 区 → USB → I2C/TF/TYPE-C →
+>   Refill → 非 GND unconnected = 0 → 清理 GND 碎片 → 开启最后两项 Routing DRC → Final DRC。
+
 > **2026-09-17 更新（最终收敛阶段 / Routing final convergence）**：按
 > `ESP32S3_GDEM102T91_V1.6_Routing_Final_Convergence_Plan.md` 推进，重点从"减少 DRC 错误"
 > 转为"把电源 / GND / 局部控制网络真正收敛到 0 unconnected"：

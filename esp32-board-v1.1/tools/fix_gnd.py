@@ -121,6 +121,18 @@ def main():
     gnd_targets += [(v["x"], v["y"]) for v in data.get("gnd_vias", [])]
     gnd_targets += [(v["x"], v["y"]) for v in data.get("vias", [])
                     if v["net"] == "GND"]
+    # ... plus the filled GND pours themselves (sampled along their outlines and
+    # inset a little, so a stranded pad can be stitched straight into the copper
+    # that already surrounds it)
+    for (layer, pts, net) in filled_outlines(board, ["F.Cu"]):
+        if net != "GND":
+            continue
+        xs = [q[0] for q in pts]
+        ys = [q[1] for q in pts]
+        cx, cy = sum(xs) / len(xs), sum(ys) / len(ys)
+        for (px, py) in pts:
+            for t in (0.10, 0.25, 0.5):
+                gnd_targets.append((px + (cx - px) * t, py + (cy - py) * t))
 
     for (x, y, desc) in missing_pads:
         cands = [(x, y)]
@@ -197,17 +209,38 @@ def main():
         xs = [q[0] for q in pts]
         ys = [q[1] for q in pts]
         cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
-        touched = any(abs(px - cx) < (max(xs) - min(xs)) / 2 + 0.3
-                      and abs(py - cy) < (max(ys) - min(ys)) / 2 + 0.3
+        # a piece is connected when a GND pad or via actually lies inside it
+        poly = [(q[0], q[1]) for q in pts]
+        touched = any(R.point_in_polygon(px, py, poly)
                       for (px, py) in gnd_pads + gnd_vias)
         if touched:
             continue
         isolated += 1
         ok = False
-        for (ox, oy) in ((cx, cy), (cx, min(ys) + 0.4), (cx, max(ys) - 0.4),
-                         (min(xs) + 0.4, cy), (max(xs) - 0.4, cy)):
-            if via_ok(ox, oy) and add_via(ox, oy, "stitch"):
-                ok = True
+        # sample a fine grid inside the piece and try progressively smaller vias
+        cand_pts = []
+        step = 0.2
+        gy = min(ys)
+        while gy <= max(ys):
+            gx = min(xs)
+            while gx <= max(xs):
+                if R.point_in_polygon(gx, gy, poly):
+                    cand_pts.append((gx, gy))
+                gx += step
+            gy += step
+        cand_pts.sort(key=lambda q: (q[0] - cx) ** 2 + (q[1] - cy) ** 2)
+        for (dia, drill) in ((0.6, 0.3), (0.5, 0.25), (0.4, 0.2)):
+            vmask = sess.rtr.via_mask("GND", dia / 2.0, drill / 2.0,
+                                      R.net_params("GND")["clearance"])
+
+            def ok_v(x, y):
+                i, j = int(round(x / R.PITCH)), int(round(y / R.PITCH))
+                return (0 <= i < R.W and 0 <= j < R.H and bool(vmask[j, i]))
+            for (ox, oy) in cand_pts[:400]:
+                if ok_v(ox, oy) and add_via(ox, oy, "stitch"):
+                    ok = True
+                    break
+            if ok:
                 break
         if ok:
             stitched += 1
@@ -221,18 +254,11 @@ def main():
     # final sanity pass: re-check every new via against the settled copper and
     # against the GND vias that are already on the board
     existing = list(data.get("gnd_vias", []))
-    fresh = R.Board(model)
-    fresh.load_routing(data)
-    fresh_r = R.Router(fresh)
-    vmask = fresh_r.via_mask("GND", 0.3, 0.15, R.net_params("GND")["clearance"])
     keep = []
     for (x, y, kind, _r) in placed:
-        if any(math.hypot(x - v["x"], y - v["y"]) < 0.7 for v in existing):
+        if any(math.hypot(x - v["x"], y - v["y"]) < 0.5 for v in existing):
             continue
-        if any(math.hypot(x - kx, y - ky) < 0.7 for (kx, ky) in keep):
-            continue
-        i, j = int(round(x / R.PITCH)), int(round(y / R.PITCH))
-        if not (0 <= i < R.W and 0 <= j < R.H) or not vmask[j, i]:
+        if any(math.hypot(x - kx, y - ky) < 0.5 for (kx, ky) in keep):
             continue
         keep.append((x, y))
     added = [{"x": round(x, 4), "y": round(y, 4), "dia": 0.6, "drill": 0.3,
