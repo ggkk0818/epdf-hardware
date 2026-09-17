@@ -286,7 +286,12 @@ def relax_gnd_zones(board, clearance=0.20):
     for z in board.Zones():
         if z.GetIsRuleArea() or z.GetNetname() != "GND":
             continue
-        z.SetLocalClearance(int(round(clearance * MM)))
+        # the B.Cu pour is cut by the BAT_BUS trunk, and a 0.20 mm clearance
+        # lets it squeeze a hair-thin bridge through the resulting gaps - DRC
+        # reports that as "copper connection too narrow".  A wider clearance
+        # leaves the pour short of those gaps, so no sliver is formed.
+        c = 0.30 if z.IsOnLayer(pcbnew.B_Cu) else clearance
+        z.SetLocalClearance(int(round(c * MM)))
         # MD §14 / §16: copper slivers with no pad and no via are removed by the
         # filler instead of being reported as unconnected islands
         try:

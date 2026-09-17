@@ -63,6 +63,8 @@ DIAG_STEP = 70      # heuristic scale (admissible with 45 degree moves)
 VIA_COST = 1900     # cost of a layer change (1.9 mm of track)
 LAYER_PENALTY = {"F.Cu": 5, "In2.Cu": 1, "B.Cu": 0}
 WIDE_MIN_RUN = 4    # cells of contiguous room needed before widening a neck
+# two drills may not touch even inside one net (DRC hole_to_hole, project value)
+HOLE_TO_HOLE = 0.25
 STUB_MIN = 1.0      # a fan-out stub may stop this far from the pad centre (mm)
 STUB_SLACK = 12     # fewer walkable ring cells than this => reserve a stub
 STUB_ALL = False    # True: reserve a stub at every pad, not just pinched ones
@@ -70,6 +72,9 @@ STUB_ALL = False    # True: reserve a stub at every pad, not just pinched ones
 # reserved from the very beginning - otherwise the signals routed earlier seal
 # the pull-up / decoupling pads off (this is what blocked 3V3_MAIN).
 STUB_ALL_NETS = {"3V3_MAIN", "SYS"}
+# pads whose escape has to go a specific way (MD 2026-09-17 TPS_EN/TPS_VSEL fix:
+# U3 pin 14/15 escape sideways, away from the SYS trunk above them)
+STUB_DIR_HINT = {("U3", "14"): (-1.0, 0.0), ("U3", "15"): (-1.0, 0.0)}
 
 BOARD_CX, BOARD_CY, BOARD_HX, BOARD_HY, BOARD_R = 27.5, 42.0, 27.5, 42.0, 2.0
 
@@ -128,7 +133,8 @@ ISLANDS = [
     {"name": "SYS_ISLAND_C13", "net": "SYS", "layer": "F.Cu",
      "poly": [(31.35, 63.95), (32.55, 63.95), (32.55, 65.10), (31.35, 65.10)]},
     {"name": "SYS_ISLAND_U3", "net": "SYS", "layer": "F.Cu",
-     "poly": [(31.45, 40.35), (35.05, 40.35), (35.05, 44.05), (31.45, 44.05)]},
+     # stops above the U3 top pin row so pins 14/15/1 keep their escape
+     "poly": [(31.45, 40.35), (35.05, 40.35), (35.05, 42.55), (31.45, 42.55)]},
     {"name": "3V3_ISLAND_U3", "net": "3V3_MAIN", "layer": "F.Cu",
      "poly": [(33.90, 45.60), (35.20, 45.60), (35.20, 47.20), (33.90, 47.20)]},
     {"name": "3V3_ISLAND_CAPS", "net": "3V3_MAIN", "layer": "F.Cu",
@@ -205,6 +211,24 @@ class Shape:
         d = (np.minimum(np.maximum(qx, qy), 0.0)
              + np.hypot(np.maximum(qx, 0.0), np.maximum(qy, 0.0)) - self.r)
         return np.maximum(d, 0.0).astype(np.float32)
+
+
+def seg_shape(x0, y0, x1, y1, w, net, hard=True):
+    """Exact copper footprint of a straight track.
+
+    A 45 degree run used to be modelled as the axis aligned bounding box, which
+    is up to 41 % wider than the real copper (and swept a square shadow over
+    everything beside a diagonal).  The track is really a capsule, so build one:
+    a rectangle of length L x w with rounded ends - when rotated onto the run it
+    matches the copper exactly and the maze only avoids what is really there.
+    """
+    cx, cy = (x0 + x1) / 2.0, (y0 + y1) / 2.0
+    dx, dy = x1 - x0, y1 - y0
+    r = w / 2.0
+    length = math.hypot(dx, dy)
+    if length < 1e-9:
+        return Shape(cx, cy, r, r, r, 0.0, net, hard)
+    return Shape(cx, cy, length / 2.0 + r, r, r, math.atan2(dy, dx), net, hard)
 
 
 class Obstacles:
@@ -481,9 +505,7 @@ class Board:
             half = s["width"] / 2.0
             grp = "hi" if params["clearance"] > 0.15 else "lo"
             self.ob.add(s["layer"], grp,
-                        Shape((x0 + x1) / 2.0, (y0 + y1) / 2.0,
-                              abs(x1 - x0) / 2.0 + half,
-                              abs(y1 - y0) / 2.0 + half, 0.0, 0.0, s["net"]))
+                        seg_shape(x0, y0, x1, y1, s["width"], s["net"]))
             self.net_segments.setdefault(s["net"], []).append(s)
         for v in data.get("vias", []) + data.get("gnd_vias", []):
             params = net_params(v["net"])
@@ -594,6 +616,22 @@ class Router:
             own = np.minimum(own, self.b.ob.field(lyr, "hi", None, only_net=net,
                                                  hard=hard))
             ok = ok & ((own <= 0.001) | (own >= via_r + 0.12))
+        # holes must not touch each other *even inside one net* (DRC
+        # hole_to_hole), so a new via has to keep the drill clearance from every
+        # via of its own net that is already on the board
+        for v in self.b.net_vias.get(net, []):
+            need = drill_r + v["drill"] / 2.0 + HOLE_TO_HOLE
+            i0 = max(0, int((v["x"] - need) / PITCH) - 1)
+            i1 = min(W - 1, int((v["x"] + need) / PITCH) + 1)
+            j0 = max(0, int((v["y"] - need) / PITCH) - 1)
+            j1 = min(H - 1, int((v["y"] + need) / PITCH) + 1)
+            if i1 < i0 or j1 < j0:
+                continue
+            xs = (np.arange(i0, i1 + 1) * PITCH).astype(np.float32)
+            ys = (np.arange(j0, j1 + 1) * PITCH).astype(np.float32)
+            X, Y = np.meshgrid(xs, ys)
+            view = ok[j0:j1 + 1, i0:i1 + 1]
+            view &= np.hypot(X - v["x"], Y - v["y"]) >= need - EPS
         return ok
 
     def astar(self, walk, slack, target, sources, via_ok, guide=None,
@@ -962,11 +1000,11 @@ class Session:
             ys = [p["y"] for p in pads]
             self.span[net] = max(max(xs) - min(xs), max(ys) - min(ys))
 
-    def masks_for(self, net, width, soft=False, boost=None):
+    def masks_for(self, net, width, soft=False, boost=None, via=None):
         params = net_params(net)
         if boost is None:
             boost = getattr(self, "clear_boost", 0.0)
-        key = (net, round(width, 3), bool(soft), round(boost, 3))
+        key = (net, round(width, 3), bool(soft), round(boost, 3), via)
         hit = self.mask_cache.get(key)
         if hit is not None:
             return hit
@@ -993,8 +1031,9 @@ class Session:
             if lyr not in owners:
                 walk, slack = m[lyr]
                 m[lyr] = (walk & ~guard, slack)
-        via_dia, via_drill = params["via_dia"], params["via_drill"]
-        if width > 0.45:
+        via_dia, via_drill = via if via else (params["via_dia"],
+                                              params["via_drill"])
+        if via is None and width > 0.45:
             via_dia = max(via_dia, 0.8)
             via_drill = max(via_drill, 0.4)
         via_ok = self.rtr.via_mask(net, via_dia / 2.0, via_drill / 2.0, clear,
@@ -1135,6 +1174,9 @@ class Session:
             cands = [min(params["width"], 0.15)]
         dirs = [first, (first[1], first[0]), (-first[0], -first[1]),
                 (-first[1], -first[0])]
+        hint = STUB_DIR_HINT.get(key)
+        if hint:
+            dirs = [hint] + [d for d in dirs if d != hint]
         for dirv in dirs:
             for extra in (0.70, 0.50, 0.35):
                 len1 = half + extra
@@ -1177,9 +1219,7 @@ class Session:
             if abs(a[0] - bpt[0]) < 1e-9 and abs(a[1] - bpt[1]) < 1e-9:
                 continue
             b.ob.add(layer, grp,
-                     Shape((a[0] + bpt[0]) / 2.0, (a[1] + bpt[1]) / 2.0,
-                           abs(bpt[0] - a[0]) / 2.0 + hw,
-                           abs(bpt[1] - a[1]) / 2.0 + hw, 0.0, 0.0, net))
+                     seg_shape(a[0], a[1], bpt[0], bpt[1], w, net))
         tipx, tipy = pts[-1]
         tip = (layers_ok[0], int(round(tipx / PITCH)), int(round(tipy / PITCH)))
         self.stubs[key] = {"tip": tip, "cells": [], "net": net, "width": w}
@@ -1399,11 +1439,8 @@ class Session:
         for s in segs_all:
             x0, y0 = s["start"]
             x1, y1 = s["end"]
-            half = s["width"] / 2.0
             b.ob.add(s["layer"], grp,
-                     Shape((x0 + x1) / 2.0, (y0 + y1) / 2.0,
-                           abs(x1 - x0) / 2.0 + half, abs(y1 - y0) / 2.0 + half,
-                           0.0, 0.0, net))
+                     seg_shape(x0, y0, x1, y1, s["width"], net))
         for v in vias_all:
             r = v["dia"] / 2.0
             for lyr in ALL_CU:
@@ -1485,12 +1522,13 @@ class Session:
                                     if s.get("kind") == "stub"]
         self.b.net_vias[net] = []
 
-    def blockers_for(self, net, max_nets=3):
+    def blockers_for(self, net, max_nets=3, pads=None):
         """Nets whose F.Cu copper sits on the boundary of this net's pocket."""
         params = net_params(net)
         m = self.rtr.masks(net, params["width"] / 2.0, params["clearance"])
         walk = m["F.Cu"][0]
-        seeds = [(i, j) for p in self.b.pads_of.get(net, [])
+        seeds = [(i, j) for p in (pads if pads is not None
+                                  else self.b.pads_of.get(net, []))
                  if "F.Cu" in p["cu_layers"] for (i, j) in p["cells"]]
         seen = flood_fill(walk, seeds)
         if not seen.any():
@@ -1654,6 +1692,8 @@ class Session:
         grown = {}
         targets = {net: target for net in WIDE_BUS}
         targets.update(TRUNKS)
+        # the TPS63070 switch node wants 0.50 mm wherever it fits (MD §7.1)
+        targets.setdefault("TPS_L2", 0.50)
         for net in sorted(targets):
             params = net_params(net)
             if net not in self.b.net_segments:

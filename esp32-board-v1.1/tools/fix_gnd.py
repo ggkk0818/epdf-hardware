@@ -76,11 +76,14 @@ def main():
 
     placed = []
 
-    def add_via(x, y, kind, ref=""):
-        for (px, py, _k, _r) in placed:
+    def add_via(x, y, kind, size):
+        for (px, py, _k, _s) in placed:
             if math.hypot(px - x, py - y) < 0.7:
                 return False
-        placed.append((x, y, kind, ref))
+        # remember the size the clearance engine actually approved - writing
+        # every via back at 0.6/0.3 used to turn a legal 0.4 mm via into a
+        # clearance error (it does not fit where the small one does)
+        placed.append((x, y, kind, size))
         return True
 
     # --- A. real GND pads the pour cannot reach --------------------------
@@ -149,7 +152,7 @@ def main():
                 i, j = int(round(x / R.PITCH)), int(round(y / R.PITCH))
                 return (0 <= i < R.W and 0 <= j < R.H and bool(vmask[j, i]))
             for (cx, cy) in cands:
-                if ok_v(cx, cy) and add_via(cx, cy, "pad", desc):
+                if ok_v(cx, cy) and add_via(cx, cy, "pad", (dia, drill)):
                     got = (cx, cy, dia)
                     break
             if got:
@@ -237,7 +240,7 @@ def main():
                 i, j = int(round(x / R.PITCH)), int(round(y / R.PITCH))
                 return (0 <= i < R.W and 0 <= j < R.H and bool(vmask[j, i]))
             for (ox, oy) in cand_pts[:400]:
-                if ok_v(ox, oy) and add_via(ox, oy, "stitch"):
+                if ok_v(ox, oy) and add_via(ox, oy, "stitch", (dia, drill)):
                     ok = True
                     break
             if ok:
@@ -261,9 +264,9 @@ def main():
         if any(math.hypot(x - kx, y - ky) < 0.5 for (kx, ky) in keep):
             continue
         keep.append((x, y))
-    added = [{"x": round(x, 4), "y": round(y, 4), "dia": 0.6, "drill": 0.3,
-              "net": "GND", "kind": kind}
-             for (x, y, kind, _r) in placed if (x, y) in keep]
+    added = [{"x": round(x, 4), "y": round(y, 4), "dia": size[0],
+              "drill": size[1], "net": "GND", "kind": kind}
+             for (x, y, kind, size) in placed if (x, y) in keep]
     data["gnd_vias"] = existing + added
     if len(added) != len(placed):
         print(f"   rejected {len(placed) - len(added)} vias that would clash")

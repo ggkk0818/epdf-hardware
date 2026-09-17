@@ -8,8 +8,24 @@
 > `SYS`/`3V3_MAIN` 状态更正为"电源拓扑完成、局部连通待收尾"。检查点板见
 > `esp32-board-v1.1_routing_checkpoint_20260917.kicad_pcb`。
 > 随后又按 MD §8/§15 加入**局部电源铜皮 + In2.Cu 1.2 mm 宽主干**，收掉 `SYS` 与 `3V3_MAIN`。
-> 摘要：**54/69 网络完成、ERC 0、DRC 0 Error / 0 Warning**、unconnected 68（未完成网络 +
-> GND 孤岛）；线间间距独立校验 0 问题；POWER 网络类线宽 0.80 → **0.50 mm**，
+> **2026-09-17 更新（TPS_EN / TPS_VSEL 收敛）**：按 `..._TPS_EN_VSEL_Routing_Solution.md`
+> 让 U3 上方 SYS 局部 1.20 → 0.80 mm（**位置不动**），`TPS_VSEL` 从 U3.15 左出、`TPS_EN`
+> 从 U3.14 上出后左转，两条都立刻换层到 **B.Cu** 走长距离。过程中发现并修掉布线器的
+> **斜线障碍模型误差**（45° 走线原先按轴对齐外接矩形建模，比真实铜箔宽 √2 倍）；
+> U3 两块 SYS 电源焊盘也一并接到 C18.1 / `SYS_ISLAND_U3`。**Net Class 未改动**
+> （0.80 mm 已是本工程 BAT/SYS/USB_VBUS 的主干标准，此处属于 MD 允许的局部 neck-down）。
+> 摘要：**54/69 网络完成、ERC 0、DRC 0 Error / 0 Warning**、unconnected 62 → **59**
+> （TPS_EN / TPS_VSEL 与 U3 的 SYS 焊盘已从列表消失）；线间间距独立校验 0 问题；
+> POWER 网络类线宽 0.80 → **0.50 mm**，
+> **2026-09-17 更新（Post-TPS 收敛，Checkpoint 1 / 2）**：按
+> `..._Post_TPS_Final_Convergence_Plan.md` 完成电源骨架：`3V3_MAIN`（含 ESP32 模组 3V3 群
+> 那块 24 mm 的历史断口）、`SYS`、`BAT_BUS`（0.80 mm 主干）、`EPD_3V3`（0.50 mm 主干）、
+> `CHG_REGN` / `CHG_CE` / `CHG_DSEL` 全部闭合，仅剩 `CHG_OTG`（U2.8 在 0.4 mm 间距引脚区
+> 内无出口，需局部 rip-up）。**unconnected 59 → 35**（non-GND 40 → 16），
+> **DRC 维持 0 Error / 0 Warning**。B.Cu GND 铺铜局部净空由 0.20 → **0.30 mm**
+> （新主干切开铺铜后会挤出 0.116 mm 细颈）。检查点：
+> `esp32-board-v1.1_power_backbone_checkpoint_20260917.kicad_pcb`、
+> `esp32-board-v1.1_bat_epd_checkpoint_20260917.kicad_pcb`。
 > 并新增 `SWITCH_NODE`（0.50/0.15）承载 CHG_SW/EPD_SW/TPS_L1/TPS_L2；
 > BAT/SYS/USB_VBUS 主干在收尾阶段加宽到 0.80 mm。详见 **`ROUTING_NOTES.md`**。
 
@@ -95,6 +111,8 @@ USB 90 Ω：L1 微带参考 L2，**W 0.24 / S 0.18 mm（≈89.7 Ω）**。
 > 0.20 mm）；按要求拆出 `SWITCH_NODE`（0.50 mm 但保留 0.15 mm 间距，因为 U3 焊盘间隙
 > 只有 0.15 mm）。高电流主干在布线收尾时自动加宽到 **0.80 mm**（BAT/SYS/USB_VBUS，
 > 当前 20 段），R29 保持冻结位置 (12.8648, 49.5497)。
+> 2026-09-17：本表**未变**。U3 上方那段 SYS 主干由 1.20 → 0.80 mm 属于 MD 允许的
+> **局部 neck-down**（0.80 mm 本来就是本工程的主干标准），没有修改任何 Net Class。
 > min track 0.15 / clearance 0.15 / via 0.40-0.20 / 铜到板边 0.30（不变）。
 
 ---
@@ -218,11 +236,15 @@ ERC           : 0 violations
                           simulation_model_issue（与本设计无关，MD §9）
 DRC Errors    : 0
 DRC Warnings  : 0
-Unconnected   : 255   = 尚未布线的飞线（本阶段预期）
+Unconnected   : 35    = 5 个低速网络（I2C/TF_CS/TYPEC_INT/USB_DN/CHG_OTG）
+                        + GND 铺铜碎片（MD §18 统一清理）
+                        （2026-09-17：布线起点 255 → 68 → 62 → 59 → 50 → 35）
 DRC Exclusions: 0
 ```
 
 **Placement 阶段 DRC 已全零**（含 courtyard、库一致性、丝印、规则区检查）。
+布线阶段维持 **0 Error / 0 Warning**；线间/线过孔间距另有独立精确校验
+（`tools/check_routing.py`，当前 0 问题）。
 `track_not_centered_on_via`、`tuning_profile_track_geometries` 按 MD §16
 保持 Ignore，布线完成后开启。
 

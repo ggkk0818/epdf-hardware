@@ -1,5 +1,78 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-17 更新（Post-TPS 收敛：Checkpoint 1 全部达成，Checkpoint 2 只差 CHG_OTG）**：
+> 按 `..._Post_TPS_Final_Convergence_Plan.md` 推进。新增主力工具 `tools/bridge_net.py`
+> （按真实几何把网络的铜箔拆成连通分量 → MST → 只补真正缺的那几段）。
+>
+> - **Checkpoint 1 达成**：U3 Pad10 GND、`SYS`、`3V3_MAIN` 全部从 unconnected 中消失。
+>   ⚠️ **重要发现**：3V3_MAIN 原先并不是"只差两段短桩"，而是 **ESP32 模组的 3V3 群
+>   （C1–C4 / R1–R5 / U1.2）整块与电源区断开了约 24 mm**（历史上几轮"3V3_MAIN 已闭合"
+>   的结论有误）。已用一条 0.65 mm 主线（In2 → B.Cu → F.Cu）接回。
+> - **Checkpoint 2**：`BAT_BUS`（0.80 mm 主干 + 器件端 0.50/0.35）✅、`EPD_3V3`（0.50 mm
+>   主干 + 短支路，含打开 J2.15/16 的电源出口）✅、`CHG_REGN` ✅、`CHG_CE` ✅、
+>   `CHG_DSEL` ✅；**`CHG_OTG` 未闭合**——U2.8 在 0.4 mm 间距引脚区里被围成一个 34 格的
+>   窄井，需局部 rip-up 邻近走线。
+> - **unconnected 59 → 35**（non-GND 40 → 16），全程 **DRC 0 Error / 0 Warning**。
+> - 修掉的工具链真 bug：`fix_gnd.py` 过孔尺寸写错（0.4 验证却写 0.6）、布线器过孔掩膜
+>   不看同网络过孔（`hole_to_hole`）、单批 `bridge_net` 跨网络看不到新铜、`snap_end`
+>   拉长末端擦焊盘、B.Cu GND 铺铜被 BAT_BUS 主干切出 0.116 mm 细颈。
+> - 检查点：`esp32-board-v1.1_power_backbone_checkpoint_20260917.kicad_pcb`（CP1）、
+>   `esp32-board-v1.1_bat_epd_checkpoint_20260917.kicad_pcb`（CP2 除 CHG_OTG）。
+> - 下一步（MD §13~§18）：`CHG_OTG`（局部 rip）→ USB DP/DN → I2C → TF_CS_N →
+>   TYPEC_INT_N → Non-GND unconnected = 0 → GND 统一清理。
+
+> **2026-09-17 更新（TPS_EN / TPS_VSEL 已闭合 ✅，依 `..._TPS_EN_VSEL_Routing_Solution.md`）**：
+> 按 MD §1/§4/§5 的"**局部减宽 + 尽快换 B.Cu**"方案，两条控制线**双双布通**，前几轮
+> 的"必须交互布线"结论已作废。**根因不在 SYS，而在布线器自己的几何模型**：
+> `route.py` 原先把线段障碍建成**轴对齐外接矩形**，45° 走线因此比真实铜箔"胖" √2 倍。
+> 实测一支 `3V3_MAIN` 斜线段 (28.1,49.7)→(30.7,47.1) 的外接矩形把 **R28.2 焊盘的
+> 78/78 个栅格全部盖死**，而真实铜箔离它还有 0.50 mm 余量 —— 这就是历次 rip-up /
+> 主干上移都失败的真正原因。新增 `seg_shape()` 把线段按**真实胶囊形**建模后，R28.2
+> 恢复可走，`TPS_VSEL` / `TPS_EN` 当场布通。
+>
+> - `SYS` 主干：U3 上方局部 1.20 → **0.80 mm**（0.80 已是本工程主干标准），**位置不动**。
+> - `TPS_VSEL`：U3.15 → 左出 → Via (32.5,43.5) → **B.Cu 长距离** → R28.2 ✅
+> - `TPS_EN`：U3.14 → 上短出 → **左转** → Via (32.4,42.7) → **B.Cu 长距离** → R26.2 ✅
+> - U3.12/U3.13（SYS 电源焊盘）→ 0.5 mm 出线向上 1.4 mm 接到 C18.1 与 `SYS_ISLAND_U3` ✅
+> - 未动 `TPS_L1/L2/PS_SYNC/FB`、未移动 R26/R28、未启用 `TPS_CTRL_ESCAPE` 规则区。
+> - **DRC 0 Error / 0 Warning**，unconnected **62 → 59**；基准板更新为
+>   `esp32-board-v1.1_routing_tps_ctrl_20260917.kicad_pcb`。
+> - 下一轮（MD §15）：BQ 区（`CHG_REGN` → `CHG_CE` → `CHG_OTG`/`CHG_DSEL`）→
+>   USB DP/DN → I2C → TF_CS_N → TYPEC_INT_N；同时用 `tools/anchor_islands.py`
+>   收掉 `SYS_ISLAND_U2/C13`、`3V3_ISLAND_U3/CAPS` 的岛—岛断点。
+
+> **2026-09-17 更新（方案 1：SYS 主干上移 1 mm，已测试后回退）**：按用户选择实现
+> `tools/move_sys_trunk.py`（摘掉 U3 顶排引脚上方走廊内的 SYS 铜 → 用显式走廊折线重画、
+> 保留原端点以保证连通 → 逐版用真实间距引擎打分，不劣于基线才写盘）。**结论：不可行**。
+> 6 个走廊高度（41.90 ~ 40.50 mm）的 SYS 间距分数为 205~235，而摘除后的基线是 99——
+> 抬高主干只是把冲突搬到上方，因为 U3 上方 1~2 mm 已被其它网络走线占满。脚本按设计拒绝写盘，
+> **基准板保持验证状态（ERC 0 / DRC 0 Error 0 Warning / unconnected 62），无回归**。
+> `TPS_EN` / `TPS_VSEL` 因此归入"必须交互布线"清单（建议：从 U3 底部绕行，或评审把
+> R26/R28 移到 U3 顶部一侧）。
+
+> **2026-09-17 更新（SYS 局部 rip-up 尝试，用户已授权）**：按授权实现"只 rip 引脚附近
+> 1–2 mm 的 SYS → 立刻重走 → 验证 DRC"（`fix_tps.py::rip_near_pads()`，段按边界切开、
+> 超过 2 mm 直接拒绝）。**实测仍无法闭合 `TPS_EN` / `TPS_VSEL`**：U3.14/15 的出线通道在
+> 栅格上只有一列 0.1 mm 可行格，唯一挡路物是 1.2 mm 宽的 SYS 主干（距引脚中心 1.21 mm），
+> 挖掉后通道仍被 U3 自身焊盘列封成死端。已**回退**到验证过的状态（DRC 0/0、unconnected 62），
+> 未产生回归。这两个网络留待交互布线，可选方案见 `ROUTING_NOTES.md` §3.0c 第四轮
+> （SYS 主干上移 ~1 mm / 从 U3 底部绕行 / 移动 R26/R28）。
+
+> **2026-09-17 更新（最终收敛第三轮：TPS 区，MD §7 + §2）**：新增 `tools/fix_tps.py`
+> 做**局部**收敛（不做全局重跑）：
+> - **`TPS_L2` 已布通** ✅（F.Cu、**0 过孔**、4 段加宽到 0.50 mm，焊盘处 0.25 mm 收颈）；
+>   **`TPS_PS_SYNC` 已布通** ✅（32 段 / 0.20 mm）。
+> - `TPS_EN` / `TPS_VSEL` 仍未闭合 ❌：U3 顶部引脚 14/15 的出线走廊被 SYS 铜皮与走线占满，
+>   连 0.35 mm 短桩都放不下 → 需要局部 rip-up SYS 或交互布线。
+> - **关键修正**：`SYS_ISLAND_U3` 铜皮下沿 44.05 → **42.55**（原值把 U3 顶排引脚的出线整段盖住）。
+>   修正后铺铜可流入 U3 区域，真实 GND 焊盘 **23 → 6**（剩 U3.10 / C18.2 / C24.2 / D5.2 / U5.3 / U5.5）。
+> - **`3V3_MAIN` 已完全闭合** ✅（不再出现在 unconnected_items）；`SYS` 仅剩 2 项。
+> - 顺带清理：TF_SCLK 重复过孔 2 组、EPD_VCOM / TPS_VSEL 悬空残段。
+> - **ERC 0 / DRC 0 Error 0 Warning**，unconnected 62；基准板
+>   `esp32-board-v1.1_routing_final_convergence_20260917.kicad_pcb` 已更新。
+> - 下一轮（MD §8~§10）：BQ 区（CHG_REGN → CHG_CE → CHG_OTG/DSEL）→ USB DP/DN →
+>   I2C/TF_CS/TYPEC_INT；TPS_EN/VSEL 与 U3 剩余地引脚建议在交互布线中一并收掉。
+
 > **2026-09-17 更新（最终收敛第二轮，按 `..._Final_Convergence_Next_Steps.md`）**：
 > 按 MD §11 停止全局自动 reroute，转为**局部收敛**，并保存基准板
 > `esp32-board-v1.1_routing_final_convergence_20260917.kicad_pcb`。要点：
@@ -387,10 +460,12 @@ kicad-cli sch erc  →  0 violations
 
 1. 已完成：4 层布线框架（0.1 mm 栅格 A* + 出线预约 + 功率宽度阶梯 + 合法性重布）、
    In1.Cu 完整 GND 平面、四层 GND 铺铜与 145 个缝合过孔、5 个 `PWR_NECK_*` 窄颈规则区。
-2. 未完成：12 个网络（`3V3_MAIN`、`SYS`、`USB_VBUS_RAW/PROT`、`I2C_SCL/SDA`、
-   `CHG_CE/INT_N/OTG`、`TPS_L2`、`SPI_SCLK`、`TF_SCLK`、`TYPEC_INT_N`、`EPD_VGH`、
-   `USB_DN_CONN`）的最后 1–2 段，需人工交互布线收尾。
-3. 未完成：4 个 DRC 项（1 间距 + 3 悬空线头，均在 J2 FPC 扇出区）。
+2. 进行中（2026-09-17 第七轮后）：**DRC 0 Error / 0 Warning**，unconnected **35**（起点 255）。
+   已闭合：`3V3_MAIN`、`SYS`、`BAT_BUS`、`EPD_3V3`、`CHG_REGN`、`CHG_CE`、`CHG_DSEL`、
+   TPS 全家（L1/L2/PS_SYNC/FB/EN/VSEL）、U3 的 GND 与 SYS 焊盘、全部电源铜皮的岛—主干锚点。
+   仍未闭合的非地网络（16 项）：`CHG_OTG 1`、`USB_DN_CONN 3`、`I2C_SCL 4`、`I2C_SDA 4`、
+   `TF_CS_N 2`、`TYPEC_INT_N 2`。收尾顺序见 `ROUTING_NOTES.md` §3.0c 第七轮与 MD §13~§18。
+3. 未完成：GND 最终清理（19 项：铺铜碎片 + 少量真实地焊盘）。
 4. 待确认：POWER 网络类线宽 0.80 → 0.50 mm（见 `ROUTING_NOTES.md` §4.1）。
 
 ### 原理图阶段
