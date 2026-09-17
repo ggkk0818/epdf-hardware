@@ -213,6 +213,47 @@ def update_dru(areas):
     DRU.write_text(text.rstrip() + "\n" + "\n".join(lines) + "\n", encoding="utf-8")
 
 
+def add_power_islands(board):
+    """Publish the local power copper islands as filled zones (MD §8.1/§15.2).
+
+    Each island is a small pour on F.Cu that groups a converter's output pins
+    with its local capacitors.  The polygon list comes from tools/route.py so
+    the router and the board always agree on the geometry.
+    """
+    sys.path.insert(0, str(ROOT / "tools"))
+    import route as R
+    for z in [z for z in board.Zones() if z.GetZoneName().startswith(("SYS_ISLAND", "3V3_ISLAND"))]:
+        board.Remove(z)
+    made = []
+    for isl in R.ISLANDS:
+        code = board.GetNetcodeFromNetname(isl["net"])
+        if code <= 0:
+            continue
+        z = pcbnew.ZONE(board)
+        z.SetNet(board.FindNet(isl["net"]))
+        z.SetLayer(LAYERS[isl["layer"]])
+        z.SetZoneName(isl["name"])
+        z.SetLocalClearance(int(round(0.30 * MM)))
+        z.SetMinThickness(int(round(0.25 * MM)))
+        z.SetAssignedPriority(20)       # above the GND pours
+        # solid bond to the pads: these are power pours, thermal relief would
+        # add resistance and it also fragments the fill in a dense cluster
+        z.SetPadConnection(pcbnew.ZONE_CONNECTION_FULL)
+        # drop slivers that end up with no pad/via of their own net (a power
+        # island inside a dense cluster always fragments a little)
+        try:
+            z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)
+        except AttributeError:
+            pass
+        outline = z.Outline()
+        outline.NewOutline()
+        for (px, py) in isl["poly"]:
+            outline.Append(int(round(px * MM)), int(round(py * MM)))
+        board.Add(z)
+        made.append(isl["name"])
+    return made
+
+
 def add_l3_pour(board):
     for z in [z for z in board.Zones() if z.GetZoneName() == "GND_POUR_L3"]:
         return None
@@ -255,10 +296,12 @@ def main():
     if areas:
         update_dru(areas)
     add_l3_pour(board)
+    islands = add_power_islands(board)
     filler = pcbnew.ZONE_FILLER(board)
     filler.Fill(board.Zones())
     pcbnew.SaveBoard(str(PCB), board)
     print(f"segments {seg}  signal vias {via}  gnd vias {gnd}")
+    print(f"power islands: {islands}")
     print(f"neck rule areas: {len(areas)} {[a for a, _ in areas]}")
     print(f"   rects: {merged}")
     print("saved", PCB)

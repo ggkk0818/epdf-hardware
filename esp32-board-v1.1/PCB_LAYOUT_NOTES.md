@@ -2,7 +2,8 @@
 
 > **2026-09-16 更新（首次布线 + 收尾）**：§11 的布线顺序已由 `tools/route.py` 执行，
 > 并按 `..._Post_First_Routing_Next_Steps.md` 完成 DRC 清零。
-> 摘要：**55/69 网络完成、ERC 0、DRC 0 Error / 0 Warning**、unconnected 92（未完成网络 +
+> 随后又按 MD §8/§15 加入**局部电源铜皮 + In2.Cu 1.2 mm 宽主干**，收掉 `SYS` 与 `3V3_MAIN`。
+> 摘要：**54/69 网络完成、ERC 0、DRC 0 Error / 0 Warning**、unconnected 68（未完成网络 +
 > GND 孤岛）；线间间距独立校验 0 问题；POWER 网络类线宽 0.80 → **0.50 mm**，
 > 并新增 `SWITCH_NODE`（0.50/0.15）承载 CHG_SW/EPD_SW/TPS_L1/TPS_L2；
 > BAT/SYS/USB_VBUS 主干在收尾阶段加宽到 0.80 mm。详见 **`ROUTING_NOTES.md`**。

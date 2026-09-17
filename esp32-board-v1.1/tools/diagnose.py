@@ -50,7 +50,7 @@ def main():
     for net in fails:
         params = R.net_params(net)
         sess.mask_cache.clear()
-        m, via, vdd, vdr = sess.masks_for(net, params["width"])
+        m, via, vdd, vdr, _soft = sess.masks_for(net, params["width"])
         walk = m["F.Cu"][0]
         pads = board.pads_of[net]
         seen = flood(walk, pads[0]["cells"])

@@ -1,5 +1,23 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-16 更新（局部电源铜皮 + 宽主干，收掉 SYS / 3V3_MAIN）**：布线器新增
+> "局部电源铜皮 + In2.Cu 宽主干"能力（MD §8 / §15）：
+> - **5 个电源铜皮**（F.Cu，优先级 20，实体连接、自动移除孤立铜岛）：
+>   `SYS_ISLAND_U2`（U2 SYS 引脚 + L1 输出）、`SYS_ISLAND_C13`、`SYS_ISLAND_U3`
+>   （U3 VIN + C18/C19）、`3V3_ISLAND_U3`（U3 VOUT 引脚）、`3V3_ISLAND_CAPS`。
+> - 铜皮内的焊盘由铜皮连通，迷宫只需把主干接到铜皮 → **`SYS` 与 `3V3_MAIN` 已布通**；
+>   主干走 In2.Cu 并自动加宽到 **1.2 mm**（36 段），BAT/SYS/USB_VBUS 保持 0.8 mm（15 段）。
+> - **DRC 重新回到 0 Error / 0 Warning**；unconnected 由 92 → **68**；
+>   已布线 **54 / 69**，未完成 15（`TPS_L2`、`TPS_EN/VSEL/PS_SYNC`、`USB_DN_CONN`、
+>   `CHG_CE/INT_N/OTG/DSEL/REGN`、`I2C_SCL/SDA`、`TF_CS_N`、`TYPEC_INT_N`、
+>   `BAT_BUS`、`EPD_3V3`）。
+> - 取舍：为给 `3V3_MAIN`/`SYS` 的全部焊盘预约出线（它们最后布），`BAT_BUS` 与
+>   `EPD_3V3` 本轮被挤出；把这两个网络加入 `tools/route.py` 的 `STUB_ALL_NETS`
+>   后重跑即可恢复（详见 `ROUTING_NOTES.md` §6）。
+> - 重跑命令：`python tools/route.py --passes 1 --mode hard --quiet`（约 15–20 min）
+>   → `python tools/apply_routing.py` → `kicad-cli pcb drc`。
+>   `python tools/route.py --post` 只重跑收尾步骤（约 1 s），用于微调最后几个 DRC 项。
+
 > **2026-09-16 更新（按 `ESP32S3_GDEM102T91_V1.6_Post_First_Routing_Next_Steps.md` 收尾）**：
 > 完成 MD §20 的 ①②③ —— **DRC 已清零：0 Error / 0 Warning**（此前 2 Error + 3 Warning）：
 > - EPD_GDR ↔ EPD_RESE 间距（0.125 → 0.225 mm）：把 EPD_RESE 在 J2 Pin3 的过渡重画

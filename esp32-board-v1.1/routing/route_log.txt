@@ -1,17 +1,18 @@
 69 nets to route (0.0s setup)
 --- pass 1/1 ---
-pass 1: 14 failed, 68 vias, 638 segments
-best pass: 14 failed ['CHG_REGN', 'TPS_L2', 'SYS', 'USB_DN_CONN', 'CHG_OTG', 'CHG_DSEL', 'CHG_CE', 'TF_SCLK', 'I2C_SCL', 'CHG_INT_N', 'I2C_SDA', 'TYPEC_INT_N', 'TF_CS_N', '3V3_MAIN']
-stub cleanup: removed 16, trimmed 5
-  legality sweep 1: 16 nets flagged, re-routing ['KEY1_N', 'EPD_PWR_EN', 'SPI_MISO', 'TF_MOSI', 'CHG_TS', 'EPD_BUSY']
-  legality sweep 2: 14 nets flagged, re-routing ['EPD_PWR_EN', 'TF_MOSI', 'CHG_TS', 'EPD_DC', 'TF_CD_N', 'SPI_SCLK']
-  legality sweep 3: 11 nets flagged, re-routing ['TF_MOSI', 'CHG_TS', 'EPD_PWR_EN', 'EPD_DC', 'EPD_VDD', 'EPD_VGH']
-  trunk widening: 21 segments -> 0.8 mm ({'BAT1_RAW': 1, 'BAT2_RAW': 2, 'BAT_BUS': 11, 'USB_VBUS_PROT': 5, 'USB_VBUS_RAW': 2})
+    repair: TF_SCLK routed after ripping up ['3V3_MAIN', 'SYS', 'BOOT']
+pass 1: 15 failed, 84 vias, 781 segments
+best pass: 15 failed ['CHG_REGN', 'TPS_VSEL', 'TPS_EN', 'TPS_PS_SYNC', 'TPS_L2', 'USB_DN_CONN', 'CHG_OTG', 'CHG_DSEL', 'CHG_CE', 'I2C_SCL', 'I2C_SDA', 'TYPEC_INT_N', 'TF_CS_N', 'BAT_BUS', 'EPD_3V3']
+stub cleanup: removed 37, trimmed 16
+  legality sweep 1: 21 nets flagged, re-routing ['KEY1_N', 'SPI_MISO', 'TF_MOSI', 'CHG_TS', 'TF_SCLK', 'EPD_VGH']
+  legality sweep 2: 18 nets flagged, re-routing ['TF_MOSI', 'CHG_TS', 'EPD_VGH', 'EPD_DC', 'EPD_RESE', '3V3_MAIN']
+  legality sweep 3: 18 nets flagged, re-routing ['TF_MOSI', 'CHG_TS', 'EPD_CS_N', 'EPD_VGH', 'EPD_RESE', '3V3_MAIN']
+  trunk widening: 53 segments -> 0.8 mm ({'3V3_MAIN': 33, 'BAT1_RAW': 1, 'BAT2_RAW': 2, 'SYS': 5, 'USB_VBUS_PROT': 6, 'USB_VBUS_RAW': 6})
     §3 EPD_RESE jog re-drawn (RESE↔GDR gap 0.225 mm)
   manual finish: removed 0, added 2 segments, moved 3 endpoints
-still unrouted: 14
-segments 706  vias 71  failed 14: ['CHG_REGN', 'TPS_L2', 'SYS', 'USB_DN_CONN', 'CHG_OTG', 'CHG_DSEL', 'CHG_CE', 'TF_SCLK', 'I2C_SCL', 'CHG_INT_N', 'I2C_SDA', 'TYPEC_INT_N', 'TF_CS_N', '3V3_MAIN']
-  GND vias: 23 at pads, 117 stitching
+still unrouted: 15
+segments 788  vias 87  failed 15: ['CHG_REGN', 'TPS_VSEL', 'TPS_EN', 'TPS_PS_SYNC', 'TPS_L2', 'USB_DN_CONN', 'CHG_OTG', 'CHG_DSEL', 'CHG_CE', 'I2C_SCL', 'I2C_SDA', 'TYPEC_INT_N', 'TF_CS_N', 'BAT_BUS', 'EPD_3V3']
+  GND vias: 28 at pads, 113 stitching
   dropped 5 GND vias that no longer fit
-necked power segments: 133
-wrote C:\Code\epdf-hardware\esp32-board-v1.1\routing\routing.json (176.6s)
+necked power segments: 154
+wrote C:\Code\epdf-hardware\esp32-board-v1.1\routing\routing.json (966.9s)

@@ -66,6 +66,10 @@ WIDE_MIN_RUN = 4    # cells of contiguous room needed before widening a neck
 STUB_MIN = 1.0      # a fan-out stub may stop this far from the pad centre (mm)
 STUB_SLACK = 12     # fewer walkable ring cells than this => reserve a stub
 STUB_ALL = False    # True: reserve a stub at every pad, not just pinched ones
+# Power distribution nets are routed last, so their pad escapes have to be
+# reserved from the very beginning - otherwise the signals routed earlier seal
+# the pull-up / decoupling pads off (this is what blocked 3V3_MAIN).
+STUB_ALL_NETS = {"3V3_MAIN", "SYS"}
 
 BOARD_CX, BOARD_CY, BOARD_HX, BOARD_HY, BOARD_R = 27.5, 42.0, 27.5, 42.0, 2.0
 
@@ -112,6 +116,27 @@ WIDE_BUS = {"BAT_BUS", "BAT1_RAW", "BAT2_RAW", "SYS", "3V3_MAIN",
 WIDE_TARGET = 0.80          # trunk target width for WIDE_BUS nets
 # ... while the switching nodes stay short, small and via free.
 NO_VIA = {"CHG_SW", "TPS_L1", "TPS_L2", "EPD_SW"}
+
+# --- Local power copper islands + wide trunks (MD §8 / §15) ----------------
+# A power island is a small copper pour on F.Cu that groups a converter's pins
+# with its local capacitors: the pads inside it are connected by the pour, so
+# the maze only has to bring the trunk to the island instead of to every pad.
+# The trunks themselves are drawn as 1.2 mm copper on In2.Cu.
+ISLANDS = [
+    {"name": "SYS_ISLAND_U2", "net": "SYS", "layer": "F.Cu",
+     "poly": [(35.30, 58.95), (42.85, 58.95), (42.85, 60.55), (35.30, 60.55)]},
+    {"name": "SYS_ISLAND_C13", "net": "SYS", "layer": "F.Cu",
+     "poly": [(31.35, 63.95), (32.55, 63.95), (32.55, 65.10), (31.35, 65.10)]},
+    {"name": "SYS_ISLAND_U3", "net": "SYS", "layer": "F.Cu",
+     "poly": [(31.45, 40.35), (35.05, 40.35), (35.05, 44.05), (31.45, 44.05)]},
+    {"name": "3V3_ISLAND_U3", "net": "3V3_MAIN", "layer": "F.Cu",
+     "poly": [(33.90, 45.60), (35.20, 45.60), (35.20, 47.20), (33.90, 47.20)]},
+    {"name": "3V3_ISLAND_CAPS", "net": "3V3_MAIN", "layer": "F.Cu",
+     "poly": [(32.10, 47.90), (33.60, 47.90), (33.60, 51.85), (32.10, 51.85)]},
+]
+
+# nets whose trunk is drawn as wide copper on In2.Cu
+TRUNKS = {"SYS": 1.20, "3V3_MAIN": 1.20}
 
 
 # ---------------------------------------------------------------------------
@@ -248,6 +273,40 @@ def _cell_range(x0, y0, x1, y1, pad=0.0):
     j0 = max(0, int(math.floor((y0 - pad) / PITCH)))
     j1 = min(H - 1, int(math.ceil((y1 + pad) / PITCH)))
     return i0, i1, j0, j1
+
+
+def polygon_rect(points):
+    """Bounding rectangle of a polygon."""
+    xs = [p[0] for p in points]
+    ys = [p[1] for p in points]
+    return (min(xs), min(ys), max(xs), max(ys))
+
+
+def point_in_polygon(x, y, points):
+    """Ray casting test for one point."""
+    inside = False
+    n = len(points)
+    for k in range(n):
+        x0, y0 = points[k]
+        x1, y1 = points[(k + 1) % n]
+        if (y0 > y) != (y1 > y):
+            xi = x0 + (y - y0) * (x1 - x0) / (y1 - y0)
+            if xi > x:
+                inside = not inside
+    return inside
+
+
+def polygon_cells(points):
+    """Grid cells whose centre lies inside the polygon."""
+    x0, y0, x1, y1 = polygon_rect(points)
+    i0, i1, j0, j1 = _cell_range(x0, y0, x1, y1)
+    out = []
+    for j in range(j0, j1 + 1):
+        y = j * PITCH
+        for i in range(i0, i1 + 1):
+            if point_in_polygon(i * PITCH, y, points):
+                out.append((i, j))
+    return out
 
 
 def _seg_in_box(seg, box):
@@ -858,7 +917,9 @@ def width_ladder(params):
     not fit); tools/route.py then fattens every stretch that has room.
     """
     if params["class"] in ("POWER", "SWITCH_NODE"):
-        return [0.5, 0.4, 0.3, 0.25, 0.2, 0.15]
+        # fewer rungs: the widening pass restores the width wherever there is
+        # room, and every extra rung costs a full A* search over the board
+        return [0.5, 0.35, 0.25, 0.15]
     if params["class"] == "HV_EPD":
         return [0.3, 0.25, 0.2, 0.15]
     if params["class"] == "USB90":
@@ -878,6 +939,23 @@ class Session:
         self.stubs = {}          # (ref, num) -> {"tip": (li,i,j), "cells": [...]}
         self.hist = {lyr: np.zeros((H, W), np.float32) for lyr in ROUTABLE}
         self.net_keepout = {}    # net -> [(x0, y0, x1, y1)] route-only barriers
+        self.island_cells = {}   # (net, layer) -> [(i, j)]
+        for isl in ISLANDS:
+            cells = polygon_cells(isl["poly"])
+            self.island_cells.setdefault((isl["net"], isl["layer"]), []).extend(cells)
+        # keep foreign copper out of the islands so the pour stays in one piece
+        self.island_guard = {}
+        for lyr in ROUTABLE:
+            m = np.zeros((H, W), bool)
+            for isl in ISLANDS:
+                if isl["layer"] != lyr:
+                    continue
+                for (i, j) in polygon_cells(isl["poly"]):
+                    m[j, i] = True
+            if m.any():
+                # a tiny halo only: the pour pulls back from foreign copper by
+                # itself, a wide guard would strangle the dense clusters
+                self.island_guard[lyr] = dilate(m, 1)      # +0.1 mm
         self.span = {}
         for net, pads in board.pads_of.items():
             xs = [p["x"] for p in pads]
@@ -905,7 +983,16 @@ class Session:
             for (bx0, by0, bx1, by1) in boxes:
                 i0, i1, j0, j1 = _cell_range(bx0, by0, bx1, by1)
                 for lyr in ROUTABLE:
-                    m[lyr][0][j0:j1 + 1, i0:i1 + 1] = False
+                    walk, slack = m[lyr]
+                    walk = walk.copy()
+                    walk[j0:j1 + 1, i0:i1 + 1] = False
+                    m[lyr] = (walk, slack)
+        # foreign nets keep clear of every power island
+        owners = {isl["layer"] for isl in ISLANDS if isl["net"] == net}
+        for lyr, guard in self.island_guard.items():
+            if lyr not in owners:
+                walk, slack = m[lyr]
+                m[lyr] = (walk & ~guard, slack)
         via_dia, via_drill = params["via_dia"], params["via_drill"]
         if width > 0.45:
             via_dia = max(via_dia, 0.8)
@@ -925,6 +1012,10 @@ class Session:
         """
         if net in ON_L1:
             return (0, 25, 25)
+        if net in TRUNKS:
+            # power distribution: run on the pad free inner layer, only the pad
+            # fan-out and the branches use F.Cu (MD §8.2 / §15.2)
+            return (25, 0, 3)
         span = self.span.get(net, 0.0)
         if span > 15.0:
             return (12, 1, 0)
@@ -1021,7 +1112,8 @@ class Session:
         open_sides = sum(1 for v in sides if v >= 3)
         # a pad with only one usable side has to be reserved even if that side
         # looks roomy right now
-        if not STUB_ALL and open_sides >= 2 and escapes >= STUB_SLACK:
+        if not STUB_ALL and net not in STUB_ALL_NETS \
+                and open_sides >= 2 and escapes >= STUB_SLACK:
             return None
         # A deterministic, straight escape stub: it leaves the pad along the
         # axis that points away from the component centre (which is where the
@@ -1133,6 +1225,39 @@ class Session:
         self.mask_cache.clear()
         snap = b.ob.snapshot()
         own_local = {lyr: np.zeros((H, W), bool) for lyr in ROUTABLE}
+
+        # --- local power islands: their copper is this net's own copper and it
+        # already connects every pad inside them (MD §8.1 / §15.2)
+        island_tips = []
+        island_masks = {}
+        for isl in ISLANDS:
+            if isl["net"] != net:
+                continue
+            layer = isl["layer"]
+            li = ROUTABLE.index(layer)
+            m = island_masks.get(layer)
+            if m is None:
+                m = np.zeros((H, W), bool)
+                island_masks[layer] = m
+            for (i, j) in self.island_cells[(net, layer)]:
+                m[j, i] = True
+                island_tips.append((li, i, j))
+            own_local[layer] |= m
+        island_pads = set()
+        if island_masks:
+            for p in pads:
+                for lyr, m in island_masks.items():
+                    if lyr not in p["cu_layers"]:
+                        continue
+                    i = int(round(p["x"] / PITCH))
+                    j = int(round(p["y"] / PITCH))
+                    if 0 <= i < W and 0 <= j < H and m[j, i]:
+                        island_pads.add((p["ref"], p["num"]))
+                        break
+            pads = [p for p in pads if (p["ref"], p["num"]) not in island_pads]
+            if len(pads) < 1:
+                self.log(f"    {net}: all pads covered by islands")
+                return True
         order = mst_edges(pads)
         # every pad is reached at its stub tip (fan-out reservation) or, when
         # no stub was needed, at the pad itself
@@ -1162,6 +1287,7 @@ class Session:
             return t
 
         tree_pts = anchor(pads[0])
+        tree_pts = list(tree_pts) + island_tips
         segs_all, vias_all = [], []
         path_cells = list(tree_pts)
         tx0 = min(c[1] for c in tree_pts)
@@ -1526,10 +1652,13 @@ class Session:
         """
         masks = {}
         grown = {}
-        for net in sorted(WIDE_BUS):
+        targets = {net: target for net in WIDE_BUS}
+        targets.update(TRUNKS)
+        for net in sorted(targets):
             params = net_params(net)
             if net not in self.b.net_segments:
                 continue
+            target = targets[net]
             key = (net, round(target, 3))
             if key not in masks:
                 masks[key] = self.rtr.masks(net, target / 2.0,
@@ -1681,6 +1810,164 @@ class Session:
         log(f"  pad entries deepened: {fixed}")
         return fixed
 
+    def prune_dead_ends(self, tol=0.25, log=print):
+        """Delete route spurs whose free end touches nothing (MD §5: 删除).
+
+        A spur is a segment with one end sitting on other copper of the same net
+        and the other end free.  Removing it cannot disconnect anything (the
+        free end is by definition not a connection), and it removes the DRC
+        "track has unconnected end" warnings.
+        """
+        segs_by_net = self.b.net_segments
+        removed = 0
+        for net, segs in list(segs_by_net.items()):
+            keep = []
+            for s in segs:
+                if s.get("kind") == "stub":
+                    keep.append(s)
+                    continue
+                ends = []
+                for which in ("start", "end"):
+                    pt = np.array(s[which], float)
+                    hits = 0
+                    for o in segs:
+                        if o is s or o["layer"] != s["layer"]:
+                            continue
+                        a = np.array(o["start"], float)
+                        b = np.array(o["end"], float)
+                        v = b - a
+                        den = float(v @ v)
+                        t = 0.0 if den <= 1e-12 else \
+                            float(np.clip((pt - a) @ v / den, 0.0, 1.0))
+                        if float(np.linalg.norm(a + t * v - pt)) <= tol:
+                            hits += 1
+                    for p in self.b.pads_of.get(net, []):
+                        if s["layer"] not in p["cu_layers"]:
+                            continue
+                        shape = self.b._shape_from_pad(p)
+                        if float(shape.dist(pt[:1], pt[1:])[0]) <= tol:
+                            hits += 1
+                    for isl in ISLANDS:
+                        if isl["net"] != net or isl["layer"] != s["layer"]:
+                            continue
+                        x0, y0, x1, y1 = polygon_rect(isl["poly"])
+                        if x0 - 0.02 <= pt[0] <= x1 + 0.02 \
+                                and y0 - 0.02 <= pt[1] <= y1 + 0.02:
+                            hits += 1
+                    ends.append(hits)
+                if min(ends) == 0 and max(ends) > 0:
+                    removed += 1
+                    continue
+                keep.append(s)
+            segs_by_net[net] = keep
+        if removed:
+            self.b.rebuild_copper()
+            self.rebuild_necks()
+        log(f"  dead-end spurs removed: {removed}")
+        return removed
+
+    def join_dangling_ends(self, reach=0.80, tol=0.03, log=print):
+        """Pull every loose track end onto the nearest copper of its own net.
+
+        After the finish-up edits a few ends can stop on the *edge* of an
+        island fill or just short of a pad.  Each of them is moved (<= reach)
+        onto the nearest same-net copper - pad centre, island interior or
+        neighbouring segment - but only when the moved segment still passes the
+        clearance mask, so no new violation can appear.
+        """
+        joined = 0
+        masks = {}
+        for net, segs in list(self.b.net_segments.items()):
+            params = net_params(net)
+            segs_now = list(segs)
+            pads = [(p, self.b._shape_from_pad(p)) for p in self.b.pads_of.get(net, [])]
+            islands = [isl for isl in ISLANDS if isl["net"] == net]
+
+            def connected(pt, layer, skip):
+                for s in segs_now:
+                    if s is skip or s["layer"] != layer:
+                        continue
+                    a = np.array(s["start"], float)
+                    b = np.array(s["end"], float)
+                    v = b - a
+                    den = float(v @ v)
+                    t = 0.0 if den <= 1e-12 else float(np.clip((pt - a) @ v / den, 0, 1))
+                    if float(np.linalg.norm(a + t * v - pt)) <= tol:
+                        return True
+                for (p, shape) in pads:
+                    if layer not in p["cu_layers"]:
+                        continue
+                    if float(np.linalg.norm(np.array([p["x"], p["y"]], float) - pt)) \
+                            <= 0.05 or float(shape.dist(pt[:1], pt[1:])[0]) <= tol:
+                        return True
+                for isl in islands:
+                    if isl["layer"] != layer:
+                        continue
+                    x0, y0, x1, y1 = polygon_rect(isl["poly"])
+                    if x0 - 0.02 <= pt[0] <= x1 + 0.02 and y0 - 0.02 <= pt[1] <= y1 + 0.02:
+                        return True
+                return False
+
+            for s in segs_now:
+                for which in ("start", "end"):
+                    pt = np.array(s[which], float)
+                    if connected(pt, s["layer"], s):
+                        continue
+                    # candidate targets of the same net, nearest first
+                    cands = []
+                    for o in segs_now:
+                        if o is s or o["layer"] != s["layer"]:
+                            continue
+                        a = np.array(o["start"], float)
+                        b = np.array(o["end"], float)
+                        v = b - a
+                        den = float(v @ v)
+                        t = 0.0 if den <= 1e-12 else \
+                            float(np.clip((pt - a) @ v / den, 0, 1))
+                        q = a + t * v
+                        cands.append((float(np.linalg.norm(q - pt)), q))
+                    for (p, shape) in pads:
+                        if s["layer"] not in p["cu_layers"]:
+                            continue
+                        centre = np.array([p["x"], p["y"]], float)
+                        cands.append((float(np.linalg.norm(centre - pt)), centre))
+                    for isl in islands:
+                        if isl["layer"] != s["layer"]:
+                            continue
+                        x0, y0, x1, y1 = polygon_rect(isl["poly"])
+                        centre = np.array([(x0 + x1) / 2, (y0 + y1) / 2], float)
+                        cands.append((float(np.linalg.norm(centre - pt)), centre))
+                    cands = [c for c in cands if 1e-4 < c[0] <= reach]
+                    if not cands:
+                        continue
+                    cands.sort(key=lambda c: c[0])
+                    other = np.array(s["end" if which == "start" else "start"], float)
+                    key = round(s["width"], 3)
+                    if key not in masks:
+                        masks[key] = self.rtr.masks(net, s["width"] / 2.0,
+                                                    params["clearance"])
+                    walk = masks[key][s["layer"]][0]
+                    for _d, new in cands:
+                        ok = True
+                        nn = max(3, int(np.linalg.norm(new - other) / 0.05))
+                        for t in np.linspace(0.0, 1.0, nn):
+                            x = other[0] + (new[0] - other[0]) * t
+                            y = other[1] + (new[1] - other[1]) * t
+                            i, j = int(round(x / PITCH)), int(round(y / PITCH))
+                            if not (0 <= i < W and 0 <= j < H) or not walk[j, i]:
+                                ok = False
+                                break
+                        if not ok:
+                            continue
+                        s[which] = [round(float(new[0]), 4), round(float(new[1]), 4)]
+                        joined += 1
+                        break
+        if joined:
+            self.b.rebuild_copper()
+            self.rebuild_necks()
+        log(f"  dangling ends joined: {joined}")
+        return joined
+
     def _pair_gap(self, net_a, net_b, layer):
         """Smallest copper gap between two nets on one layer (None if far apart)."""
         a = [s for s in self.b.net_segments.get(net_a, []) if s["layer"] == layer]
@@ -1758,6 +2045,26 @@ class Session:
             # EPD_VSH1 used to stop exactly on C32 pad 1's edge (connection
             # width 0.135 mm); push it 0.3 mm into the pad
             ("EPD_VSH1", "F.Cu", 11.7, 40.3, 12.0, 40.3),
+            # 3V3_MAIN: join the trunk stub onto the diagonal it feeds
+            ("3V3_MAIN", "F.Cu", 25.8, 55.2, 26.2, 54.8),
+            # 3V3_MAIN: the last free end lands on C4 pad 1
+            ("3V3_MAIN", "F.Cu", 17.6, 8.0, 16.54, 8.03),
+        ]
+        # segments that have to neck down because they pass a foreign GND pad
+        # with only 0.19 mm to spare (DRC wants 0.20 mm for the POWER class)
+        narrow = [
+            ("3V3_MAIN", "F.Cu", 25.8, 61.4, 25.4, 61.0, 0.25),
+            ("3V3_MAIN", "F.Cu", 25.4, 61.0, 25.3, 61.0, 0.25),
+            ("3V3_MAIN", "F.Cu", 25.3, 61.0, 25.2, 60.9, 0.25),
+            ("3V3_MAIN", "F.Cu", 14.1, 10.7, 12.8, 10.7, 0.25),
+        ]
+        drop_extra = [
+            # 0.1 mm trunk sliver left next to R18 (free end, carries nothing)
+            ("3V3_MAIN", "F.Cu", 25.8, 55.2, 25.7, 55.2),
+            # free-ended spurs (their far end touches nothing)
+            ("3V3_MAIN", "F.Cu", 17.6, 8.0, 17.7, 8.0),
+            ("3V3_MAIN", "F.Cu", 16.7, 10.5, 17.7, 10.5),
+            ("SYS", "F.Cu", 42.8, 58.6, 43.4, 58.0),
         ]
         def same(s, x0, y0, x1, y1):
             f = lambda a, b: abs(a[0] - b[0]) < 1e-3 and abs(a[1] - b[1]) < 1e-3
@@ -1765,7 +2072,14 @@ class Session:
                 f(s["start"], [x1, y1]) and f(s["end"], [x0, y0])
 
         removed = 0
-        for (net, layer, x0, y0, x1, y1) in drop:
+        # §4 only applies while EPD_3V3 is actually routed
+        drop_list = list(drop_extra)
+        add_list = list(add)
+        if any(s["layer"] == "F.Cu" for s in self.b.net_segments.get("EPD_3V3", [])):
+            drop_list += drop
+        else:
+            add_list = [a for a in add if a[0] != "EPD_3V3"]
+        for (net, layer, x0, y0, x1, y1) in drop_list:
             lst = self.b.net_segments.get(net, [])
             keep = []
             for s in lst:
@@ -1774,10 +2088,14 @@ class Session:
                     continue
                 keep.append(s)
             self.b.net_segments[net] = keep
-        for (net, layer, w, x0, y0, x1, y1) in add:
+        for (net, layer, w, x0, y0, x1, y1) in add_list:
             self.b.net_segments.setdefault(net, []).append(
                 {"layer": layer, "net": net, "width": w,
                  "start": [x0, y0], "end": [x1, y1], "kind": "route"})
+        for (net, layer, x0, y0, x1, y1, w) in narrow:
+            for s in self.b.net_segments.get(net, []):
+                if s["layer"] == layer and same(s, x0, y0, x1, y1):
+                    s["width"] = w
         moved_via = 0
         for (net, layer, ox, oy, nx, ny) in move_end:
             for s in self.b.net_segments.get(net, []):
@@ -2042,6 +2360,11 @@ def main():
     ap.add_argument("--tidy", action="store_true",
                     help="aggressively pull marginal track ends into pads "
                          "(experimental: can create new clearance issues)")
+    ap.add_argument("--post", action="store_true",
+                    help="re-run only the finish-up steps on routing.json")
+    ap.add_argument("--write", action="store_true",
+                    help="with --post: overwrite routing.json instead of writing "
+                         "routing_post.json")
     ap.add_argument("--out", default=str(OUT_PATH))
     args = ap.parse_args()
     t0 = time.time()
@@ -2052,6 +2375,53 @@ def main():
         print(f"preloaded {len(pre.get('segments', []))} segments, "
               f"{len(pre.get('vias', []))} vias")
     only = set(args.nets.split(",")) if args.nets else None
+
+    if args.post:
+        # re-run the finish-up steps on an existing routing.json (seconds, not
+        # minutes) - used while iterating on the last few DRC items
+        data = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        # repair a file written by an older --post run (gnd vias were mirrored
+        # into the signal list and would be added to the board twice)
+        data["vias"] = [v for v in data.get("vias", []) if "kind" not in v]
+        board = Board(model)
+        board.load_routing(data)
+        sess = Session(board)
+        sess.failed = list(data.get("failed", []))
+        sess.trim_dangling_stubs()
+        sess.manual_finish()
+        sess.fatten_trunks()
+        # MD §4: the 0.5 mm 3V3_MAIN elbow next to C3's GND pad needs a neck
+        for s in sess.b.net_segments.get("3V3_MAIN", []):
+            if s["net"] == "3V3_MAIN" and abs(s["start"][0] - 14.1) < 0.02 \
+                    and abs(s["start"][1] - 10.7) < 0.02 and s["width"] > 0.3:
+                s["width"] = 0.3
+        # MD §3-style nudge: the EPD_VSL via sat 0.005 mm too close to EPD_VGH
+        for v in sess.b.net_vias.get("EPD_VSL", []):
+            if abs(v["x"] - 3.4) < 0.02 and abs(v["y"] - 37.2) < 0.02:
+                v["y"] = 37.1
+        sess.b.rebuild_copper()
+        sess.rebuild_necks()
+        segs, vias = board.copper()
+        out = dict(data)
+        out["segments"] = segs
+        # signal vias carry no "kind"; the GND stitching/pad vias do, and they
+        # must stay in their own list (otherwise apply_routing adds them twice)
+        out["vias"] = [v for v in vias if "kind" not in v]
+        uniq = {}
+        for v in vias:
+            if "kind" in v:
+                uniq[(round(v["x"], 3), round(v["y"], 3), v["net"])] = v
+        out["gnd_vias"] = list(uniq.values())
+        out["neck_segments"] = [
+            {"layer": s["layer"], "net": s["net"], "width": s["width"],
+             "class": netclass_of(s["net"]), "start": s["start"], "end": s["end"]}
+            for s in sess.neck_segments]
+        target = OUT_PATH if args.out == str(OUT_PATH) and args.write else \
+            Path(str(OUT_PATH).replace(".json", "_post.json"))
+        target.write_text(json.dumps(out, indent=1), encoding="utf-8")
+        print(f"post-processed (-> {target.name}): {len(segs)} segments, {len(vias)} vias, "
+              f"{len(sess.failed)} unrouted ({time.time()-t0:.1f}s)")
+        return 0
 
     base = Board(model)
     base_order = Session(base).net_order(only)
