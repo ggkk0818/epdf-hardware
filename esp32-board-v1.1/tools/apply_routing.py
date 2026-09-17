@@ -272,6 +272,25 @@ def add_l3_pour(board):
     return z
 
 
+def relax_gnd_zones(board, clearance=0.20):
+    """Let the GND pours fill the narrow gaps between the fine pitch pads.
+
+    MD §4: stranded GND pads (U2/U3/U5/J1...) are pads the pour cannot reach.
+    The board's pours were generated with a 0.3 mm clearance, which is wider
+    than the DRC requires (0.15 mm minimum); tightening it to 0.20 mm lets the
+    copper flow between the 0.4-0.5 mm pitch pads without breaking any rule.
+    (KiCad still applies the larger net-pair clearance where two nets need
+    more, so a POWER net keeps its 0.20 mm.)
+    """
+    touched = 0
+    for z in board.Zones():
+        if z.GetIsRuleArea() or z.GetNetname() != "GND":
+            continue
+        z.SetLocalClearance(int(round(clearance * MM)))
+        touched += 1
+    return touched
+
+
 def main():
     if "--gen" in sys.argv:
         # Regenerate the placement first.  NOTE: tools/gen_pcb.py currently
@@ -297,6 +316,8 @@ def main():
         update_dru(areas)
     add_l3_pour(board)
     islands = add_power_islands(board)
+    n = relax_gnd_zones(board)
+    print(f"GND pours clearance tightened to 0.20 mm ({n} zones)")
     filler = pcbnew.ZONE_FILLER(board)
     filler.Fill(board.Zones())
     pcbnew.SaveBoard(str(PCB), board)

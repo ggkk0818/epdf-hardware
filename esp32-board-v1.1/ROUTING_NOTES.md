@@ -52,12 +52,31 @@
 
 ```
 网络 69（不含 GND）：已布线 54，未完成 15
-线段 786，信号过孔 87，GND 缝合过孔 136
+线段 805，信号过孔 87，GND 缝合过孔 135
 ERC  0 violations
-DRC  0 Error / 0 Warning     ← 2026-09-16 已清零（含局部电源铜皮后重跑）
-     unconnected 68 项（= 15 个未完成网络 + GND 铺铜孤岛）
+DRC  0 Error / 0 Warning
+     unconnected 62 项（2026-09-17：68 → 62）
 tools/check_routing.py：线-线 / 线-过孔间距 0 问题（精确几何校验）
 ```
+
+### 3.0c 最终收敛阶段（2026-09-17，依 `..._Routing_Final_Convergence_Plan.md`）
+
+阶段定位：**Routing final convergence** —— 主布线结构成型，剩下的是把电源/地/局部控制网络
+真正收敛到 0 unconnected。本轮完成：
+
+| 项目 | 处理 | 结果 |
+|---|---|---|
+| 电源铜皮"岛—主干"锚点（MD §5） | 布线器新增 `anchor_islands()`：逐个铜皮检查是否有同网络 Track/Via 落在铜皮内，没有就画一段最短合法锚点接过去 | `SYS_ISLAND_U3`、`3V3_ISLAND_CAPS` 已锚定 |
+| GND 真实焊盘未接地（MD §4） | 新增 `tools/fix_gnd.py`：对 DRC 报出的未连接 GND 焊盘，优先在其焊盘内/旁放 GND 过孔（0.6→0.5→0.4 mm 递减），放不下就用 0.3/0.2/0.15 mm 短 GND 铜连到最近的 GND 铜 | 已放置 9~11 颗；GND unconnected 48 → 36 |
+| GND 铺铜可达性 | `apply_routing.py` 把 GND 铺铜的局部净空从 0.30 收到 **0.20 mm**（KiCad 仍按网络对取较大值，POWER 仍保持 0.2） | 更多密集区焊盘被铺铜覆盖 |
+| DRC 复核 | 每轮 `apply → DRC` 迭代，出现过 3 个新增违规（过孔间距/连接宽度）立即回退 | **DRC 维持 0 Error / 0 Warning** |
+
+当前 DRC 未连接项按网络：`GND 36`（多为 U2/U3/U5/J1 引脚旁的焊盘 + 铺铜碎片）、
+`BAT_BUS 14`、`EPD_3V3 14`、`I2C_SCL/SDA 各 8`、`SYS 6`、`USB_DN_CONN 6`、
+`3V3_MAIN 4`、`TF_CS_N 4`、`CHG_CE/REGN 各 4`、`TYPEC_INT_N 4`、TPS 各 2。
+
+> 检查点板：`esp32-board-v1.1_routing_checkpoint_20260917.kicad_pcb` +
+> `routing/routing_checkpoint_20260917.json`（MD §13.1 要求的收尾基准板）。
 
 ### 3.0b 局部电源铜皮（MD §8 / §15，2026-09-16）
 

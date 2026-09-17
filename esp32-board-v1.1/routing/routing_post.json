@@ -1276,6 +1276,20 @@
   },
   {
    "layer": "F.Cu",
+   "net": "SYS",
+   "width": 1.2,
+   "start": [
+    33.25,
+    42.2
+   ],
+   "end": [
+    37.1,
+    40.9
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "F.Cu",
    "net": "USB_DP_CONN",
    "width": 0.24,
    "start": [
@@ -6918,6 +6932,20 @@
   },
   {
    "layer": "F.Cu",
+   "net": "3V3_MAIN",
+   "width": 1.2,
+   "start": [
+    32.85,
+    49.875
+   ],
+   "end": [
+    32.1,
+    51.6
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "F.Cu",
    "net": "USB_VBUS_PROT",
    "width": 0.25,
    "start": [
@@ -11003,6 +11031,34 @@
     46.0
    ],
    "kind": "route"
+  },
+  {
+   "layer": "F.Cu",
+   "net": "EPD_3V3",
+   "width": 0.5,
+   "start": [
+    10.7,
+    44.4
+   ],
+   "end": [
+    10.7,
+    43.7
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "F.Cu",
+   "net": "EPD_3V3",
+   "width": 0.2,
+   "start": [
+    10.7,
+    44.4
+   ],
+   "end": [
+    12.2,
+    46.0
+   ],
+   "kind": "route"
   }
  ],
  "vias": [
@@ -14904,6 +14960,20 @@
    "end": [
     29.3,
     70.6
+   ]
+  },
+  {
+   "layer": "F.Cu",
+   "net": "EPD_3V3",
+   "width": 0.2,
+   "class": "POWER",
+   "start": [
+    10.7,
+    44.4
+   ],
+   "end": [
+    12.2,
+    46.0
    ]
   },
   {

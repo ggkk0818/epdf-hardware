@@ -2,6 +2,11 @@
 
 > **2026-09-16 更新（首次布线 + 收尾）**：§11 的布线顺序已由 `tools/route.py` 执行，
 > 并按 `..._Post_First_Routing_Next_Steps.md` 完成 DRC 清零。
+> **2026-09-17 更新（Routing final convergence）**：按 `..._Routing_Final_Convergence_Plan.md`
+> 增加铜皮锚点（`anchor_islands`）与 GND 收敛工具（`tools/fix_gnd.py`），GND 铺铜净空收紧到
+> 0.20 mm；**DRC 维持 0 Error / 0 Warning**，unconnected 68 → 62（GND 48→36）。
+> `SYS`/`3V3_MAIN` 状态更正为"电源拓扑完成、局部连通待收尾"。检查点板见
+> `esp32-board-v1.1_routing_checkpoint_20260917.kicad_pcb`。
 > 随后又按 MD §8/§15 加入**局部电源铜皮 + In2.Cu 1.2 mm 宽主干**，收掉 `SYS` 与 `3V3_MAIN`。
 > 摘要：**54/69 网络完成、ERC 0、DRC 0 Error / 0 Warning**、unconnected 68（未完成网络 +
 > GND 孤岛）；线间间距独立校验 0 问题；POWER 网络类线宽 0.80 → **0.50 mm**，

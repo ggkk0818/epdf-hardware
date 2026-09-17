@@ -1810,6 +1810,89 @@ class Session:
         log(f"  pad entries deepened: {fixed}")
         return fixed
 
+    def anchor_islands(self, log=print):
+        """Give every power island an explicit track/via anchor (MD §5).
+
+        A pour only carries the net once the maze actually touches it.  For each
+        island this looks for a same-net track or via inside (or on the edge of)
+        the island polygon and, when there is none, draws the shortest legal
+        neck from the island interior to the nearest same-net copper.
+        """
+        added = 0
+        for isl in ISLANDS:
+            net, layer = isl["net"], isl["layer"]
+            if net not in self.b.net_segments:
+                continue
+            x0, y0, x1, y1 = polygon_rect(isl["poly"])
+            centre = np.array([(x0 + x1) / 2.0, (y0 + y1) / 2.0], float)
+            params = net_params(net)
+            segs = self.b.net_segments.get(net, [])
+            vias = self.b.net_vias.get(net, [])
+
+            def inside(pt):
+                return (x0 - 0.05 <= pt[0] <= x1 + 0.05
+                        and y0 - 0.05 <= pt[1] <= y1 + 0.05)
+
+            anchored = False
+            for v in vias:
+                if layer in ("F.Cu",) and inside(np.array([v["x"], v["y"]], float)):
+                    anchored = True
+                    break
+            if anchored:
+                continue
+
+            # nearest same-net copper to the island centre
+            best = None
+            for s in segs:
+                if s["layer"] != layer:
+                    continue
+                a = np.array(s["start"], float)
+                b = np.array(s["end"], float)
+                v = b - a
+                den = float(v @ v)
+                t = 0.0 if den <= 1e-12 else \
+                    float(np.clip((centre - a) @ v / den, 0.0, 1.0))
+                q = a + t * v
+                d = float(np.linalg.norm(q - centre))
+                if best is None or d < best[0]:
+                    best = (d, q, s["width"])
+            for v in vias:
+                q = np.array([v["x"], v["y"]], float)
+                d = float(np.linalg.norm(q - centre))
+                if best is None or d < best[0]:
+                    best = (d, q, v["dia"])
+            if best is None:
+                log(f"    {isl['name']}: no {net} copper to anchor to")
+                continue
+            target = best[1]
+            walk = self.rtr.masks(net, params["width"] / 2.0,
+                                  params["clearance"])[layer][0]
+            ok = True
+            n = max(4, int(np.linalg.norm(target - centre) / 0.05))
+            for t in np.linspace(0.0, 1.0, n):
+                x = centre[0] + (target[0] - centre[0]) * t
+                y = centre[1] + (target[1] - centre[1]) * t
+                i, j = int(round(x / PITCH)), int(round(y / PITCH))
+                if not (0 <= i < W and 0 <= j < H) or not walk[j, i]:
+                    ok = False
+                    break
+            if not ok:
+                log(f"    {isl['name']}: anchor path blocked")
+                continue
+            self.b.net_segments.setdefault(net, []).append(
+                {"layer": layer, "net": net, "width": params["width"],
+                 "start": [round(float(centre[0]), 4), round(float(centre[1]), 4)],
+                 "end": [round(float(target[0]), 4), round(float(target[1]), 4)],
+                 "kind": "route"})
+            added += 1
+            log(f"    {isl['name']}: anchored to {net} copper "
+                f"{best[0]:.2f} mm away")
+        if added:
+            self.b.rebuild_copper()
+            self.rebuild_necks()
+        log(f"  island anchors added: {added}")
+        return added
+
     def prune_dead_ends(self, tol=0.25, log=print):
         """Delete route spurs whose free end touches nothing (MD §5: 删除).
 
@@ -2388,6 +2471,7 @@ def main():
         sess = Session(board)
         sess.failed = list(data.get("failed", []))
         sess.trim_dangling_stubs()
+        sess.anchor_islands()
         sess.manual_finish()
         sess.fatten_trunks()
         # MD §4: the 0.5 mm 3V3_MAIN elbow next to C3's GND pad needs a neck

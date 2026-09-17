@@ -1,5 +1,24 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-17 更新（最终收敛阶段 / Routing final convergence）**：按
+> `ESP32S3_GDEM102T91_V1.6_Routing_Final_Convergence_Plan.md` 推进，重点从"减少 DRC 错误"
+> 转为"把电源 / GND / 局部控制网络真正收敛到 0 unconnected"：
+> - **状态定位更正**：`SYS` / `3V3_MAIN` = **电源拓扑已完成，但仍有局部连通断点**
+>   （铜皮与主干之间此前只靠"同名 Zone"隐式连通，实际未接上）。
+> - 新增 `Session.anchor_islands()`：逐个电源铜皮检查是否有同网络 Track/Via 落在铜皮内，
+>   没有就自动画一段最短合法锚点 → `SYS_ISLAND_U3`、`3V3_ISLAND_CAPS` 已锚定。
+> - 新增 `tools/fix_gnd.py`：对 DRC 报出的未连接 **GND 真实焊盘**，优先放 GND 过孔
+>   （0.6→0.5→0.4 mm），放不下则用 0.15~0.3 mm 短 GND 铜连到最近 GND 铜；
+>   只删除"无 Pad / 无 Via"的孤立铺铜，不做 Exclude。
+> - GND 铺铜局部净空 0.30 → **0.20 mm**（POWER 仍按网络对保持 0.2 mm）。
+> - **DRC 维持 0 Error / 0 Warning**；unconnected **68 → 62**
+>   （GND 48→36，SYS 8→6，3V3_MAIN 归入 4 项）；已布线 54/69。
+> - 检查点：`esp32-board-v1.1_routing_checkpoint_20260917.kicad_pcb` +
+>   `routing/routing_checkpoint_20260917.json`（MD §13.1 的收尾基准板）。
+> - 剩余顺序按 MD §14：GND 剩余焊盘 → SYS/3V3_MAIN 锚点 → **BAT_BUS / EPD_3V3 受控重跑**
+>   （把它们加入 `STUB_ALL_NETS`，仅此一次）→ TPS → BQ → USB → I2C/TF/TYPE-C。
+>   MD 明确建议此后**停止全局重跑**，改用 KiCad 交互布线收尾。
+
 > **2026-09-16 更新（局部电源铜皮 + 宽主干，收掉 SYS / 3V3_MAIN）**：布线器新增
 > "局部电源铜皮 + In2.Cu 宽主干"能力（MD §8 / §15）：
 > - **5 个电源铜皮**（F.Cu，优先级 20，实体连接、自动移除孤立铜岛）：
