@@ -1,5 +1,74 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-18 更新（U5.11 尝试：MD 建议的窗口全被占，已回退）**：按
+> `..._Round7_to_Zero_No_VIPPO_DFM_Final_Plan.md` §6~§7，从 U5.10↔U5.11 的 bridge 中点
+> `(29.50,68.675)` 向上引 0.20 mm F.Cu 到 `(29.50,67.25)`，再在候选窗口
+> `x 29.45~29.55 / y 67.20~67.30` 试 0.40/0.20 off-pad 过孔 → **BLOCKED**；
+> 沿 x=29.50 逐点扫 y=66.6/66.8/67.0/67.4/67.6/67.8/68.0 → **全部 BLOCKED**
+> （该列被 U5.9/U5.12 与 3V3_MAIN 支路压住）。
+> 已按 MD §9 的 Stop Condition **回退**这段引出线（不留悬空短桩），板子保持
+> **unconnected = 2（都在 U5）/ DRC 0 Error 0 Warning / Non-GND = 0**。
+> 下一步：① 把 U5.11 引出铜继续往更外侧延伸找能落孔的位置；② 或直接做 U5.5 的 Plan B
+> （局部 rip `USB_VBUS_DET` 的 U5 侧扇出）一并解决；③ 按 MD §24~§28 给
+> `find_stitch_candidates.py` 加 `pad_mask` + DFM margin 用于阶段 B 清 7 颗 via-in-pad。
+
+> **2026-09-18 更新（GND 8 → 2：off-pad 缝合过孔）**：按
+> `..._GND_Round6_to_Zero_and_ViaInPad_DFM_Plan.md` §5~§18，停止"焊盘中心塞过孔"，
+> 新增只读工具 `tools/find_stitch_candidates.py`（在 orphan 铜块**内部**扫描 0.40/0.20
+> 过孔合法位、按离铜块边缘的余量排序、不落焊盘）。6 个铜块拿到候选并各放 1 颗 **off-pad**
+> 过孔 → **GND 8 → 2 条**，DRC 仍 0 Error / 0 Warning，Non-GND = 0。
+>
+> 剩 2 条都在 U5：`Track 0.1988 ↔ Pad5[U5]`（U5.5 侧）与 `Pad11[U5] ↔ Track 1.0800`
+> （U5.11 侧）—— 这两个铜块内部放不下过孔，需按 MD 的 Plan B：先局部 rip `USB_VBUS_DET`
+> 在 U5 侧的扇出让路，再把 U5.3 的 1.08 mm 延长段与 U5.11 短桩打通。
+> 完成后即 `Unconnected = 0`，再按 MD §31~§34 清理那 7 颗 via-in-pad（DFM）。
+> 检查点：`esp32-board-v1.1_gnd_round7_20260918.kicad_pcb`（GND 2 条）。
+
+> **2026-09-18 更新（GND 15 → 8：修正 solver 跨层假连接后缝合 7 个铜块）**：
+> 按 `..._GND_Connectivity_Solver_V2_and_KiCad_Crosscheck_Plan.md` §2，把
+> `tools/gnd_components.py` 的**跨层模型**改成「只有过孔 / PTH 焊盘所在格才允许换层」
+> （V1 是两层在同一 (x,y) 有铜就算导通）。修正后：GND 铜从「1 个分量」变成
+> **17 个分量 = 1 个 MAIN_GND + 16 个带真实 GND 焊盘的局部铜块**，与 DRC 的 15 条
+> record 终于对上。
+> 新增 `tools/stitch_orphans.py`（在每个局部铜块的焊盘中心试放 0.40/0.20 缝合过孔），
+> 16 个铜块中 7 个成功 → **GND 15 → 8 条**，无新增违规，分量降到 10 个。
+> 剩 9 个铜块的焊盘中心放不下过孔：C14.2/C19.2/SW2.2、C30.2、J2.17、J2.8、R13.2、
+> C13.2、U5.10、U5.11、U5.5 —— 下一步在铜块内部其它位置放过孔，或补一小段铜接到
+> MAIN_GND（其中 ORPHAN_002 = C14/C19/SW2 那块面积最大，8348 格，可在其内部找点）。
+> 检查点：`esp32-board-v1.1_gnd_round6_20260918.kicad_pcb`（GND 8，Zone/Plane 仅 4 条）。
+
+> **2026-09-18 更新（Checkpoint M：GND component 地图工具已建）**：按
+> `..._GND_Round4_to_Zero_Unconnected_Final_Plan.md` §3 新增**只读**工具
+> `tools/gnd_components.py`（精确栅格化 track / via / pad / **实铺铜填充多边形** →
+> 跨层连通分量 → 每分量输出 Layer / BBox / 面积 / Track·Via·Pad 数 / 是否接 In1
+> `GND_PLANE_L2`（标 `MAIN_GND` 或 `ORPHAN_00x`）/ 焊盘清单）。
+>
+> ⚠️ **首轮在 0.1 mm 栅格上只解出 1 个分量（MAIN_GND，四层、83 个 GND 焊盘、145 过孔）**，
+> 与 DRC 的 15 条 record 不一致 → 说明这些 record 不是"大铜岛互相分离"，而是**亚栅格级**
+> 的间隙或铺铜记账差异。下一步：把栅格细化到 0.025~0.05 mm 重解，并与 KiCad 自己的
+> connectivity 交叉验证，再把 record 映射到真实铜块（MD §4 的"1 record ≠ 1 铜岛"）。
+>
+> 本轮**未改 PCB**：仍 GND 15 条 / DRC 0/0 / Non-GND = 0，检查点沿用
+> `esp32-board-v1.1_gnd_round5_20260918.kicad_pcb`。
+
+> **2026-09-18 更新（GND 16 → 15：C38.2 已接地）**：按
+> `..._GND_Round4_to_Zero_Unconnected_Final_Plan.md` §5~§7，用 `pour_hit` 确认 C38.2 东南
+> 0.85 mm 处就是 F.Cu GND 铺铜，补一段 0.20 mm F.Cu `(43.55,65.00)→(43.90,65.15)` 直接
+> 吃进铺铜（**未加过孔**）→ C38.2 record 消失，**DRC 0/0**。
+> 剩余 15 = 11 Zone/Plane + U5 区 2 条 + R13.2 2 条。
+> 检查点：`esp32-board-v1.1_gnd_round5_20260918.kicad_pcb`。
+> 下一步按 MD：先写只读工具 `tools/gnd_components.py` 建 GND component 地图
+> （Layer/BBox/面积/含 Pad·Via·Track/是否接 In1 MAIN_GND/关联 DRC record/到 MAIN_GND 距离，
+> 含 `GND_PLANE_L2` 的标 MAIN_GND、其余 ORPHAN_00x），再清 U5 区与 R13.2，最后按 component
+> 收 11 条 Zone/Plane。
+
+> **2026-09-18 更新（GND 17 → 16：U5.3 已接地）**：
+> 新工具 `tools/pour_hit.py` 可判断某点是否落在某网络的**实铺铜**里，用它定位到
+> F.Cu GND 铺铜就在 U5.3 短桩末端正南 **1.08 mm**，于是补一段 0.20 mm F.Cu
+> `(28.70,70.12)→(28.70,71.20)` 直接吃进铺铜 → U5.3 record 消失，**DRC 0/0**。
+> 剩余 16 条 = 11 Zone/Plane + U5.5（2 条）+ U5.10/11 短桩（1 条）+ R13.2（2 条）+ C38.2（1 条）。
+> 检查点：`esp32-board-v1.1_gnd_round4_20260918.kicad_pcb`。
+
 > **2026-09-18 更新（GND Final Convergence 第一轮：18 → 17）**：
 > 按 `..._GND_Final_Convergence_and_Final_DRC_Plan.md` 执行；**USB 正式冻结为 Plan C**
 > （不再动 USB_SHIELD / R8 / BAT_BUS / 3V3_MAIN / CC1 / DP-DN fanout）。
@@ -562,10 +631,12 @@ kicad-cli sch erc  →  0 violations
 2. 进行中（2026-09-18 第十轮后）：**DRC 0 Error / 0 Warning**，unconnected **18**（起点 255），
    **Non-GND unconnected = 0** ✅（所有信号网络都已连通，含 `USB_DP_CONN` / `USB_DN_CONN`）。
    已闭合清单见上文与 `ROUTING_NOTES.md` §3.0c 第十轮。
-3. 未完成：**GND 剩余 17 项**（11 Zone/Plane + U5.3/U5.5 短桩 3 条 + R13.2 2 条 + C38.2 1 条）。
-   已逐条定位卡点：`U5.3` 补短铜即可；`U5.5` 需先局部 rip `USB_VBUS_DET`；`R13.2` 需先局部
-   rip `I2C_SDA`（约 1~3 mm）再接到 U2 Pad25；`C38.2` 补 1 颗缝合过孔；11 条 Zone/Plane
-   先生成 GND component report 再按 A/B/C 分类处理。（`fix_gnd.py` 已按 MD §13 停用。）
+3. 未完成：**GND 只剩 2 条，都在 U5**（`Track 0.1988 ↔ Pad5[U5]`、`Pad11[U5] ↔ Track 1.0800`）。
+   ZONE/PLANE 类已经清零；R13.2 / C38.2 / J2 / C30 / C13 / C14·C19·SW2 等铜块都已缝合。
+   U5 这两条需按 MD 的 Plan B：先局部 rip `USB_VBUS_DET` 的 U5 侧扇出让路
+   （再把 U5.3 的 1.08 mm 延长段与 U5.11 短桩打通）→ 目标 `Unconnected = 0`。
+   然后按 MD §31~§34 清理 7 颗 via-in-pad（DFM），（`fix_gnd.py` 与
+   `stitch_orphans.py` 的 pad-center 模式均已按 MD 停用）。
    完成 `Unconnected = 0` 后再逐个开启 `track_not_centered_on_via` 与
    `tuning_profile_track_geometries` 跑 Final DRC。
 4. 待确认：USB DN 主干目前是 F.Cu→In2→B.Cu / 3 过孔；若要回到 MD 期望的「全程 F.Cu /
