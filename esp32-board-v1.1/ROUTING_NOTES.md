@@ -209,6 +209,52 @@ Checkpoint 推进，**Checkpoint 1 全部达成、Checkpoint 2 只差 `CHG_OTG` 
 
 > 本轮 non-GND unconnected **40 → 16**，总计 **59 → 35**，全程 DRC 保持 **0 Error / 0 Warning**。
 
+**第八轮（2026-09-17，依 `..._Final_16_NonGND_Convergence_Plan.md`）**——按 MD 的
+Checkpoint A/B/C/D 推进：**A 完成、C 完成一半、D 完成一半**；**non-GND 16 → 9**。
+
+| MD 条目 | 处理 | 结果 |
+|---|---|---|
+| §2~§6 Checkpoint A：`CHG_OTG` | ① 先 `pre_chg_otg` 存盘；② 用 `move_endpoint` + `rip_local` 把 U2.7 的短桩与 y≈63.1 走线**只拆掉本地一小段**，`bridge_net` 重布 CHG_INT_N；③ 再 `bridge_net` 收 `CHG_OTG`（U2.8 → F.Cu 短出 → via → In2/B.Cu → R19.1） | ✅ **BQ25895 区封闭**（CHG_OTG / CHG_INT_N / CHG_CE 均 Connected） |
+| §11~§12 Checkpoint C：`I2C_SCL` | `bridge_net I2C_SCL --layer-pen 5,8,0`（把 In2 的每步代价抬高，优先 B.Cu / F.Cu） | ✅ 已闭合（50 段 / 10 过孔） |
+| §11~§12 Checkpoint C：`I2C_SDA` | 两端都被封死，见下 | ❌ 待局部重排 U5 区 |
+| §13~§14 Checkpoint D：`TF_CS_N` | `bridge_net TF_CS_N` | ✅ 已闭合（17 段 / 6 过孔） |
+| §13~§15 Checkpoint D：`TYPEC_INT_N` | U5.6 一侧被封死，见下 | ❌ 待局部重排 U5 区 |
+| §7~§10 Checkpoint B：USB DP/DN | 见下（DP 已布通，DN 完全没有铜） | ⏸ 需要差分对布线 |
+
+**`I2C_SDA` / `TYPEC_INT_N` 的准确阻塞点**（这两个都在 TUSB320 U5 那一小片）：
+
+```text
+U5 引脚：3/4/5/6 在 y=70.33（GND / VBUS_DET / GND / TYPEC_INT_N）
+         7/8 在 x=30.23（I2C_SDA / I2C_SCL，0.4 mm 间距）
+
+它们的过孔必须落在 U5 的引脚口袋里，而口袋里：
+  · In2.Cu 正好被 1.2 mm 宽的 3V3_MAIN 主干压住（x 30.0~31.2，y 66~76）→ 任何过孔
+    都会与主干冲突（0.42 mm 的过孔净空）；
+  · 东侧 F.Cu 是 USB_VBUS_DET（x=31.8 竖线 + 斜线）与 TF_CD_N（x=32.2 竖线）；
+  · 西/南侧是 U5 自己的 0.4 mm 间距引脚（U5.2/U5.4/U5.6/U5.9）。
+实测：x ≤ 29.58 或 x ≥ 31.62 才有过孔位置，但这两种位置分别被 U5 焊盘/上述走线占住。
+```
+
+> 因此这两项需要**局部重排 U5 扇出**，而其中一步会是「把 In2 的 3V3_MAIN 主干在 U5
+> 下方局部收窄（1.2 → 0.5 mm）或平移约 1.5 mm」。这属于 MD §1「不要再动车 3V3_MAIN」
+> 的例外情形（3V3_MAIN 自身没有回归，是它在挡 I2C），**等确认后再动**。
+> 本轮已实测过的失败尝试：rip USB_VBUS_DET 本地两段后重布（重布结果反而更靠中间，把
+> 通道堵得更死）；先 SCL 后 SDA（SCL 抢走 SDA 的出口）、先 SDA 后 SCL（SDA 两端仍封死）。
+
+**USB（Checkpoint B）现状**：
+
+```text
+USB_DP_CONN  = 已布通（F.Cu / 0.24 mm，从 J1.A6/B6 ↔ D2.1 ↔ 往北）
+USB_DN_CONN  = 一点铜都没有：D3.1 / J1.A7 / J1.B7 / R10.1 四个焊盘全孤立，
+               连 0.7 mm 的 A7↔B7 也放不下（J1 扇出区已被 CC1/CC2/VBUS/DP 占满）
+```
+
+按 MD §9，DN 应该**照着已布好的 DP 一起做差分对**，不要用 bridge_net 硬补。
+
+检查点：`esp32-board-v1.1_pre_chg_otg_20260917.kicad_pcb`、
+`esp32-board-v1.1_u2_u5_progress_20260917.kicad_pcb`、
+`esp32-board-v1.1_bq_i2c_tf_checkpoint_20260917.kicad_pcb`（本轮最终状态）。
+
 | U3 地引脚（Pad4 / Pad10，"短粗 F.Cu 地铜 + GND Via"） | 部分完成：`SYS_ISLAND_U3` 铜皮下沿由 44.05 收到 **42.55**（原先把 U3 顶排引脚的出线整段盖住），铺铜随后可以流进 U3 区域；真实 GND 焊盘 23 → **6** |
 | `3V3_MAIN` | ✅ **完全闭合**（不再出现在 unconnected） |
 | `SYS` | 仅剩 2 项（`SYS_ISLAND_U2`/`C13` 需岛内过孔或人工接线） |
@@ -234,9 +280,12 @@ Checkpoint 推进，**Checkpoint 1 全部达成、Checkpoint 2 只差 `CHG_OTG` 
 | GND 铺铜可达性 | `apply_routing.py` 把 GND 铺铜的局部净空从 0.30 收到 **0.20 mm**（KiCad 仍按网络对取较大值，POWER 仍保持 0.2） | 更多密集区焊盘被铺铜覆盖 |
 | DRC 复核 | 每轮 `apply → DRC` 迭代，出现过 3 个新增违规（过孔间距/连接宽度）立即回退 | **DRC 维持 0 Error / 0 Warning** |
 
-当前 DRC 未连接项按网络（2026-09-17 第七轮后，共 **35** 项，按 DRC record 计）：`GND 19`
-（铺铜碎片 + 少量真实地焊盘，MD §18 统一清理）、`I2C_SCL 4`、`I2C_SDA 4`、`USB_DN_CONN 3`、
-`TF_CS_N 2`、`TYPEC_INT_N 2`、`CHG_OTG 1`。
+当前 DRC 未连接项按网络（2026-09-17 第八轮后，共 **29** 项，按 DRC record 计）：`GND 20`
+（铺铜碎片 + 少量真实地焊盘，MD §18 统一清理）、`I2C_SDA 4`、`USB_DN_CONN 3`、
+`TYPEC_INT_N 2`。
+**已闭合**：`3V3_MAIN`、`SYS`、`BAT_BUS`、`EPD_3V3`、`CHG_REGN`、`CHG_CE`、`CHG_DSEL`、
+`CHG_OTG`、`CHG_INT_N`、`I2C_SCL`、`TF_CS_N`、TPS 全家、U3 的 GND 与 SYS 焊盘、
+全部电源铜皮锚点。
 **已闭合**：`3V3_MAIN`、`SYS`、`BAT_BUS`、`EPD_3V3`、`CHG_REGN`、`CHG_CE`、`CHG_DSEL`、
 TPS 全家（L1/L2/PS_SYNC/FB/EN/VSEL）、U3 的 GND 与 SYS 焊盘、`3V3_ISLAND_*`、`SYS_ISLAND_*`。
 

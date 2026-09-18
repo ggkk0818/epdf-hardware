@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import numpy as np  # noqa: E402
 import route as R  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -41,25 +42,29 @@ def main():
                    "hi": via_r + max(clear, 0.20) + R.EPS,
                    "hole": max(via_r + clear, drill_r + 0.25) + R.EPS,
                    "res": via_r + max(clear, 0.22) + R.EPS}
-            for grp in ("lo", "hi", "hole", "res"):
-                f = b.ob.field(lyr, grp, net)
-                if f[j, i] + 1e-6 < rec[grp]:
+            px = np.array([i * R.PITCH], np.float32)
+            py = np.array([j * R.PITCH], np.float32)
+            for lyr in R.ALL_CU:
+                for grp in ("lo", "hi", "hole", "res"):
+                    f = b.ob.field(lyr, grp, net)
+                    if f[j, i] + 1e-6 >= rec[grp]:
+                        continue
                     worst = None
                     for s in b.ob.by[lyr][grp]:
                         if s.net == net:
                             continue
-                        d = float(s.dist(
-                            np.array([i * R.PITCH], np.float32),
-                            np.array([j * R.PITCH], np.float32))[0])
+                        d = float(s.dist(px, py)[0])
                         if d < rec[grp] and (worst is None or d < worst[0]):
-                            worst = (d, s.net)
-                    print(f"      blocked by '{grp}' group: "
-                          f"field {f[j, i]:.3f} < {rec[grp]:.3f} "
-                          f"worst={worst}")
-            own = b.ob.field(lyr, "lo", None, only_net=net)
-            own = np.minimum(own, b.ob.field(lyr, "hi", None, only_net=net))
-            if not (own[j, i] <= 0.001 or own[j, i] >= via_r + 0.12):
-                print(f"      blocked by own-copper rule: own={own[j, i]:.3f}")
+                            worst = (round(d, 3), s.net)
+                    print(f"      {lyr} '{grp}': field {f[j, i]:.3f} < "
+                          f"{rec[grp]:.3f} worst={worst}")
+                own = b.ob.field(lyr, "lo", None, only_net=net)
+                own = np.minimum(own, b.ob.field(lyr, "hi", None,
+                                                 only_net=net))
+                if not (own[j, i] <= 0.001 or own[j, i] >= via_r + 0.12):
+                    print(f"      {lyr} own-copper rule: own={own[j, i]:.3f}")
+                if b.keepout_dil[lyr][j, i]:
+                    print(f"      {lyr} blocked by a rule area")
             for v in b.net_vias.get(net, []):
                 need = drill_r + v["drill"] / 2.0 + R.HOLE_TO_HOLE
                 d = math.hypot(v["x"] - i * R.PITCH, v["y"] - j * R.PITCH)

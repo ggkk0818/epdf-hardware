@@ -370,6 +370,9 @@ def main():
                     help="A* expansion budget per attempt (default 550000)")
     ap.add_argument("--small-via", action="store_true",
                     help="only retry a failed gap with 0.4/0.2 vias")
+    ap.add_argument("--layer-pen", default=None,
+                    help="per-step cost for F.Cu,In2.Cu,B.Cu "
+                         "(default 5,1,0; raise In2 to keep a net off it)")
     args = ap.parse_args()
 
     model = json.loads(R.MODEL_PATH.read_text(encoding="utf-8"))
@@ -378,6 +381,9 @@ def main():
     board.load_routing(data)
     sess = R.Session(board, log=print)
     rtr = sess.rtr
+    layer_pen = None
+    if args.layer_pen:
+        layer_pen = [float(x) for x in args.layer_pen.split(",")]
     added_segs, added_vias = [], []
 
     for net in args.nets.split(","):
@@ -497,7 +503,7 @@ def main():
                     via_ok = np.zeros_like(via_ok)
                 path = rtr.astar(walk, slack, target, tree, via_ok,
                                  ref_ij=ref, slack_slack=R.DIAG_MARGIN,
-                                 max_expand=args.expand)
+                                 max_expand=args.expand, layer_pen=layer_pen)
                 if path is None:
                     continue
                 snap_start = None
@@ -520,6 +526,10 @@ def main():
                     walk = [m[lyr][0] for lyr in R.ROUTABLE]
                     if not _segs_walkable(segs2, walk, net):
                         segs2, vias2, _ = R.emit_path(path, w, net)
+                if not segs2 and not vias2:
+                    # a one-cell path emits no copper; without this the two
+                    # components never merge and the loop would spin forever
+                    continue
                 for s in segs2:
                     s["kind"] = "route"
                 for v in vias2:

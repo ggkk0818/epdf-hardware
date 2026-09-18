@@ -26,6 +26,11 @@
 > （新主干切开铺铜后会挤出 0.116 mm 细颈）。检查点：
 > `esp32-board-v1.1_power_backbone_checkpoint_20260917.kicad_pcb`、
 > `esp32-board-v1.1_bat_epd_checkpoint_20260917.kicad_pcb`。
+> **2026-09-17 更新（Final 16 Non-GND 收敛）**：`CHG_OTG` 闭合（BQ25895 区封闭）、
+> `I2C_SCL` 与 `TF_CS_N` 闭合；**unconnected 35 → 29**（non-GND 16 → 9），DRC 仍
+> **0 Error / 0 Warning**。剩下 `I2C_SDA` / `TYPEC_INT_N` 卡在 TUSB320（U5）的引脚口袋
+> （In2 的 1.2 mm 3V3_MAIN 主干正好压在 U5 下方，过孔无处可落），`USB_DN_CONN` 需与
+> 已布通的 DP 一起做差分对。检查点：`esp32-board-v1.1_bq_i2c_tf_checkpoint_20260917.kicad_pcb`。
 > 并新增 `SWITCH_NODE`（0.50/0.15）承载 CHG_SW/EPD_SW/TPS_L1/TPS_L2；
 > BAT/SYS/USB_VBUS 主干在收尾阶段加宽到 0.80 mm。详见 **`ROUTING_NOTES.md`**。
 
@@ -236,9 +241,9 @@ ERC           : 0 violations
                           simulation_model_issue（与本设计无关，MD §9）
 DRC Errors    : 0
 DRC Warnings  : 0
-Unconnected   : 35    = 5 个低速网络（I2C/TF_CS/TYPEC_INT/USB_DN/CHG_OTG）
+Unconnected   : 29    = 3 个低速网络（I2C_SDA / TYPEC_INT_N / USB_DN）
                         + GND 铺铜碎片（MD §18 统一清理）
-                        （2026-09-17：布线起点 255 → 68 → 62 → 59 → 50 → 35）
+                        （2026-09-17：布线起点 255 → 68 → 62 → 59 → 50 → 35 → 29）
 DRC Exclusions: 0
 ```
 

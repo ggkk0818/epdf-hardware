@@ -1,5 +1,28 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-17 更新（Final 16 Non-GND：Checkpoint A 完成、C/D 各完成一半）**：
+> 按 `..._Final_16_NonGND_Convergence_Plan.md` 推进。
+>
+> - **Checkpoint A ✅**：`CHG_OTG` 闭合（做法完全按 MD §3.1：先用 `move_endpoint.py` +
+>   `rip_local.py` 只拆掉 U2.7 附近一小段 `CHG_INT_N`，`bridge_net` 重布它，再收 `CHG_OTG`）。
+>   **BQ25895 区正式封闭**，CHG_OTG / CHG_INT_N / CHG_CE 三者均 Connected。
+> - **Checkpoint C**：`I2C_SCL` ✅（`bridge_net --layer-pen 5,8,0`）；`I2C_SDA` ❌。
+> - **Checkpoint D**：`TF_CS_N` ✅；`TYPEC_INT_N` ❌。
+> - **Checkpoint B（USB）⏸**：`USB_DP_CONN` 已布通（F.Cu 0.24 mm 差分对形态），
+>   但 `USB_DN_CONN` **一点铜都没有**（4 个焊盘全孤立，J1 扇出区已被占满，A7↔B7 只差
+>   0.7 mm 也放不下）。按 MD §9 应与 DP 一起做差分对，不要用 bridge_net 硬补。
+>
+> ❌ 的两项（`I2C_SDA` / `TYPEC_INT_N`）卡在同一个地方：**TUSB320（U5）的引脚口袋**。
+> 过孔只能落在 U5 焊盘之间，而口袋里：In2.Cu 被 **1.2 mm 宽的 3V3_MAIN 主干**压住
+> （x 30.0~31.2）、东侧是 USB_VBUS_DET / TF_CD_N 的 F.Cu、四周是 0.4 mm 间距引脚。
+> 实测 x ≤ 29.58 或 x ≥ 31.62 才有过孔位置，两种位置都被占住。
+> → 需要**局部重排 U5 扇出**，其中一步是「把 In2 的 3V3_MAIN 主干在 U5 下方局部收窄
+> 到 0.5 mm 或平移 ~1.5 mm」。这超出 MD §1「不要再动 3V3_MAIN」的授权范围
+> （3V3_MAIN 本身没有 DRC 回归，是它在挡 I2C），**需先与用户确认**。
+>
+> 现状：**unconnected 35 → 29**（non-GND 16 → 9），**DRC 0 Error / 0 Warning**。
+> 检查点：`esp32-board-v1.1_bq_i2c_tf_checkpoint_20260917.kicad_pcb`。
+
 > **2026-09-17 更新（Post-TPS 收敛：Checkpoint 1 全部达成，Checkpoint 2 只差 CHG_OTG）**：
 > 按 `..._Post_TPS_Final_Convergence_Plan.md` 推进。新增主力工具 `tools/bridge_net.py`
 > （按真实几何把网络的铜箔拆成连通分量 → MST → 只补真正缺的那几段）。
@@ -460,12 +483,14 @@ kicad-cli sch erc  →  0 violations
 
 1. 已完成：4 层布线框架（0.1 mm 栅格 A* + 出线预约 + 功率宽度阶梯 + 合法性重布）、
    In1.Cu 完整 GND 平面、四层 GND 铺铜与 145 个缝合过孔、5 个 `PWR_NECK_*` 窄颈规则区。
-2. 进行中（2026-09-17 第七轮后）：**DRC 0 Error / 0 Warning**，unconnected **35**（起点 255）。
+2. 进行中（2026-09-17 第八轮后）：**DRC 0 Error / 0 Warning**，unconnected **29**（起点 255）。
    已闭合：`3V3_MAIN`、`SYS`、`BAT_BUS`、`EPD_3V3`、`CHG_REGN`、`CHG_CE`、`CHG_DSEL`、
-   TPS 全家（L1/L2/PS_SYNC/FB/EN/VSEL）、U3 的 GND 与 SYS 焊盘、全部电源铜皮的岛—主干锚点。
-   仍未闭合的非地网络（16 项）：`CHG_OTG 1`、`USB_DN_CONN 3`、`I2C_SCL 4`、`I2C_SDA 4`、
-   `TF_CS_N 2`、`TYPEC_INT_N 2`。收尾顺序见 `ROUTING_NOTES.md` §3.0c 第七轮与 MD §13~§18。
-3. 未完成：GND 最终清理（19 项：铺铜碎片 + 少量真实地焊盘）。
+   `CHG_OTG`、`CHG_INT_N`、`I2C_SCL`、`TF_CS_N`、TPS 全家、U3 的 GND 与 SYS 焊盘、
+   全部电源铜皮的岛—主干锚点。
+   仍未闭合的非地网络（9 项）：`I2C_SDA 4`、`USB_DN_CONN 3`、`TYPEC_INT_N 2`。
+   前两项卡在 TUSB320（U5）引脚口袋（In2 的 3V3_MAIN 主干 + USB_VBUS_DET/TF_CD_N 挡住
+   过孔位置），USB_DN 需要与已布通的 DP 一起做差分对。详见 `ROUTING_NOTES.md` §3.0c 第八轮。
+3. 未完成：GND 最终清理（20 项：铺铜碎片 + 少量真实地焊盘）。
 4. 待确认：POWER 网络类线宽 0.80 → 0.50 mm（见 `ROUTING_NOTES.md` §4.1）。
 
 ### 原理图阶段
