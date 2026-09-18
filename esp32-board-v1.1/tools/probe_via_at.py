@@ -19,8 +19,10 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     net = sys.argv[1]
     x, y = float(sys.argv[2]), float(sys.argv[3])
+    verbose = "-v" in sys.argv
+    args = [a for a in sys.argv[4:] if a != "-v"]
     sizes = [(float(a), float(b)) for a, b in
-             (p.split("/") for p in sys.argv[4:])] or [(0.6, 0.3)]
+             (p.split("/") for p in args)] or [(0.6, 0.3)]
     model = json.loads(R.MODEL_PATH.read_text(encoding="utf-8"))
     data = json.loads((ROOT / "routing" / "routing.json").read_text(
         encoding="utf-8"))
@@ -34,7 +36,7 @@ def main():
         m = sess.rtr.via_mask(net, dia / 2.0, drill / 2.0,
                               R.net_params(net)["clearance"])
         print(f"   via {dia}/{drill}: {'OK' if m[j, i] else 'BLOCKED'}")
-        if not m[j, i]:
+        if not m[j, i] and verbose:
             rtr, b = sess.rtr, sess.b
             clear = R.net_params(net)["clearance"]
             via_r, drill_r = dia / 2.0, drill / 2.0

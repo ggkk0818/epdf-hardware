@@ -44,6 +44,7 @@ def main():
     net, layer = sys.argv[1], sys.argv[2]
     lo = float(sys.argv[3]) if len(sys.argv) > 3 else 0.30
     hi = float(sys.argv[4]) if len(sys.argv) > 4 else 0.70
+    other_net = sys.argv[5] if len(sys.argv) > 5 else None
     model = json.loads(R.MODEL_PATH.read_text(encoding="utf-8"))
     data = json.loads((ROOT / "routing" / "routing.json").read_text(
         encoding="utf-8"))
@@ -53,12 +54,12 @@ def main():
     for s in segs:
         length = math.hypot(s["end"][0] - s["start"][0],
                             s["end"][1] - s["start"][1])
-        if length < 1.0:
+        if length < 0.15:
             continue
         print(f"{net} [{s['start'][0]:.2f},{s['start'][1]:.2f}]->"
               f"[{s['end'][0]:.2f},{s['end'][1]:.2f}] w{s['width']}")
         for onet, osegs in board.net_segments.items():
-            if onet == net:
+            if onet == net or (other_net and onet != other_net):
                 continue
             for o in osegs:
                 if o["layer"] != layer:

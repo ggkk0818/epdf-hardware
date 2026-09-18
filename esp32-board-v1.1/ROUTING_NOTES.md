@@ -255,6 +255,90 @@ USB_DN_CONN  = 一点铜都没有：D3.1 / J1.A7 / J1.B7 / R10.1 四个焊盘全
 `esp32-board-v1.1_u2_u5_progress_20260917.kicad_pcb`、
 `esp32-board-v1.1_bq_i2c_tf_checkpoint_20260917.kicad_pcb`（本轮最终状态）。
 
+**第九轮（2026-09-18，依 `..._U5_USB_GND_Final_Convergence_Plan.md`）**——Checkpoint E 达成，
+**non-GND 9 → 3**（只剩 `USB_DN_CONN`）。
+
+| MD 条目 | 处理 | 结果 |
+|---|---|---|
+| §3~§6 U5 下方 3V3_MAIN 局部减宽 | 新增 `tools/neck_trunk.py`：保持中心线不动，把 In2.Cu 主干在 **y 68.0~71.2** 由 1.20 → **0.50 mm**，两端各留 0.35 mm 的 0.85 mm 过渡段，不加过孔 | ✅ Refill + DRC 后 **3V3_MAIN 仍完全连通**（0 条 unconnected） |
+| §7~§9 `I2C_SDA` | 减宽后 U5.7 的过孔位恢复：**F.Cu 向东短出 → 0.4/0.2 过孔 (31.300,69.700) → B.Cu**（正是 MD §7.1 的参考区域）→ `bridge_net --layer-pen 5,8,0` 收掉整条 SDA | ✅ **4 → 0** |
+| §10 `TYPEC_INT_N` | 先按 §11 把 USB_VBUS_DET 的 U5 东侧竖线**手工东推**到 x=31.81（手工画线，不用自动重布）；随后 U5.6 → F.Cu 东出 → 0.4/0.2 过孔 **(31.300,70.500)**（与 SDA 过孔 Y 错开 0.8 mm）→ B.Cu | ✅ **2 → 0** |
+| §13~§20 Checkpoint F：USB DP/DN | 做了详细勘察，**发现结构性问题**（见下） | ⏸ 需确认方案 |
+
+**USB（Checkpoint F）勘察结论**——`USB_DN_CONN` 的 4 个焊盘（J1.B7 / J1.A7 / D3.1 / R10.1）
+一个铜都没有，而 J1 扇出区已被 CC1 / DP / VBUS_RAW / SHIELD 占满。逐点实测后确认：
+
+```text
+J1 焊盘 x 顺序： B7(23.25,DN)  A6(23.75,DP)  A7(24.25,DN)  B6(24.75,DP)   ← 都在 y=77.65
+
+要接的两条搭接： DP: A6—B6   /   DN: B7—A7
+但 A7 夹在 A6 与 B6 之间 → DN 的搭接横线必须穿过 A6 的竖直出线；
+反过来把 DP 搭接放到更远处，DN 的横线又会撞 DP 的搭接横线。
+即：A6—B6 与 B7—A7 在**同一层上无法同时成立**（数学上必有一次交叉）。
+
+想从连接器“内侧”（y 78.8~82.3）绕也不行：
+  USB_VBUS_RAW 在 y=78.60 横穿、USB_SHIELD 在 y=79.40 横穿，
+  两条竖出线都会被它们挡住。
+```
+
+> 所以 MD §17「Via = 0」与这个连接器的焊盘排列存在冲突：**至少需要 1 颗过孔**来完成其中
+> 一条搭接（短桩上的过孔不影响差分对本身的连续性）。请确认：
+> ① 允许在 DN（或 DP）的搭接短桩上放 1 颗 0.4/0.2 过孔（推荐）；或
+> ② 保持 Via = 0，改为在连接器外侧另行飞线（会很长、且仍与 CC/VBUS/SHIELD 扇出冲突）；
+> ③ 其他指定做法。
+> DP 本身已经布通（F.Cu / 0.24 mm / 0 过孔），DN 的主干长线可以照 DP 平行复核后再定。
+
+检查点：`esp32-board-v1.1_pre_u5_fanout_20260918.kicad_pcb`（改动前）、
+`esp32-board-v1.1_u5_closed_20260918.kicad_pcb`（Checkpoint E 完成）。
+
+**第十轮（2026-09-18，依 `..._J1_USB_Interleaved_Pad_Fanout_Final_Plan.md`）**——
+**`USB_DN_CONN` 闭合，Non-GND unconnected = 0** ✅（MD 的 Checkpoint G）。
+
+| MD 条目 | 处理 | 结果 |
+|---|---|---|
+| §3~§11 Plan A：VBUS 下沉 | 删掉 J1 内侧 y≈78.60 的 F.Cu VBUS 横线（10 段），在西侧 VBUS 焊盘组旁加 **0.6/0.3 过孔 (21.60,76.80)** 接 In2 汇流；USB_SHIELD 保持不动 | ✅ `USB_VBUS_RAW` 仍完全 Connected，DRC 0 |
+| §12~§14 DP 下侧 short | 局部 rip J1 A6/B6 的 DP 扇出（8 段），重画：A6 → 下侧 short **y=76.72** → B6；A6 作主出口向北接回原主干 | ✅ DP 仍 Connected |
+| §14 DN 上侧 short | 重画：B7 → 上侧 short **y=78.55** → A7；B7 作主出口向北 → D3.1 | ✅ J1 侧全部并入 DN |
+| §15~§17 DN 主干 | ⚠️ 见下 | DN 已闭合（带过孔） |
+
+**DN 主干的实测结论（与 MD 的期望有出入）**：MD 期望 DN 沿 DP 平行、全程 F.Cu / 0 过孔。
+实测该走廊在 ESD 管北侧就被占满，逐段量过：
+
+```text
+D3.1 的四个方向：
+  北：D3 自己的 Pad2（GND，x 22.575~23.025）挡住
+  西：USB_CC1 的过孔 (22.20,75.60) 挡住（净空差 0.14 mm）
+  东：USB_DP 的竖直段 (x 23.40) 挡住
+  南：DN 自己的扇出
+
+DP 西侧想跑第二条线（DN）：
+  y 69.6~70.4 被 BAT_BUS 的 0.8 mm F.Cu 主干挡死（铜到 x=22.90）
+  y 66.75~69.36 被 3V3_MAIN 的三个 F.Cu 支路挡死（x 23.75~25.43）
+  → DP 与该两道墙之间已无 0.27 mm 余量
+```
+
+因此本轮先按"可布通"完成：DN 主干用现有布线器走 **F.Cu→In2→B.Cu，3 颗 0.45/0.2 过孔**
+（`bridge_net USB_DN_CONN`），**非地网络已全部连通**。
+
+> 若要回到 MD 期望的「DN 全程 F.Cu / 0 Via」，需要再做一次局部重排（按优先级）：
+> ① 把 3V3_MAIN 在 (24.10,67.00)-(24.10,69.10) 一带的三个 F.Cu 支路局部改走 In2；
+> ② 把 BAT_BUS 的 F.Cu 段 (22.50,70.00)→(15.50,70.00) 的东端收短或改层；
+> ③ 或者把 USB_CC1 的过孔 (22.20,75.60) 西移，允许 DN 从 D3.1 西侧出线。
+> 这三项都会碰到已完成的电源/CC 布线，需确认后再动。
+
+**Checkpoint H：GND 第一轮清理**（MD §24）——`fix_gnd.py` 又放了 5 颗 GND 过孔、缝合 2 块
+铺铜块：**GND 22 → 18 项**。剩余 18 项的分布：
+
+```text
+A 类（含 Pad）：U5.3↔U5.5、R13.2↔U2.25、R13.2↔短铜、J3.SH↔短铜
+                —— 实测这几处的 0.4/0.2 过孔都放不下（相邻焊盘/内层走线卡净空）
+B 类（Track↔Track）：3 条历史 GND 短桩
+C 类（Zone/Plane）：13 条 = F.Cu 铺铜块之间 / 与 In1 平面 / 与 In2、B.Cu 铺铜的孤立铜
+```
+
+检查点：`esp32-board-v1.1_nongnd_zero_20260918.kicad_pcb`（Non-GND = 0 时刻）、
+`esp32-board-v1.1_gnd_round1_20260918.kicad_pcb`（GND 第一轮之后）。
+
 | U3 地引脚（Pad4 / Pad10，"短粗 F.Cu 地铜 + GND Via"） | 部分完成：`SYS_ISLAND_U3` 铜皮下沿由 44.05 收到 **42.55**（原先把 U3 顶排引脚的出线整段盖住），铺铜随后可以流进 U3 区域；真实 GND 焊盘 23 → **6** |
 | `3V3_MAIN` | ✅ **完全闭合**（不再出现在 unconnected） |
 | `SYS` | 仅剩 2 项（`SYS_ISLAND_U2`/`C13` 需岛内过孔或人工接线） |
@@ -280,12 +364,13 @@ USB_DN_CONN  = 一点铜都没有：D3.1 / J1.A7 / J1.B7 / R10.1 四个焊盘全
 | GND 铺铜可达性 | `apply_routing.py` 把 GND 铺铜的局部净空从 0.30 收到 **0.20 mm**（KiCad 仍按网络对取较大值，POWER 仍保持 0.2） | 更多密集区焊盘被铺铜覆盖 |
 | DRC 复核 | 每轮 `apply → DRC` 迭代，出现过 3 个新增违规（过孔间距/连接宽度）立即回退 | **DRC 维持 0 Error / 0 Warning** |
 
-当前 DRC 未连接项按网络（2026-09-17 第八轮后，共 **29** 项，按 DRC record 计）：`GND 20`
-（铺铜碎片 + 少量真实地焊盘，MD §18 统一清理）、`I2C_SDA 4`、`USB_DN_CONN 3`、
-`TYPEC_INT_N 2`。
+当前 DRC 未连接项按网络（2026-09-18 第十轮后，共 **18** 项，按 DRC record 计）：**全部是 GND**
+（铺铜块 / 平面之间 13 条 + 真实地焊盘 4 条 + 历史短桩 3 条…去重后 18 条）。
+**Non-GND unconnected = 0** ✅
 **已闭合**：`3V3_MAIN`、`SYS`、`BAT_BUS`、`EPD_3V3`、`CHG_REGN`、`CHG_CE`、`CHG_DSEL`、
-`CHG_OTG`、`CHG_INT_N`、`I2C_SCL`、`TF_CS_N`、TPS 全家、U3 的 GND 与 SYS 焊盘、
-全部电源铜皮锚点。
+`CHG_OTG`、`CHG_INT_N`、`I2C_SCL`、`I2C_SDA`、`TF_CS_N`、`TYPEC_INT_N`、`USB_DP_CONN`、
+`USB_DN_CONN`、TPS 全家、U3 的 GND 与 SYS 焊盘、全部电源铜皮锚点。
+**所有非地网络均已连通。**
 **已闭合**：`3V3_MAIN`、`SYS`、`BAT_BUS`、`EPD_3V3`、`CHG_REGN`、`CHG_CE`、`CHG_DSEL`、
 TPS 全家（L1/L2/PS_SYNC/FB/EN/VSEL）、U3 的 GND 与 SYS 焊盘、`3V3_ISLAND_*`、`SYS_ISLAND_*`。
 

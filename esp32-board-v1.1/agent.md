@@ -1,5 +1,46 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-18 更新（J1 交错焊盘扇出：Non-GND unconnected = 0 ✅）**：
+> 按 `..._J1_USB_Interleaved_Pad_Fanout_Final_Plan.md` 的 Plan A 执行。
+>
+> - **§3~§11 VBUS 下沉**：删掉 J1 内侧 y≈78.60 的 F.Cu VBUS 横线，在西侧 VBUS 焊盘组旁加
+>   0.6/0.3 过孔 (21.60,76.80) 接 In2 汇流；USB_SHIELD 不动 → `USB_VBUS_RAW` 仍全连通。
+> - **§12~§14 DP 下侧 / DN 上侧 short**：局部 rip DP 的 J1 扇出（8 段）后重画 ——
+>   A6 →(下侧 short y=76.72)→ B6，B7 →(上侧 short y=78.55)→ A7；主出口分别取 A6 / B7。
+> - **§15~§17 DN 主干**：MD 期望「沿 DP 平行、全程 F.Cu / 0 Via」实测走不通 ——
+>   D3.1 的北/西/东三个方向分别被 D3 自己的 Pad2、USB_CC1 的过孔、DP 的竖直段挡住；
+>   DP 西侧想再放一条又被 **BAT_BUS 0.8 mm F.Cu 主干（y≈70）与 3V3_MAIN 的三个 F.Cu
+>   支路（y 66.75~69.36）**夹死。故先按可布通完成：DN 主干 F.Cu→In2→B.Cu，3 颗过孔。
+> - **结果：`USB_DN_CONN` 闭合 → Non-GND unconnected = 0**（MD 的 Checkpoint G ✅）；
+>   **DRC 0 Error / 0 Warning**。
+> - **Checkpoint H（GND 第一轮）**：`fix_gnd.py` 再放 5 颗 GND 过孔 + 缝合 2 块铺铜：
+>   **GND 22 → 18 项**。剩余 18 项 = 铺铜/平面之间 13 条 + 真实地焊盘 4 条 + 历史短桩 3 条；
+>   实测 U5.3/U5.5、R13.2 处连 0.4/0.2 过孔都放不下（相邻 0.4 mm 间距焊盘 / 内层走线卡净空）。
+> - 检查点：`esp32-board-v1.1_nongnd_zero_20260918.kicad_pcb`、
+>   `esp32-board-v1.1_gnd_round1_20260918.kicad_pcb`。
+> - 待确认：① USB DN 主干是否要做「0 Via」的局部重排（需动 3V3_MAIN 三个 F.Cu 支路 /
+>   BAT_BUS F.Cu 段 / CC1 过孔）；② GND 剩余 18 项是否按 MD §24 继续逐类清理。
+
+> **2026-09-18 更新（U5/USB/GND 收敛：Checkpoint E 达成，non-GND 只剩 USB_DN）**：
+> 按 `..._U5_USB_GND_Final_Convergence_Plan.md` 执行。
+>
+> - **§3~§6 3V3_MAIN 局部减宽**：新工具 `tools/neck_trunk.py`，保持 In2.Cu 主干中心线不动，
+>   在 **y 68.0~71.2** 把 U5 下方那段由 1.20 → **0.50 mm**（两端 0.35 mm 的 0.85 mm 过渡，
+>   不加过孔）。Refill+DRC 后 **3V3_MAIN 仍完全连通**。
+> - **§7~§9 `I2C_SDA` ✅**：减宽后 U5.7 的过孔位恢复 —— F.Cu 东出 → 0.4/0.2 过孔
+>   (31.300,69.700) → B.Cu（正是 MD 给的参考区域），其余用 `bridge_net --layer-pen 5,8,0`。
+> - **§10~§11 `TYPEC_INT_N` ✅**：先把 USB_VBUS_DET 的 U5 东侧竖线**手工东推**到 x=31.81
+>   （`rip_local` + `add_track`，不用自动重布），再 U5.6 → F.Cu 东出 → 过孔
+>   (31.300,70.500)（与 SDA 过孔 Y 错开 0.8 mm）→ B.Cu。
+> - **unconnected 29 → 25，non-GND 9 → 3**（只剩 `USB_DN_CONN`），**DRC 0 Error / 0 Warning**。
+> - **Checkpoint F（USB DP/DN）停下来等确认**：勘察发现 J1 的焊盘顺序是
+>   `B7(DN) A6(DP) A7(DN) B6(DP)`，DN 的搭接必须穿过 DP 的竖直出线 ——
+>   **A6—B6 与 B7—A7 两条搭接在同一层上无法同时成立**（数学上必有一次交叉）；
+>   连接器内侧也被 USB_VBUS_RAW(y=78.60) 与 USB_SHIELD(y=79.40) 横穿。
+>   因此 MD §17 的「Via = 0」与该封装冲突，**至少需要 1 颗过孔**完成一条搭接（短桩过孔，
+>   不影响差分对本身）。等用户确认方案后再做。
+> - 检查点：`esp32-board-v1.1_u5_closed_20260918.kicad_pcb`。
+
 > **2026-09-17 更新（Final 16 Non-GND：Checkpoint A 完成、C/D 各完成一半）**：
 > 按 `..._Final_16_NonGND_Convergence_Plan.md` 推进。
 >
@@ -483,14 +524,14 @@ kicad-cli sch erc  →  0 violations
 
 1. 已完成：4 层布线框架（0.1 mm 栅格 A* + 出线预约 + 功率宽度阶梯 + 合法性重布）、
    In1.Cu 完整 GND 平面、四层 GND 铺铜与 145 个缝合过孔、5 个 `PWR_NECK_*` 窄颈规则区。
-2. 进行中（2026-09-17 第八轮后）：**DRC 0 Error / 0 Warning**，unconnected **29**（起点 255）。
-   已闭合：`3V3_MAIN`、`SYS`、`BAT_BUS`、`EPD_3V3`、`CHG_REGN`、`CHG_CE`、`CHG_DSEL`、
-   `CHG_OTG`、`CHG_INT_N`、`I2C_SCL`、`TF_CS_N`、TPS 全家、U3 的 GND 与 SYS 焊盘、
-   全部电源铜皮的岛—主干锚点。
-   仍未闭合的非地网络（9 项）：`I2C_SDA 4`、`USB_DN_CONN 3`、`TYPEC_INT_N 2`。
-   前两项卡在 TUSB320（U5）引脚口袋（In2 的 3V3_MAIN 主干 + USB_VBUS_DET/TF_CD_N 挡住
-   过孔位置），USB_DN 需要与已布通的 DP 一起做差分对。详见 `ROUTING_NOTES.md` §3.0c 第八轮。
-3. 未完成：GND 最终清理（20 项：铺铜碎片 + 少量真实地焊盘）。
+2. 进行中（2026-09-18 第十轮后）：**DRC 0 Error / 0 Warning**，unconnected **18**（起点 255），
+   **Non-GND unconnected = 0** ✅（所有信号网络都已连通，含 `USB_DP_CONN` / `USB_DN_CONN`）。
+   已闭合清单见上文与 `ROUTING_NOTES.md` §3.0c 第十轮。
+3. 未完成：**GND 剩余 18 项**（铺铜块/平面之间 13 条 + 真实地焊盘 4 条 + 历史短桩 3 条）。
+  按 MD §24 分三类处理：A 类补过孔/短铜（U5.3/U5.5、R13.2、J3.SH 处实测
+   0.4/0.2 过孔放不下，需要先局部让路）、B 类判断后补回或删除、C 类无 Pad/Via 的孤岛删除。
+4. 待确认：USB DN 主干目前是 F.Cu→In2→B.Cu / 3 过孔；若要回到 MD 期望的「全程 F.Cu /
+   0 Via」，需局部改 3V3_MAIN 的三个 F.Cu 支路 + BAT_BUS 的 F.Cu 段 + CC1 过孔位置。
 4. 待确认：POWER 网络类线宽 0.80 → 0.50 mm（见 `ROUTING_NOTES.md` §4.1）。
 
 ### 原理图阶段

@@ -31,6 +31,20 @@
 > **0 Error / 0 Warning**。剩下 `I2C_SDA` / `TYPEC_INT_N` 卡在 TUSB320（U5）的引脚口袋
 > （In2 的 1.2 mm 3V3_MAIN 主干正好压在 U5 下方，过孔无处可落），`USB_DN_CONN` 需与
 > 已布通的 DP 一起做差分对。检查点：`esp32-board-v1.1_bq_i2c_tf_checkpoint_20260917.kicad_pcb`。
+> **2026-09-18 更新（U5 收敛）**：按 `..._U5_USB_GND_Final_Convergence_Plan.md` 把
+> U5 下方的 **In2.Cu 3V3_MAIN 主干局部 1.20 → 0.50 mm**（保持中心线，y 68.0~71.2，
+> 两端 0.85 mm 过渡，不加过孔），释放出 U5.6/U5.7 的过孔走廊；随后 `I2C_SDA` 与
+> `TYPEC_INT_N` 都已闭合（过孔分别落在 (31.30,69.70) 与 (31.30,70.50)，Y 错开）。
+> **unconnected 29 → 25，非地网络只剩 `USB_DN_CONN`**，DRC 仍 **0 Error / 0 Warning**。
+> USB 差分对重整待确认（J1 焊盘排列导致两条搭接在同层必然交叉）。
+> 检查点：`esp32-board-v1.1_u5_closed_20260918.kicad_pcb`。
+> **2026-09-18 更新（J1 扇出 Plan A）**：按 `..._J1_USB_Interleaved_Pad_Fanout_Final_Plan.md`
+> 把 J1 内侧的 VBUS 汇流下沉到 In2（F.Cu 横线删除 + 0.6/0.3 过孔），随后重建
+> **DP 下侧 short（y=76.72）/ DN 上侧 short（y=78.55）** —— `USB_DN_CONN` 闭合，
+> **Non-GND unconnected = 0**，DRC 仍 0/0。DN 主干受 BAT_BUS 0.8 mm 主干与 3V3_MAIN
+> 三个 F.Cu 支路夹击，暂用 F.Cu→In2→B.Cu（3 过孔）。GND 第一轮清理后剩 18 项。
+> 检查点：`esp32-board-v1.1_nongnd_zero_20260918.kicad_pcb`、
+> `esp32-board-v1.1_gnd_round1_20260918.kicad_pcb`。
 > 并新增 `SWITCH_NODE`（0.50/0.15）承载 CHG_SW/EPD_SW/TPS_L1/TPS_L2；
 > BAT/SYS/USB_VBUS 主干在收尾阶段加宽到 0.80 mm。详见 **`ROUTING_NOTES.md`**。
 
@@ -241,9 +255,10 @@ ERC           : 0 violations
                           simulation_model_issue（与本设计无关，MD §9）
 DRC Errors    : 0
 DRC Warnings  : 0
-Unconnected   : 29    = 3 个低速网络（I2C_SDA / TYPEC_INT_N / USB_DN）
-                        + GND 铺铜碎片（MD §18 统一清理）
-                        （2026-09-17：布线起点 255 → 68 → 62 → 59 → 50 → 35 → 29）
+Unconnected   : 18    = 全部为 GND（铺铜块/平面之间 13 + 真实地焊盘 4 + 历史短桩 3，去重）
+                        **Non-GND = 0**（所有信号网络已连通）
+                        （2026-09-17~18：布线起点 255 → 68 → 62 → 59 → 50 → 35 → 29 →
+                          25 → 22 → 18）
 DRC Exclusions: 0
 ```
 
