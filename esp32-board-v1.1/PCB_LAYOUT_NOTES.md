@@ -45,6 +45,12 @@
 > 三个 F.Cu 支路夹击，暂用 F.Cu→In2→B.Cu（3 过孔）。GND 第一轮清理后剩 18 项。
 > 检查点：`esp32-board-v1.1_nongnd_zero_20260918.kicad_pcb`、
 > `esp32-board-v1.1_gnd_round1_20260918.kicad_pcb`。
+> **2026-09-18 更新（USB SI 冻结 + GND 逐条分类）**：按
+> `..._USB_SI_Freeze_and_GND_Final_Cleanup_Plan.md`，用 F.Cu 洪水填充证明 **D3.1 的 F.Cu
+> 口袋只到 y≈71.6**（被 USB_SHIELD 扇出 + R8.1 焊盘封死），MD 授权的两项局部动作无法解决
+> → 按 MD §13 止损，**USB 冻结为 Plan C**（DN 保留 F.Cu→In2→B.Cu / 3 过孔，Full-Speed
+> 原型方案，量产前按 MD §17 强化实测）。GND 18 条已逐条定位卡点（见 `ROUTING_NOTES.md`
+> §3.0c 第十一轮）。检查点：`esp32-board-v1.1_gnd_round2_20260918.kicad_pcb`。
 > 并新增 `SWITCH_NODE`（0.50/0.15）承载 CHG_SW/EPD_SW/TPS_L1/TPS_L2；
 > BAT/SYS/USB_VBUS 主干在收尾阶段加宽到 0.80 mm。详见 **`ROUTING_NOTES.md`**。
 

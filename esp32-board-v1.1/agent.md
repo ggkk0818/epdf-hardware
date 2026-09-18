@@ -1,5 +1,40 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-18 更新（GND Final Convergence 第一轮：18 → 17）**：
+> 按 `..._GND_Final_Convergence_and_Final_DRC_Plan.md` 执行；**USB 正式冻结为 Plan C**
+> （不再动 USB_SHIELD / R8 / BAT_BUS / 3V3_MAIN / CC1 / DP-DN fanout）。
+>
+> - **§3 ① U3 Pad4** ✅：加 3 段 0.20 mm F.Cu `(33.80,45.00)→(33.60,45.00)→(33.60,45.75)
+>   →(32.95,45.75)` 接到已有 GND Via，**未新增过孔**，U3.4 record 消失。
+> - **§16.1 真孤岛** ✅：删除 (43.1078,64.575)→(43.1078,64.8578) 的 0.2828 mm 历史短桩
+>   （无 Pad / 无 Via），J3.SH 相关 record 消失。
+> - **GND 18 → 17，DRC 0 Error / 0 Warning，Non-GND = 0**。
+> - 剩余 17 = 11 条 Zone/Plane + U5.3 / U5.5 短桩（3 条）+ R13.2（2 条）+ C38.2（1 条）。
+>   下一步按 MD §26：U5.3 补短铜 → U5.5 先局部 rip USB_VBUS_DET 让路 → R13.2 先局部 rip
+>   I2C_SDA 再接到 U2 Pad25 → C38.2 补缝合过孔 → 最后生成 GND component report 处理
+>   11 条 Zone/Plane（A 删孤岛 / B 补 1 颗缝合过孔 / C Refill 或删碎片）。
+> - 检查点：`esp32-board-v1.1_gnd_round3_20260918.kicad_pcb`。
+
+> **2026-09-18 更新（USB SI Freeze = Plan C；GND 逐条分类）**：
+> 按 `..._USB_SI_Freeze_and_GND_Final_Cleanup_Plan.md` 执行。
+>
+> - **USB Plan A 实测不可行（有硬证据）**：把 DN 的 3 过孔绕行整段删掉后，从 D3.1 做
+>   **F.Cu 洪水填充**，口袋只有 1982 格、bbox 到 **y≈71.6 就封死**（R10.1 侧是整板 172k 格）
+>   → F.Cu 根本连不到 R10.1。封死它的是 **USB_SHIELD 扇出**（(17,74.7)→(20.5,71.2) 斜线 +
+>   →(22.3,71.2) 横线 + **R8.1 焊盘 x 22.23~23.03**），正压在 MD 建议的 DN 走廊 x≈22.98 上。
+>   MD §4 只授权动 `CC1 局部 Via` 与 `BAT_BUS 局部换层点`，而真正的阻塞物不在授权清单内 →
+>   按 MD §13 止损：**USB 冻结为 Plan C**（DP 全 F.Cu/0 过孔；DN F.Cu→In2→B.Cu/3 过孔），
+>   并已恢复 DN 绕行，保持 **Non-GND = 0**。
+> - **GND 逐条分类（18 条 = 11 Zone/Plane + 4 Pad + 3 Track）**：
+>   · 已删除 U3.4 的历史短桩残段（8 段），无新违规（record 组合变化、总数仍 18）。
+>   · `R13.2` 的 F.Cu 口袋只有 118 格（被 I2C_SDA/SCL/CHG 扇出封死）→ MD §21 的短直线画不过去，
+>     需先局部 rip I2C_SDA 一小段。
+>   · `U5.3` 短桩末端口袋是整板级 → 补短铜即可；`U5.5` 末端口袋只有 79 格且过孔放不下 →
+>     需局部让路。`J3.SH` 自身已有过孔，残留的是一段 0.2828 mm 旧短铜。
+>   · 11 条 Zone/Plane 记录按 MD §27 逐块判断（删孤岛 / 补缝合过孔）。
+> - 状态：**DRC 0 Error / 0 Warning，unconnected 18（全部 GND），Non-GND = 0**。
+>   检查点：`esp32-board-v1.1_gnd_round2_20260918.kicad_pcb`。
+
 > **2026-09-18 更新（J1 交错焊盘扇出：Non-GND unconnected = 0 ✅）**：
 > 按 `..._J1_USB_Interleaved_Pad_Fanout_Final_Plan.md` 的 Plan A 执行。
 >
@@ -527,9 +562,12 @@ kicad-cli sch erc  →  0 violations
 2. 进行中（2026-09-18 第十轮后）：**DRC 0 Error / 0 Warning**，unconnected **18**（起点 255），
    **Non-GND unconnected = 0** ✅（所有信号网络都已连通，含 `USB_DP_CONN` / `USB_DN_CONN`）。
    已闭合清单见上文与 `ROUTING_NOTES.md` §3.0c 第十轮。
-3. 未完成：**GND 剩余 18 项**（铺铜块/平面之间 13 条 + 真实地焊盘 4 条 + 历史短桩 3 条）。
-  按 MD §24 分三类处理：A 类补过孔/短铜（U5.3/U5.5、R13.2、J3.SH 处实测
-   0.4/0.2 过孔放不下，需要先局部让路）、B 类判断后补回或删除、C 类无 Pad/Via 的孤岛删除。
+3. 未完成：**GND 剩余 17 项**（11 Zone/Plane + U5.3/U5.5 短桩 3 条 + R13.2 2 条 + C38.2 1 条）。
+   已逐条定位卡点：`U5.3` 补短铜即可；`U5.5` 需先局部 rip `USB_VBUS_DET`；`R13.2` 需先局部
+   rip `I2C_SDA`（约 1~3 mm）再接到 U2 Pad25；`C38.2` 补 1 颗缝合过孔；11 条 Zone/Plane
+   先生成 GND component report 再按 A/B/C 分类处理。（`fix_gnd.py` 已按 MD §13 停用。）
+   完成 `Unconnected = 0` 后再逐个开启 `track_not_centered_on_via` 与
+   `tuning_profile_track_geometries` 跑 Final DRC。
 4. 待确认：USB DN 主干目前是 F.Cu→In2→B.Cu / 3 过孔；若要回到 MD 期望的「全程 F.Cu /
    0 Via」，需局部改 3V3_MAIN 的三个 F.Cu 支路 + BAT_BUS 的 F.Cu 段 + CC1 过孔位置。
 4. 待确认：POWER 网络类线宽 0.80 → 0.50 mm（见 `ROUTING_NOTES.md` §4.1）。
