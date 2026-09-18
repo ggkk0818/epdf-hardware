@@ -604,6 +604,41 @@ tools/gnd_components.py：GND 铜 = 1 个分量（MAIN_GND，含 83 个 GND 焊�
 下一步（按 MD）：① 清掉 7 颗历史 via-in-pad（DFM 阶段 B）；② 打开最后两项 Routing DRC 规则做
 Final DRC；③ 出 Gerber / 钻孔 / 贴片坐标。
 
+**第二十二轮（2026-09-18，DFM 阶段 B：7 颗 via-in-pad 全部移到焊盘外 ✅）**
+
+新增只读工具 `tools/find_via_in_pad.py`：以"**钻孔落在焊盘铜上**"判定 via-in-pad，列出全部命中
+并给出最近的合法 off-pad 位置；`--at-centre` 只列"**焊盘中心塞孔**"那一类。实测：
+
+| 类别 | 数量 | 说明 |
+|---|---|---|
+| 全部 via-in-pad（钻孔压焊盘） | 94 | 绝大多数是布线器自己的 pad escape（出线预约），属布线器既定手法 |
+| **焊盘中心塞孔** | **30** | 23 颗 0.6/0.3（早期 `fix_gnd.py` 家族 A）+ **7 颗 0.4/0.2**（第十六轮 `stitch_orphans.py`，即 MD §31~§34 指定的那 7 颗） |
+
+按 MD 的做法给候选搜索加 **pad_mask + DFM margin**：新增 `tools/fix_via_in_pad.py`，对每颗在
+**同一片实铺 GND 铜**内搜 0.40/0.20 合法位（布线器同源净空引擎 + 与任何**同网络焊盘铜**保持
+≥0.15 mm 的 DFM 余量 + 必须落在该焊盘所在的**同一片铺铜**里），取离原位最近的落点，只改
+`routing/routing.json`（备份 `_pre_via_in_pad.json`），再由 `apply_routing.py` 重建。
+
+| 焊盘 | 原（焊盘中心） | 新（off-pad） | 位移 |
+|---|---|---|---|
+| `SW1.2` | (23.700,32.000) | (22.900,32.000) | 0.80 mm |
+| `U6.2` | (14.412,43.700) | (13.400,43.700) | 1.00 mm |
+| `C31.2` | (10.200,45.750) | (9.300,45.800) | 0.90 mm |
+| `R31.2` | (20.688,54.747) | (19.800,54.700) | 0.90 mm |
+| `C16.2` | (47.060,53.328) | (46.900,54.200) | 0.92 mm |
+| `R8.2` | (24.281,71.161) | (24.300,72.000) | 0.80 mm |
+| `D3.2` | (22.800,72.950) | (22.200,73.000) | 0.60 mm |
+
+结果：**DRC 0 Error / 0 Warning / unconnected 0**；`tools/check_routing.py` 0 问题；
+`tools/gnd_components.py` GND 铜仍为 **1 个分量**；`find_via_in_pad.py --at-centre` 已无
+0.4/0.20 命中。检查点：`esp32-board-v1.1_dfm_offpad_20260918.kicad_pcb` +
+`routing/routing_dfm_offpad_20260918.json`。
+
+> 附带发现（**本轮未做**，等指示）：早期 `fix_gnd.py` 还留下 **23 颗 0.6/0.3 的焊盘中心塞孔**
+> （同一 DFM 类别）。`tools/fix_via_in_pad.py --dry-run --all-at-centre` 实测其中 **20 颗**能找到
+> off-pad 落点（位移 0.7~1.1 mm），**C3.2 / R29.2 / C18.2** 三颗在 1.2 mm 内没有 off-pad 落点。
+> 要一起清就加 `--all-at-centre --apply-all`。
+
 | U3 地引脚（Pad4 / Pad10，"短粗 F.Cu 地铜 + GND Via"） | 部分完成：`SYS_ISLAND_U3` 铜皮下沿由 44.05 收到 **42.55**（原先把 U3 顶排引脚的出线整段盖住），铺铜随后可以流进 U3 区域；真实 GND 焊盘 23 → **6** |
 | `3V3_MAIN` | ✅ **完全闭合**（不再出现在 unconnected） |
 | `SYS` | 仅剩 2 项（`SYS_ISLAND_U2`/`C13` 需岛内过孔或人工接线） |
