@@ -6933,6 +6933,34 @@
   {
    "layer": "In2.Cu",
    "net": "3V3_MAIN",
+   "width": 0.85,
+   "start": [
+    30.6,
+    71.2
+   ],
+   "end": [
+    30.6,
+    71.55
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "In2.Cu",
+   "net": "3V3_MAIN",
+   "width": 1.2,
+   "start": [
+    30.6,
+    71.55
+   ],
+   "end": [
+    30.6,
+    75.1
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "In2.Cu",
+   "net": "3V3_MAIN",
    "width": 1.2,
    "start": [
     30.6,
@@ -14761,6 +14789,20 @@
    "net": "BAT_BUS",
    "width": 0.8,
    "start": [
+    31.1,
+    68.2
+   ],
+   "end": [
+    24.5,
+    68.2
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "B.Cu",
+   "net": "BAT_BUS",
+   "width": 0.8,
+   "start": [
     24.5,
     68.2
    ],
@@ -17765,125 +17807,6 @@
     65.15
    ],
    "kind": "gnd_fix"
-  },
-  {
-   "layer": "In2.Cu",
-   "net": "3V3_MAIN",
-   "width": 0.5,
-   "start": [
-    30.6,
-    71.2
-   ],
-   "end": [
-    30.6,
-    72.6
-   ]
-  },
-  {
-   "layer": "In2.Cu",
-   "net": "3V3_MAIN",
-   "width": 1.2,
-   "start": [
-    30.6,
-    72.6
-   ],
-   "end": [
-    30.6,
-    75.1
-   ]
-  },
-  {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
-   "start": [
-    31.1,
-    68.2
-   ],
-   "end": [
-    30.45,
-    68.2
-   ]
-  },
-  {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
-   "start": [
-    30.45,
-    68.2
-   ],
-   "end": [
-    30.0,
-    67.75
-   ]
-  },
-  {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
-   "start": [
-    30.0,
-    67.75
-   ],
-   "end": [
-    28.9,
-    67.75
-   ]
-  },
-  {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
-   "start": [
-    28.9,
-    67.75
-   ],
-   "end": [
-    28.45,
-    68.2
-   ]
-  },
-  {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
-   "start": [
-    28.45,
-    68.2
-   ],
-   "end": [
-    24.5,
-    68.2
-   ]
-  },
-  {
-   "layer": "F.Cu",
-   "net": "GND",
-   "width": 0.15,
-   "start": [
-    29.7343,
-    70.66
-   ],
-   "end": [
-    29.7343,
-    71.1
-   ],
-   "kind": "u5_pad5"
-  },
-  {
-   "layer": "F.Cu",
-   "net": "GND",
-   "width": 0.15,
-   "start": [
-    29.7343,
-    71.1
-   ],
-   "end": [
-    29.8,
-    71.1
-   ],
-   "kind": "u5_pad5"
   }
  ],
  "vias": [
@@ -20270,22 +20193,6 @@
    "drill": 0.2,
    "net": "GND",
    "kind": "pad"
-  },
-  {
-   "x": 29.5,
-   "y": 68.675,
-   "dia": 0.4,
-   "drill": 0.2,
-   "net": "GND",
-   "kind": "u5_bridge"
-  },
-  {
-   "x": 29.8,
-   "y": 71.1,
-   "dia": 0.4,
-   "drill": 0.2,
-   "net": "GND",
-   "kind": "u5_pad5"
   }
  ],
  "failed": [

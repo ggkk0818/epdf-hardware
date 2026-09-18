@@ -6933,6 +6933,34 @@
   {
    "layer": "In2.Cu",
    "net": "3V3_MAIN",
+   "width": 0.85,
+   "start": [
+    30.6,
+    71.2
+   ],
+   "end": [
+    30.6,
+    71.55
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "In2.Cu",
+   "net": "3V3_MAIN",
+   "width": 1.2,
+   "start": [
+    30.6,
+    71.55
+   ],
+   "end": [
+    30.6,
+    75.1
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "In2.Cu",
+   "net": "3V3_MAIN",
    "width": 1.2,
    "start": [
     30.6,
@@ -8615,48 +8643,6 @@
    "net": "USB_VBUS_DET",
    "width": 0.15,
    "start": [
-    30.5,
-    71.8
-   ],
-   "end": [
-    29.7,
-    71.8
-   ],
-   "kind": "route"
-  },
-  {
-   "layer": "F.Cu",
-   "net": "USB_VBUS_DET",
-   "width": 0.15,
-   "start": [
-    29.7,
-    71.8
-   ],
-   "end": [
-    29.3,
-    71.4
-   ],
-   "kind": "route"
-  },
-  {
-   "layer": "F.Cu",
-   "net": "USB_VBUS_DET",
-   "width": 0.15,
-   "start": [
-    29.3,
-    71.4
-   ],
-   "end": [
-    29.3,
-    70.6
-   ],
-   "kind": "route"
-  },
-  {
-   "layer": "F.Cu",
-   "net": "USB_VBUS_DET",
-   "width": 0.15,
-   "start": [
     31.0,
     68.5
    ],
@@ -8691,20 +8677,6 @@
    "end": [
     30.5,
     71.5
-   ],
-   "kind": "route"
-  },
-  {
-   "layer": "F.Cu",
-   "net": "USB_VBUS_DET",
-   "width": 0.15,
-   "start": [
-    30.5,
-    71.5
-   ],
-   "end": [
-    30.5,
-    71.8
    ],
    "kind": "route"
   },
@@ -14761,6 +14733,20 @@
    "net": "BAT_BUS",
    "width": 0.8,
    "start": [
+    31.1,
+    68.2
+   ],
+   "end": [
+    24.5,
+    68.2
+   ],
+   "kind": "route"
+  },
+  {
+   "layer": "B.Cu",
+   "net": "BAT_BUS",
+   "width": 0.8,
+   "start": [
     24.5,
     68.2
    ],
@@ -17767,123 +17753,74 @@
    "kind": "gnd_fix"
   },
   {
-   "layer": "In2.Cu",
-   "net": "3V3_MAIN",
-   "width": 0.5,
+   "layer": "F.Cu",
+   "net": "USB_VBUS_DET",
+   "width": 0.15,
    "start": [
-    30.6,
-    71.2
+    30.5,
+    71.5
    ],
    "end": [
-    30.6,
-    72.6
-   ]
+    30.5,
+    72.3
+   ],
+   "kind": "route"
   },
   {
-   "layer": "In2.Cu",
-   "net": "3V3_MAIN",
-   "width": 1.2,
+   "layer": "F.Cu",
+   "net": "USB_VBUS_DET",
+   "width": 0.15,
    "start": [
-    30.6,
-    72.6
+    30.5,
+    72.3
    ],
    "end": [
-    30.6,
-    75.1
-   ]
+    29.3,
+    72.3
+   ],
+   "kind": "route"
   },
   {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
+   "layer": "F.Cu",
+   "net": "USB_VBUS_DET",
+   "width": 0.15,
    "start": [
-    31.1,
-    68.2
+    29.3,
+    72.3
    ],
    "end": [
-    30.45,
-    68.2
-   ]
+    29.3,
+    70.6
+   ],
+   "kind": "route"
   },
   {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
+   "layer": "F.Cu",
+   "net": "USB_VBUS_DET",
+   "width": 0.15,
    "start": [
-    30.45,
-    68.2
+    29.3,
+    70.6
    ],
    "end": [
-    30.0,
-    67.75
-   ]
-  },
-  {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
-   "start": [
-    30.0,
-    67.75
+    29.3,
+    70.5
    ],
-   "end": [
-    28.9,
-    67.75
-   ]
-  },
-  {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
-   "start": [
-    28.9,
-    67.75
-   ],
-   "end": [
-    28.45,
-    68.2
-   ]
-  },
-  {
-   "layer": "B.Cu",
-   "net": "BAT_BUS",
-   "width": 0.8,
-   "start": [
-    28.45,
-    68.2
-   ],
-   "end": [
-    24.5,
-    68.2
-   ]
+   "kind": "route"
   },
   {
    "layer": "F.Cu",
    "net": "GND",
    "width": 0.15,
    "start": [
-    29.7343,
-    70.66
+    29.73,
+    70.69
    ],
    "end": [
-    29.7343,
-    71.1
+    29.73,
+    71.95
    ],
-   "kind": "u5_pad5"
-  },
-  {
-   "layer": "F.Cu",
-   "net": "GND",
-   "width": 0.15,
-   "start": [
-    29.7343,
-    71.1
-   ],
-   "end": [
-    29.8,
-    71.1
-   ],
-   "kind": "u5_pad5"
+   "kind": "gnd_fix"
   }
  ],
  "vias": [
@@ -20270,22 +20207,6 @@
    "drill": 0.2,
    "net": "GND",
    "kind": "pad"
-  },
-  {
-   "x": 29.5,
-   "y": 68.675,
-   "dia": 0.4,
-   "drill": 0.2,
-   "net": "GND",
-   "kind": "u5_bridge"
-  },
-  {
-   "x": 29.8,
-   "y": 71.1,
-   "dia": 0.4,
-   "drill": 0.2,
-   "net": "GND",
-   "kind": "u5_pad5"
   }
  ],
  "failed": [
