@@ -56,9 +56,9 @@
 
 ```
 网络 69（不含 GND）：已布线 69，未完成 0（以 DRC 未连接项为准）
-线段 1278，信号过孔 163，GND 缝合过孔 154
+线段 1220，信号过孔 163，GND 缝合过孔 154
 ERC  0 violations
-DRC  0 Error / 0 Warning
+DRC  0 Error / 0 Warning（**全部规则打开，ignored_checks = 0**，2026-09-20）
      unconnected 0 项（2026-09-18 第二十一轮收官；过程 255 → 68 → 62 → 59 → 50 → 35 → … → 2 → 0）
 tools/check_routing.py：线-线 / 线-过孔间距 0 问题（精确几何校验）
 ```
@@ -638,6 +638,84 @@ Final DRC；③ 出 Gerber / 钻孔 / 贴片坐标。
 > （同一 DFM 类别）。`tools/fix_via_in_pad.py --dry-run --all-at-centre` 实测其中 **20 颗**能找到
 > off-pad 落点（位移 0.7~1.1 mm），**C3.2 / R29.2 / C18.2** 三颗在 1.2 mm 内没有 off-pad 落点。
 > 要一起清就加 `--all-at-centre --apply-all`。
+
+**第二十三轮（2026-09-20，按 `ESP32S3_GDEM102T91_V1.6_Final_DFM_DRC_Plan.md` 收尾：Phase A~E ✅）**
+
+> 原则：**冻结已验证拓扑**（U5 的 BAT_BUS 拱形 / 3V3 窄颈 / USB Plan C / GND 缝合 / 电源主干
+> 都不再改动），只做投板前的 DFM 与 Final DRC。
+
+**Phase A — 清理剩余 0.6/0.3 焊盘中心过孔**
+
+`tools/fix_via_in_pad.py` 增加两件事：① 显式 `KEEP_IN_PAD = {C3.2, R29.2, C18.2}`（按 MD 的
+Phase B 保留，不参与自动外移）；② 外移时**必须同时给出合法短引线**（`stub_segments()`：
+0.3→0.25→0.2→0.15 mm 阶梯、直线或 L 形，用布线器同源净空引擎校验），保证焊盘不会因为
+搬走过孔而失去连接。
+
+结果：**19 颗成功外移**（各带一条 0.3 mm GND 短引线，位移 0.6~1.1 mm）；
+`J3.SH`(33.175,82.125) 的唯一候选点没有合法引线 → 保留；加上 MD 指定的 3 颗，共 **4 颗保留**。
+
+| 保留在焊盘上的过孔 | 原因（逐条记录，供 release note） |
+|---|---|
+| `C3.2` (14.990,10.490) | MD Phase B：电源去耦 GND 回路，优先短回路，不做外移 |
+| `C18.2` (34.525,39.800) | 同上（关键去耦区） |
+| `R29.2` (13.690,49.550) | 1.2 mm（放宽到 2.0 mm 后仍然）没有合法的同片铺铜落点 |
+| `J3.SH` (33.175,82.125) | 唯一候选点 (32.200,82.100) 无合法 GND 短引线 |
+
+**Phase C — 完全重叠线段清理**
+
+新增 `tools/drop_duplicate_segments.py`（C1 规则：**net + layer + width + 两端点完全一致**
+才算重复，A→B 与 B→A 视为同一条；不做任何模糊合并）。实测 **49 组 / 80 条冗余线段**
+（U5 区同一段铜最多 6 份、EPD_3V3 5 份、GND 0.30 mm 若干）→ 线段 **1298 → 1218**，
+铜形状不变；重复过孔 0 颗。
+
+**Phase D / E — 打开全部 DRC 规则（不再 Ignore）**
+
+在 `esp32-board-v1.1.kicad_pro` 的 rule_severities 里把 `tuning_profile_track_geometries`
+与 `track_not_centered_on_via` 由 `ignore` 改为 `error`：
+
+- `tuning_profile_track_geometries`：**0 项**（板上没有 tuning / serpentine 结构）。
+- `track_not_centered_on_via`：**11 项**（3V3_MAIN ×4、EPD_VSL ×2、GND ×2、I2C_SCL、I2C_SDA、SYS）。
+  新增 `tools/fix_track_on_via.py`，按 MD"改几何、不改规则"处理：
+  · 端点差 0.03~0.30 mm 的 → **把端点吸附到过孔中心**（另一端不动，例 3V3_MAIN
+    (29.200,64.459)→(28.900,64.500)）；
+  · 过孔落在走线中段的（GND U5 跨接铜、3V3_MAIN 0.9 mm 段）→ **在过孔中心把线段一分为二**
+    （铜形状完全不变）；
+  · EPD_VSL 那一对判定为"过孔本该在两条走线的换层点上" → 把**过孔**从 (3.4,37.1) 移到
+    (3.4,37.2)（两条走线随即都居中，位移 0.1 mm，拓扑不变）。
+
+结果（**全部规则打开、无 Ignore / 无 Exclusion**）：
+
+```text
+ERC violations          = 0     （2026-09-20 当天重跑）
+DRC Error / Warning     = 0 / 0
+DRC Unconnected         = 0
+DRC ignored_checks      = 0 ✅（此前 2）
+tools/check_routing.py  = 0 问题
+gnd_components.py       = 1 个分量（MAIN_GND，83 焊盘 / 160 过孔）
+线段 1220 / 信号过孔 163 / GND 缝合过孔 154
+```
+
+检查点：`esp32-board-v1.1_final_drc_20260920.kicad_pcb` +
+`routing/routing_final_drc_20260920.json`；阶段中间检查点：
+`esp32-board-v1.1_dfm_phaseA_20260920.kicad_pcb` + `routing/routing_dfm_phaseA_20260920.json`。
+
+**USB 回流路径复核（MD §6，`tools/usb_return_path.py`，只读）**
+
+```text
+USB_DP_CONN：23 段 / 0 过孔，全 F.Cu，60.8 mm；In1 参考面 319/319 采样均为实心 GND ✅
+USB_DN_CONN：32 段 / 3 过孔，F.Cu+In2+B.Cu，64.2 mm；参考面 271/352 采样为实心 GND，
+              最长参考面缺口 2.6 mm（USB-C 连接器通孔区，属局部针孔而非分割）
+三次换层附近的最近 GND 过孔：1.50 / 0.66 / 0.83 mm
+  （后两处原有 2.66 / 3.76 mm，本轮各补 1 颗 0.4/0.20 回流缝合过孔：
+    (15.550,45.800)、(12.620,22.780)，`tools/add_gnd_vias.py`，DRC 仍 0/0/0）
+```
+
+**生产资料输出（MD §8）**：`kicad-cli` 导出到 `fab/20260920/` ——
+Gerber（F/In1/In2/B.Cu、F/B.Mask、F/B.Silkscreen、Edge_Cuts 等）、
+钻孔（PTH + NPTH 分开）、`CPL.csv`（贴片坐标）、`BOM.csv`（含 Quantity/DNP 列）。
+
+下一步（按 MD §8/§9）：CAM Review → 与板厂确认叠层/铜厚/PP/Dk 后的 90 Ω 差分阻抗 →
+把 4 颗保留的焊盘中心过孔写进 release note → Release V1.6。
 
 | U3 地引脚（Pad4 / Pad10，"短粗 F.Cu 地铜 + GND Via"） | 部分完成：`SYS_ISLAND_U3` 铜皮下沿由 44.05 收到 **42.55**（原先把 U3 顶排引脚的出线整段盖住），铺铜随后可以流进 U3 区域；真实 GND 焊盘 23 → **6** |
 | `3V3_MAIN` | ✅ **完全闭合**（不再出现在 unconnected） |

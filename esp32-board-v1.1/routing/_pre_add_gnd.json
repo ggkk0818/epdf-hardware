@@ -19474,22 +19474,6 @@
    "net": "GND",
    "kind": "pad",
    "ref": "U4"
-  },
-  {
-   "x": 15.55,
-   "y": 45.8,
-   "dia": 0.4,
-   "drill": 0.2,
-   "net": "GND",
-   "kind": "usb_return_stitch"
-  },
-  {
-   "x": 12.62,
-   "y": 22.78,
-   "dia": 0.4,
-   "drill": 0.2,
-   "net": "GND",
-   "kind": "usb_return_stitch"
   }
  ],
  "failed": [

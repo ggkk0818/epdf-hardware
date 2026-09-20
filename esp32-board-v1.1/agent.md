@@ -1,5 +1,36 @@
 # ESP32-S3 + GDEM102T91 PCB V1.1 任务交接说明
 
+> **2026-09-20 更新（第二十三轮：按 `Final_DFM_DRC_Plan.md` 收尾，Phase A~E 全部完成 ✅）**：
+> 原则 = **冻结已验证拓扑**（U5 的 BAT_BUS 拱形 / 3V3 窄颈 / USB Plan C / GND 缝合 / 电源主干
+> 都不再改），只做投板前 DFM 与 Final DRC。
+>
+> - **Phase A（20 颗 0.6/0.3 焊盘中心过孔）**：`tools/fix_via_in_pad.py` 增设
+>   `KEEP_IN_PAD = {C3.2, R29.2, C18.2}`（按 MD 显式保留）与"外移必须带合法短引线"
+>   （`stub_segments()`：0.3→0.25→0.2→0.15 mm、直线或 L 形、布线器同源净空校验）。
+>   → **19 颗外移成功**（各带 0.3 mm GND 短引线，位移 0.6~1.1 mm）；`J3.SH`(33.175,82.125)
+>   唯一候选点没有合法引线 → 保留；连 MD 指定 3 颗共 **4 颗保留**（逐条理由见 `ROUTING_NOTES.md` §3.0c 第二十三轮）。
+> - **Phase C（重复线段）**：新增 `tools/drop_duplicate_segments.py`（严格 four-tuple 判重，
+>   不做模糊合并）→ **49 组 / 80 条**冗余线段删除，线段 **1298 → 1218**，铜形状不变。
+> - **Phase D/E（打开全部 DRC 规则）**：`.kicad_pro` 里把 `tuning_profile_track_geometries`
+>   与 `track_not_centered_on_via` 由 `ignore` 改为 `error`；前者 0 项，后者 11 项，新增
+>   `tools/fix_track_on_via.py` 按"改几何不改规则"处理（端点吸附 8 处 + 过孔中段劈线 2 处 +
+>   EPD_VSL 过孔移 0.1 mm 1 处）。
+>
+> **验收（全部规则打开、无 Ignore/Exclusion）**：ERC 0；**DRC 0 Error / 0 Warning /
+> unconnected 0 / ignored_checks 0**；`check_routing.py` 0 问题；`gnd_components.py` 1 个分量；
+> 线段 1220 / 信号过孔 163 / GND 缝合过孔 154。
+> **USB 回流复核（MD §6）**：`tools/usb_return_path.py`（只读）→ DP 全 F.Cu / 0 过孔，In1 参考面
+> **319/319** 采样实心 ✅；DN（F.Cu+In2+B.Cu / 3 过孔）参考面 271/352，最长缺口 2.6 mm（USB-C
+> 通孔区，局部针孔非分割）；三次换层最近的 GND 过孔 1.50 / 2.66 / 3.76 mm → 后两处各补 1 颗
+> 0.4/0.20 回流缝合过孔（`tools/add_gnd_vias.py`：(15.550,45.800)、(12.620,22.780)）后变成
+> **1.50 / 0.66 / 0.83 mm**，DRC 仍 0/0/0。
+> **生产资料（MD §8）**：已导出到 `fab/20260920/` —— Gerber（F/In1/In2/B.Cu + Mask + Silk +
+> Edge_Cuts 等）、钻孔 PTH/NPTH、`CPL.csv`、`BOM.csv`。
+> 检查点：`esp32-board-v1.1_final_drc_20260920.kicad_pcb` +
+> `routing/routing_final_drc_20260920.json`（中间态：`..._dfm_phaseA_20260920.*`）。
+> 下一步：CAM Review → 与板厂确认叠层后复核 90 Ω 差分阻抗 → 4 颗保留的焊盘中心过孔写进
+> release note → Release V1.6。
+
 > **2026-09-18 更新（第二十二轮：DFM 阶段 B —— 7 颗 via-in-pad 全部移到焊盘外 ✅）**：
 > 新增只读工具 `tools/find_via_in_pad.py`（以"钻孔压焊盘铜"判定 via-in-pad，
 > `--at-centre` 只看"焊盘中心塞孔"），实测全板 via-in-pad 94 颗（绝大多数是布线器自己的

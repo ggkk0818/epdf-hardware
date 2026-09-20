@@ -1,0 +1,224 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-20T17:05:34",
+    "ignored_checks": [],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.5",
+    "schematic_parity": [],
+    "source": "esp32-board-v1.1.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [3V3_MAIN] on F.Cu, length 1.1000 mm",
+                    "pos": {
+                        "x": 16.3831,
+                        "y": 61.838
+                    },
+                    "uuid": "128c0131-94ad-4d3a-8c51-f6f8e11809ec"
+                },
+                {
+                    "description": "Via [3V3_MAIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 16.4,
+                        "y": 60.7
+                    },
+                    "uuid": "02a8aded-9b44-4d9c-b54b-3f85585b578f"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [3V3_MAIN] on F.Cu, length 1.0860 mm",
+                    "pos": {
+                        "x": 28.114,
+                        "y": 64.4594
+                    },
+                    "uuid": "4dec5488-df4d-4ca7-a499-5ebe9d2a338f"
+                },
+                {
+                    "description": "Via [3V3_MAIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 28.9,
+                        "y": 64.5
+                    },
+                    "uuid": "116da7b2-13a6-41fb-acf6-03dc240cd7ec"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [3V3_MAIN] on F.Cu, length 0.9000 mm",
+                    "pos": {
+                        "x": 28.3,
+                        "y": 64.5
+                    },
+                    "uuid": "88f82ae8-c301-4e2b-a0b3-571cbd75288b"
+                },
+                {
+                    "description": "Via [3V3_MAIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 28.9,
+                        "y": 64.5
+                    },
+                    "uuid": "116da7b2-13a6-41fb-acf6-03dc240cd7ec"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [3V3_MAIN] on F.Cu, length 1.1734 mm",
+                    "pos": {
+                        "x": 30.9446,
+                        "y": 78.8266
+                    },
+                    "uuid": "f316c21e-4633-4010-8749-2d1ad4e07a2e"
+                },
+                {
+                    "description": "Via [3V3_MAIN] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 30.9,
+                        "y": 80.0
+                    },
+                    "uuid": "acd07971-71f2-4ff8-b6c9-4ebe9dc21b30"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.3000 mm",
+                    "pos": {
+                        "x": 31.1,
+                        "y": 45.25
+                    },
+                    "uuid": "4aa3ae6a-c9fc-4986-b91f-f5c554398a36"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 30.875,
+                        "y": 45.0125
+                    },
+                    "uuid": "5dde1be3-cc61-424e-94b8-1b78290390ec"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.4000 mm",
+                    "pos": {
+                        "x": 29.3,
+                        "y": 68.675
+                    },
+                    "uuid": "d31759ae-b46b-42be-b08a-fb7e309e7b83"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 29.5,
+                        "y": 68.675
+                    },
+                    "uuid": "4e5e21b8-a1b5-414b-8906-49590697a167"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [I2C_SCL] on In2.Cu, length 4.2426 mm",
+                    "pos": {
+                        "x": 37.4,
+                        "y": 62.6
+                    },
+                    "uuid": "fc717556-3379-40c0-8946-80f4946f1f41"
+                },
+                {
+                    "description": "Via [I2C_SCL] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 34.2,
+                        "y": 65.6
+                    },
+                    "uuid": "9070e6e9-8d10-4802-a5a3-9a0925a77f58"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [I2C_SDA] on In2.Cu, length 12.4000 mm",
+                    "pos": {
+                        "x": 35.4,
+                        "y": 50.9
+                    },
+                    "uuid": "102ead03-29a4-4805-b424-5cbec48b6a17"
+                },
+                {
+                    "description": "Via [I2C_SDA] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 35.2,
+                        "y": 51.1
+                    },
+                    "uuid": "32a2ae39-163d-43f9-9c6c-5cf6089df747"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "items": [
+                {
+                    "description": "Track [SYS] on F.Cu, length 1.0550 mm",
+                    "pos": {
+                        "x": 42.155,
+                        "y": 45.73
+                    },
+                    "uuid": "67fb7565-ffad-42c2-9e46-5da363e4db9f"
+                },
+                {
+                    "description": "Via [SYS] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 41.1,
+                        "y": 45.7
+                    },
+                    "uuid": "5b48594d-6e88-41b0-86ed-94e4fd726264"
+                }
+            ],
+            "severity": "error",
+            "type": "track_not_centered_on_via"
+        }
+    ]
+}
