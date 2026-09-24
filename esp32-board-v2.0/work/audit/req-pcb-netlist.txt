@@ -1,0 +1,8 @@
+v1.1 PCB footprints 110
+  J1: : v1.1='' v2=None
+  U1: : v1.1='' v2=None
+  U2: : v1.1='' v2=None
+  U4: : v1.1='' v2=None
+components matching: 102, differing: 4
+in v1.1 PCB only: ['H1', 'H2', 'H3', 'H4']
+in model only   : []

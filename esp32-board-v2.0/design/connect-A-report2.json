@@ -1,0 +1,32 @@
+{
+ "doc": "P1",
+ "planned": 5,
+ "done": [],
+ "failed": [
+  {
+   "pin": "C11:1",
+   "net": "CHG_BTST",
+   "error": "Netlabel create did not settle within 7000ms — rolling back the stub wire."
+  },
+  {
+   "pin": "U2:21",
+   "net": "CHG_BTST",
+   "error": "Netlabel create did not settle within 7000ms — rolling back the stub wire."
+  },
+  {
+   "pin": "R18:2",
+   "net": "CHG_CE",
+   "error": "Netlabel create did not settle within 7000ms — rolling back the stub wire."
+  },
+  {
+   "pin": "U2:9",
+   "net": "CHG_CE",
+   "error": "Netlabel create did not settle within 7000ms — rolling back the stub wire."
+  },
+  {
+   "pin": "R20:2",
+   "net": "CHG_DSEL",
+   "error": "Netlabel create did not settle within 7000ms — rolling back the stub wire."
+  }
+ ]
+}

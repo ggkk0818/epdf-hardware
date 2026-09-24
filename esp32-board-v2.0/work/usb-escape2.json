@@ -1,0 +1,13 @@
+{"tracks":[
+ {"x1":935,"y1":264,"x2":935,"y2":304,"layer":1,"width":10,"net":"USB_DP_CONN"},
+ {"x1":974.4,"y1":264,"x2":974.4,"y2":304,"layer":1,"width":10,"net":"USB_DP_CONN"},
+ {"x1":935,"y1":304,"x2":974.4,"y2":304,"layer":2,"width":10,"net":"USB_DP_CONN"},
+ {"x1":954.7,"y1":264,"x2":954.7,"y2":330,"layer":1,"width":10,"net":"USB_DN_CONN"},
+ {"x1":915.3,"y1":264,"x2":915.3,"y2":330,"layer":1,"width":10,"net":"USB_DN_CONN"},
+ {"x1":915.3,"y1":330,"x2":954.7,"y2":330,"layer":2,"width":10,"net":"USB_DN_CONN"}
+],"vias":[
+ {"x":935,"y":304,"net":"USB_DP_CONN","diameter":24,"hole":12},
+ {"x":974.4,"y":304,"net":"USB_DP_CONN","diameter":24,"hole":12},
+ {"x":954.7,"y":330,"net":"USB_DN_CONN","diameter":24,"hole":12},
+ {"x":915.3,"y":330,"net":"USB_DN_CONN","diameter":24,"hole":12}
+]}

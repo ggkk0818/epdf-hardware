@@ -1,0 +1,33 @@
+{
+ "connections": [
+  {
+   "pin": "C11:1",
+   "kind": "net_label",
+   "net": "CHG_BTST"
+  },
+  {
+   "pin": "U2:21",
+   "kind": "net_label",
+   "net": "CHG_BTST"
+  },
+  {
+   "pin": "R18:2",
+   "kind": "net_label",
+   "net": "CHG_CE"
+  },
+  {
+   "pin": "U2:9",
+   "kind": "net_label",
+   "net": "CHG_CE"
+  },
+  {
+   "pin": "R20:2",
+   "kind": "net_label",
+   "net": "CHG_DSEL"
+  }
+ ],
+ "rules": {
+  "avoidTitleBlock": true,
+  "preferVertical": true
+ }
+}

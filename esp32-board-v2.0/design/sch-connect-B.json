@@ -1,0 +1,693 @@
+{
+ "connections": [
+  {
+   "pin": "C1:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "C37:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "C38:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "J3:4",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R14:2",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R1:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R2:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R32:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R36:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R3:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R4:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R5:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R6:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R7:1",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "U1:2",
+   "kind": "power",
+   "net": "3V3_MAIN"
+  },
+  {
+   "pin": "R2:2",
+   "kind": "net_port_bi",
+   "net": "BOOT"
+  },
+  {
+   "pin": "SW2:1",
+   "kind": "net_port_bi",
+   "net": "BOOT"
+  },
+  {
+   "pin": "U1:27",
+   "kind": "net_port_bi",
+   "net": "BOOT"
+  },
+  {
+   "pin": "U1:24",
+   "kind": "net_port_bi",
+   "net": "CHG_CE"
+  },
+  {
+   "pin": "R14:1",
+   "kind": "net_port_bi",
+   "net": "CHG_INT_N"
+  },
+  {
+   "pin": "U1:9",
+   "kind": "net_port_bi",
+   "net": "CHG_INT_N"
+  },
+  {
+   "pin": "R16:1",
+   "kind": "power",
+   "net": "CHG_REGN"
+  },
+  {
+   "pin": "R21:2",
+   "kind": "net_port_bi",
+   "net": "CHG_SNUB"
+  },
+  {
+   "pin": "R21:1",
+   "kind": "net_port_bi",
+   "net": "CHG_SW"
+  },
+  {
+   "pin": "R16:2",
+   "kind": "net_port_bi",
+   "net": "CHG_TS"
+  },
+  {
+   "pin": "R17:1",
+   "kind": "net_port_bi",
+   "net": "CHG_TS"
+  },
+  {
+   "pin": "C27:1",
+   "kind": "power",
+   "net": "EPD_3V3"
+  },
+  {
+   "pin": "J2:15",
+   "kind": "power",
+   "net": "EPD_3V3"
+  },
+  {
+   "pin": "J2:16",
+   "kind": "power",
+   "net": "EPD_3V3"
+  },
+  {
+   "pin": "L3:1",
+   "kind": "power",
+   "net": "EPD_3V3"
+  },
+  {
+   "pin": "J2:9",
+   "kind": "net_port_bi",
+   "net": "EPD_BUSY"
+  },
+  {
+   "pin": "U1:7",
+   "kind": "net_port_bi",
+   "net": "EPD_BUSY"
+  },
+  {
+   "pin": "J2:12",
+   "kind": "net_port_bi",
+   "net": "EPD_CS_N"
+  },
+  {
+   "pin": "U1:18",
+   "kind": "net_port_bi",
+   "net": "EPD_CS_N"
+  },
+  {
+   "pin": "J2:11",
+   "kind": "net_port_bi",
+   "net": "EPD_DC"
+  },
+  {
+   "pin": "U1:17",
+   "kind": "net_port_bi",
+   "net": "EPD_DC"
+  },
+  {
+   "pin": "J2:2",
+   "kind": "net_port_bi",
+   "net": "EPD_GDR"
+  },
+  {
+   "pin": "Q1:1",
+   "kind": "net_port_bi",
+   "net": "EPD_GDR"
+  },
+  {
+   "pin": "R30:1",
+   "kind": "net_port_bi",
+   "net": "EPD_GDR"
+  },
+  {
+   "pin": "U1:6",
+   "kind": "net_port_bi",
+   "net": "EPD_PWR_EN"
+  },
+  {
+   "pin": "J2:3",
+   "kind": "net_port_bi",
+   "net": "EPD_RESE"
+  },
+  {
+   "pin": "Q1:2",
+   "kind": "net_port_bi",
+   "net": "EPD_RESE"
+  },
+  {
+   "pin": "R31:1",
+   "kind": "net_port_bi",
+   "net": "EPD_RESE"
+  },
+  {
+   "pin": "J2:10",
+   "kind": "net_port_bi",
+   "net": "EPD_RST_N"
+  },
+  {
+   "pin": "U1:12",
+   "kind": "net_port_bi",
+   "net": "EPD_RST_N"
+  },
+  {
+   "pin": "C29:1",
+   "kind": "net_port_bi",
+   "net": "EPD_SW"
+  },
+  {
+   "pin": "D6:2",
+   "kind": "net_port_bi",
+   "net": "EPD_SW"
+  },
+  {
+   "pin": "L3:2",
+   "kind": "net_port_bi",
+   "net": "EPD_SW"
+  },
+  {
+   "pin": "Q1:3",
+   "kind": "net_port_bi",
+   "net": "EPD_SW"
+  },
+  {
+   "pin": "J2:24",
+   "kind": "net_port_bi",
+   "net": "EPD_VCOM"
+  },
+  {
+   "pin": "C35:1",
+   "kind": "net_port_bi",
+   "net": "EPD_VDD"
+  },
+  {
+   "pin": "J2:18",
+   "kind": "net_port_bi",
+   "net": "EPD_VDD"
+  },
+  {
+   "pin": "D6:1",
+   "kind": "net_port_bi",
+   "net": "EPD_VGH"
+  },
+  {
+   "pin": "J2:21",
+   "kind": "net_port_bi",
+   "net": "EPD_VGH"
+  },
+  {
+   "pin": "C30:1",
+   "kind": "net_port_bi",
+   "net": "EPD_VGL"
+  },
+  {
+   "pin": "D8:2",
+   "kind": "net_port_bi",
+   "net": "EPD_VGL"
+  },
+  {
+   "pin": "J2:23",
+   "kind": "net_port_bi",
+   "net": "EPD_VGL"
+  },
+  {
+   "pin": "C32:1",
+   "kind": "net_port_bi",
+   "net": "EPD_VSH1"
+  },
+  {
+   "pin": "J2:20",
+   "kind": "net_port_bi",
+   "net": "EPD_VSH1"
+  },
+  {
+   "pin": "C31:1",
+   "kind": "net_port_bi",
+   "net": "EPD_VSH2"
+  },
+  {
+   "pin": "J2:5",
+   "kind": "net_port_bi",
+   "net": "EPD_VSH2"
+  },
+  {
+   "pin": "C33:1",
+   "kind": "net_port_bi",
+   "net": "EPD_VSL"
+  },
+  {
+   "pin": "J2:22",
+   "kind": "net_port_bi",
+   "net": "EPD_VSL"
+  },
+  {
+   "pin": "C29:2",
+   "kind": "net_port_bi",
+   "net": "EPD_X"
+  },
+  {
+   "pin": "D7:2",
+   "kind": "net_port_bi",
+   "net": "EPD_X"
+  },
+  {
+   "pin": "D8:1",
+   "kind": "net_port_bi",
+   "net": "EPD_X"
+  },
+  {
+   "pin": "U1:39",
+   "kind": "net_port_bi",
+   "net": "FG_ALRT_N"
+  },
+  {
+   "pin": "C18:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C1:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C27:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C30:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C31:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C32:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C33:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C35:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C37:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "C38:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "D7:1",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "J2:17",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "J2:8",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "J3:10",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "J3:11",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "J3:12",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "J3:13",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "J3:14",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "J3:6",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "R17:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "R30:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "R31:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "SW1:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "SW2:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "SW3:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "SW4:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "SW5:2",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "U1:1",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "U1:40",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "U1:41",
+   "kind": "ground",
+   "net": "GND"
+  },
+  {
+   "pin": "R7:2",
+   "kind": "net_port_bi",
+   "net": "I2C_SCL"
+  },
+  {
+   "pin": "U1:23",
+   "kind": "net_port_bi",
+   "net": "I2C_SCL"
+  },
+  {
+   "pin": "R6:2",
+   "kind": "net_port_bi",
+   "net": "I2C_SDA"
+  },
+  {
+   "pin": "U1:11",
+   "kind": "net_port_bi",
+   "net": "I2C_SDA"
+  },
+  {
+   "pin": "R3:2",
+   "kind": "net_port_bi",
+   "net": "KEY1_N"
+  },
+  {
+   "pin": "SW3:1",
+   "kind": "net_port_bi",
+   "net": "KEY1_N"
+  },
+  {
+   "pin": "U1:4",
+   "kind": "net_port_bi",
+   "net": "KEY1_N"
+  },
+  {
+   "pin": "R4:2",
+   "kind": "net_port_bi",
+   "net": "KEY2_N"
+  },
+  {
+   "pin": "SW4:1",
+   "kind": "net_port_bi",
+   "net": "KEY2_N"
+  },
+  {
+   "pin": "U1:5",
+   "kind": "net_port_bi",
+   "net": "KEY2_N"
+  },
+  {
+   "pin": "R5:2",
+   "kind": "net_port_bi",
+   "net": "KEY3_N"
+  },
+  {
+   "pin": "SW5:1",
+   "kind": "net_port_bi",
+   "net": "KEY3_N"
+  },
+  {
+   "pin": "U1:8",
+   "kind": "net_port_bi",
+   "net": "KEY3_N"
+  },
+  {
+   "pin": "R1:2",
+   "kind": "net_port_bi",
+   "net": "RESET_N"
+  },
+  {
+   "pin": "SW1:1",
+   "kind": "net_port_bi",
+   "net": "RESET_N"
+  },
+  {
+   "pin": "U1:3",
+   "kind": "net_port_bi",
+   "net": "RESET_N"
+  },
+  {
+   "pin": "R35:1",
+   "kind": "net_port_bi",
+   "net": "SPI_MISO"
+  },
+  {
+   "pin": "U1:21",
+   "kind": "net_port_bi",
+   "net": "SPI_MISO"
+  },
+  {
+   "pin": "J2:14",
+   "kind": "net_port_bi",
+   "net": "SPI_MOSI"
+  },
+  {
+   "pin": "R34:1",
+   "kind": "net_port_bi",
+   "net": "SPI_MOSI"
+  },
+  {
+   "pin": "U1:19",
+   "kind": "net_port_bi",
+   "net": "SPI_MOSI"
+  },
+  {
+   "pin": "J2:13",
+   "kind": "net_port_bi",
+   "net": "SPI_SCLK"
+  },
+  {
+   "pin": "R33:1",
+   "kind": "net_port_bi",
+   "net": "SPI_SCLK"
+  },
+  {
+   "pin": "U1:20",
+   "kind": "net_port_bi",
+   "net": "SPI_SCLK"
+  },
+  {
+   "pin": "C18:1",
+   "kind": "power",
+   "net": "SYS"
+  },
+  {
+   "pin": "J3:9",
+   "kind": "net_port_bi",
+   "net": "TF_CD_N"
+  },
+  {
+   "pin": "R36:2",
+   "kind": "net_port_bi",
+   "net": "TF_CD_N"
+  },
+  {
+   "pin": "U1:38",
+   "kind": "net_port_bi",
+   "net": "TF_CD_N"
+  },
+  {
+   "pin": "J3:2",
+   "kind": "net_port_bi",
+   "net": "TF_CS_N"
+  },
+  {
+   "pin": "R32:2",
+   "kind": "net_port_bi",
+   "net": "TF_CS_N"
+  },
+  {
+   "pin": "U1:22",
+   "kind": "net_port_bi",
+   "net": "TF_CS_N"
+  },
+  {
+   "pin": "J3:7",
+   "kind": "net_port_bi",
+   "net": "TF_MISO"
+  },
+  {
+   "pin": "R35:2",
+   "kind": "net_port_bi",
+   "net": "TF_MISO"
+  },
+  {
+   "pin": "J3:3",
+   "kind": "net_port_bi",
+   "net": "TF_MOSI"
+  },
+  {
+   "pin": "R34:2",
+   "kind": "net_port_bi",
+   "net": "TF_MOSI"
+  },
+  {
+   "pin": "J3:5",
+   "kind": "net_port_bi",
+   "net": "TF_SCLK"
+  },
+  {
+   "pin": "R33:2",
+   "kind": "net_port_bi",
+   "net": "TF_SCLK"
+  },
+  {
+   "pin": "U1:10",
+   "kind": "net_port_bi",
+   "net": "TYPEC_INT_N"
+  },
+  {
+   "pin": "U1:13",
+   "kind": "net_port_bi",
+   "net": "USB_DN"
+  },
+  {
+   "pin": "U1:14",
+   "kind": "net_port_bi",
+   "net": "USB_DP"
+  }
+ ],
+ "rules": {
+  "avoidTitleBlock": true,
+  "preferVertical": true
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "comment": "USB front-end relayout step 1: EPD_PWR_EN Bottom run 597 -> 665 (outside the USB pair corridor), lower via moved with it",
+ "delete": {
+  "tracks": ["801998d460905405", "f30b5ec7d0e9c7ac", "2ce186d350bfe2be",
+             "637218e0f72ecc5c"],
+  "vias": ["741b1b8499e97579"]
+ },
+ "tracks": [
+  {"net": "EPD_PWR_EN", "layer": 2, "width": 10, "x1": 614.5, "y1": 2260.4, "x2": 665.0, "y2": 2310.9},
+  {"net": "EPD_PWR_EN", "layer": 2, "width": 10, "x1": 665.0, "y1": 2310.9, "x2": 665.0, "y2": 2662.4},
+  {"net": "EPD_PWR_EN", "layer": 1, "width": 10, "x1": 665.0, "y1": 2662.4, "x2": 665.0, "y2": 2703.4},
+  {"net": "EPD_PWR_EN", "layer": 1, "width": 10, "x1": 665.0, "y1": 2703.4, "x2": 680.6, "y2": 2718.3}
+ ],
+ "vias": [
+  {"net": "EPD_PWR_EN", "x": 665.0, "y": 2662.4, "diameter": 24, "hole": 12}
+ ]
+}

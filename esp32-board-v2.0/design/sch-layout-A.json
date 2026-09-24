@@ -1,0 +1,126 @@
+{
+ "page": "P1",
+ "sheet": "A4",
+ "modules": [
+  {
+   "name": "USB_INPUT",
+   "zone": "left-bottom",
+   "core": "J1",
+   "parts": [
+    "J1",
+    "F1",
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "R9",
+    "R10",
+    "R11",
+    "C6",
+    "C9"
+   ]
+  },
+  {
+   "name": "CHARGER",
+   "zone": "center",
+   "core": "U2",
+   "parts": [
+    "U2",
+    "L1",
+    "C7",
+    "C8",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "R13",
+    "R15",
+    "R18",
+    "C2",
+    "C3",
+    "C4",
+    "NTC1",
+    "C24",
+    "R20"
+   ]
+  },
+  {
+   "name": "FUEL_GAUGE",
+   "zone": "left-top",
+   "core": "U4",
+   "parts": [
+    "U4",
+    "R19",
+    "R22",
+    "C36",
+    "C17"
+   ]
+  },
+  {
+   "name": "TYPEC_CC",
+   "zone": "right-bottom",
+   "core": "U5",
+   "parts": [
+    "U5",
+    "R8",
+    "R12",
+    "C28"
+   ]
+  },
+  {
+   "name": "BUCKBOOST",
+   "zone": "right-top",
+   "core": "U3",
+   "parts": [
+    "U3",
+    "L2",
+    "C19",
+    "C20",
+    "C21",
+    "C22",
+    "C23",
+    "R23",
+    "R24",
+    "R25",
+    "R26",
+    "R27",
+    "C5",
+    "R28"
+   ]
+  },
+  {
+   "name": "EPD_POWER",
+   "zone": "top",
+   "core": "U6",
+   "parts": [
+    "U6",
+    "R29",
+    "C25",
+    "C26",
+    "C34"
+   ]
+  },
+  {
+   "name": "BATTERY",
+   "zone": "bottom",
+   "core": "J4",
+   "parts": [
+    "J4",
+    "J5",
+    "F2",
+    "F3"
+   ]
+  }
+ ],
+ "rules": {
+  "avoidTitleBlock": true,
+  "preservePinFanout": true,
+  "moduleGap": 110,
+  "routeChannelGap": 55,
+  "preferVerticalPeripheralPlacement": true
+ }
+}

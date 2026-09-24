@@ -1,0 +1,64 @@
+[
+ {
+  "step": "outline",
+  "ok": true
+ },
+ {
+  "step": "stackup",
+  "ok": true
+ },
+ {
+  "step": "mount-holes",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "ESP32_ANT_COPPER_KEEPOUT",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "ANT_NC_LEFT",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "ANT_NC_RIGHT",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "J3_SOCKET_KEEP_OUT_1",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "J3_SOCKET_KEEP_OUT_2",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "J3_SOCKET_KEEP_OUT_3",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "J3_SOCKET_KEEP_OUT_4",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "J3_SOCKET_KEEP_OUT_5",
+  "ok": true
+ },
+ {
+  "step": "region",
+  "name": "KEY_RIGHT_MECH_KEEP_OUT",
+  "ok": true
+ },
+ {
+  "step": "components",
+  "placed": 106,
+  "failed": []
+ }
+]

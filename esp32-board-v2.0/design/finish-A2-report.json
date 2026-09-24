@@ -1,0 +1,77 @@
+[
+ {
+  "pin": "C11:2",
+  "net": "CHG_SW",
+  "status": "unresolved"
+ },
+ {
+  "pin": "C12:1",
+  "net": "BAT_BUS",
+  "status": "unresolved"
+ },
+ {
+  "pin": "C16:1",
+  "net": "CHG_SNUB",
+  "status": "unresolved"
+ },
+ {
+  "pin": "C17:1",
+  "net": "BAT_BUS",
+  "status": "unresolved"
+ },
+ {
+  "pin": "C17:2",
+  "net": "GND",
+  "status": "unresolved"
+ },
+ {
+  "pin": "F2:2",
+  "net": "BAT_BUS",
+  "status": "unresolved"
+ },
+ {
+  "pin": "L1:1",
+  "net": "CHG_SW",
+  "status": "unresolved"
+ },
+ {
+  "pin": "NTC1:1",
+  "net": "CHG_TS",
+  "status": "unresolved"
+ },
+ {
+  "pin": "R22:2",
+  "net": "FG_ALRT_N",
+  "status": "unresolved"
+ },
+ {
+  "pin": "R19:1",
+  "net": "CHG_OTG",
+  "status": "unresolved"
+ },
+ {
+  "pin": "U2:20",
+  "net": "CHG_SW",
+  "status": "unresolved"
+ },
+ {
+  "pin": "U2:19",
+  "net": "CHG_SW",
+  "status": "unresolved"
+ },
+ {
+  "pin": "U2:11",
+  "net": "CHG_TS",
+  "status": "unresolved"
+ },
+ {
+  "pin": "U2:8",
+  "net": "CHG_OTG",
+  "status": "unresolved"
+ },
+ {
+  "pin": "U4:5",
+  "net": "FG_ALRT_N",
+  "status": "unresolved"
+ }
+]

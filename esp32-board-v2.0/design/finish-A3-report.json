@@ -1,0 +1,107 @@
+[
+ {
+  "pin": "C11:2",
+  "net": "CHG_SW",
+  "direction": "right",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "C12:1",
+  "net": "BAT_BUS",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "C16:1",
+  "net": "CHG_SNUB",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "C17:1",
+  "net": "BAT_BUS",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "C17:2",
+  "net": "GND",
+  "direction": "right",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "F2:2",
+  "net": "BAT_BUS",
+  "direction": "right",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "L1:1",
+  "net": "CHG_SW",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "NTC1:1",
+  "net": "CHG_TS",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "R22:2",
+  "net": "FG_ALRT_N",
+  "direction": "right",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "R19:1",
+  "net": "CHG_OTG",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "U2:20",
+  "net": "CHG_SW",
+  "direction": "right",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "U2:19",
+  "net": "CHG_SW",
+  "direction": "right",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "U2:11",
+  "net": "CHG_TS",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "U2:8",
+  "net": "CHG_OTG",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "U4:5",
+  "net": "FG_ALRT_N",
+  "direction": "right",
+  "offset": 45.0,
+  "status": "fixed"
+ }
+]

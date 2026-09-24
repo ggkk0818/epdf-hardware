@@ -1,0 +1,713 @@
+{
+ "version": 1,
+ "meta": {
+  "name": "place-schematic-P1",
+  "doc": "P1"
+ },
+ "steps": [
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2f9bf6a0a7d34c2f9c7da89f9a445ccb",
+    "x": 60,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C10"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "ed3e2032cdfe4c688efeae34aa292a1d",
+    "x": 140,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C11"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "8c1f4a9e9d204b148b36ce719c891bd1",
+    "x": 220,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C12"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "159c3da60be9490abf4e97599788a0d5",
+    "x": 300,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C13"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "159c3da60be9490abf4e97599788a0d5",
+    "x": 380,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C14"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "8c1f4a9e9d204b148b36ce719c891bd1",
+    "x": 460,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C15"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "e1a0502cfc8a4101be063bb222561690",
+    "x": 540,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C16"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "96b39256cc3f4d80bd3b503deb4f3328",
+    "x": 620,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C17"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "8c1f4a9e9d204b148b36ce719c891bd1",
+    "x": 700,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C19"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "8c1f4a9e9d204b148b36ce719c891bd1",
+    "x": 780,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C2"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "8c1f4a9e9d204b148b36ce719c891bd1",
+    "x": 860,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C20"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "159c3da60be9490abf4e97599788a0d5",
+    "x": 940,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C21"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "159c3da60be9490abf4e97599788a0d5",
+    "x": 1020,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C22"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "159c3da60be9490abf4e97599788a0d5",
+    "x": 60,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C23"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "96b39256cc3f4d80bd3b503deb4f3328",
+    "x": 140,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C24"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "8c1f4a9e9d204b148b36ce719c891bd1",
+    "x": 220,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C25"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "96b39256cc3f4d80bd3b503deb4f3328",
+    "x": 300,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C26"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2f9bf6a0a7d34c2f9c7da89f9a445ccb",
+    "x": 380,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C28"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "f4744ff7405a46a48e360c2c6fadeca3",
+    "x": 460,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C3"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "f4744ff7405a46a48e360c2c6fadeca3",
+    "x": 540,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C34"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "89c7d63b9d074e6dae4b7baf00fed93b",
+    "x": 620,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C36"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "96b39256cc3f4d80bd3b503deb4f3328",
+    "x": 700,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C4"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "f4744ff7405a46a48e360c2c6fadeca3",
+    "x": 780,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C5"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "f4744ff7405a46a48e360c2c6fadeca3",
+    "x": 860,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C6"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "f7218f4330f6417aa864e05da749dbcb",
+    "x": 940,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C7"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "96b39256cc3f4d80bd3b503deb4f3328",
+    "x": 1020,
+    "y": 310,
+    "rotation": 0,
+    "designator": "C8"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "f4744ff7405a46a48e360c2c6fadeca3",
+    "x": 60,
+    "y": 380,
+    "rotation": 0,
+    "designator": "C9"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "93250235cc8d4546a65e7ad6d841ccc2",
+    "x": 140,
+    "y": 380,
+    "rotation": 0,
+    "designator": "D1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "fd34755569d440b98fdb93a00b790543",
+    "x": 220,
+    "y": 380,
+    "rotation": 0,
+    "designator": "D2"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "fd34755569d440b98fdb93a00b790543",
+    "x": 300,
+    "y": 380,
+    "rotation": 0,
+    "designator": "D3"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "74d172ff07d54808a08a45c7c1834833",
+    "x": 380,
+    "y": 380,
+    "rotation": 0,
+    "designator": "D4"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "74d172ff07d54808a08a45c7c1834833",
+    "x": 460,
+    "y": 380,
+    "rotation": 0,
+    "designator": "D5"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "e07725670cca47c69b0c0ada7131a860",
+    "x": 540,
+    "y": 380,
+    "rotation": 0,
+    "designator": "F1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "e07725670cca47c69b0c0ada7131a860",
+    "x": 620,
+    "y": 380,
+    "rotation": 0,
+    "designator": "F2"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "e07725670cca47c69b0c0ada7131a860",
+    "x": 700,
+    "y": 380,
+    "rotation": 0,
+    "designator": "F3"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "c715e9a17f3e4becbbed5b1f88059720",
+    "x": 780,
+    "y": 380,
+    "rotation": 0,
+    "designator": "J1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "ffd25f373bb143fcb7e2efee724bc057",
+    "x": 860,
+    "y": 380,
+    "rotation": 0,
+    "designator": "J4"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "ffd25f373bb143fcb7e2efee724bc057",
+    "x": 940,
+    "y": 380,
+    "rotation": 0,
+    "designator": "J5"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "bd0904ec8815425eb2d973992c8938fb",
+    "x": 1020,
+    "y": 380,
+    "rotation": 0,
+    "designator": "L1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "7a73b811482b413f8cd7651667185e10",
+    "x": 60,
+    "y": 450,
+    "rotation": 0,
+    "designator": "L2"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "9a470a049d5c4046934567b4dd436613",
+    "x": 140,
+    "y": 450,
+    "rotation": 0,
+    "designator": "NTC1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "dc350a4449fc446cb76492694e54aa4c",
+    "x": 220,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R10"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "142c06ac6c2f491b817d2b99ab9de45f",
+    "x": 300,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R11"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 380,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R12"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "a3e9c66c895247c59c77a2ffa00260e1",
+    "x": 460,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R13"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 540,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R15"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 620,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R18"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "40ff282b3d594c33b798d1707d8406cb",
+    "x": 700,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R19"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 780,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R20"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 860,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R22"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "dc0fa8d4958c425c9e246c05e65fbdea",
+    "x": 940,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R23"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "db283e3760f94330ac8590f5100e16e2",
+    "x": 1020,
+    "y": 450,
+    "rotation": 0,
+    "designator": "R24"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 60,
+    "y": 520,
+    "rotation": 0,
+    "designator": "R25"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 140,
+    "y": 520,
+    "rotation": 0,
+    "designator": "R26"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "40ff282b3d594c33b798d1707d8406cb",
+    "x": 220,
+    "y": 520,
+    "rotation": 0,
+    "designator": "R27"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "40ff282b3d594c33b798d1707d8406cb",
+    "x": 300,
+    "y": 520,
+    "rotation": 0,
+    "designator": "R28"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "40ff282b3d594c33b798d1707d8406cb",
+    "x": 380,
+    "y": 520,
+    "rotation": 0,
+    "designator": "R29"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "fc38f436091b49a696be03a7955956ed",
+    "x": 460,
+    "y": 520,
+    "rotation": 0,
+    "designator": "R8"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "dc350a4449fc446cb76492694e54aa4c",
+    "x": 540,
+    "y": 520,
+    "rotation": 0,
+    "designator": "R9"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "63d87d4ce1284812b7c0a77a8e22011d",
+    "x": 620,
+    "y": 520,
+    "rotation": 0,
+    "designator": "U2"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "ef9d1177a0bb4e7dbbd3e31de64eafe6",
+    "x": 700,
+    "y": 520,
+    "rotation": 0,
+    "designator": "U3"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "3fc7026b3d874cf0bc17a35fb31deabf",
+    "x": 780,
+    "y": 520,
+    "rotation": 0,
+    "designator": "U4"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "fa88b83012e442c9964e293c817f5f42",
+    "x": 860,
+    "y": 520,
+    "rotation": 0,
+    "designator": "U5"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "4f99db5a5a614bb4a4f77db2f3a45c11",
+    "x": 940,
+    "y": 520,
+    "rotation": 0,
+    "designator": "U6"
+   }
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+[
+ {
+  "pin": "U2:8",
+  "net": "CHG_OTG",
+  "status": "unresolved"
+ },
+ {
+  "pin": "U2:19",
+  "net": "CHG_SW",
+  "status": "unresolved"
+ },
+ {
+  "pin": "R19:1",
+  "net": "CHG_OTG",
+  "status": "unresolved"
+ },
+ {
+  "pin": "NTC1:1",
+  "net": "CHG_TS",
+  "status": "unresolved"
+ },
+ {
+  "pin": "R22:2",
+  "net": "FG_ALRT_N",
+  "status": "unresolved"
+ }
+]

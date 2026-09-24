@@ -1,0 +1,50 @@
+[
+ {
+  "pin": "R19:1",
+  "net": "CHG_OTG",
+  "kind": "net_port_bi",
+  "direction": "up"
+ },
+ {
+  "pin": "U2:19",
+  "net": "CHG_SW",
+  "kind": "net_port_bi",
+  "direction": "left"
+ },
+ {
+  "pin": "NTC1:1",
+  "net": "CHG_TS",
+  "kind": "net_port_bi",
+  "direction": "down"
+ },
+ {
+  "pin": "R22:2",
+  "net": "FG_ALRT_N",
+  "kind": "net_port_bi",
+  "direction": "up"
+ },
+ {
+  "pin": "C5:1",
+  "net": "RESET_N",
+  "kind": "net_port_bi",
+  "direction": "left"
+ },
+ {
+  "pin": "J1:A7",
+  "net": "USB_DN_CONN",
+  "kind": "net_port_bi",
+  "direction": "left"
+ },
+ {
+  "pin": "J1:A6",
+  "net": "USB_DP_CONN",
+  "kind": "net_port_bi",
+  "direction": "left"
+ },
+ {
+  "pin": "U5:4",
+  "net": "USB_VBUS_DET",
+  "kind": "net_port_bi",
+  "direction": "left"
+ }
+]

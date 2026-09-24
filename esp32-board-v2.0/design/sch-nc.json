@@ -1,0 +1,222 @@
+{
+ "A": [
+  {
+   "designator": "J1",
+   "pins": [
+    "A8"
+   ]
+  },
+  {
+   "designator": "J1",
+   "pins": [
+    "B8"
+   ]
+  },
+  {
+   "designator": "J4",
+   "pins": [
+    "MP"
+   ]
+  },
+  {
+   "designator": "J4",
+   "pins": [
+    "MP"
+   ]
+  },
+  {
+   "designator": "J5",
+   "pins": [
+    "MP"
+   ]
+  },
+  {
+   "designator": "J5",
+   "pins": [
+    "MP"
+   ]
+  },
+  {
+   "designator": "U2",
+   "pins": [
+    "2"
+   ]
+  },
+  {
+   "designator": "U2",
+   "pins": [
+    "3"
+   ]
+  },
+  {
+   "designator": "U2",
+   "pins": [
+    "12"
+   ]
+  },
+  {
+   "designator": "U3",
+   "pins": [
+    "6"
+   ]
+  },
+  {
+   "designator": "U5",
+   "pins": [
+    "9"
+   ]
+  },
+  {
+   "designator": "U6",
+   "pins": [
+    "4"
+   ]
+  },
+  {
+   "designator": "U6",
+   "pins": [
+    "5"
+   ]
+  }
+ ],
+ "B": [
+  {
+   "designator": "J2",
+   "pins": [
+    "1"
+   ]
+  },
+  {
+   "designator": "J2",
+   "pins": [
+    "4"
+   ]
+  },
+  {
+   "designator": "J2",
+   "pins": [
+    "6"
+   ]
+  },
+  {
+   "designator": "J2",
+   "pins": [
+    "7"
+   ]
+  },
+  {
+   "designator": "J2",
+   "pins": [
+    "19"
+   ]
+  },
+  {
+   "designator": "J2",
+   "pins": [
+    "25"
+   ]
+  },
+  {
+   "designator": "J2",
+   "pins": [
+    "26"
+   ]
+  },
+  {
+   "designator": "J3",
+   "pins": [
+    "1"
+   ]
+  },
+  {
+   "designator": "J3",
+   "pins": [
+    "8"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "15"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "16"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "25"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "26"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "28"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "29"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "30"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "31"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "32"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "33"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "34"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "35"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "36"
+   ]
+  },
+  {
+   "designator": "U1",
+   "pins": [
+    "37"
+   ]
+  }
+ ]
+}

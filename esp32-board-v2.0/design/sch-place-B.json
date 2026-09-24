@@ -1,0 +1,471 @@
+{
+ "version": 1,
+ "meta": {
+  "name": "place-schematic-P2",
+  "doc": "P2"
+ },
+ "steps": [
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "159c3da60be9490abf4e97599788a0d5",
+    "x": 60,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "8c1f4a9e9d204b148b36ce719c891bd1",
+    "x": 140,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C18"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2f9bf6a0a7d34c2f9c7da89f9a445ccb",
+    "x": 220,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C27"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2f9bf6a0a7d34c2f9c7da89f9a445ccb",
+    "x": 300,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C29"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2f9bf6a0a7d34c2f9c7da89f9a445ccb",
+    "x": 380,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C30"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2f9bf6a0a7d34c2f9c7da89f9a445ccb",
+    "x": 460,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C31"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2f9bf6a0a7d34c2f9c7da89f9a445ccb",
+    "x": 540,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C32"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2f9bf6a0a7d34c2f9c7da89f9a445ccb",
+    "x": 620,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C33"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "f4744ff7405a46a48e360c2c6fadeca3",
+    "x": 700,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C35"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "8c1f4a9e9d204b148b36ce719c891bd1",
+    "x": 780,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C37"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "96b39256cc3f4d80bd3b503deb4f3328",
+    "x": 860,
+    "y": 240,
+    "rotation": 0,
+    "designator": "C38"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "25e8e30d8a1d4bd1ac613bc3b045b169",
+    "x": 940,
+    "y": 240,
+    "rotation": 0,
+    "designator": "D6"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "25e8e30d8a1d4bd1ac613bc3b045b169",
+    "x": 1020,
+    "y": 240,
+    "rotation": 0,
+    "designator": "D7"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "25e8e30d8a1d4bd1ac613bc3b045b169",
+    "x": 60,
+    "y": 310,
+    "rotation": 0,
+    "designator": "D8"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "952d84b8ccdc4bacbacac392c1fc6bb3",
+    "x": 140,
+    "y": 310,
+    "rotation": 0,
+    "designator": "J2"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "33b8e9eb3d614961885c5fd4a66cfbbd",
+    "x": 220,
+    "y": 310,
+    "rotation": 0,
+    "designator": "J3"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2c5e75f10a79408594db4cf0efb2bd4c",
+    "x": 300,
+    "y": 310,
+    "rotation": 0,
+    "designator": "L3"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "d9c271defb654c9680c7f22bd93d7995",
+    "x": 380,
+    "y": 310,
+    "rotation": 0,
+    "designator": "Q1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 460,
+    "y": 310,
+    "rotation": 0,
+    "designator": "R1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 540,
+    "y": 310,
+    "rotation": 0,
+    "designator": "R14"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2af10998b74a4c03a290a4fe92c90f4f",
+    "x": 620,
+    "y": 310,
+    "rotation": 0,
+    "designator": "R16"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b79c90756f924ef2a249e14bbb11ae91",
+    "x": 700,
+    "y": 310,
+    "rotation": 0,
+    "designator": "R17"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 780,
+    "y": 310,
+    "rotation": 0,
+    "designator": "R2"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2342b292580541a4b0faf3d2e6fcc670",
+    "x": 860,
+    "y": 310,
+    "rotation": 0,
+    "designator": "R21"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 940,
+    "y": 310,
+    "rotation": 0,
+    "designator": "R3"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "c5d3ddeca7954ce9bf313feccfb6d85c",
+    "x": 1020,
+    "y": 310,
+    "rotation": 0,
+    "designator": "R30"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "2342b292580541a4b0faf3d2e6fcc670",
+    "x": 60,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R31"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 140,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R32"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "fc38f436091b49a696be03a7955956ed",
+    "x": 220,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R33"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "fc38f436091b49a696be03a7955956ed",
+    "x": 300,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R34"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "fc38f436091b49a696be03a7955956ed",
+    "x": 380,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R35"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 460,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R36"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 540,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R4"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "b948db94476e4027ac8953235755ec96",
+    "x": 620,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R5"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "0f0661658cdd4f45888ea39caf7e9650",
+    "x": 700,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R6"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "0f0661658cdd4f45888ea39caf7e9650",
+    "x": 780,
+    "y": 380,
+    "rotation": 0,
+    "designator": "R7"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "881d1183d98b475b872bf22b0d8fbdbd",
+    "x": 860,
+    "y": 380,
+    "rotation": 0,
+    "designator": "SW1"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "881d1183d98b475b872bf22b0d8fbdbd",
+    "x": 940,
+    "y": 380,
+    "rotation": 0,
+    "designator": "SW2"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "881d1183d98b475b872bf22b0d8fbdbd",
+    "x": 1020,
+    "y": 380,
+    "rotation": 0,
+    "designator": "SW3"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "881d1183d98b475b872bf22b0d8fbdbd",
+    "x": 60,
+    "y": 450,
+    "rotation": 0,
+    "designator": "SW4"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "881d1183d98b475b872bf22b0d8fbdbd",
+    "x": 140,
+    "y": 450,
+    "rotation": 0,
+    "designator": "SW5"
+   }
+  },
+  {
+   "action": "schematic.component.place",
+   "payload": {
+    "libraryUuid": "0819f05c4eef4c71ace90d822a990e87",
+    "uuid": "701a1177d7184d1bbf7f86d69d9385c2",
+    "x": 220,
+    "y": 450,
+    "rotation": 0,
+    "designator": "U1"
+   }
+  }
+ ]
+}

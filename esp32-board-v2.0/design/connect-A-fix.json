@@ -1,0 +1,78 @@
+{
+ "connections": [
+  {
+   "pin": "C12:1",
+   "kind": "power",
+   "net": "BAT_BUS"
+  },
+  {
+   "pin": "C17:1",
+   "kind": "power",
+   "net": "BAT_BUS"
+  },
+  {
+   "pin": "F2:2",
+   "kind": "power",
+   "net": "BAT_BUS"
+  },
+  {
+   "pin": "R19:1",
+   "kind": "net_port_bi",
+   "net": "CHG_OTG"
+  },
+  {
+   "pin": "U2:8",
+   "kind": "net_port_bi",
+   "net": "CHG_OTG"
+  },
+  {
+   "pin": "C11:2",
+   "kind": "net_port_bi",
+   "net": "CHG_SW"
+  },
+  {
+   "pin": "L1:1",
+   "kind": "net_port_bi",
+   "net": "CHG_SW"
+  },
+  {
+   "pin": "U2:19",
+   "kind": "net_port_bi",
+   "net": "CHG_SW"
+  },
+  {
+   "pin": "U2:20",
+   "kind": "net_port_bi",
+   "net": "CHG_SW"
+  },
+  {
+   "pin": "NTC1:1",
+   "kind": "net_port_bi",
+   "net": "CHG_TS"
+  },
+  {
+   "pin": "U2:11",
+   "kind": "net_port_bi",
+   "net": "CHG_TS"
+  },
+  {
+   "pin": "R22:2",
+   "kind": "net_port_bi",
+   "net": "FG_ALRT_N"
+  },
+  {
+   "pin": "U4:5",
+   "kind": "net_port_bi",
+   "net": "FG_ALRT_N"
+  },
+  {
+   "pin": "C17:2",
+   "kind": "ground",
+   "net": "GND"
+  }
+ ],
+ "rules": {
+  "avoidTitleBlock": true,
+  "preferVertical": true
+ }
+}

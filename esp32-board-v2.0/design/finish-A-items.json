@@ -1,0 +1,72 @@
+[
+ {
+  "pin": "C11:2",
+  "net": "CHG_SW",
+  "kind": "power"
+ },
+ {
+  "pin": "C12:1",
+  "net": "BAT_BUS",
+  "kind": "power"
+ },
+ {
+  "pin": "C17:1",
+  "net": "BAT_BUS",
+  "kind": "power"
+ },
+ {
+  "pin": "C17:2",
+  "net": "GND",
+  "kind": "ground"
+ },
+ {
+  "pin": "F2:2",
+  "net": "BAT_BUS",
+  "kind": "power"
+ },
+ {
+  "pin": "L1:1",
+  "net": "CHG_SW",
+  "kind": "power"
+ },
+ {
+  "pin": "NTC1:1",
+  "net": "CHG_TS",
+  "kind": "power"
+ },
+ {
+  "pin": "R19:1",
+  "net": "CHG_OTG",
+  "kind": "power"
+ },
+ {
+  "pin": "R22:2",
+  "net": "FG_ALRT_N",
+  "kind": "power"
+ },
+ {
+  "pin": "U2:11",
+  "net": "CHG_TS",
+  "kind": "power"
+ },
+ {
+  "pin": "U2:19",
+  "net": "CHG_SW",
+  "kind": "power"
+ },
+ {
+  "pin": "U2:20",
+  "net": "CHG_SW",
+  "kind": "power"
+ },
+ {
+  "pin": "U2:8",
+  "net": "CHG_OTG",
+  "kind": "power"
+ },
+ {
+  "pin": "U4:5",
+  "net": "FG_ALRT_N",
+  "kind": "power"
+ }
+]

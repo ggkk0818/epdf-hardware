@@ -1,0 +1,23 @@
+[
+ {
+  "pin": "C12:2",
+  "net": "GND",
+  "direction": "right",
+  "offset": 60,
+  "status": "fixed"
+ },
+ {
+  "pin": "C4:1",
+  "net": "3V3_MAIN",
+  "direction": "left",
+  "offset": 45.0,
+  "status": "fixed"
+ },
+ {
+  "pin": "C4:2",
+  "net": "GND",
+  "direction": "right",
+  "offset": 60,
+  "status": "fixed"
+ }
+]

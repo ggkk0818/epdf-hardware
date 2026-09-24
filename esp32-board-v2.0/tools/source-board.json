@@ -1,0 +1,9067 @@
+{
+ "general": {
+  "thickness": 1.2
+ },
+ "components": [
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TF_CS_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 30.9446,
+   "y": 78.0016,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "R32",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "MountingHole:MountingHole_2.2mm_M2",
+   "pads": [
+    {
+     "number": "",
+     "type": "np_thru_hole",
+     "shape": "circle",
+     "x": 0.0,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 2.2,
+     "h": 2.2,
+     "drill": [
+      "2.2"
+     ],
+     "layers": [
+      "*.Cu",
+      "*.Mask"
+     ]
+    }
+   ],
+   "x": 3.0,
+   "y": 3.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "H1",
+   "Value": "MountingHole_2.2mm_M2",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "mounting_hardware/mounting_hole"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_TS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 19.085,
+   "y": 64.5825,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "NTC1",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "EPD_3V3",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 11.4423,
+   "y": 43.3041,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C34",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_ILIM",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 29.2824,
+   "y": 61.8613,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R13",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "CHG_BTST",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "CHG_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 35.175,
+   "y": 56.0975,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C11",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_CE",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 27.609,
+   "y": 55.2339,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R18",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 42.3192,
+   "y": 49.7543,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "C21",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 15.765,
+   "y": 8.03,
+   "rot": 180.0,
+   "layer": "F.Cu",
+   "Reference": "C4",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "USB_VBUS_PROT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 16.5885,
+   "y": 77.4166,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C6",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Package_TO_SOT_SMD:SOT-323_SC-70",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.8875,
+     "y": -0.65,
+     "rot": 0.0,
+     "w": 0.925,
+     "h": 0.45,
+     "net": "EPD_GDR",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.8875,
+     "y": 0.65,
+     "rot": 0.0,
+     "w": 0.925,
+     "h": 0.45,
+     "net": "EPD_RESE",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.8875,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.925,
+     "h": 0.45,
+     "net": "EPD_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 21.7546,
+   "y": 49.2517,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "Q1",
+   "Value": "SOT-323_SC-70",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "package/gullwing"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_INT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 27.289,
+   "y": 64.4594,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R14",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "EPD_3V3",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 13.0127,
+   "y": 47.5718,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C26",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.7,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "KEY3_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.7,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 52.85,
+   "y": 69.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "SW5",
+   "Value": "SW_SPST_B3U-1000P",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "I2C_SCL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 45.67,
+   "y": 61.1812,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R7",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.625,
+     "y": -2.4,
+     "rot": 270.0,
+     "w": 0.8,
+     "h": 1.6,
+     "net": "BAT1_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.625,
+     "y": -2.4,
+     "rot": 270.0,
+     "w": 0.8,
+     "h": 1.6,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "MP",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -3.175,
+     "y": 0.5,
+     "rot": 270.0,
+     "w": 2.1,
+     "h": 3.0,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "MP",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 3.175,
+     "y": 0.5,
+     "rot": 270.0,
+     "w": 2.1,
+     "h": 3.0,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 6.0,
+   "y": 62.0,
+   "rot": -90.0,
+   "layer": "F.Cu",
+   "Reference": "J4",
+   "Value": "Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "connector/SMD_single_row_plus_mounting_pad"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 30.9825,
+   "y": 64.5,
+   "rot": 180.0,
+   "layer": "F.Cu",
+   "Reference": "C13",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Diode_SMD:D_SOD-323",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.05,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "USB_VBUS_PROT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.05,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 16.3028,
+   "y": 82.2165,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "D1",
+   "Value": "D_SOD-323",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "CHG_SNUB",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 46.285,
+   "y": 53.3275,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C16",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Connector_Molex:Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.625,
+     "y": -2.4,
+     "rot": 270.0,
+     "w": 0.8,
+     "h": 1.6,
+     "net": "BAT2_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.625,
+     "y": -2.4,
+     "rot": 270.0,
+     "w": 0.8,
+     "h": 1.6,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "MP",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -3.175,
+     "y": 0.5,
+     "rot": 270.0,
+     "w": 2.1,
+     "h": 3.0,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "MP",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 3.175,
+     "y": 0.5,
+     "rot": 270.0,
+     "w": 2.1,
+     "h": 3.0,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 6.0,
+   "y": 72.0,
+   "rot": -90.0,
+   "layer": "F.Cu",
+   "Reference": "J5",
+   "Value": "Molex_PicoBlade_53261-0271_1x02-1MP_P1.25mm_Horizontal",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "connector/SMD_single_row_plus_mounting_pad"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 270.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TPS_FB",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 270.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 30.6929,
+   "y": 51.5817,
+   "rot": -90.0,
+   "layer": "F.Cu",
+   "Reference": "R24",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TPS_VSEL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 27.8903,
+   "y": 47.5288,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R28",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Fuse:Fuse_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9375,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.975,
+     "h": 1.4,
+     "net": "BAT2_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9375,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.975,
+     "h": 1.4,
+     "net": "BAT_BUS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 12.18,
+   "y": 72.95,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "F3",
+   "Value": "Fuse_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "KEY1_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 12.125,
+   "y": 12.95,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R3",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "MountingHole:MountingHole_2.2mm_M2",
+   "pads": [
+    {
+     "number": "",
+     "type": "np_thru_hole",
+     "shape": "circle",
+     "x": 0.0,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 2.2,
+     "h": 2.2,
+     "drill": [
+      "2.2"
+     ],
+     "layers": [
+      "*.Cu",
+      "*.Mask"
+     ]
+    }
+   ],
+   "x": 3.0,
+   "y": 81.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "H3",
+   "Value": "MountingHole_2.2mm_M2",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "mounting_hardware/mounting_hole"
+  },
+  {
+   "lib": "esp32-board-v1.1:X05B20U24T",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -5.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": -5.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_GDR",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "rect",
+     "x": -4.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_RESE",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "4",
+     "type": "smd",
+     "shape": "rect",
+     "x": -4.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "5",
+     "type": "smd",
+     "shape": "rect",
+     "x": -3.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_VSH2",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "6",
+     "type": "smd",
+     "shape": "rect",
+     "x": -3.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "7",
+     "type": "smd",
+     "shape": "rect",
+     "x": -2.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "8",
+     "type": "smd",
+     "shape": "rect",
+     "x": -2.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "9",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_BUSY",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "10",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_RST_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "11",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_DC",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "12",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_CS_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "13",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "SPI_SCLK",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "14",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "SPI_MOSI",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "15",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_3V3",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "16",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_3V3",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "17",
+     "type": "smd",
+     "shape": "rect",
+     "x": 2.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "18",
+     "type": "smd",
+     "shape": "rect",
+     "x": 2.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_VDD",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "19",
+     "type": "smd",
+     "shape": "rect",
+     "x": 3.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "20",
+     "type": "smd",
+     "shape": "rect",
+     "x": 3.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_VSH1",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "21",
+     "type": "smd",
+     "shape": "rect",
+     "x": 4.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_VGH",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "22",
+     "type": "smd",
+     "shape": "rect",
+     "x": 4.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_VSL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "23",
+     "type": "smd",
+     "shape": "rect",
+     "x": 5.25,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_VGL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "24",
+     "type": "smd",
+     "shape": "rect",
+     "x": 5.75,
+     "y": -1.175,
+     "rot": 90.0,
+     "w": 0.3,
+     "h": 1.6,
+     "net": "EPD_VCOM",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "smd",
+     "shape": "rect",
+     "x": -7.4,
+     "y": 1.175,
+     "rot": 90.0,
+     "w": 2.4,
+     "h": 3.5,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "26",
+     "type": "smd",
+     "shape": "rect",
+     "x": 7.4,
+     "y": 1.175,
+     "rot": 90.0,
+     "w": 2.4,
+     "h": 3.5,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 3.275,
+   "y": 42.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "J2",
+   "Value": "X05B20U24T",
+   "Datasheet": "https://item.szlcsc.com/434884.html",
+   "Description": ""
+  },
+  {
+   "lib": "Diode_SMD:D_SOD-123",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.65,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.2,
+     "net": "EPD_VGH",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.65,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.2,
+     "net": "EPD_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 20.6686,
+   "y": 52.1251,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "D6",
+   "Value": "D_SOD-123",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_OTG",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 25.6722,
+   "y": 62.078,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R19",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 12.0,
+   "y": 8.28,
+   "rot": 180.0,
+   "layer": "F.Cu",
+   "Reference": "C2",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "USB_VBUS_PROT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 30.0975,
+   "y": 58.875,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "C9",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal",
+   "pads": [
+    {
+     "number": "",
+     "type": "np_thru_hole",
+     "shape": "circle",
+     "x": -2.89,
+     "y": -2.605,
+     "rot": 0.0,
+     "w": 0.65,
+     "h": 0.65,
+     "drill": [
+      "0.65"
+     ],
+     "layers": [
+      "*.Cu",
+      "*.Mask"
+     ]
+    },
+    {
+     "number": "",
+     "type": "np_thru_hole",
+     "shape": "circle",
+     "x": 2.89,
+     "y": -2.605,
+     "rot": 0.0,
+     "w": 0.65,
+     "h": 0.65,
+     "drill": [
+      "0.65"
+     ],
+     "layers": [
+      "*.Cu",
+      "*.Mask"
+     ]
+    },
+    {
+     "number": "A1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -3.2,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 1.15,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "A4",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -2.4,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 1.15,
+     "net": "USB_VBUS_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "A5",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.25,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.3,
+     "h": 1.15,
+     "net": "USB_CC1",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "A6",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.25,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.3,
+     "h": 1.15,
+     "net": "USB_DP_CONN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "A7",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.25,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.3,
+     "h": 1.15,
+     "net": "USB_DN_CONN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "A8",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.25,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.3,
+     "h": 1.15,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "A9",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 2.4,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 1.15,
+     "net": "USB_VBUS_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "A12",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 3.2,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 1.15,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "B1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 3.2,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 1.15,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "B4",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 2.4,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 1.15,
+     "net": "USB_VBUS_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "B5",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.75,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.3,
+     "h": 1.15,
+     "net": "USB_CC2",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "B6",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.75,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.3,
+     "h": 1.15,
+     "net": "USB_DP_CONN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "B7",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.75,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.3,
+     "h": 1.15,
+     "net": "USB_DN_CONN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "B8",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.75,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.3,
+     "h": 1.15,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "B9",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -2.4,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 1.15,
+     "net": "USB_VBUS_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "B12",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -3.2,
+     "y": -3.68,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 1.15,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "SH",
+     "type": "thru_hole",
+     "shape": "oval",
+     "x": -4.32,
+     "y": -3.105,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 2.1,
+     "drill": [
+      "oval",
+      "0.6",
+      "1.7"
+     ],
+     "net": "USB_SHIELD",
+     "layers": [
+      "*.Cu",
+      "*.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "SH",
+     "type": "thru_hole",
+     "shape": "oval",
+     "x": -4.32,
+     "y": 1.075,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.8,
+     "drill": [
+      "oval",
+      "0.6",
+      "1.4"
+     ],
+     "net": "USB_SHIELD",
+     "layers": [
+      "*.Cu",
+      "*.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "SH",
+     "type": "thru_hole",
+     "shape": "oval",
+     "x": 4.32,
+     "y": -3.105,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 2.1,
+     "drill": [
+      "oval",
+      "0.6",
+      "1.7"
+     ],
+     "net": "USB_SHIELD",
+     "layers": [
+      "*.Cu",
+      "*.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "SH",
+     "type": "thru_hole",
+     "shape": "oval",
+     "x": 4.32,
+     "y": 1.075,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.8,
+     "drill": [
+      "oval",
+      "0.6",
+      "1.4"
+     ],
+     "net": "USB_SHIELD",
+     "layers": [
+      "*.Cu",
+      "*.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 24.0,
+   "y": 81.33,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "J1",
+   "Value": "USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_VGH",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 17.5497,
+   "y": 37.2322,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C28",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 25.9213,
+   "y": 67.0035,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C8",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Diode_SMD:D_SOD-323",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.05,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "USB_CC1",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.05,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 20.4,
+   "y": 74.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "D4",
+   "Value": "D_SOD-323",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_VCOM",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 9.5,
+   "y": 37.25,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C36",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_STAT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 27.112,
+   "y": 57.4169,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R15",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_TS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 27.1556,
+   "y": 59.6056,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R17",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 33.797,
+   "y": 48.676,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C22",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_REGN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_TS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 38.5694,
+   "y": 53.5679,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R16",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Inductor_SMD:L_Taiyo-Yuden_NR-40xx",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.4,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.2,
+     "h": 3.7,
+     "net": "EPD_3V3",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.4,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.2,
+     "h": 3.7,
+     "net": "EPD_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 17.3046,
+   "y": 48.1517,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "L3",
+   "Value": "L_Taiyo-Yuden_NR-40xx",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "BOOT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 39.48,
+   "y": 16.83,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R2",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Diode_SMD:D_SOD-123",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.65,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.2,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.65,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.2,
+     "net": "EPD_X",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 22.7038,
+   "y": 46.4134,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "D7",
+   "Value": "D_SOD-123",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "CHG_REGN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 34.7,
+   "y": 53.3875,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C10",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "CHG_PMID",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 31.3,
+   "y": 55.8875,
+   "rot": 180.0,
+   "layer": "F.Cu",
+   "Reference": "C15",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "RESET_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 15.765,
+   "y": 12.95,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R1",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "KEY2_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 12.125,
+   "y": 15.41,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R4",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.7,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "BOOT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.7,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 30.0,
+   "y": 32.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "SW2",
+   "Value": "SW_SPST_B3U-1000P",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "MountingHole:MountingHole_2.2mm_M2",
+   "pads": [
+    {
+     "number": "",
+     "type": "np_thru_hole",
+     "shape": "circle",
+     "x": 0.0,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 2.2,
+     "h": 2.2,
+     "drill": [
+      "2.2"
+     ],
+     "layers": [
+      "*.Cu",
+      "*.Mask"
+     ]
+    }
+   ],
+   "x": 52.0,
+   "y": 3.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "H2",
+   "Value": "MountingHole_2.2mm_M2",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "mounting_hardware/mounting_hole"
+  },
+  {
+   "lib": "Resistor_SMD:R_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9125,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.025,
+     "h": 1.4,
+     "net": "CHG_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9125,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.025,
+     "h": 1.4,
+     "net": "CHG_SNUB",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 42.4049,
+   "y": 53.3295,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R21",
+   "Value": "R_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "BAT_BUS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 15.093,
+   "y": 64.5264,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C17",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_VSH2",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 9.25,
+   "y": 45.75,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C31",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 32.0295,
+   "y": 40.0196,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "C19",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "USB_SHIELD",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 23.4563,
+   "y": 71.1613,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R8",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 46.065,
+   "y": 64.495,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C37",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "USB_VBUS_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "USB_VBUS_DET",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 29.8675,
+   "y": 66.8062,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R11",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "MountingHole:MountingHole_2.2mm_M2",
+   "pads": [
+    {
+     "number": "",
+     "type": "np_thru_hole",
+     "shape": "circle",
+     "x": 0.0,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 2.2,
+     "h": 2.2,
+     "drill": [
+      "2.2"
+     ],
+     "layers": [
+      "*.Cu",
+      "*.Mask"
+     ]
+    }
+   ],
+   "x": 52.0,
+   "y": 81.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "H4",
+   "Value": "MountingHole_2.2mm_M2",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "mounting_hardware/mounting_hole"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_VGL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 9.25,
+   "y": 39.71,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C30",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.7,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "KEY2_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.7,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 52.85,
+   "y": 42.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "SW4",
+   "Value": "SW_SPST_B3U-1000P",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "esp32-board-v1.1:RNM0015A",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.15,
+     "y": -0.750001,
+     "rot": 90.0,
+     "w": 0.24,
+     "h": 0.599999,
+     "net": "TPS_PS_SYNC",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.15,
+     "y": -0.250002,
+     "rot": 90.0,
+     "w": 0.24,
+     "h": 0.599999,
+     "net": "TPS_PG",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.15,
+     "y": 0.25,
+     "rot": 90.0,
+     "w": 0.24,
+     "h": 0.599999,
+     "net": "TPS_VAUX",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "4",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.15,
+     "y": 0.749998,
+     "rot": 90.0,
+     "w": 0.24,
+     "h": 0.599999,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "5",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.725,
+     "y": 1.4,
+     "rot": 0.0,
+     "w": 0.24,
+     "h": 0.599999,
+     "net": "TPS_FB",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "6",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.225001,
+     "y": 1.4,
+     "rot": 0.0,
+     "w": 0.24,
+     "h": 0.599999,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "7",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.525,
+     "y": 1.4,
+     "rot": 90.0,
+     "w": 0.700001,
+     "h": 0.850001,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "8",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.525,
+     "y": 1.4,
+     "rot": 90.0,
+     "w": 0.700001,
+     "h": 0.850001,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "9",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.775,
+     "y": 0.499999,
+     "rot": 90.0,
+     "w": 0.349999,
+     "h": 1.45,
+     "net": "TPS_L2",
+     "layers": [
+      "F.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "10",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.599999,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.349999,
+     "h": 1.799999,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "11",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.775,
+     "y": -0.499999,
+     "rot": 90.0,
+     "w": 0.349999,
+     "h": 1.45,
+     "net": "TPS_L1",
+     "layers": [
+      "F.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "12",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.525,
+     "y": -1.4,
+     "rot": 90.0,
+     "w": 0.700001,
+     "h": 0.850001,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "13",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.525,
+     "y": -1.4,
+     "rot": 90.0,
+     "w": 0.700001,
+     "h": 0.850001,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "14",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.225001,
+     "y": -1.4,
+     "rot": 0.0,
+     "w": 0.24,
+     "h": 0.599999,
+     "net": "TPS_EN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "15",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.725,
+     "y": -1.4,
+     "rot": 0.0,
+     "w": 0.24,
+     "h": 0.599999,
+     "net": "TPS_VSEL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 34.0,
+   "y": 45.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "U3",
+   "Value": "RNM0015A",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 34.525,
+   "y": 40.75,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "C18",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_3V3",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 20.8633,
+   "y": 40.667,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C27",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TPS_PG",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 29.4264,
+   "y": 43.1006,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R25",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "SPI_MOSI",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TF_MOSI",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 25.88,
+   "y": 27.53,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R34",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 15.765,
+   "y": 10.49,
+   "rot": 180.0,
+   "layer": "F.Cu",
+   "Reference": "C3",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "EPD_VDD",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 17.1416,
+   "y": 40.6497,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C35",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "esp32-board-v1.1:microSD_DM3AT-SF-PEJM5_EPDF",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": 2.775,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.675,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "net": "TF_CS_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.575,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "net": "TF_MOSI",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "4",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.525,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "5",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.625,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "net": "TF_SCLK",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "6",
+     "type": "smd",
+     "shape": "rect",
+     "x": -2.725,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "7",
+     "type": "smd",
+     "shape": "rect",
+     "x": -3.825,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "net": "TF_MISO",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "8",
+     "type": "smd",
+     "shape": "rect",
+     "x": -4.925,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "9",
+     "type": "smd",
+     "shape": "rect",
+     "x": -5.875,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 0.7,
+     "h": 1.2,
+     "net": "TF_CD_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "10",
+     "type": "smd",
+     "shape": "rect",
+     "x": -6.825,
+     "y": 2.775,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 0.8,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "SH",
+     "type": "smd",
+     "shape": "rect",
+     "x": -6.825,
+     "y": -3.425,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.2,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "SH",
+     "type": "smd",
+     "shape": "rect",
+     "x": -6.825,
+     "y": 6.925,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 2.8,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "SH",
+     "type": "smd",
+     "shape": "rect",
+     "x": 4.325,
+     "y": -7.725,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.2,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "SH",
+     "type": "smd",
+     "shape": "rect",
+     "x": 6.675,
+     "y": 7.375,
+     "rot": 0.0,
+     "w": 1.3,
+     "h": 1.9,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 40.0,
+   "y": 75.2,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "J3",
+   "Value": "microSD_DM3AT-SF-PEJM5_EPDF",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "esp32-board-v1.1:ESP32-S3-WROOM-1_EPDF",
+   "pads": [
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -2.9,
+     "y": 1.06,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -2.9,
+     "y": 2.46,
+     "rot": 270.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -2.9,
+     "y": 3.86,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.5,
+     "y": 1.06,
+     "rot": 270.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.5,
+     "y": 2.46,
+     "rot": 270.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.5,
+     "y": 3.86,
+     "rot": 270.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.1,
+     "y": 1.06,
+     "rot": 270.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.1,
+     "y": 2.46,
+     "rot": 270.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.1,
+     "y": 3.86,
+     "rot": 270.0,
+     "w": 0.9,
+     "h": 0.9,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": -5.26,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": -3.99,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": -2.72,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "RESET_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "4",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": -1.45,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "KEY1_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "5",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": -0.18,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "KEY2_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "6",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 1.09,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "EPD_PWR_EN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "7",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 2.36,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "EPD_BUSY",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "8",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 3.63,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "KEY3_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "9",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 4.9,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "CHG_INT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "10",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 6.17,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "TYPEC_INT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "11",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 7.44,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "I2C_SDA",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "12",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 8.71,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "EPD_RST_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "13",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 9.98,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "USB_DN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "14",
+     "type": "smd",
+     "shape": "rect",
+     "x": -8.75,
+     "y": 11.25,
+     "rot": 180.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "USB_DP",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "15",
+     "type": "smd",
+     "shape": "rect",
+     "x": -6.985,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "16",
+     "type": "smd",
+     "shape": "rect",
+     "x": -5.715,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "17",
+     "type": "smd",
+     "shape": "rect",
+     "x": -4.445,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "EPD_DC",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "18",
+     "type": "smd",
+     "shape": "rect",
+     "x": -3.175,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "EPD_CS_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "19",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.905,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "SPI_MOSI",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "20",
+     "type": "smd",
+     "shape": "rect",
+     "x": -0.635,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "SPI_SCLK",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "21",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.635,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "SPI_MISO",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "22",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.905,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "TF_CS_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "23",
+     "type": "smd",
+     "shape": "rect",
+     "x": 3.175,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "I2C_SCL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "24",
+     "type": "smd",
+     "shape": "rect",
+     "x": 4.445,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "CHG_CE",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "smd",
+     "shape": "rect",
+     "x": 5.715,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "26",
+     "type": "smd",
+     "shape": "rect",
+     "x": 6.985,
+     "y": 12.5,
+     "rot": 270.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "27",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 11.25,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "BOOT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "28",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 9.98,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "29",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 8.71,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "30",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 7.44,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "31",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 6.17,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "32",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 4.9,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "33",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 3.63,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "34",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 2.36,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "35",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": 1.09,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "36",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": -0.18,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "37",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": -1.45,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "38",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": -2.72,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "TF_CD_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "39",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": -3.99,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "FG_ALRT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "40",
+     "type": "smd",
+     "shape": "rect",
+     "x": 8.75,
+     "y": -5.26,
+     "rot": 0.0,
+     "w": 1.5,
+     "h": 0.9,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -2.9,
+     "y": 1.76,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -2.9,
+     "y": 3.16,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -2.2,
+     "y": 1.06,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -2.2,
+     "y": 2.46,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -2.2,
+     "y": 3.86,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -1.5,
+     "y": 1.76,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.5,
+     "y": 2.46,
+     "rot": 270.0,
+     "w": 3.9,
+     "h": 3.9,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -1.5,
+     "y": 3.16,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -0.8,
+     "y": 1.06,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -0.8,
+     "y": 2.46,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -0.8,
+     "y": 3.86,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -0.1,
+     "y": 1.76,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "41",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -0.1,
+     "y": 3.16,
+     "rot": 0.0,
+     "w": 0.6,
+     "h": 0.6,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu",
+      "F.Mask"
+     ]
+    }
+   ],
+   "x": 27.5,
+   "y": 12.75,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "U1",
+   "Value": "ESP32-S3-WROOM-1_EPDF",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Fuse:Fuse_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9375,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.975,
+     "h": 1.4,
+     "net": "BAT1_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9375,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.975,
+     "h": 1.4,
+     "net": "BAT_BUS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 11.9164,
+   "y": 59.2534,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "F2",
+   "Value": "Fuse_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 270.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 270.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TPS_FB",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 30.6929,
+   "y": 48.1217,
+   "rot": -90.0,
+   "layer": "F.Cu",
+   "Reference": "R23",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "USB_SHIELD",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 17.3724,
+   "y": 75.098,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C7",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Fuse:Fuse_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9375,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.975,
+     "h": 1.4,
+     "net": "USB_VBUS_RAW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9375,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.975,
+     "h": 1.4,
+     "net": "USB_VBUS_PROT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 16.3426,
+   "y": 79.7599,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "F1",
+   "Value": "Fuse_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_3V3",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 19.9385,
+   "y": 43.3488,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C25",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Package_TO_SOT_SMD:SOT-23-6",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.1375,
+     "y": -0.95,
+     "rot": 0.0,
+     "w": 1.325,
+     "h": 0.6,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.1375,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.325,
+     "h": 0.6,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.1375,
+     "y": 0.95,
+     "rot": 0.0,
+     "w": 1.325,
+     "h": 0.6,
+     "net": "EPD_PWR_EN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "4",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.1375,
+     "y": 0.95,
+     "rot": 0.0,
+     "w": 1.325,
+     "h": 0.6,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "5",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.1375,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.325,
+     "h": 0.6,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "6",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.1375,
+     "y": -0.95,
+     "rot": 0.0,
+     "w": 1.325,
+     "h": 0.6,
+     "net": "EPD_3V3",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 15.55,
+   "y": 43.7,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "U6",
+   "Value": "SOT-23-6",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "package/gullwing"
+  },
+  {
+   "lib": "Diode_SMD:D_SOD-323",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.05,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "USB_DP_CONN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.05,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 25.2,
+   "y": 74.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "D2",
+   "Value": "D_SOD-323",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "EPD_PWR_EN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 12.8648,
+   "y": 49.5497,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R29",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.7,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "KEY1_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.7,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 52.85,
+   "y": 15.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "SW3",
+   "Value": "SW_SPST_B3U-1000P",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "EPD_GDR",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 25.3821,
+   "y": 49.5317,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R30",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 37.108,
+   "y": 38.5383,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "C14",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "CHG_DSEL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 46.1949,
+   "y": 51.2085,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R20",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Package_DFN_QFN:Texas_X2QFN-12_1.6x1.6mm_P0.4mm",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.725,
+     "y": -0.2,
+     "rot": 0.0,
+     "w": 0.85,
+     "h": 0.2,
+     "net": "USB_CC1",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.725,
+     "y": 0.2,
+     "rot": 0.0,
+     "w": 0.85,
+     "h": 0.2,
+     "net": "USB_CC2",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.6,
+     "y": 0.825,
+     "rot": 0.0,
+     "w": 0.2,
+     "h": 0.65,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "4",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.2,
+     "y": 0.825,
+     "rot": 0.0,
+     "w": 0.2,
+     "h": 0.65,
+     "net": "USB_VBUS_DET",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "5",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.2,
+     "y": 0.825,
+     "rot": 0.0,
+     "w": 0.2,
+     "h": 0.65,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "6",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.6,
+     "y": 0.825,
+     "rot": 0.0,
+     "w": 0.2,
+     "h": 0.65,
+     "net": "TYPEC_INT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "7",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.725,
+     "y": 0.2,
+     "rot": 0.0,
+     "w": 0.85,
+     "h": 0.2,
+     "net": "I2C_SDA",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "8",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.725,
+     "y": -0.2,
+     "rot": 0.0,
+     "w": 0.85,
+     "h": 0.2,
+     "net": "I2C_SCL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "9",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.6,
+     "y": -0.825,
+     "rot": 0.0,
+     "w": 0.2,
+     "h": 0.65,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "10",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.2,
+     "y": -0.825,
+     "rot": 0.0,
+     "w": 0.2,
+     "h": 0.65,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "11",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.2,
+     "y": -0.825,
+     "rot": 0.0,
+     "w": 0.2,
+     "h": 0.65,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "12",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.6,
+     "y": -0.825,
+     "rot": 0.0,
+     "w": 0.2,
+     "h": 0.65,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 29.5,
+   "y": 69.5,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "U5",
+   "Value": "Texas_X2QFN-12_1.6x1.6mm_P0.4mm",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "package/no_lead"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "KEY3_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 12.125,
+   "y": 17.87,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R5",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Diode_SMD:D_SOD-323",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.05,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "USB_DN_CONN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.05,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 22.8,
+   "y": 74.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "D3",
+   "Value": "D_SOD-323",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 37.7248,
+   "y": 50.1857,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "C20",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "SPI_MISO",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TF_MISO",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 34.78,
+   "y": 64.575,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R35",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_VSH1",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 13.15,
+   "y": 39.71,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C32",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Inductor_SMD:L_Coilcraft_XAL5030-XXX",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.655,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.18,
+     "h": 4.7,
+     "net": "CHG_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.655,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.18,
+     "h": 4.7,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 40.505,
+   "y": 58.0375,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "L1",
+   "Value": "L_Coilcraft_XAL5030-XXX",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "inductor/SMD"
+  },
+  {
+   "lib": "Package_DFN_QFN:Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias",
+   "pads": [
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.675,
+     "y": -0.675,
+     "rot": 0.0,
+     "w": 1.13,
+     "h": 1.13,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.675,
+     "y": 0.675,
+     "rot": 0.0,
+     "w": 1.13,
+     "h": 1.13,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.675,
+     "y": -0.675,
+     "rot": 0.0,
+     "w": 1.13,
+     "h": 1.13,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.675,
+     "y": 0.675,
+     "rot": 0.0,
+     "w": 1.13,
+     "h": 1.13,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.9625,
+     "y": -1.25,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "USB_VBUS_PROT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.9625,
+     "y": -0.75,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.9625,
+     "y": -0.25,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "4",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.9625,
+     "y": 0.25,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "CHG_STAT",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "5",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.9625,
+     "y": 0.75,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "I2C_SCL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "6",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.9625,
+     "y": 1.25,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "I2C_SDA",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "7",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.25,
+     "y": 1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_INT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "8",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.75,
+     "y": 1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_OTG",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "9",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.25,
+     "y": 1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_CE",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "10",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.25,
+     "y": 1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_ILIM",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "11",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.75,
+     "y": 1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_TS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "12",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.25,
+     "y": 1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "13",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.9625,
+     "y": 1.25,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "BAT_BUS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "14",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.9625,
+     "y": 0.75,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "BAT_BUS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "15",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.9625,
+     "y": 0.25,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "16",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.9625,
+     "y": -0.25,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "17",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.9625,
+     "y": -0.75,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "18",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.9625,
+     "y": -1.25,
+     "rot": 0.0,
+     "w": 0.825,
+     "h": 0.25,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "19",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.25,
+     "y": -1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "20",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.75,
+     "y": -1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "21",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.25,
+     "y": -1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_BTST",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "22",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.25,
+     "y": -1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_REGN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "23",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.75,
+     "y": -1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_PMID",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "24",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.25,
+     "y": -1.9625,
+     "rot": 0.0,
+     "w": 0.25,
+     "h": 0.825,
+     "net": "CHG_DSEL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -1.1,
+     "y": -1.1,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -1.1,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": -1.1,
+     "y": 1.1,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": 0.0,
+     "y": -1.1,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": 0.0,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.0,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 2.7,
+     "h": 2.7,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.0,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 2.7,
+     "h": 2.7,
+     "net": "GND",
+     "layers": [
+      "B.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": 0.0,
+     "y": 1.1,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": 1.1,
+     "y": -1.1,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": 1.1,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    },
+    {
+     "number": "25",
+     "type": "thru_hole",
+     "shape": "circle",
+     "x": 1.1,
+     "y": 1.1,
+     "rot": 0.0,
+     "w": 0.5,
+     "h": 0.5,
+     "drill": [
+      "0.2"
+     ],
+     "net": "GND",
+     "layers": [
+      "*.Cu"
+     ]
+    }
+   ],
+   "x": 34.0,
+   "y": 60.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "U2",
+   "Value": "Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm_ThermalVias",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "package/no_lead"
+  },
+  {
+   "lib": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "rect",
+     "x": -1.7,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "RESET_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "rect",
+     "x": 1.7,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.7,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 22.0,
+   "y": 32.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "SW1",
+   "Value": "SW_SPST_B3U-1000P",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "I2C_SDA",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 33.4658,
+   "y": 51.0371,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R6",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "RESET_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 15.765,
+   "y": 15.41,
+   "rot": 180.0,
+   "layer": "F.Cu",
+   "Reference": "C5",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 45.0492,
+   "y": 58.1733,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "C23",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "SPI_SCLK",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TF_SCLK",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 29.38,
+   "y": 27.53,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R33",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_SW",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_X",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 22.6691,
+   "y": 57.408,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C29",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "USB_DN_CONN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "USB_DN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 14.175,
+   "y": 22.08,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R10",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 180.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 12.0,
+   "y": 10.74,
+   "rot": 180.0,
+   "layer": "F.Cu",
+   "Reference": "C1",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "EPD_VSL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 13.4,
+   "y": 37.25,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C33",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "BAT_BUS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.95,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.0,
+     "h": 1.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 38.5425,
+   "y": 64.5,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C12",
+   "Value": "C_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TF_CD_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 30.8457,
+   "y": 74.3126,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "R36",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "USB_DP_CONN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "USB_DP",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 14.175,
+   "y": 24.65,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R9",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0805_2012Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9125,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.025,
+     "h": 1.4,
+     "net": "EPD_RESE",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9125,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 1.025,
+     "h": 1.4,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 19.7754,
+   "y": 54.7466,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R31",
+   "Value": "R_0805_2012Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "TPS_VAUX",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 30.325,
+   "y": 45.25,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C24",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "FG_ALRT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 17.2081,
+   "y": 61.838,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R22",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TPS_PS_SYNC",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 42.98,
+   "y": 45.73,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R27",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TYPEC_INT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 26.0043,
+   "y": 69.1109,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R12",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Package_DFN_QFN:TDFN-8-1EP_2x2mm_P0.5mm_EP0.8x1.2mm",
+   "pads": [
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.2,
+     "y": -0.3,
+     "rot": 0.0,
+     "w": 0.32,
+     "h": 0.48,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.2,
+     "y": 0.3,
+     "rot": 0.0,
+     "w": 0.32,
+     "h": 0.48,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.2,
+     "y": -0.3,
+     "rot": 0.0,
+     "w": 0.32,
+     "h": 0.48,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.2,
+     "y": 0.3,
+     "rot": 0.0,
+     "w": 0.32,
+     "h": 0.48,
+     "layers": [
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9875,
+     "y": -0.75,
+     "rot": 0.0,
+     "w": 0.775,
+     "h": 0.25,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9875,
+     "y": -0.25,
+     "rot": 0.0,
+     "w": 0.775,
+     "h": 0.25,
+     "net": "BAT_BUS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "3",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9875,
+     "y": 0.25,
+     "rot": 0.0,
+     "w": 0.775,
+     "h": 0.25,
+     "net": "BAT_BUS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "4",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.9875,
+     "y": 0.75,
+     "rot": 0.0,
+     "w": 0.775,
+     "h": 0.25,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "5",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9875,
+     "y": 0.75,
+     "rot": 0.0,
+     "w": 0.775,
+     "h": 0.25,
+     "net": "FG_ALRT_N",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "6",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9875,
+     "y": 0.25,
+     "rot": 0.0,
+     "w": 0.775,
+     "h": 0.25,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "7",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9875,
+     "y": -0.25,
+     "rot": 0.0,
+     "w": 0.775,
+     "h": 0.25,
+     "net": "I2C_SCL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "8",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.9875,
+     "y": -0.75,
+     "rot": 0.0,
+     "w": 0.775,
+     "h": 0.25,
+     "net": "I2C_SDA",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "9",
+     "type": "smd",
+     "shape": "rect",
+     "x": 0.0,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 1.2,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask"
+     ]
+    }
+   ],
+   "x": 13.5,
+   "y": 62.0,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "U4",
+   "Value": "TDFN-8-1EP_2x2mm_P0.5mm_EP0.8x1.2mm",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "package/no_lead"
+  },
+  {
+   "lib": "Diode_SMD:D_SOD-323",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.05,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "USB_CC2",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.05,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 0.6,
+     "h": 0.45,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 27.6,
+   "y": 74.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "D5",
+   "Value": "D_SOD-323",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Capacitor_SMD:C_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "3V3_MAIN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.775,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 0.95,
+     "net": "GND",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 42.38,
+   "y": 64.575,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "C38",
+   "Value": "C_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  },
+  {
+   "lib": "Inductor_SMD:L_Sunlord_MWSA0402S",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.85,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.5,
+     "h": 2.5,
+     "net": "TPS_L1",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.85,
+     "y": 0.0,
+     "rot": 90.0,
+     "w": 1.5,
+     "h": 2.5,
+     "net": "TPS_L2",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 38.475,
+   "y": 45.0,
+   "rot": 90.0,
+   "layer": "F.Cu",
+   "Reference": "L2",
+   "Value": "L_Sunlord_MWSA0402S",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "inductor/SMD"
+  },
+  {
+   "lib": "Diode_SMD:D_SOD-123",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -1.65,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.2,
+     "net": "EPD_X",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 1.65,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.9,
+     "h": 1.2,
+     "net": "EPD_VGL",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 15.3753,
+   "y": 52.0762,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "D8",
+   "Value": "D_SOD-123",
+   "Datasheet": "",
+   "Description": ""
+  },
+  {
+   "lib": "Resistor_SMD:R_0603_1608Metric",
+   "pads": [
+    {
+     "number": "1",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": -0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "SYS",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    },
+    {
+     "number": "2",
+     "type": "smd",
+     "shape": "roundrect",
+     "x": 0.825,
+     "y": 0.0,
+     "rot": 0.0,
+     "w": 0.8,
+     "h": 0.95,
+     "net": "TPS_EN",
+     "layers": [
+      "F.Cu",
+      "F.Mask",
+      "F.Paste"
+     ]
+    }
+   ],
+   "x": 40.359,
+   "y": 40.851,
+   "rot": 0.0,
+   "layer": "F.Cu",
+   "Reference": "R26",
+   "Value": "R_0603_1608Metric",
+   "Datasheet": "",
+   "Description": "",
+   "KiLib_Generator": "SMD_2terminal_chip_molded"
+  }
+ ],
+ "nets": [],
+ "edge": [],
+ "zones": [
+  {
+   "net": "",
+   "name": "3V3_ISLAND_U3",
+   "layers": [],
+   "polygon": [
+    [
+     33.9,
+     45.6
+    ],
+    [
+     35.2,
+     45.6
+    ],
+    [
+     35.2,
+     47.2
+    ],
+    [
+     33.9,
+     47.2
+    ]
+   ],
+   "keepout": {}
+  },
+  {
+   "net": "",
+   "name": "SYS_ISLAND_U2",
+   "layers": [],
+   "polygon": [
+    [
+     35.3,
+     58.95
+    ],
+    [
+     42.85,
+     58.95
+    ],
+    [
+     42.85,
+     60.55
+    ],
+    [
+     35.3,
+     60.55
+    ]
+   ],
+   "keepout": {}
+  },
+  {
+   "net": "",
+   "name": "3V3_ISLAND_CAPS",
+   "layers": [],
+   "polygon": [
+    [
+     32.1,
+     47.9
+    ],
+    [
+     33.6,
+     47.9
+    ],
+    [
+     33.6,
+     51.85
+    ],
+    [
+     32.1,
+     51.85
+    ]
+   ],
+   "keepout": {}
+  },
+  {
+   "net": "",
+   "name": "SYS_ISLAND_C13",
+   "layers": [],
+   "polygon": [
+    [
+     31.35,
+     63.95
+    ],
+    [
+     32.55,
+     63.95
+    ],
+    [
+     32.55,
+     65.1
+    ],
+    [
+     31.35,
+     65.1
+    ]
+   ],
+   "keepout": {}
+  },
+  {
+   "net": "",
+   "name": "GND_POUR_L1",
+   "layers": [],
+   "polygon": [
+    [
+     0.4,
+     0.4
+    ],
+    [
+     54.6,
+     0.4
+    ],
+    [
+     54.6,
+     83.6
+    ],
+    [
+     0.4,
+     83.6
+    ]
+   ],
+   "keepout": {}
+  },
+  {
+   "net": "",
+   "name": "SYS_ISLAND_U3",
+   "layers": [],
+   "polygon": [
+    [
+     31.45,
+     40.35
+    ],
+    [
+     35.05,
+     40.35
+    ],
+    [
+     35.05,
+     42.55
+    ],
+    [
+     31.45,
+     42.55
+    ]
+   ],
+   "keepout": {}
+  },
+  {
+   "net": "",
+   "name": "J3_SOCKET_KEEP_OUT_3",
+   "layers": [
+    "F.Cu",
+    "B.Cu"
+   ],
+   "polygon": [
+    [
+     33.875,
+     73.775
+    ],
+    [
+     34.575,
+     73.775
+    ],
+    [
+     34.575,
+     81.375
+    ],
+    [
+     33.875,
+     81.375
+    ]
+   ],
+   "keepout": {
+    "tracks": true,
+    "vias": true,
+    "pads": true,
+    "copperpour": true,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "J3_SOCKET_KEEP_OUT_5",
+   "layers": [
+    "F.Cu",
+    "B.Cu"
+   ],
+   "polygon": [
+    [
+     34.575,
+     72.475
+    ],
+    [
+     43.275,
+     72.475
+    ],
+    [
+     43.275,
+     74.075
+    ],
+    [
+     34.575,
+     74.075
+    ]
+   ],
+   "keepout": {
+    "tracks": true,
+    "vias": true,
+    "pads": true,
+    "copperpour": true,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "J3_SOCKET_KEEP_OUT_4",
+   "layers": [
+    "F.Cu",
+    "B.Cu"
+   ],
+   "polygon": [
+    [
+     42.925,
+     82.175
+    ],
+    [
+     45.475,
+     82.175
+    ],
+    [
+     45.475,
+     83.525
+    ],
+    [
+     42.925,
+     83.525
+    ]
+   ],
+   "keepout": {
+    "tracks": true,
+    "vias": true,
+    "pads": true,
+    "copperpour": true,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "KEY_RIGHT_MECH_KEEP_OUT",
+   "layers": [
+    "F.Cu",
+    "B.Cu"
+   ],
+   "polygon": [
+    [
+     49.0,
+     0.0
+    ],
+    [
+     51.0,
+     0.0
+    ],
+    [
+     51.0,
+     84.0
+    ],
+    [
+     49.0,
+     84.0
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "J3_SOCKET_KEEP_OUT_1",
+   "layers": [
+    "F.Cu",
+    "B.Cu"
+   ],
+   "polygon": [
+    [
+     32.775,
+     67.925
+    ],
+    [
+     33.525,
+     67.925
+    ],
+    [
+     33.525,
+     71.175
+    ],
+    [
+     32.775,
+     71.175
+    ]
+   ],
+   "keepout": {
+    "tracks": true,
+    "vias": true,
+    "pads": true,
+    "copperpour": true,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "J3_SOCKET_KEEP_OUT_2",
+   "layers": [
+    "F.Cu",
+    "B.Cu"
+   ],
+   "polygon": [
+    [
+     32.775,
+     72.375
+    ],
+    [
+     33.525,
+     72.375
+    ],
+    [
+     33.525,
+     75.975
+    ],
+    [
+     32.775,
+     75.975
+    ]
+   ],
+   "keepout": {
+    "tracks": true,
+    "vias": true,
+    "pads": true,
+    "copperpour": true,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "ESP32_ANT_KEEP_OUT",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     16.0,
+     0.0
+    ],
+    [
+     39.0,
+     0.0
+    ],
+    [
+     39.0,
+     6.0
+    ],
+    [
+     16.0,
+     6.0
+    ]
+   ],
+   "keepout": {
+    "tracks": true,
+    "vias": true,
+    "pads": true,
+    "copperpour": true,
+    "footprints": true
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_3",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     34.15,
+     43.875
+    ],
+    [
+     40.725,
+     43.875
+    ],
+    [
+     40.725,
+     48.525
+    ],
+    [
+     34.15,
+     48.525
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_10",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     0.1,
+     35.6
+    ],
+    [
+     16.675,
+     35.6
+    ],
+    [
+     16.675,
+     41.375
+    ],
+    [
+     0.1,
+     41.375
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_8",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     11.325,
+     7.455
+    ],
+    [
+     17.275,
+     7.455
+    ],
+    [
+     17.275,
+     13.775
+    ],
+    [
+     11.325,
+     13.775
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_6",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     25.475,
+     45.475
+    ],
+    [
+     32.725,
+     45.475
+    ],
+    [
+     32.725,
+     52.225
+    ],
+    [
+     25.475,
+     52.225
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_5",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     43.325,
+     60.625
+    ],
+    [
+     45.69,
+     60.625
+    ],
+    [
+     45.69,
+     65.075
+    ],
+    [
+     43.325,
+     65.075
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_2",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     11.725,
+     61.125
+    ],
+    [
+     13.1875,
+     61.125
+    ],
+    [
+     13.1875,
+     62.925
+    ],
+    [
+     11.725,
+     62.925
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_7",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     1.5,
+     41.475
+    ],
+    [
+     22.525,
+     41.475
+    ],
+    [
+     22.525,
+     51.025
+    ],
+    [
+     1.5,
+     51.025
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_9",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     30.1707,
+     74.4626
+    ],
+    [
+     31.5207,
+     74.4626
+    ],
+    [
+     31.5207,
+     76.975
+    ],
+    [
+     30.1707,
+     76.975
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_4",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     14.875,
+     75.775
+    ],
+    [
+     27.225,
+     75.775
+    ],
+    [
+     27.225,
+     79.725
+    ],
+    [
+     14.875,
+     79.725
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "PWR_NECK_1",
+   "layers": [
+    "F.Cu",
+    "B.Cu",
+    "In1.Cu",
+    "In2.Cu"
+   ],
+   "polygon": [
+    [
+     24.575,
+     53.525
+    ],
+    [
+     36.6375,
+     53.525
+    ],
+    [
+     36.6375,
+     72.375
+    ],
+    [
+     24.575,
+     72.375
+    ]
+   ],
+   "keepout": {
+    "tracks": false,
+    "vias": false,
+    "pads": false,
+    "copperpour": false,
+    "footprints": false
+   }
+  },
+  {
+   "net": "",
+   "name": "GND_POUR_L4",
+   "layers": [],
+   "polygon": [
+    [
+     0.4,
+     0.4
+    ],
+    [
+     54.6,
+     0.4
+    ],
+    [
+     54.6,
+     83.6
+    ],
+    [
+     0.4,
+     83.6
+    ]
+   ],
+   "keepout": {}
+  },
+  {
+   "net": "",
+   "name": "GND_PLANE_L2",
+   "layers": [],
+   "polygon": [
+    [
+     0.4,
+     0.4
+    ],
+    [
+     54.6,
+     0.4
+    ],
+    [
+     54.6,
+     83.6
+    ],
+    [
+     0.4,
+     83.6
+    ]
+   ],
+   "keepout": {}
+  },
+  {
+   "net": "",
+   "name": "GND_POUR_L3",
+   "layers": [],
+   "polygon": [
+    [
+     0.4,
+     0.4
+    ],
+    [
+     54.6,
+     0.4
+    ],
+    [
+     54.6,
+     83.6
+    ],
+    [
+     0.4,
+     83.6
+    ]
+   ],
+   "keepout": {}
+  }
+ ],
+ "drawings": [
+  {
+   "kind": "gr_line",
+   "layer": "Dwgs.User",
+   "start": [
+    49.0,
+    0.0
+   ],
+   "end": [
+    55.0,
+    0.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_line",
+   "layer": "Dwgs.User",
+   "start": [
+    49.0,
+    84.0
+   ],
+   "end": [
+    49.0,
+    0.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_line",
+   "layer": "Dwgs.User",
+   "start": [
+    55.0,
+    0.0
+   ],
+   "end": [
+    55.0,
+    84.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_line",
+   "layer": "Dwgs.User",
+   "start": [
+    55.0,
+    84.0
+   ],
+   "end": [
+    49.0,
+    84.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_line",
+   "layer": "Edge.Cuts",
+   "start": [
+    0.0,
+    82.0
+   ],
+   "end": [
+    0.0,
+    2.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_line",
+   "layer": "Edge.Cuts",
+   "start": [
+    2.0,
+    0.0
+   ],
+   "end": [
+    53.0,
+    0.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_line",
+   "layer": "Edge.Cuts",
+   "start": [
+    53.0,
+    84.0
+   ],
+   "end": [
+    2.0,
+    84.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_line",
+   "layer": "Edge.Cuts",
+   "start": [
+    55.0,
+    2.0
+   ],
+   "end": [
+    55.0,
+    82.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_arc",
+   "layer": "Edge.Cuts",
+   "start": [
+    0.0,
+    2.0
+   ],
+   "mid": [
+    0.5858,
+    0.5858
+   ],
+   "end": [
+    2.0,
+    0.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_arc",
+   "layer": "Edge.Cuts",
+   "start": [
+    2.0,
+    84.0
+   ],
+   "mid": [
+    0.5858,
+    83.4142
+   ],
+   "end": [
+    0.0,
+    82.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_arc",
+   "layer": "Edge.Cuts",
+   "start": [
+    53.0,
+    0.0
+   ],
+   "mid": [
+    54.414199,
+    0.585801
+   ],
+   "end": [
+    55.0,
+    2.0
+   ],
+   "width": 0.0
+  },
+  {
+   "kind": "gr_arc",
+   "layer": "Edge.Cuts",
+   "start": [
+    55.0,
+    82.0
+   ],
+   "mid": [
+    54.414214,
+    83.414214
+   ],
+   "end": [
+    53.0,
+    84.0
+   ],
+   "width": 0.0
+  }
+ ],
+ "title_block": {
+  "title": "ESP32-S3 GDEM102T91 Mainboard",
+  "date": "2026-09-15",
+  "rev": "V1.6",
+  "company": "EPDF Hardware"
+ }
+}

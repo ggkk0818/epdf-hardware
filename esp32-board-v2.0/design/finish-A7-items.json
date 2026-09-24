@@ -1,0 +1,35 @@
+[
+ {
+  "pin": "C12:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C4:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C4:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ }
+]

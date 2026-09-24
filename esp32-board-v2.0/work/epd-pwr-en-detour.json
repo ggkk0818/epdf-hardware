@@ -1,0 +1,19 @@
+{
+ "comment": "P0-3 step 1: move EPD_PWR_EN's Bottom-layer run from x=597 out to x=668 so the USB pair can reach R9/R10 coupled",
+ "delete": {
+  "tracks": [
+   "801998d460905405",
+   "f30b5ec7d0e9c7ac",
+   "2ce186d350bfe2be",
+   "741b1b8499e97579"
+  ]
+ },
+ "tracks": [
+  {"net": "EPD_PWR_EN", "layer": 2, "width": 10, "x1": 614.5, "y1": 2260.4, "x2": 668.2, "y2": 2314.1},
+  {"net": "EPD_PWR_EN", "layer": 2, "width": 10, "x1": 668.2, "y1": 2314.1, "x2": 668.2, "y2": 2718.3},
+  {"net": "EPD_PWR_EN", "layer": 1, "width": 10, "x1": 668.2, "y1": 2718.3, "x2": 738.2, "y2": 2718.3}
+ ],
+ "vias": [
+  {"net": "EPD_PWR_EN", "x": 668.2, "y": 2718.3, "diameter": 24, "hole": 12}
+ ]
+}

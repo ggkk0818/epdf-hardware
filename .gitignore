@@ -35,3 +35,14 @@ Desktop.ini
 # 编辑器 / IDE
 .vscode/
 .idea/
+
+# 嘉立创EDA（EasyEDA Pro）本地工程缓存/元数据
+.easyeda/
+
+# 第三方工具（体积大、可重新下载，不入版本控制）
+# FreeRouting 自动布线器
+freerouting/
+
+# 本地 Java 运行时（jre21 / jre25 等）
+jre*/
+jdk*/

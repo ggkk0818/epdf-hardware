@@ -1,0 +1,1135 @@
+[
+ {
+  "pin": "C10:1",
+  "net": "CHG_REGN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C10:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C28:1",
+  "net": "EPD_VGH",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C28:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C11:1",
+  "net": "CHG_BTST",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C11:2",
+  "net": "CHG_SW",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C12:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C12:1",
+  "net": "BAT_BUS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C15:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C15:1",
+  "net": "CHG_PMID",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C19:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C19:1",
+  "net": "SYS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C2:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C2:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C20:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C20:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C25:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C25:1",
+  "net": "EPD_3V3",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C13:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C14:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C21:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C21:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C22:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C22:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C23:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C23:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C16:1",
+  "net": "CHG_SNUB",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C16:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C17:1",
+  "net": "BAT_BUS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C17:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C24:1",
+  "net": "TPS_VAUX",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C24:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C26:1",
+  "net": "EPD_3V3",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C26:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C4:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C4:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C8:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C3:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C3:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C34:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C34:1",
+  "net": "EPD_3V3",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C5:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C5:1",
+  "net": "RESET_N",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C6:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C6:1",
+  "net": "USB_VBUS_PROT",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C36:1",
+  "net": "EPD_VCOM",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C36:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "C7:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "D3:1",
+  "net": "USB_DN_CONN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "D4:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "D5:1",
+  "net": "USB_CC2",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "F2:1",
+  "net": "BAT1_RAW",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "F2:2",
+  "net": "BAT_BUS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "F3:1",
+  "net": "BAT2_RAW",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "F3:2",
+  "net": "BAT_BUS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "J1:A1-B12",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "J1:A6",
+  "net": "USB_DP_CONN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "J1:A7",
+  "net": "USB_DN_CONN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "J4:1",
+  "net": "BAT1_RAW",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "J4:2",
+  "net": "GND",
+  "kind": "ground",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "J5:1",
+  "net": "BAT2_RAW",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "L1:1",
+  "net": "CHG_SW",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "NTC1:1",
+  "net": "CHG_TS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R9:1",
+  "net": "USB_DP_CONN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R12:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R15:2",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R15:1",
+  "net": "CHG_STAT",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R18:2",
+  "net": "CHG_CE",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R18:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R20:2",
+  "net": "CHG_DSEL",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R20:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R22:2",
+  "net": "FG_ALRT_N",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R22:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R25:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R13:1",
+  "net": "CHG_ILIM",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R19:1",
+  "net": "CHG_OTG",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R29:1",
+  "net": "EPD_PWR_EN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "R23:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:24",
+  "net": "CHG_DSEL",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:23",
+  "net": "CHG_PMID",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:22",
+  "net": "CHG_REGN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:21",
+  "net": "CHG_BTST",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:20",
+  "net": "CHG_SW",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:19",
+  "net": "CHG_SW",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:14",
+  "net": "BAT_BUS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:13",
+  "net": "BAT_BUS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:11",
+  "net": "CHG_TS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:10",
+  "net": "CHG_ILIM",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:9",
+  "net": "CHG_CE",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:8",
+  "net": "CHG_OTG",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:7",
+  "net": "CHG_INT_N",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:6",
+  "net": "I2C_SDA",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U2:4",
+  "net": "CHG_STAT",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U3:7",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U3:8",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U4:2",
+  "net": "BAT_BUS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U4:3",
+  "net": "BAT_BUS",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U4:5",
+  "net": "FG_ALRT_N",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U5:4",
+  "net": "USB_VBUS_DET",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U5:12",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U6:1",
+  "net": "3V3_MAIN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U6:3",
+  "net": "EPD_PWR_EN",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ },
+ {
+  "pin": "U6:6",
+  "net": "EPD_3V3",
+  "kind": "power",
+  "directions": [
+   "right",
+   "left",
+   "up",
+   "down"
+  ]
+ }
+]

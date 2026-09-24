@@ -1,0 +1,77 @@
+{
+ "doc": "P1",
+ "planned": 14,
+ "done": [],
+ "failed": [
+  {
+   "pin": "C12:1",
+   "net": "BAT_BUS",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "C17:1",
+   "net": "BAT_BUS",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "F2:2",
+   "net": "BAT_BUS",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "R19:1",
+   "net": "CHG_OTG",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "U2:8",
+   "net": "CHG_OTG",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "C11:2",
+   "net": "CHG_SW",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "L1:1",
+   "net": "CHG_SW",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "U2:19",
+   "net": "CHG_SW",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "U2:20",
+   "net": "CHG_SW",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "NTC1:1",
+   "net": "CHG_TS",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "U2:11",
+   "net": "CHG_TS",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "R22:2",
+   "net": "FG_ALRT_N",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "U4:5",
+   "net": "FG_ALRT_N",
+   "error": "schematic geometry guard failed (preflight)"
+  },
+  {
+   "pin": "C17:2",
+   "net": "GND",
+   "error": "schematic geometry guard failed (preflight)"
+  }
+ ]
+}

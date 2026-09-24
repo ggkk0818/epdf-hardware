@@ -1,0 +1,50 @@
+{
+ "ok": [
+  {
+   "pin": "C5:1",
+   "net": "RESET_N",
+   "offset": 45.0
+  },
+  {
+   "pin": "J1:A7",
+   "net": "USB_DN_CONN",
+   "offset": 45.0
+  },
+  {
+   "pin": "J1:A6",
+   "net": "USB_DP_CONN",
+   "offset": 45.0
+  },
+  {
+   "pin": "U5:4",
+   "net": "USB_VBUS_DET",
+   "offset": 45.0
+  }
+ ],
+ "failed": [
+  {
+   "pin": "R19:1",
+   "net": "CHG_OTG",
+   "kind": "net_port_bi",
+   "direction": "up"
+  },
+  {
+   "pin": "U2:19",
+   "net": "CHG_SW",
+   "kind": "net_port_bi",
+   "direction": "left"
+  },
+  {
+   "pin": "NTC1:1",
+   "net": "CHG_TS",
+   "kind": "net_port_bi",
+   "direction": "down"
+  },
+  {
+   "pin": "R22:2",
+   "net": "FG_ALRT_N",
+   "kind": "net_port_bi",
+   "direction": "up"
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+[
+ {
+  "net": "USB_VBUS_RAW",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "USB_VBUS_PROT",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "BAT1_RAW",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "BAT2_RAW",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "BAT_BUS",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "SYS",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "3V3_MAIN",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_3V3",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "CHG_PMID",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "CHG_REGN",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "CHG_SW",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "CHG_BTST",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "TPS_L1",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "TPS_L2",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "TPS_VAUX",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_VDD",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_SW",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_X",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_VGH",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_VGL",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_VSH1",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_VSH2",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_VSL",
+  "plan": true,
+  "applied": true
+ },
+ {
+  "net": "EPD_VCOM",
+  "plan": true,
+  "applied": true
+ }
+]

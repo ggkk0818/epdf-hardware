@@ -1,0 +1,16 @@
+{
+ "comment": "USB0: terminate the Bottom-layer pair onto the Top-layer series-resistor pads through vias (they are SMD pads on L1, not L2)",
+ "delete": {
+  "tracks": ["11812f9e942a60e7", "d753ba151940bb0d"]
+ },
+ "tracks": [
+  {"net": "USB_DP_CONN", "layer": 2, "width": 8, "x1": 600.0, "y1": 2510.0, "x2": 592.0, "y2": 2455.0},
+  {"net": "USB_DP_CONN", "layer": 1, "width": 8, "x1": 592.0, "y1": 2455.0, "x2": 581.5, "y2": 2406.9},
+  {"net": "USB_DN_CONN", "layer": 2, "width": 8, "x1": 600.0, "y1": 2490.0, "x2": 596.0, "y2": 2520.0},
+  {"net": "USB_DN_CONN", "layer": 1, "width": 8, "x1": 596.0, "y1": 2520.0, "x2": 581.5, "y2": 2584.1}
+ ],
+ "vias": [
+  {"net": "USB_DP_CONN", "x": 592.0, "y": 2455.0, "diameter": 24, "hole": 12},
+  {"net": "USB_DN_CONN", "x": 596.0, "y": 2520.0, "diameter": 24, "hole": 12}
+ ]
+}

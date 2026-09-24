@@ -1,0 +1,124 @@
+== 1a. v2 schematic vs v1.1 historical netlist export (esp32-board-v1.1.net, 2026-09-10 �� NOT the requirement's data source) ==
+   NOTE: that export predates the frozen V1.6 fixups: it still carries TP1-TP10 test points, a 16-pin U3 symbol and unnamed single-pad nets.
+   The requirement document declares the v1.1 FINAL PCB as its data source; see tools/pcb_netlist_check.py for that comparison.
+   v1.1 pins 331, v2 pins 363, only-in-v1.1 20, only-in-v2 52, net differences 301
+     v1.1 only: J1.A1 = Net-(J1-GND-PadA1)
+     v1.1 only: J1.A12 = Net-(J1-GND-PadA1)
+     v1.1 only: J1.A4 = unconnected-(J1-VBUS-PadA4)
+     v1.1 only: J1.A9 = unconnected-(J1-VBUS-PadA4)
+     v1.1 only: J1.B1 = Net-(J1-GND-PadA1)
+     v1.1 only: J1.B12 = Net-(J1-GND-PadA1)
+     v1.1 only: J1.B4 = unconnected-(J1-VBUS-PadA4)
+     v1.1 only: J1.B9 = unconnected-(J1-VBUS-PadA4)
+     v1.1 only: J1.SH = unconnected-(J1-SHIELD-PadSH)
+     v1.1 only: TP1.1 = /DBG_TX
+     v1.1 only: TP10.1 = /I2C_SCL
+     v1.1 only: TP2.1 = /DBG_RX
+     v1.1 only: TP3.1 = /USB_VBUS_RAW
+     v1.1 only: TP4.1 = /USB_VBUS_PROT
+     v1.1 only: TP5.1 = /SYS
+     v1.1 only: TP6.1 = /BAT_BUS
+     v1.1 only: TP7.1 = /3V3_MAIN
+     v1.1 only: TP8.1 = /EPD_3V3
+     v1.1 only: TP9.1 = /I2C_SDA
+     v1.1 only: U3.16 = /SYS
+     v2 only  : C34.1 = EPD_3V3
+     v2 only  : C34.2 = GND
+     v2 only  : C35.1 = EPD_VDD
+     v2 only  : C35.2 = GND
+     v2 only  : C36.1 = EPD_VCOM
+     v2 only  : C36.2 = GND
+     v2 only  : C37.1 = 3V3_MAIN
+     v2 only  : C37.2 = GND
+     v2 only  : C38.1 = 3V3_MAIN
+     v2 only  : C38.2 = GND
+     v2 only  : D5.1 = USB_CC2
+     v2 only  : D5.2 = GND
+     v2 only  : D6.1 = EPD_VGH
+     v2 only  : D6.2 = EPD_SW
+     v2 only  : D7.1 = GND
+     v2 only  : D7.2 = EPD_X
+     v2 only  : D8.1 = EPD_X
+     v2 only  : D8.2 = EPD_VGL
+     v2 only  : J1.1 = USB_SHIELD
+     v2 only  : J1.2 = USB_SHIELD
+     differs  : C1.1: v1.1=GND  v2=3V3_MAIN
+     differs  : C1.2: v1.1=/3V3_MAIN  v2=GND
+     differs  : C10.1: v1.1=/CHG_SW  v2=CHG_REGN
+     differs  : C10.2: v1.1=/CHG_BTST  v2=GND
+     differs  : C11.1: v1.1=GND  v2=CHG_BTST
+     differs  : C11.2: v1.1=/BAT_BUS  v2=CHG_SW
+     differs  : C12.1: v1.1=GND  v2=BAT_BUS
+     differs  : C12.2: v1.1=/SYS  v2=GND
+     differs  : C13.1: v1.1=GND  v2=SYS
+     differs  : C13.2: v1.1=/SYS  v2=GND
+     differs  : C14.1: v1.1=GND  v2=SYS
+     differs  : C14.2: v1.1=/BAT_BUS  v2=GND
+     differs  : C15.1: v1.1=GND  v2=CHG_PMID
+     differs  : C15.2: v1.1=/SYS  v2=GND
+     differs  : C16.1: v1.1=GND  v2=CHG_SNUB
+     differs  : C16.2: v1.1=/SYS  v2=GND
+     differs  : C17.1: v1.1=GND  v2=BAT_BUS
+     differs  : C17.2: v1.1=/3V3_MAIN  v2=GND
+     differs  : C18.1: v1.1=GND  v2=SYS
+     differs  : C18.2: v1.1=/3V3_MAIN  v2=GND
+     differs  : C19.1: v1.1=GND  v2=SYS
+     differs  : C19.2: v1.1=/3V3_MAIN  v2=GND
+     differs  : C2.1: v1.1=GND  v2=3V3_MAIN
+     differs  : C2.2: v1.1=/3V3_MAIN  v2=GND
+     differs  : C20.1: v1.1=GND  v2=3V3_MAIN
+     differs  : C20.2: v1.1=/3V3_MAIN  v2=GND
+     differs  : C21.1: v1.1=GND  v2=3V3_MAIN
+     differs  : C21.2: v1.1=/TPS_VAUX  v2=GND
+     differs  : C22.1: v1.1=GND  v2=3V3_MAIN
+     differs  : C22.2: v1.1=/EPD_3V3  v2=GND
+   component refs only in v1.1: ['TP1', 'TP10', 'TP2', 'TP3', 'TP4', 'TP5', 'TP6', 'TP7', 'TP8', 'TP9']
+   component refs only in v2  : ['C34', 'C35', 'C36', 'C37', 'C38', 'D5', 'D6', 'D7', 'D8', 'R28', 'R29', 'R30', 'R31', 'R32', 'R33', 'R34', 'R35', 'R36']
+   nets: v1.1 65, v2 70; v1.1-only ['/3V3_MAIN', '/BAT1_RAW', '/BAT2_RAW', '/BAT_BUS', '/BOOT', '/CHG_BTST', '/CHG_ILIM', '/CHG_INT_N', '/CHG_REGN', '/CHG_STAT', '/CHG_SW', '/CHG_TS', '/DBG_RX', '/DBG_TX', '/EPD_3V3', '/EPD_BUSY', '/EPD_CS_N', '/EPD_DC', '/EPD_GDR', '/EPD_PWR_EN', '/EPD_RESE', '/EPD_RST_N', '/EPD_SW', '/EPD_VCOM', '/EPD_VDD', '/EPD_VGH', '/EPD_VGL', '/EPD_VSH', '/EPD_VSH1', '/EPD_VSL', '/FG_ALRT_N', '/I2C_SCL', '/I2C_SDA', '/KEY1_N', '/KEY2_N', '/KEY3_N', '/RESET_N', '/SPI_MISO', '/SPI_MOSI', '/SPI_SCLK', '/SYS', '/TF_CD_N', '/TF_CS_N', '/TF_MISO', '/TF_MOSI', '/TF_SCLK', '/TPS_FB', '/TPS_L1', '/TPS_L2', '/TPS_PG', '/TPS_VAUX', '/TYPEC_INT_N', '/USB_CC2', '/USB_DN', '/USB_DN_CONN', '/USB_DP', '/USB_DP_CONN', '/USB_SHIELD', '/USB_VBUS_DET', '/USB_VBUS_PROT', '/USB_VBUS_RAW', 'Net-(J1-GND-PadA1)', 'Net-(U2-BAT-Pad13)', 'Net-(U2-PGND-Pad17)']; v2-only ['3V3_MAIN', 'BAT1_RAW', 'BAT2_RAW', 'BAT_BUS', 'BOOT', 'CHG_BTST', 'CHG_CE', 'CHG_DSEL', 'CHG_ILIM', 'CHG_INT_N', 'CHG_OTG', 'CHG_PMID', 'CHG_REGN', 'CHG_SNUB', 'CHG_STAT', 'CHG_SW', 'CHG_TS', 'EPD_3V3', 'EPD_BUSY', 'EPD_CS_N', 'EPD_DC', 'EPD_GDR', 'EPD_PWR_EN', 'EPD_RESE', 'EPD_RST_N', 'EPD_SW', 'EPD_VCOM', 'EPD_VDD', 'EPD_VGH', 'EPD_VGL', 'EPD_VSH1', 'EPD_VSH2', 'EPD_VSL', 'EPD_X', 'FG_ALRT_N', 'I2C_SCL', 'I2C_SDA', 'KEY1_N', 'KEY2_N', 'KEY3_N', 'RESET_N', 'SPI_MISO', 'SPI_MOSI', 'SPI_SCLK', 'SYS', 'TF_CD_N', 'TF_CS_N', 'TF_MISO', 'TF_MOSI', 'TF_SCLK', 'TPS_EN', 'TPS_FB', 'TPS_L1', 'TPS_L2', 'TPS_PG', 'TPS_PS_SYNC', 'TPS_VAUX', 'TPS_VSEL', 'TYPEC_INT_N', 'USB_CC1', 'USB_CC2', 'USB_DN', 'USB_DN_CONN', 'USB_DP', 'USB_DP_CONN', 'USB_SHIELD', 'USB_VBUS_DET', 'USB_VBUS_PROT', 'USB_VBUS_RAW']
+     net GND: v1.1-only pins ['C1.1', 'C11.1', 'C12.1', 'C13.1', 'C14.1', 'C15.1', 'C16.1', 'C17.1', 'C18.1', 'C19.1', 'C2.1', 'C20.1', 'C21.1', 'C22.1', 'C23.1', 'C24.1', 'C25.1', 'C26.1', 'C27.1', 'C28.1', 'C29.1', 'C3.1', 'C30.1', 'C31.1', 'C32.1', 'C33.1', 'C4.1', 'C5.1', 'C6.1', 'C7.1', 'C8.1', 'C9.1', 'J2.16', 'J2.7', 'J3.4', 'J3.8', 'NTC1.1', 'R10.1', 'R13.1', 'R17.1', 'R20.1', 'R22.1', 'R23.1', 'U1.2', 'U2.5', 'U3.12', 'U3.13', 'U3.6', 'U3.8', 'U4.7', 'U5.9'], v2-only pins ['C1.2', 'C10.2', 'C12.2', 'C13.2', 'C14.2', 'C15.2', 'C16.2', 'C17.2', 'C18.2', 'C19.2', 'C2.2', 'C20.2', 'C21.2', 'C22.2', 'C23.2', 'C24.2', 'C25.2', 'C26.2', 'C27.2', 'C28.2', 'C3.2', 'C30.2', 'C31.2', 'C32.2', 'C33.2', 'C34.2', 'C35.2', 'C36.2', 'C37.2', 'C38.2', 'C4.2', 'C5.2', 'C6.2', 'C7.2', 'C8.2', 'C9.2', 'D2.2', 'D3.2', 'D4.2', 'D5.2', 'D7.1', 'J1.A1-B12', 'J1.B1-A12', 'J2.17', 'J2.8', 'J3.10', 'J3.12', 'J3.13', 'J3.14', 'J4.2', 'J5.2', 'NTC1.2', 'R13.2', 'R17.2', 'R19.2', 'R24.2', 'R28.1', 'R29.2', 'R30.2', 'R31.2', 'R8.2', 'SW1.2', 'SW2.2', 'SW3.2', 'SW4.2', 'SW5.2', 'U2.17', 'U2.18', 'U2.25', 'U3.10', 'U3.4', 'U4.1', 'U4.6', 'U4.9', 'U5.11', 'U6.2']
+
+== 2a. requirement doc 7.2: ESP32-S3 GPIO map (module pin -> net) ==
+   22/22 GPIO assignments match
+   NC pins on U1 in v2: [15, 16, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]
+   doc names these NC  : [31, 32, 36, 37] (+ GPIO3/35/36/37/40/41/42/45/46/48 per SCHEMATIC_NOTES 3)
+
+== 2b. requirement doc 5.5: microSD J3 pin map ==
+   14/14 J3 pins match
+
+== 2c. FPC J2 pin map (SCHEMATIC_NOTES 4.2 / GDEM102T91 p.7) ==
+   24/24 J2 pins match
+
+== 2d. requirement doc 7.4/7.5/7.9: connector & function wiring ==
+   24/24 connector/function pins match
+
+== 2e. requirement doc 7.6: CHG_STAT must stay off the MCU ==
+   CHG_STAT pins: ['R15.1', 'U2.4']
+
+== 2f. requirement doc 5.2/5.4/5.5 pin counts per connector ==
+   J1: 16 pins (expected 16)
+   J2: 26 pins (expected 26)
+   J3: 14 pins (expected 14)
+   J4: 4 pins (expected 2)  <-- check
+   J5: 4 pins (expected 2)  <-- check
+   SW3: 2 pins (expected 2)
+   SW4: 2 pins (expected 2)
+   SW5: 2 pins (expected 2)
+   U1: 41 pins (expected 41)
+
+== 3. v1.1 BOM vs v2 parts-map ==
+   refs in v1.1 BOM only: ['C1', 'C10', 'C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C2', 'C20', 'C21', 'C22', 'C23', 'C24', 'C25', 'C26', 'C27', 'C28', 'C29', 'C3', 'C30', 'C31', 'C32', 'C33', 'C34', 'C35', 'C36', 'C37', 'C38', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'D2', 'D3', 'D4', 'D5', 'D7', 'D8', 'F1', 'F2', 'F3', 'J5', 'R1', 'R10', 'R11', 'R12', 'R13', 'R14', 'R15', 'R16', 'R17', 'R18', 'R19', 'R2', 'R20', 'R21', 'R22', 'R23', 'R24', 'R25', 'R26', 'R27', 'R28', 'R29', 'R3', 'R30', 'R31', 'R32', 'R33', 'R34', 'R35', 'R36', 'R4', 'R5', 'R6', 'R7', 'R8', 'R9', 'SW1', 'SW2', 'SW3', 'SW4', 'SW5']
+   refs in v2 parts only : ['C_100nF_0603', 'C_10uF_0805', 'C_1nF_0603', 'C_1uF_0603', 'C_1uF_25V_0805', 'C_22uF_0805', 'C_470pF_0603', 'C_47nF_0603', 'C_4u7uF_0805', 'D23', 'D45', 'F', 'R_0R_0603', 'R_100k_0603', 'R_10k_0603', 'R_150k_0603', 'R_180R_0603', 'R_1M_0603', 'R_22R_0603', 'R_2R2_0805', 'R_30k1_0603', 'R_470k_0603', 'R_4k7_0603', 'R_5k23_0603', 'R_900k_0603', 'SW']
+   ref   v1.1 value    v2 value    v1.1 MPN                          v2 MPN                            
+   D1    TVS 5.6V      PESD5V0S1BA PESD5V0S1BA,115                   PESD5V0S1BA                         VALUE  MPN
+   D6    MBR0530       MBR0530     MBR0530T1G                        MBR0530                             MPN
+   J1    USB-C 2.0 SinkUSB4105-GF- GCT USB4105-15-A-120              USB4105-GF-A-120                    VALUE  MPN
+   J2    GDEM102T91 24P FPCX05B20U24T  XKB X05B20U24T                    X05B20U24T                          VALUE  MPN
+   J3    MicroSD       DM3AT-SF-PE Hirose DM3AT-SF-PEJM5             DM3AT-SF-PEJM5                      VALUE  MPN
+   J4    BAT1          532610271   Molex 53261-0271                  532610271                           VALUE  MPN
+   L1    1.0uH         1uH         Sunlord MWSA0503S-1R0MT           NR5040-1.0uH/N                      VALUE  MPN
+   L2    1.2uH         1.2uH       Sunlord MWSA0402S-1R2MT           MWSA0402S-1R2MT                     MPN
+   L3    47uH          47uH        cjiang FHD4020S-470MT             FHD4020S-470MT                      MPN
+   NTC1  10k B3435     NTCS0603E31 Vishay NTCS0603E3103FLT           NTCS0603E3103FLT                    VALUE  MPN
+   Q1    Si1304BDL     SI1304BDL   Si1304BDL-T1-GE3                  SI1304BDL                           VALUE  MPN
+   U1    ESP32-S3-WROOM-1-N16R82.4GHz      ESP32-S3-WROOM-1-N16R8            ESP32-S3-WROOM-1-N16R8              VALUE
+   U6    TPS22918      TPS22918DBV TPS22918                          TPS22918DBVR                        MPN
