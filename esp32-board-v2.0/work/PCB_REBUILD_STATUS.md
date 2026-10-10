@@ -329,3 +329,108 @@ U5.3  ─(1676.4,970.5)-(1676.4,949.5)─(1669.8,949.5)-(1669.8,721.9)─(1717.3
    `save` + `doc reload` 再 dump。
 5. `pcb drc` 的 `position`/`clearance` 单位不是 mm：位置是 **mil/10**，`clearance` 是
    **mil/10**（例：`clearance 0.40157` = 4.016 mil）。
+
+---
+
+# 第九轮（2026-10-10）：只读复核 —— 最新板况（**全程未改动 PCB / 原理图**）
+
+本轮不修任何东西，只用 easyeda-agent typed 读取把最终板况量一遍。
+现场快照 `work/scan-20261010/board-dump.json`；逐条 CLI 回读输出已在 2026-10-10 清理时删除，
+可用 `tools/scan-20261010.ps1` / `scan2-20261010.ps1` / `scan3-20261010.ps1` / `scan4-20261010.ps1` 重跑生成。
+详细表格见 `HANDOFF.md` §16；本节只留可执行的状态摘要。
+
+## 一、板况（`pcb dump --include-copper`，`semanticSha256 = 7f7500b6…c259ca9`）
+
+| 项 | 实测 | 与 2026-09-23 第七轮相比 |
+|---|---|---|
+| 器件 | **109**（全 Top） | 与 P1 63 + P2 46 一致 |
+| 网络 | **72**，**全部有铜** | ↑（第七轮还有 Connection 未连） |
+| 走线 | **1041 段 + 1 弧**，合计 **98 529 mil ≈ 2502.6 mm**（Top 777 / Bottom 264 段） | 新增 `tools/patch_gnd.py` 之后的收口结果 |
+| 过孔 | **219**（Ø24/hole12 ×215、Ø48/hole24 ×4）；GND 127、3V3_MAIN 26 | 第七轮去重 43 个 + 后续 stitching |
+| 铺铜 | **1 块 GND / Top**，55.000 × 84.000 mm 圆角矩形 R3.000，locked | 无 2 层冲突（GND 移到了 Inner1 内电层） |
+| 内电层 | Inner1 = PLANE、Inner2 = PLANE（4 层板） | 见 `pcb power-planes` 路线 |
+| 铜填充 | 9 块同网填充（3V3_MAIN×2、SYS×2、TPS_L1/L2、CHG_SW、USB_VBUS_PROT、EPD_3V3） | — |
+| 天线禁布区 | 1 个，Multi-Layer，X 20.500–43.500 / Y 0.000–6.000 mm | ⚠️ 需求文档写 X 16–39，见下 |
+
+## 二、DRC：**只剩 1 条**
+
+第七轮结束时是 33 条（94 → 33），本轮为 **1 条**：
+
+```
+rule=Clearance Error  objType=Plane Zone to Via  layer=Inner2  net=3V3_MAIN  @(284, -2875)
+message=(3V3_MAIN): e-1 to (GND): e123 distance is 0mil, should be >= 10mil
+```
+
+→ **Inner2（3V3_MAIN 内电层）与一个 GND 过孔间距 0 mil。**
+这属于 `pcb check` 标注的 `via-crosses-plane`（内电层反焊盘问题，easyeda/pro-api-sdk#32）：
+**在平面已存在之后新建的过孔不会自动带反焊盘**。可选修法（本轮未做）：
+
+1. 删掉该过孔、把这根线改到外层走（最稳）；
+2. 或 `pcb save` → `doc reload` → `pcb pour-rebuild` 让平台重建内电层反焊盘，再复跑 `pcb drc`。
+
+第七轮遗留的 **U5 GND 焊盘引擎判据**问题在本轮 DRC 里**已不再出现**（Connection/Clearance 都没有它）。
+第七轮修掉的 43 个重复过孔也确认没有回来（219 个过孔全为有效换层/缝合）。
+
+## 三、⚠️ 工具侧缺陷：`pcb check` / `layout-lint` 的阈值当前失真
+
+`pcb check` 报 431 issue（ERROR=41 WARN=342，`clearance=41 coupling=247 copperNearEdge=46`），
+但**这些阈值不能采信**：本板 `pcb net-classes` 把 signal / power / gnd 五档线宽全部读成
+**393.7 mil（= 10 mm）**，于是 `pcb check` 用 `clearance=235.6 mil`、`copperToEdge=393.7 mil` 去判，
+一条 `BAT1_RAW` 就能报 40 条“clearance”，全板有 **36 503+** 条被截断。
+根因看上去是 CLI live 规则回读的单位换算（`pcb drc-rules` 的 `unit: mil` 值被当成 mm，
+例：via 12.0078 mil → 被报成 472.75 mil = 12.0078 mm）。
+
+**结论：判定布线是否合格只用 `pcb drc`（它报 10 mil，与平台默认一致）。**
+`pcb check` 里与阈值无关的几类仍然有用：`dangling-end`（3 条，见下）、`single-layer-via`（28 条，多为
+3V3_MAIN 的 stitch 短桩）、`via-crosses-plane`（2 条 = 上面那条 DRC 的正反面）、
+`power-not-poured`（`EPD_VDD` 仍走细线未铺铜）。
+
+未闭合的 3 条 dangling-end（本轮未动）：
+
+| 坐标 | 网络 |
+|---|---|
+| (605, -1985) | `CHG_SW` |
+| (535, -1875) | `SYS` |
+| (1455, -1975) | `TPS_L1` |
+
+## 四、三处几何偏差，需用户裁决（**本轮只读，未改板也未改文档数值**）
+
+1. **四角挖孔**：实测 4 个 Multi-Layer 圆填充，**半径 2.200 mm（Ø4.400 mm）**，圆心距板边各 **4.000 mm**
+   （编辑器坐标 (4.000,4.000)/(51.000,4.000)/(4.000,80.000)/(51.000,80.000)）。
+   需求 §3 与第一轮 `mount-holes --dia 86.6 --inset 118.1` 的意图都是 **Ø2.2 mm @ 距边 3.000 mm**。
+   NPTH 钻孔文件里没有四角孔（只有 J1 的 2×Ø0.650），说明它是**铣孔**。建议 `pcb fill list --layer 12` 核对后再定。
+2. **天线禁布区**：实测 **X 20.500–43.500 mm / Y 0.000–6.000 mm**（居中于 U1 天线端 X 22.500–41.500），
+   需求 §6 写的是 X 16.000–39.000。宽度一致、整体 +4.500 mm，属 v2.0 的 U1 摆位偏差。
+3. **受约束接口 / 按键整体换位**（焊盘级实测，见 `PCB_INTERFACE_POSITIONS.md` §11.2）：
+
+   | 项 | §5.6 (2026-09-22) | 现场 (2026-10-10) | 偏差 |
+   |---|---|---|---|
+   | J1 信号焊盘行 X | 20.800–27.201 | **13.183–19.583** | **−7.617** |
+   | J2 焊盘列 X / 针序 | 2.101 / Pin1 在 Y 47.777 | **6.383 / Pin1 在 Y 36.223** | **+4.282 / 反向** |
+   | J3 Pin1–9 X | 34.201–42.850 | **30.904–39.553** | **−3.297** |
+   | J4 / J5 引脚列 X | 7.450 | **5.822** | **−1.628** |
+   | SW3/4/5 中心 | 15.000 / 42.000 / 69.000（间距 27，旋转 90°） | **25.000 / 42.000 / 59.000（间距 17，旋转 0°）** | **间距 −10** |
+
+   旁证：`work/ref-last-layout.json`（2026-09-22）仍是 `J1 x=944.882 y=170.400 mil`、`SW3 x=2080.709 mil`（= §5.6），
+   而 `work/dump-now.json`（2026-09-28）起就是现场值 ⇒ **2026-09-24 ~ 09-28 之间重做过布局**。
+   ⚠️ 焊盘→网的映射仍然正确：全板 **371 个焊盘**与原理图 P1+P2 逐脚比对 **371/371 一致（0 差异、0 孤儿）**；
+   差异只在机械坐标/朝向，不在电气连接。
+
+## 五、差分对（`pcb report`）
+
+| 差分对 | 网络 | 长度 (mm) | skew (mil) |
+|---|---|---|---|
+| `USB_DATA` | `USB_D_P` / `USB_D_N` | 111.67 / 111.75 | **2.96** |
+| `USB_DATA2` | `USB_DP` / `USB_DN` | 3.56 / 3.78 | **8.65** |
+
+两对都在规则容差 10 mil 内；`USB_D_P/N` 仍是 10 mil 宽单层 Top 走线（未真正耦合），
+与第十二轮“当前板框放不下真解耦差分对”的结论一致。
+
+## 六、下一步（若要继续动板）
+
+1. 先处理唯一的 DRC：Inner2 内电层 ↔ GND 过孔 0 mil（删过孔改外层，或 reload + pour-rebuild）。
+2. 与用户确认四角挖孔与天线禁布区，再决定改板还是改 `PCB_INTERFACE_POSITIONS.md`。
+3. `EPD_VDD` 按 `pcb check` 建议改铺铜/加宽（当前 3 段 11.8 mil）。
+4. 收尾 3 条 dangling-end。
+5. 任何写操作前先 `easyeda health` + 用 `--project`/`--doc` 明确目标 —— 工程里现在有 **9 个 Board 副本**，
+   落到副本上的概率不低。

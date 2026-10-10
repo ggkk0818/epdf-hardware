@@ -1048,3 +1048,280 @@ GND 涨到 141 脚。
   `tools/gerber_j1_outline.py`（Gerber 层范围）、`tools/j1_pad_compare.py`（J1 封装对比）。
 * 结论：**J1 整列 −0.356 mm、J4/J5 X −0.950 mm、J3 +0.175 mm，SW3–5/J2 与参考一致**；
   若后续改版要回到 v1.1 基线，按 §5.6 的“偏差”列反向平移即可。
+
+---
+
+# 第十六轮：2026-10-10 只读现场扫描（最新设计 / 布线快照）
+
+> **本轮全程只读。** 只调用 easyeda-agent 的 typed 读取命令
+> （`health` / `doc ls` / `board list|current` / `pcb list|layers|stackup show|outline-get|nets|report|drc-rules|drc|check|pour-list|via-list|track-list|dump` /
+> `sch pages|read|check`），**没有对原理图或 PCB 执行任何写操作**
+> （无 `save`、无 `modify`、无 `apply`、无 `pour-rebuild`、无 `doc reload`）。
+> 现场只读证据：`work/scan-20261010/board-dump.json`（整板快照：器件/走线/过孔/铺铜/区域/填充/规则）。
+> 逐条 CLI 回读的原始输出在 2026-10-10 的目录清理中已删除，可用
+> `tools/scan-20261010.ps1`、`tools/scan2-20261010.ps1`、`tools/scan3-20261010.ps1`、`tools/scan4-20261010.ps1` 原样重跑生成。
+
+## 16.1 运行态
+
+| 组件 | 版本 |
+|---|---|
+| CLI (`easyeda.exe`) | v1.9.0（`%LOCALAPPDATA%\Python\bin`） |
+| daemon | v1.9.0，监听 `127.0.0.1:60832`（本轮由本次会话 `easyeda daemon start` 拉起） |
+| Connector | 1.9.0（与 CLI 同版，`versionGate: ok`） |
+| EasyEDA Pro 宿主 | 4.1.60 / 4.1.71（扫描期间 daemon 上先后出现两个窗口，数据取自带 `esp32s3-board-v2.0` 工程上下文的那个，`hostCompatibility: ok`） |
+
+注：本轮开头 daemon 未运行（`health` 报 `not_found`，10 个端口全部 refused），
+`easyeda daemon start` 后约 20 秒连接器才注册成功。**页面已打开 ≠ connector 已连接**，务必先跑 `health`。
+
+## 16.2 工程 / Board / 文档身份
+
+| 项 | 值 |
+|---|---|
+| 工程 | **esp32s3-board-v2.0** |
+| projectUuid | `c4799361d2dd4e09bdd31ddc8a57a1ba` |
+| 当前 Board（`board current`） | **Board1**（`linked: true`） |
+| ↳ 原理图 | `Schematic1` `cc227a1a0e59e2a5` |
+| ↳ PCB | `PCB1` `bf67266b4f7b8c7f` |
+| 原理图页 | **P1** `7b1ca0ce011868e2`、**P2** `f568f62f67600e3d` |
+| 工程内 Board 数 | **9** |
+
+其余 8 个 Board 是历史快照副本，**不是并行分支**（每个自带一套原理图 + PCB）：
+
+| Board | PCB | Schematic |
+|---|---|---|
+| Board1_20260927 | PCB1_1 `4223ad5901dddc92` | Schematic1_1 `95ea04d3d40f3f05` |
+| Board1_20261003 | PCB1_2 `e8a9aded1cca20db` | Schematic1_2 `9ec90b5b595e6443` |
+| Board1_20261005 | PCB1_3 `50d441ed637ab82f` | Schematic1_3 `7e4e8b80ceee7e4b` |
+| Board1_20261006 | PCB1_4 `21a2081eb3d3c17d` | Schematic1_4 `4a5b22cd1af8d5da` |
+| Board1_final1 | PCB1_5 `fce0f23cce15afeb` | Schematic1_5 `352d59cfd01ef7ac` |
+| Board1_final2 | PCB1_6 `d65e5d4950200478` | Schematic1_6 `393b59d616d05322` |
+| Board1_final3 | PCB1_7 `41cedecf4a0baf03` | Schematic1_7 `0735bc91512e8880` |
+| Board1_final4 | PCB1_8 `f396277464f7b6a0` | Schematic1_8 `d0b2cf19c5d56ed2` |
+
+> `doc ls` 会把这 9 套文档全部列出来（PCB1、PCB1_1…PCB1_8，P1/P2 各 9 份）。
+> **写操作必须用 UUID 或 `--doc` 明确目标**，否则可能落到副本上；`pcb list` 之类命令只跟“当前活动文档”走。
+
+## 16.3 PCB 现状（typed 回读）
+
+| 项 | 实测 |
+|---|---|
+| 板框 | 55.000 × 84.000 mm；`outline-get` 返回 `bbox -5…2170.354 / -3312.087…5 mil`（含 0.254 mm 线宽）。**解析状态 `outlineFormat: "unexpected-start:R"`，points/segments 为空 —— 圆角半径本轮无法用 typed 读取确认**（2026-09-21 Gerber 记录为 R2.000） |
+| 叠层 | 4 铜层：Top(1,SIGNAL) / Inner1(15,**PLANE**) / Inner2(16,**PLANE**) / Bottom(2,SIGNAL) |
+| 器件 | **109**，全部在 Top 层（= P1 63 + P2 46） |
+| 网络 | **72**（全部有铜；无未布线网络） |
+| 走线 | **1041 段 + 1 段圆弧**，合计 **98 529 mil ≈ 2502.6 mm**；Top 777 段 / 55 250 mil，Bottom 264 段 / 43 279 mil |
+| 线宽分布 (mil) | 10×770、11.7×8、11.8×53、20×3、24×160、30×10、40×37 |
+| 过孔 | **219**：Ø24/hole12 ×215、Ø48/hole24 ×4；GND 127、3V3_MAIN 26、I2C_SDA 5、TYPEC_INT_N / I2C_SCL / CHG_INT_N 各 4、CHG_CE/SPI_SCLK/SPI_MOSI 各 3，其余 1–2 |
+| 铺铜 | **1 块**：`POUR1` GND / Top，圆角矩形 `0,0 → 2165.354,3307.087 mil`（55.000 × 84.000 mm，R3.000），`locked: true` |
+| 铜填充 | 9 块同网填充（Top）：`3V3_MAIN`×2、`SYS`×2、`TPS_L1`、`TPS_L2`、`CHG_SW`、`USB_VBUS_PROT`、`EPD_3V3` |
+| 禁布区 | **1 个** `86038dcab8b5a2e1`（Multi-Layer）：**X 20.500–43.500 mm，Y 0.000–6.000 mm**，规则 `no-fills / no-wires / no-pours / no-inner-electrical`（天线区，见 16.5） |
+| 丝印 | 338 个图元 |
+| 网络类 | **0 个**（`net-class list` → `classes: []`；72 个 net 全部 `default`） |
+| 快照指纹 | `semanticSha256 = 7f7500b6e227b9e9b202ee799075613d74a2054e25201fb7371483ea7c259ca9` |
+
+## 16.4 DRC / DFM 现状
+
+**原生 DRC（判据）：不通过 —— 1 条违规。**
+
+```
+rule=Clearance Error  objType=Plane Zone to Via  layer=Inner2  net=3V3_MAIN  @(284, -2875)
+objs=[5d796102179a8157, 84f72bb62cb6bd00]
+message=(3V3_MAIN): e-1 to (GND): e123 distance is 0mil, should be >= 10mil
+```
+
+即 **Inner2（3V3_MAIN 内电层）与一个 GND 过孔间距 0 mil**。这是当前唯一的阻断项；本轮只读，未修（修法参考
+`pcb check` 的 `via-crosses-plane` 提示：删除该过孔改外层走线，或 `doc reload` + `pour-rebuild`）。
+
+**`pcb check`（DFM 复原审计）：1041 track / 219 via / 379 pad → 431 issue（ERROR=41、WARN=342）。**
+
+```
+clearance=41  dangling=3  acute=5  overPad=1  silkFlipped=23  singleLayerVia=28
+widthMismatch=4  coupling=247  viaCrossesPlane=2  powerNotPoured=1  widthUnderSpec=2
+silkOverPad=7  viaInPad=19  copperNearEdge=46  fiducialMissing=1  plugClearance=1
+```
+
+> ⚠️ **这些数字目前不可直接采信**，原因是 live 规则回读退化：
+> `pcb net-classes` 把 signal / power-branch / power-trunk / high-current / gnd 五档全部读成
+> **393.7 mil（= 10 mm）**，`pcb check` 于是按 `clearance=235.6 mil`、`copperToEdge=393.7 mil`、
+> `powerWidth=393.7 mil` 判定，产生成片假阳（例：`BAT1_RAW` 一条网络就报了 40 条 clearance，
+> 全板“未列出的 clearance”被截断在 36 503 条）。原生 `pcb drc` 报的 **10 mil** 才是真实生效的间距。
+> **凡涉及阈值结论，以 `pcb drc` 为准**；DFM 输出只用于定位 `dangling-end`、`single-layer-via`、
+> `via-crosses-plane`、`power-not-poured` 这类与阈值无关的结构问题。
+
+**`pcb drc-rules`**：配置名 `自定义配置`；Safe Spacing 表 **为空**（`tables: "@{1=}"`、`status: 0`），
+其余为默认值（via 12.0078 / 24.0158 mil、hole↔hole 11.811 mil、paste/solder 扩张 0 / 2 mil、
+差分对长度容差 10 mil、`copperThickness1oz`/`innerPlane` status=1）。
+
+## 16.5 需要用户裁决的两点（本轮只读，**未改动**）
+
+1. **四角挖孔：尺寸与位置都与需求 §3 不一致。**
+   live 回读是 4 个 **Multi-Layer（12）实体圆填充**、`net: null`（即 `pcb slot`/`mount-holes` 产生的铣孔，制造出 BoardCutout）：
+
+   | 圆心（编辑器坐标, mm） | 半径 | 直径 |
+   |---|---|---|
+   | (4.000, 4.000) / (51.000, 4.000) / (4.000, 80.000) / (51.000, 80.000) | **2.200 mm** | **Ø4.400 mm** |
+
+   与 §3 的「**Ø2.200 mm、距边 3.000 mm**」不符，也与本文件早期记录的实测中心
+   `118.11 mil = 3.000 mm`（= `pcb mount-holes --dia 86.6 --inset 118.1`）**不一致**。
+   旁证：2026-09-21 导出的 Gerber 里板框仍是 55×84 / R2.000，而 NPTH 钻孔文件
+   (`work/fab/Drill_NPTH_Through.DRL`) 只有 J1 的两个 Ø0.650 mm 定位孔 —— **四角孔没有钻孔记录，
+   证实它是铣孔而非钻孔**。建议在编辑器里用 `pcb fill list --layer 12` 核对后再决定“改板”还是“改文档”。
+   （本轮不做任何改动。）
+2. **天线禁布区整体右移 4.500 mm。**
+   live 禁布区 `X 20.500–43.500 mm`（宽 23.000 mm，居中于 U1 天线端 —— U1 渲染范围 X 22.500–41.500 mm），
+   需求 §6 `ESP32_ANT_KEEP_OUT` 写的是 `X 16.000–39.000 mm`。宽度一致、整体 +4.500 mm。
+   原因：v2.0 的 U1 摆位与 v1.1 不同，禁布区是跟着模块走的。属于与 §5.6 同类的 **v2.0 实装偏差**，
+   建议在文档 §6 注明（本轮未改需求文档数值，只在 §11 记录）。
+3. **受约束接口 / 按键的摆位与 `PCB_INTERFACE_POSITIONS.md` §5.6（2026-09-22 实测）已不一致。**
+   焊盘级实测（本文件坐标：原点板左上、Y 向下，mm）：
+
+   | 项 | §5.6 (2026-09-22) | 现场 (2026-10-10) | 偏差 |
+   |---|---|---|---|
+   | J1 信号焊盘行 X / Y | 20.800–27.201 / 77.294 | **13.183–19.583 / 77.490** | X **−7.617** |
+   | J1 屏蔽孔 X / 本体外凸 | 19.680–28.321 / 0.874 | **12.062–20.704 / 1.069** | X −7.617 |
+   | J2 焊盘列 X / 针序 | 2.101 / Pin1 在 Y 47.777 | **6.383 / Pin1 在 Y 36.223（反向）** | X **+4.282** |
+   | J3 焊盘行 Y / Pin1–9 X | 67.650 / 34.201–42.850 | **67.635 / 30.904–39.553** | X **−3.297** |
+   | J4 / J5 引脚列 X | 7.450 | **5.822** | **−1.628** |
+   | SW3/4/5 焊盘 | Y 13.3/16.7、40.3/43.7、67.3/70.7，X 52.850，旋转 90° | **(49.299, 25.001) / (49.301, 41.999) / (49.299, 58.999)，旋转 0°** | 间距 **27.000 → 17.000** |
+
+   旁证：项目历史几何快照 `work/geom.json`、`geom-final.json`、`ref-last-layout.json`（2026-09-22/23）
+   与 §5.6 完全一致（`J1 x=944.882 y=170.400 mil`、`SW3 x=2080.709 y=2716.535 mil`），
+   而 `work/dump-now.json`（2026-09-28 起）就已经是现场这组值。
+   ⇒ **2026-09-24 ~ 09-28 之间板上做过新一轮布局**（对应 `Board1_20261003` / `_20261005` / `_20261006` 等副本），
+   `PCB_INTERFACE_POSITIONS.md` §5.6 已被现场数据取代。**本轮只读，两侧都没动。**
+   详见 `PCB_INTERFACE_POSITIONS.md` §11 与 `REQUIREMENT_CHECK.md` §6.3(a)。
+
+   > 注：焊盘 → 网的映射本身是**正确**的 —— 全板 **371 个焊盘**的 `padNumber → net` 与
+   > 原理图 P1+P2 的 `pin → net` 全集比对，**371/371 一致、0 差异、0 孤儿**。
+   > 差异只在**机械坐标/朝向**，不在电气连接。
+
+## 16.6 原理图现状（typed 回读）
+
+| 页 | 器件 / 网络 / 图元 | `sch check` |
+|---|---|---|
+| **P1**（电源 + USB 前端，`7b1ca0ce011868e2`） | 63 器件、44 网络、252 图元（part 63 / netflag 94 / netport 94 / sheet 1） | 3 findings：`marker-overlap`（`CHG_DSEL` × `CHG_OTG` 两个 netport 视觉重叠 17×11）、`designator-overlap`（U5 位号压在本体/标记上）、`missing-titleblock`（图签 `Drawed` 空） |
+| **P2**（MCU + 墨水屏 + 存储 + 按键，`f568f62f67600e3d`） | 46 器件、47 网络、194 图元（part 46 / netport 106 / netflag 41 / sheet 1） | 1 finding：`missing-titleblock`（图签 `Drawed` 空） |
+
+* 两页网表均可导出（`netlistAvailable: true`）；**无** floating-pin 之外的几何-网表不匹配、
+  **无**多网线 / 交叉 / 悬空线 / 零长线 / 重复标记。
+* **设计上的 NC 引脚**（`floatingPins`，共 P1 13 + P2 23）：
+  * P1：`J1.B8` `J1.A8`（USB-C SBU1/SBU2）、`J4.3` `J4.4` `J5.3` `J5.4`（电池座 3/4 脚）、
+    `U2.2` `U2.3` `U2.12`（BQ25895）、`U3.6`（TPS63070 FB2）、`U5.9`（TUSB320）、`U6.4` `U6.5`（TPS22918）。
+  * P2：`J2.1/4/6/7/19/25/26`（FPC 空脚）、`J3.1` `J3.8`（卡座）、
+    `U1.15/16/25/26/28/29/30/32–37`（未用 GPIO，见 §7.2 NC 清单）、`LED1.3`。
+* 页面分工：P1 = U2 BQ25895 + U3 TPS63070 + U4 MAX17048 + U5 TUSB320 + U6 TPS22918 + J1 + J4/J5；
+  P2 = U1 ESP32-S3-WROOM-1 + J2 24P FPC + J3 microSD + SW1–SW5 + LED1 + Q1 + D6–D8 + L3/R37。
+* 仍未处理的纯外观项（与电气无关）：P1 的 `CHG_DSEL`/`CHG_OTG` 标记重叠与 U5 位号重叠
+  （`sch destagger` / `sch designators` 可修），两页图签 `Drawed` 为空。
+
+## 16.7 逐网络布线明细
+
+`pcb report` + `pcb track-list` 合并实测（长度含该网络全部走线，不含铺铜/内电层；
+Top = 1 层，Bot = 2 层）：
+
+| 网络 | 层 | 段数 | 线宽 (mil) | 长度 (mil) | 长度 (mm) |
+|---|---|---|---|---|---|
+| `I2C_SDA` | Top+Bot | 50 | 10 | 4859.0 | 123.42 |
+| `USB_D_N` | Top | 32 | 10 | 4399.4 | 111.75 |
+| `USB_D_P` | Top | 35 | 10 | 4396.5 | 111.67 |
+| `SPI_SCLK` | Top+Bot | 27 | 10 | 4287.3 | 108.90 |
+| `SPI_MOSI` | Top+Bot | 19 | 10 | 3948.9 | 100.30 |
+| `I2C_SCL` | Top+Bot | 30 | 10 | 3764.1 | 95.61 |
+| `FG_ALRT_N` | Top+Bot | 15 | 10 | 3699.4 | 93.96 |
+| `LED_DIN` | Top | 19 | 10 | 3542.1 | 89.97 |
+| `GND` | Top | 99 | 10/11.8/20/24/30/40 | 3208.7 | 81.50 |
+| `TF_CD_N` | Top+Bot | 18 | 10 | 3203.5 | 81.37 |
+| `KEY3_N` | Top+Bot | 17 | 10 | 3063.6 | 77.82 |
+| `TYPEC_INT_N` | Top+Bot | 29 | 10 | 2958.1 | 75.13 |
+| `3V3_MAIN` | Top | 72 | 10/20/24/30 | 2906.7 | 73.83 |
+| `SPI_MISO` | Top+Bot | 16 | 10 | 2696.6 | 68.49 |
+| `TF_CS_N` | Top+Bot | 16 | 10 | 2532.6 | 64.33 |
+| `CHG_CE` | Top+Bot | 24 | 10 | 2318.1 | 58.88 |
+| `SYS` | Top | 27 | 10/24 | 2290.0 | 58.17 |
+| `KEY2_N` | Top+Bot | 17 | 10 | 2289.0 | 58.14 |
+| `CHG_INT_N` | Top+Bot | 24 | 10 | 2141.6 | 54.40 |
+| `EPD_3V3` | Top | 15 | 24 | 1938.9 | 49.25 |
+| `EPD_GDR` | Top+Bot | 16 | 10 | 1868.2 | 47.45 |
+| `EPD_RESE` | Top+Bot | 17 | 10 | 1862.7 | 47.31 |
+| `RESET_N` | Top+Bot | 25 | 10 | 1708.6 | 43.40 |
+| `EPD_BUSY` | Top+Bot | 21 | 10 | 1689.9 | 42.92 |
+| `KEY1_N` | Top+Bot | 14 | 10 | 1679.9 | 42.67 |
+| `EPD_CS_N` | Top+Bot | 8 | 10 | 1525.5 | 38.75 |
+| `EPD_RST_N` | Top+Bot | 9 | 10 | 1502.8 | 38.17 |
+| `EPD_DC` | Top+Bot | 7 | 10 | 1485.1 | 37.72 |
+| `USB_VBUS_PROT` | Top+Bot | 14 | 30/40 | 1453.5 | 36.92 |
+| `EPD_VGH` | Top | 17 | 11.8/24 | 1276.8 | 32.43 |
+| `BOOT` | Top | 13 | 10 | 1199.9 | 30.48 |
+| `USB_VBUS_RAW` | Top+Bot | 25 | 10/24 | 1182.3 | 30.03 |
+| `BAT_BUS` | Top | 18 | 10/40 | 1158.9 | 29.44 |
+| `USB_SHIELD` | Top | 9 | 24 | 1061.9 | 26.97 |
+| `EPD_PWR_EN` | Top+Bot | 19 | 10 | 1054.8 | 26.79 |
+| `CHG_TS` | Top | 17 | 10 | 936.6 | 23.79 |
+| `EPD_VGL` | Top | 10 | 11.8/24 | 794.3 | 20.18 |
+| `TF_MISO` | Top | 6 | 10 | 676.4 | 17.18 |
+| `CHG_SW` | Top | 10 | 24 | 649.0 | 16.48 |
+| `CHG_REGN` | Top+Bot | 13 | 10 | 637.7 | 16.20 |
+| `USB_CC1` | Top+Bot | 12 | 10 | 618.9 | 15.72 |
+| `USB_CC2` | Top | 13 | 10 | 597.8 | 15.18 |
+| `TF_SCLK` | Top | 5 | 10 | 510.8 | 12.97 |
+| `EPD_VCOM` | Top | 5 | 11.8 | 461.9 | 11.73 |
+| `EPD_VSH2` | Top | 9 | 11.8 | 418.6 | 10.63 |
+| `EPD_SW` | Top | 6 | 24 | 400.4 | 10.17 |
+| `TPS_PG` | Top | 6 | 10 | 375.0 | 9.53 |
+| `TPS_FB` | Top | 10 | 10 | 356.3 | 9.05 |
+| `EPD_VDD` | Top | 4 | 11.8 | 342.4 | 8.70 |
+| `TPS_PS_SYNC` | Top | 7 | 10 | 340.4 | 8.65 |
+| `EPD_X` | Top | 4 | 24 | 334.5 | 8.50 |
+| `TPS_VAUX` | Top | 5 | 10 | 277.5 | 7.05 |
+| `CHG_DSEL` | Top+Bot | 7 | 10 | 270.9 | 6.88 |
+| `EPD_VSH1` | Top | 4 | 11.8 | 262.2 | 6.66 |
+| `TPS_EN` | Top | 3 | 10 | 259.0 | 6.58 |
+| `BAT1_RAW` | Top | 3 | 40 | 258.7 | 6.57 |
+| `CHG_ILIM` | Top | 6 | 10 | 253.7 | 6.44 |
+| `TPS_L1` | Top | 3 | 40 | 213.9 | 5.43 |
+| `TPS_L2` | Top | 3 | 40 | 203.2 | 5.16 |
+| `EPD_VSL` | Top | 3 | 11.8 | 200.7 | 5.10 |
+| `BAT2_RAW` | Top | 2 | 40 | 195.9 | 4.98 |
+| `USB_VBUS_DET` | Top | 3 | 10 | 178.9 | 4.54 |
+| `CHG_SNUB` | Top | 5 | 24 | 166.0 | 4.22 |
+| `CHG_STAT` | Top | 3 | 10 | 162.1 | 4.12 |
+| `TPS_VSEL` | Top | 3 | 10 | 154.4 | 3.92 |
+| `USB_DP` | Top | 4 | 11.7 | 148.7 | 3.78 |
+| `TF_MOSI` | Top | 2 | 10 | 144.9 | 3.68 |
+| `CHG_PMID` | Top | 2 | 10 | 141.4 | 3.59 |
+| `USB_DN` | Top | 4 | 11.7 | 140.1 | 3.56 |
+| `CHG_OTG` | Top | 2 | 10 | 130.5 | 3.32 |
+| `CHG_BTST` | Top | 2 | 10 | 111.3 | 2.83 |
+| `WS2812_DIN` | Top | 2 | 10 | 91.1 | 2.31 |
+
+要点：
+
+* **信号层分工**：需要跨层的网络用 Top+Bot 双面走线 + 过孔换层；纯电源/大电流网络（`3V3_MAIN`、`SYS`、
+  `BAT_BUS`、`BAT1_RAW`、`BAT2_RAW`、`TPS_L1/L2`、`USB_VBUS_PROT`）**只在 Top 层**，配合 9 块同网铜填充 + 内电层。
+* **电源线宽阶梯**：电池/母线 `BAT1_RAW`/`BAT2_RAW`/`BAT_BUS`/`TPS_L1`/`TPS_L2`/`USB_VBUS_PROT` = **40 mil**；
+  `CHG_SW`/`EPD_3V3`/`EPD_SW`/`USB_SHIELD`/`CHG_SNUB` = **24 mil**；`3V3_MAIN`/`SYS` 主干 24 mil、分支 10–20 mil；
+  墨水屏高压（`EPD_VGH/VGL/VSH1/VSH2/VSL/VDD/VCOM`）统一 **11.8 mil**。
+* **GND**：127/219 个过孔是 GND（缝合过孔），另有 Top GND 铺铜 + Inner1 GND 内电层。
+
+## 16.8 差分对现状（`pcb report`）
+
+| 差分对 | 正/负网络 | 长度 (mil) | 长度 (mm) | 偏差 skew |
+|---|---|---|---|---|
+| `USB_DATA` | `USB_D_P` / `USB_D_N`（J1 A6/A7 → R9/R10 → U1.14/13） | 4396.5 / 4399.4 | 111.67 / 111.75 | **2.96 mil** |
+| `USB_DATA2` | `USB_DP` / `USB_DN`（R9/R10 → U1 原生 USB） | 140.1 / 148.7 | 3.56 / 3.78 | **8.65 mil** |
+
+* `USB_D_P/N` 是全长 111.7 mm 的板级差分对（J1 在板下沿、U1 在板上沿），skew 3 mil 良好；
+  但它们仍是 **10 mil 宽、单层 Top** 走线（未做真正耦合布线），与第十二轮结论一致——
+  **当前板框/布局下放不下真解耦的 USB 差分对**。
+* 规则里的差分对长度容差 `differentailPairLenTolerMax = 10 mil`，两对均在容差内。
+
+## 16.9 本轮结论
+
+1. 现场可读、可回读：`health` → 连接器 1.9.0 已连、工程与活动文档身份明确。
+2. **设计已完整落盘在一个 Board（Board1）里**：109 器件 / 72 网络 / 1041 走线段 / 219 过孔 / 1 块 GND 铺铜 + 2 层内电层 / 1 个天线禁布区 / 338 丝印图元。
+3. **阻断项只有 1 条**：`pcb drc` 的 Inner2 内电层 ↔ GND 过孔 0 mil 间距（要求 ≥10 mil）。
+4. **需要用用户裁决的几何偏差**：四角挖孔 Ø4.4 @ 4.000 mm、天线禁布区 X +4.500 mm、
+   以及 §16.5-3 的接口/按键整体换位（J1 −7.62 / J3 −3.30 / J4-J5 −1.63 / SW 间距 27→17 mm）——
+   `PCB_INTERFACE_POSITIONS.md` §5.6 已过期，需确认是“改板回基线”还是“按现场值改文档”。
+   另有**一个工具侧缺陷**（CLI live 规则回读把 mm 当 mil，导致 `pcb check` / `layout-lint` 阈值失真）。
+5. 原理图侧只有外观项（标记重叠、位号重叠、图签空），**电气连接无缺陷**。

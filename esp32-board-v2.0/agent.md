@@ -18,7 +18,22 @@ J4/J5 双电池、SW3/SW4/SW5、禁布区、功能需求、自由度说明）。
 目标工程：**esp32s3-board-v2.0**（嘉立创EDA专业版，projectUuid
 `c4799361d2dd4e09bdd31ddc8a57a1ba`），2026-09-20 时已在编辑器中打开。
 
-## 二、easyeda-agent 环境状态（2026-09-20 由上一会话升级完成）
+## 二、easyeda-agent 环境状态
+
+### 2026-10-10 实测（本文件最近一次核对）
+
+| 组件 | 版本 | 位置 / 状态 |
+|---|---|---|
+| CLI | **v1.9.0** | `C:\Users\ggkk2\AppData\Local\Python\bin\easyeda.exe`（`where easyeda` 另有一份 v1.4.8 在 `C:\Program Files\KiCad\10.0\bin\`，PATH 上被前者覆盖） |
+| Skill | **v1.9.0** | `~/.codex/skills/easyeda-agent`（`.version` = 1.9.0） |
+| daemon | **v1.9.0** | `easyeda daemon start` 后监听 `127.0.0.1:60832`；不常驻，需要时手动拉起 |
+| Connector | **1.9.0** | 已与 CLI 同版，`versionGate: ok` |
+| 宿主 | **EasyEDA Pro 4.1.60 / 4.1.71** | `hostCompatibility: ok`（V4 主线，推荐基线 4.1.60） |
+
+> 注意：daemon 默认**不常驻**。新会话先 `easyeda daemon start`，再等 10–30 秒让连接器注册，
+> 然后 `easyeda health` 确认 `windows` 非空 —— 浏览器里页面已打开 ≠ connector 已连接。
+
+### 历史记录（2026-09-20 首次升级时的状态，仅存档）
 
 | 组件 | 版本 | 位置 / 状态 |
 |---|---|---|
