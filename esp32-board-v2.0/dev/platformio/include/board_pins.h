@@ -53,7 +53,9 @@
 #define BQ_REG_INPUT_LIMIT  0x00   // EN_HIZ / EN_ILIM / IINLIM[5:0]
 #define BQ_REG_THERM_VINDPM 0x01
 #define BQ_REG_ADC_CTRL     0x02
-#define BQ_REG_MODE_CFG     0x03   // OTG_CONFIG / CHG_CONFIG / SYS_MIN
+#define BQ_REG_MODE_CFG     0x03   // bit5 OTG_CONFIG(1=升压) / bit4 CHG_CONFIG(1=允许充电) / bit3:1 SYS_MIN
+// 注意：CHG_CONFIG 在 bit4，关 OTG 且开充电应写 0x1A；写成 0x2A 会变成“开 OTG、关充电”
+#define BQ_MODE_CFG_OTG_OFF_CHG_ON  0x1A
 #define BQ_REG_ICHG         0x04   // 充电电流，64 mA/LSB
 #define BQ_REG_ITERM_IPRE   0x05   // 终止/预充电流，64 mA/LSB + 64 mA
 #define BQ_REG_VREG         0x06   // 充电电压，16 mV/LSB + 3.840 V

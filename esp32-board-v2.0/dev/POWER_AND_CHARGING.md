@@ -127,7 +127,7 @@ VBUS  ──► [BQ25895] ──► SYS ──► [TPS63070] ──► 3V3_MAIN
 ② I2C 初始化（400 kHz 以内，建议先用 100 kHz 调试）
 ③ 读 DEVICE 确认通信：REG0B 的 PG_STAT / VBUS_STAT 能反映 USB 是否插入
 ④ 关闭看门狗：REG07 ← 0x8D   （EN_TERM=1, WATCHDOG=00, EN_TIMER=1, 12 h）※ 见下方位说明
-⑤ 关 OTG：REG03 ← 0x2A      （OTG_CONFIG=0, CHG_CONFIG=1, SYS_MIN=3.5 V）
+⑤ 关 OTG：REG03 ← 0x1A      （OTG_CONFIG(bit5)=0, CHG_CONFIG(bit4)=1, SYS_MIN=3.5 V）
 ⑥ 写充电参数：
      REG00 ← IINLIM（按适配器能力；建议 0x10 = 900 mA，或 0x08 = 500 mA 保守值）
      REG04 ← ICHG   （建议 0x0E = 896 mA，与硬件热设计一致）
@@ -140,7 +140,12 @@ VBUS  ──► [BQ25895] ──► SYS ──► [TPS63070] ──► 3V3_MAIN
 
 > 第 ④ 步的 `0x8D` = `1000 1101`：EN_TERM=1、STAT_DIS=0、**WATCHDOG=00（关闭）**、
 > EN_TIMER=1、CHG_TIMER=10（12 h）。位定义见数据手册 §8.4.8 REG07（p39）。
-> 第 ⑤ 步的 `0x2A` = `0010 1010`：OTG_CONFIG=0、CHG_CONFIG=1、SYS_MIN=101(3.5 V)。
+> 第 ⑤ 步的 `0x1A` = `0001 1010`：OTG_CONFIG(bit5)=0、CHG_CONFIG(bit4)=1、SYS_MIN(bit3:1)=101(3.5 V)。
+> ⚠️ **这里必须是 `0x1A` 而不是 `0x2A`**：`CHG_CONFIG` 在 **bit4**（不是 bit3），
+> 写成 `0x2A` 会把 bit5 置 1、bit4 清 0 —— 即"开 OTG 升压、**关充电**"，
+> 表现为插 USB 后 `REG0B.CHRG_STAT` 恒为 0（未充电）、电池反而缓慢放电。
+> 位定义与 Linux 驱动 `drivers/power/supply/bq25890_charger.c` 的
+> `F_OTG_CFG = REG_FIELD(0x03,5,5)`、`F_CHG_CFG = REG_FIELD(0x03,4,4)` 一致。
 > 若你的固件允许边走边充，第 ④ 步也可以改成"保留看门狗 + 周期性写 `WD_RST`"。
 
 ### 4.1 充电电流的取值依据

@@ -135,7 +135,7 @@ static void startCharging() {
   bool ok = false;
   Serial.println(F("[BQ25895] 配置并使能充电 ..."));
   i2cWrite8(ADDR_BQ25895, BQ_REG_TERM_TIMER, 0x8D);      // 关看门狗
-  i2cWrite8(ADDR_BQ25895, BQ_REG_MODE_CFG,   0x2A);      // 关 OTG，开充电
+  i2cWrite8(ADDR_BQ25895, BQ_REG_MODE_CFG,   BQ_MODE_CFG_OTG_OFF_CHG_ON);  // 关 OTG(bit5=0)，开充电(bit4=1)
   i2cWrite8(ADDR_BQ25895, BQ_REG_INPUT_LIMIT, IINLIM_REG_VALUE);
   i2cWrite8(ADDR_BQ25895, BQ_REG_ICHG,        ICHG_REG_VALUE);
   i2cWrite8(ADDR_BQ25895, BQ_REG_ITERM_IPRE,  ITERM_REG_VALUE);
@@ -179,6 +179,39 @@ static ChgState readChargeState() {
   uint8_t st = i2cRead8(ADDR_BQ25895, BQ_REG_STATUS, &ok);
   if (!ok) return CHG_UNKNOWN;
   return (ChgState)((st & BQ_STATUS_CHRG_MASK) >> BQ_STATUS_CHRG_SHIFT);
+}
+
+// 详细充电状态上报：CHRG_STAT 只在“变化”时才打印，若只靠变化事件，
+// 排查“插了 USB 到底有没有在充”会看不到任何输出。这里做周期性全量上报。
+static void reportChargeStatus() {
+  bool ok = false;
+  uint8_t st   = i2cRead8(ADDR_BQ25895, BQ_REG_STATUS, &ok);
+  if (!ok) { Serial.println(F("[BQ25895] REG0B 读取失败（I2C 无应答）")); return; }
+  uint8_t r3   = i2cRead8(ADDR_BQ25895, BQ_REG_MODE_CFG, &ok);
+  uint8_t r0   = i2cRead8(ADDR_BQ25895, BQ_REG_INPUT_LIMIT, &ok);
+  uint8_t r4   = i2cRead8(ADDR_BQ25895, BQ_REG_ICHG, &ok);
+
+  static const char *vbusName[] = {
+    "无输入", "USB SDP(100mA)", "USB CDP(500mA)", "USB DCP",
+    "保留", "未知适配器(500mA)", "保留", "可调压适配器"
+  };
+  static const char *chrgName[] = {"未充电", "预充", "快充", "充电完成"};
+  uint8_t vs = (st >> 5) & 0x07;
+  uint8_t cs = (st & BQ_STATUS_CHRG_MASK) >> BQ_STATUS_CHRG_SHIFT;
+
+  Serial.printf("[充电] VBUS=%s  PG=%d  CHRG_STAT=%s(%u)  VSYS_STAT=%d  IINLIM=%umA  ICHG=%umA\n",
+                vbusName[vs], (st & BQ_STATUS_PG) ? 1 : 0,
+                chrgName[cs & 0x03], cs, st & 0x01,
+                100 + (r0 & 0x3F) * 50, (r4 & 0x7F) * 64);
+  // REG03: bit4 = CHG_CONFIG(1=允许充电)，bit5 = OTG_CONFIG(1=升压输出)；正确值 0x1A = 关 OTG、开充电
+  Serial.printf("[充电] REG03=0x%02X  CHG_CONFIG(bit4)=%u  OTG_CONFIG(bit5)=%u  /CE(GPIO47)=%d(0=允许充电)\n",
+                r3, (unsigned)((r3 >> 4) & 1), (unsigned)((r3 >> 5) & 1), digitalRead(PIN_CHG_CE));
+  if (vs == 0) {
+    Serial.println(F("[充电] 判定：BQ25895 认为 VBUS 无输入 → 检查 USB 线/口、F1、U2.VIN"));
+  } else if (cs == 0) {
+    Serial.println(F("[充电] 判定：VBUS 正常但确实没有充电电流 → 查电池(BAT)支路、电芯保护板、"
+                     "温控(TS)、以及 U2.BAT 到电池座是否通路"));
+  }
 }
 
 // 读取电量计（MAX17048）：电压 / SOC / 充放电速率 / STATUS / ALRT
@@ -315,7 +348,7 @@ void setup() {
 }
 
 void loop() {
-  static uint32_t tKey = 0, tLed = 0, tChg = 0, tGauge = 0;
+  static uint32_t tKey = 0, tLed = 0, tChg = 0, tGauge = 0, tChgReport = 0;
   static uint8_t ledStep = 0;
   static ChgState chgState = CHG_UNKNOWN;
   static LedMode  ledMode  = LED_MODE_BREATH;
@@ -339,6 +372,12 @@ void loop() {
                     chgStateName(chgState), chgStateName(s));
       chgState = s;
     }
+  }
+
+  // ---- 每 5 s 做一次全量充电状态上报（不依赖“变化”事件，便于插拔 USB 观察）----
+  if (millis() - tChgReport > 5000) {
+    tChgReport = millis();
+    reportChargeStatus();
   }
 
   // ---- LED：充电中=红常亮，充满=绿常亮，其余=呼吸换色 ----

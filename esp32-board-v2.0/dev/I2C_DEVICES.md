@@ -60,7 +60,7 @@ Wire.setClock(400000);
 | `0x00` | 输入限流 | bit6 `EN_ILIM`、bit5:0 `IINLIM`（100 mA + N×50 mA） | 0x08（500 mA） | 按适配器能力，如 0x10 = 900 mA（100 + 16×50） |
 | `0x01` | 温度/电压补偿 | bit7:6 `BHOT`、bit5 `BCOLD`、bit4:0 `VINDPM_OS` | 0x05 | 保持 |
 | `0x02` | ADC 与检测控制 | `CONV_START`、`CONV_RATE`、`ICO_EN`、`AUTO_DPDM_EN` | 0x3D | 保持（`AUTO_DPDM_EN=1`） |
-| `0x03` | 模式配置 | bit5 `OTG_CONFIG`、bit4 `CHG_CONFIG`、bit3:1 `SYS_MIN` | 0x3A | **0x2A**（关 OTG） |
+| `0x03` | 模式配置 | bit5 `OTG_CONFIG`（1=升压输出）、bit4 `CHG_CONFIG`（1=允许充电）、bit3:1 `SYS_MIN` | 0x3A | **0x1A**（关 OTG、开充电） |
 | `0x04` | 充电电流 | bit6:0 `ICHG`（64 mA/LSB） | 0x20（2048 mA） | **0x0E（896 mA）** |
 | `0x05` | 预充/终止电流 | bit7:4 `IPRECHG`、bit3:0 `ITERM`（64 mA + N×64 mA） | 0x13 | **0x11**（128/128 mA） |
 | `0x06` | 充电电压 | bit7:2 `VREG`（3.840 V + N×16 mV）、bit1 `BATLOWV`、bit0 `VRECHG` | 0x5E（4.208 V） | 保持 |
