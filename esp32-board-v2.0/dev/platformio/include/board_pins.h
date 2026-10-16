@@ -70,6 +70,7 @@
 #define MAX_REG_SOC         0x04   // ÷256 = %
 #define MAX_REG_MODE        0x06
 #define MAX_REG_CONFIG      0x0C   // bit5 ALRT（写 0 清报警）
+#define MAX_REG_CRATE       0x16   // 有符号，0.208 %/h LSB（正=充电 负=放电）
 #define MAX_REG_STATUS      0x1A
 #define MAX_REG_CMD         0xFE   // 写 0x5400 = POR
 
@@ -78,5 +79,3 @@
 #define TYPEC_REG_CURRENT   0x08   // CURRENT_MODE_ADVERTISE / _DETECT
 #define TYPEC_REG_ATTACH    0x09   // ATTACHED_STATE / INTERRUPT_STATUS(bit4,写1清)
 #define TYPEC_REG_MODE      0x0A   // MODE_SELECT / DISABLE_TERM
-
-#endif  // BOARD_PINS_H

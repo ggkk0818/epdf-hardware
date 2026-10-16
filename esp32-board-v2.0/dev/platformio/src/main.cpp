@@ -8,6 +8,8 @@
 //    4. 读 TUSB320 器件 ID 与检测到的电流档位
 //    5. 读三颗用户按键 + 卡检测
 //    6. 点亮 LED1（若安装了 Adafruit NeoPixel）
+//    7. loop 循环：每分钟上报一次 MAX17048 状态，LED 随充电状态变化
+//       （充电中 = 红色常亮，充满 = 绿色常亮，其余 = 呼吸换色）
 //
 //  可选开关（默认关闭，确认无误后再打开）：
 //    ENABLE_CHARGING  : 配置 BQ25895 并拉低 /CE 允许充电
@@ -25,7 +27,7 @@
 #endif
 
 // ----------------------------- 开关 ------------------------------
-#define ENABLE_CHARGING   0     // 1 = 初始化充电参数并使能充电
+#define ENABLE_CHARGING   1     // 1 = 初始化充电参数并使能充电
 #define DEMO_EPD_POWER    0     // 1 = 演示 EPD_3V3 通断一次
 #define ICHG_REG_VALUE    0x0E  // 896 mA = 14 × 64 mA（按硬件热设计）
 #define IINLIM_REG_VALUE  0x10  // 900 mA = 100 mA + 16 × 50 mA
@@ -152,13 +154,46 @@ static void startCharging() {
 }
 #endif
 
+// ------------------------- 充电状态查询 ---------------------------
+// CHRG_STAT[1:0]（BQ25895 REG0B bit4:3）：0=未充电 1=预充 2=快充 3=充电完成
+enum ChgState : uint8_t {
+  CHG_NOT_CHARGING = 0,
+  CHG_PRE_CHARGE   = 1,
+  CHG_FAST_CHARGE  = 2,
+  CHG_DONE         = 3,
+  CHG_UNKNOWN      = 0xFF,   // I2C 读取失败
+};
+
+static const char *chgStateName(ChgState s) {
+  switch (s) {
+    case CHG_PRE_CHARGE:   return "预充";
+    case CHG_FAST_CHARGE:  return "快充";
+    case CHG_DONE:         return "充满";
+    case CHG_NOT_CHARGING: return "未充电";
+    default:               return "未知";
+  }
+}
+
+static ChgState readChargeState() {
+  bool ok = false;
+  uint8_t st = i2cRead8(ADDR_BQ25895, BQ_REG_STATUS, &ok);
+  if (!ok) return CHG_UNKNOWN;
+  return (ChgState)((st & BQ_STATUS_CHRG_MASK) >> BQ_STATUS_CHRG_SHIFT);
+}
+
+// 读取电量计（MAX17048）：电压 / SOC / 充放电速率 / STATUS / ALRT
 static void readFuelGauge() {
   bool ok = false;
   uint16_t vcell = i2cRead16(ADDR_MAX17048, MAX_REG_VCELL, &ok);
   if (!ok) { Serial.println(F("[MAX17048] 无响应")); return; }
-  uint16_t soc = i2cRead16(ADDR_MAX17048, MAX_REG_SOC, &ok);
-  Serial.printf("[MAX17048] 电池 %.3f V   SOC %.2f%%\n",
-                vcell * 78.125e-6, soc / 256.0);
+  uint16_t soc    = i2cRead16(ADDR_MAX17048, MAX_REG_SOC, &ok);
+  int16_t  crate  = (int16_t)i2cRead16(ADDR_MAX17048, MAX_REG_CRATE, &ok);
+  uint16_t status = i2cRead16(ADDR_MAX17048, MAX_REG_STATUS, &ok);
+  float rate = crate * 0.208f;                 // %/h：正=充电，负=放电
+  bool alert = (digitalRead(PIN_FG_ALRT) == LOW);
+  Serial.printf("[MAX17048] 电池 %.3f V   SOC %.2f%%  速率 %+.1f %%/h(%s)  STATUS=0x%04X  ALRT=%s\n",
+                vcell * 78.125e-6, soc / 256.0, rate, (rate >= 0.0f) ? "充电" : "放电",
+                status, alert ? "低(报警)" : "高(正常)");
 }
 
 static void readTypeC() {
@@ -184,17 +219,39 @@ static void readKeys() {
                 digitalRead(PIN_SD_CD) == LOW ? 1 : 0);
 }
 
-static void setLed(uint8_t r, uint8_t g, uint8_t b) {
+// ------------------------------- LED ------------------------------
+// 状态语义：充电中 = 红色常亮，充满 = 绿色常亮，其余 = 呼吸换色（见 loop）
+#define LED_BRIGHT        32    // WS2812 整体亮度（0-255）
+#define LED_BREATH_LEVEL  16    // 呼吸/换色时的 RGB 分量（暗）
+#define LED_STEADY_LEVEL  255   // 常亮时的 RGB 分量（亮）
+
+static void setLed(uint8_t r, uint8_t g, uint8_t b, uint8_t bright = LED_BRIGHT) {
 #ifdef HAVE_NEOPIXEL
   static Adafruit_NeoPixel px(1, PIN_LED_DIN, NEO_GRB + NEO_KHZ800);
   static bool init = false;
-  if (!init) { px.begin(); px.setBrightness(32); init = true; }
+  if (!init) { px.begin(); init = true; }
+  px.setBrightness(bright);
   px.setPixelColor(0, px.Color(r, g, b));
   px.show();
 #else
-  (void)r; (void)g; (void)b;
+  (void)r; (void)g; (void)b; (void)bright;
   Serial.println(F("[LED] 未安装 Adafruit NeoPixel 库，跳过（见 platformio.ini 注释）"));
 #endif
+}
+
+// LED 显示模式：呼吸换色 / 充电中（红常亮）/ 充满（绿常亮）
+enum LedMode : uint8_t { LED_MODE_BREATH = 0, LED_MODE_CHARGING, LED_MODE_FULL };
+
+static LedMode ledModeFor(ChgState s) {
+  if (s == CHG_PRE_CHARGE || s == CHG_FAST_CHARGE) return LED_MODE_CHARGING;
+  if (s == CHG_DONE) return LED_MODE_FULL;
+  return LED_MODE_BREATH;                  // 未充电 / I2C 读取失败
+}
+
+static void applyLedMode(LedMode m) {
+  if (m == LED_MODE_CHARGING)     setLed(LED_STEADY_LEVEL, 0, 0);   // 红色常亮
+  else if (m == LED_MODE_FULL)    setLed(0, LED_STEADY_LEVEL, 0);   // 绿色常亮
+  // LED_MODE_BREATH 由 loop 逐帧刷新，这里不处理
 }
 
 // ----------------------------- 主流程 -----------------------------
@@ -219,7 +276,7 @@ void setup() {
   Serial.begin(115200);
 #if ARDUINO_USB_CDC_ON_BOOT
   unsigned long t0 = millis();
-  while (!Serial && (millis() - t0) < 3000) delay(10);
+  while (!Serial && (millis() - t0) < 5000) delay(10);
 #endif
   delay(200);
 
@@ -239,7 +296,7 @@ void setup() {
   readFuelGauge();
   readTypeC();
   readKeys();
-  setLed(0, 0, 16);   // 蓝色微亮
+  setLed(0, 0, LED_BREATH_LEVEL);   // 蓝色微亮（进入 loop 后由充电状态接管）
 
 #if ENABLE_CHARGING
   startCharging();
@@ -258,9 +315,12 @@ void setup() {
 }
 
 void loop() {
-  static uint32_t tKey = 0, tLed = 0;
+  static uint32_t tKey = 0, tLed = 0, tChg = 0, tGauge = 0;
   static uint8_t ledStep = 0;
+  static ChgState chgState = CHG_UNKNOWN;
+  static LedMode  ledMode  = LED_MODE_BREATH;
 
+  // ---- 按键事件（每 500 ms 轮询一次电平变化）----
   if (millis() - tKey > 500) {
     tKey = millis();
     static int last1 = 1, last2 = 1, last3 = 1;
@@ -270,10 +330,39 @@ void loop() {
     if (k3 != last3) { Serial.printf("KEY3 %s\n", k3 ? "松开" : "按下"); last3 = k3; }
   }
 
-  if (millis() - tLed > 1000) {          // 呼吸/换色示意
+  // ---- 充电状态（每 500 ms 读一次 BQ25895 REG0B.CHRG_STAT）----
+  if (millis() - tChg > 500) {
+    tChg = millis();
+    ChgState s = readChargeState();
+    if (s != chgState) {
+      Serial.printf("[BQ25895] 充电状态：%s -> %s\n",
+                    chgStateName(chgState), chgStateName(s));
+      chgState = s;
+    }
+  }
+
+  // ---- LED：充电中=红常亮，充满=绿常亮，其余=呼吸换色 ----
+  LedMode want = ledModeFor(chgState);
+  if (want != ledMode) {
+    ledMode = want;
+    ledStep = 0;
+    if (ledMode == LED_MODE_BREATH) tLed = millis() - 1000;   // 回到呼吸时立刻刷新一帧
+    else                            applyLedMode(ledMode);
+  }
+
+  if (ledMode == LED_MODE_BREATH && millis() - tLed > 1000) {   // 呼吸/换色示意
     tLed = millis();
-    static const uint8_t seq[3][3] = {{16, 0, 0}, {0, 16, 0}, {0, 0, 16}};
+    static const uint8_t seq[3][3] = {{LED_BREATH_LEVEL, 0, 0},
+                                      {0, LED_BREATH_LEVEL, 0},
+                                      {0, 0, LED_BREATH_LEVEL}};
     setLed(seq[ledStep][0], seq[ledStep][1], seq[ledStep][2]);
     ledStep = (ledStep + 1) % 3;
+  }
+
+  // ---- 每分钟上报一次 MAX17048 状态 ----
+  if (millis() - tGauge >= 60000UL) {
+    tGauge = millis();
+    Serial.printf("---- 周期上报 t=%lus ----\n", (unsigned long)(millis() / 1000));
+    readFuelGauge();
   }
 }
