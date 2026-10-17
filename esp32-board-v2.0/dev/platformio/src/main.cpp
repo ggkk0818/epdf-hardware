@@ -65,6 +65,24 @@ static uint16_t i2cRead16(uint8_t addr, uint8_t reg, bool *ok) {
   return ((uint16_t)b[0] << 8) | b[1];
 }
 
+// MAX17048 挂在 BAT_BUS 上，必须真电池接上才应答；电池拔掉 / 电池线断开时 0x36 会消失。
+// 注意：BQ25895 在“电池缺失”时会把 BAT 脚稳到充电调节电压（≈VREG 4.2 V），
+// 所以“BAT 脚有电压”不能用来判断电池是否在，只有电量计应答才可信。
+//
+// 先用最轻的“地址探测”（只发地址看 ACK）判断在不在：器件不存在时 NACK 不会让
+// ESP-IDF 打印 i2c_master_transmit_receive failed 的报错；确认在了再做寄存器回读。
+static bool i2cPing(uint8_t addr) {
+  Wire.beginTransmission(addr);
+  return Wire.endTransmission() == 0;
+}
+
+static bool batteryPresent() {
+  if (!i2cPing(ADDR_MAX17048)) return false;
+  bool ok = false;
+  (void)i2cRead16(ADDR_MAX17048, MAX_REG_VCELL, &ok);
+  return ok;
+}
+
 // -------------------------- 各器件读取 ---------------------------
 static void scanI2C() {
   Serial.println(F("[I2C] 扫描 0x08-0x77 ..."));
@@ -132,6 +150,14 @@ static void readCharger() {
 
 #if ENABLE_CHARGING
 static void startCharging() {
+  // 没有电池时绝对不要使能充电：BQ25895 会把 BAT 脚稳到调节电压、反复“充完→重充”，
+  // CHRG_STAT 就在 快充(2) / 充电完成(3) 之间抖动，日志被刷屏、LED 也红绿乱闪。
+  if (!batteryPresent()) {
+    digitalWrite(PIN_CHG_CE, HIGH);
+    Serial.println(F("[BQ25895] 未检测到电池（MAX17048 0x36 无应答）→ 跳过充电使能"));
+    return;
+  }
+
   bool ok = false;
   Serial.println(F("[BQ25895] 配置并使能充电 ..."));
   i2cWrite8(ADDR_BQ25895, BQ_REG_TERM_TIMER, 0x8D);      // 关看门狗
@@ -152,8 +178,27 @@ static void startCharging() {
   digitalWrite(PIN_CHG_CE, LOW);                          // 允许充电
   Serial.println(F("[BQ25895] 已使能充电（/CE 拉低）"));
 }
-#endif
 
+static void stopCharging(const __FlashStringHelper *why) {
+  digitalWrite(PIN_CHG_CE, HIGH);
+  Serial.printf("[BQ25895] 停止充电：%s（/CE 拉高）\n", why);
+}
+
+// 按电池在位情况决定是否配置/使能充电（仅在状态变化时动作）
+static void updateChargeEnable(bool present) {
+  static int8_t last = -1;                 // -1=未知 0=无电池 1=有电池
+  int8_t now = present ? 1 : 0;
+  if (now == last) return;
+  last = now;
+  if (present) startCharging();
+  else         stopCharging(F("电池已拔出或电池支路断开"));
+}
+
+// setup() 里调用：显式给出初始状态，保证首次一定会执行一次
+static void startChargingIfBatteryPresent() {
+  updateChargeEnable(batteryPresent());
+}
+#endif
 // ------------------------- 充电状态查询 ---------------------------
 // CHRG_STAT[1:0]（BQ25895 REG0B bit4:3）：0=未充电 1=预充 2=快充 3=充电完成
 enum ChgState : uint8_t {
@@ -208,17 +253,24 @@ static void reportChargeStatus() {
                 r3, (unsigned)((r3 >> 4) & 1), (unsigned)((r3 >> 5) & 1), digitalRead(PIN_CHG_CE));
   if (vs == 0) {
     Serial.println(F("[充电] 判定：BQ25895 认为 VBUS 无输入 → 检查 USB 线/口、F1、U2.VIN"));
+  } else if (!batteryPresent()) {
+    Serial.println(F("[充电] 判定：未检测到电池 → 已保持禁充（/CE 高）。此状态下 BAT 脚会被稳到"
+                     "≈4.2 V，MAX17048 读数（如 SOC>100%）是假值，可忽略"));
   } else if (cs == 0) {
-    Serial.println(F("[充电] 判定：VBUS 正常但确实没有充电电流 → 查电池(BAT)支路、电芯保护板、"
-                     "温控(TS)、以及 U2.BAT 到电池座是否通路"));
+    Serial.println(F("[充电] 判定：VBUS 正常且电池在位，但没有充电电流 → 查电池(BAT)支路、"
+                     "电芯保护板、温控(TS)、以及 U2.BAT 到电池座是否通路"));
   }
 }
 
 // 读取电量计（MAX17048）：电压 / SOC / 充放电速率 / STATUS / ALRT
 static void readFuelGauge() {
+  if (!i2cPing(ADDR_MAX17048)) {
+    Serial.println(F("[MAX17048] 无响应（未装电池 / 电池支路断开）"));
+    return;
+  }
   bool ok = false;
   uint16_t vcell = i2cRead16(ADDR_MAX17048, MAX_REG_VCELL, &ok);
-  if (!ok) { Serial.println(F("[MAX17048] 无响应")); return; }
+  if (!ok) { Serial.println(F("[MAX17048] 无响应（未装电池 / 电池支路断开）")); return; }
   uint16_t soc    = i2cRead16(ADDR_MAX17048, MAX_REG_SOC, &ok);
   int16_t  crate  = (int16_t)i2cRead16(ADDR_MAX17048, MAX_REG_CRATE, &ok);
   uint16_t status = i2cRead16(ADDR_MAX17048, MAX_REG_STATUS, &ok);
@@ -272,10 +324,11 @@ static void setLed(uint8_t r, uint8_t g, uint8_t b, uint8_t bright = LED_BRIGHT)
 #endif
 }
 
-// LED 显示模式：呼吸换色 / 充电中（红常亮）/ 充满（绿常亮）
-enum LedMode : uint8_t { LED_MODE_BREATH = 0, LED_MODE_CHARGING, LED_MODE_FULL };
+// LED 显示模式：呼吸换色 / 充电中（红常亮）/ 充满（绿常亮）/ 未装电池（黄慢闪）
+enum LedMode : uint8_t { LED_MODE_BREATH = 0, LED_MODE_CHARGING, LED_MODE_FULL, LED_MODE_NOBAT };
 
-static LedMode ledModeFor(ChgState s) {
+static LedMode ledModeFor(ChgState s, bool battPresent) {
+  if (!battPresent) return LED_MODE_NOBAT;   // 没电池时 CHRG_STAT 会抖动，优先按“无电池”显示
   if (s == CHG_PRE_CHARGE || s == CHG_FAST_CHARGE) return LED_MODE_CHARGING;
   if (s == CHG_DONE) return LED_MODE_FULL;
   return LED_MODE_BREATH;                  // 未充电 / I2C 读取失败
@@ -284,7 +337,7 @@ static LedMode ledModeFor(ChgState s) {
 static void applyLedMode(LedMode m) {
   if (m == LED_MODE_CHARGING)     setLed(LED_STEADY_LEVEL, 0, 0);   // 红色常亮
   else if (m == LED_MODE_FULL)    setLed(0, LED_STEADY_LEVEL, 0);   // 绿色常亮
-  // LED_MODE_BREATH 由 loop 逐帧刷新，这里不处理
+  // LED_MODE_BREATH / LED_MODE_NOBAT 的逐帧刷新由 loop 处理
 }
 
 // ----------------------------- 主流程 -----------------------------
@@ -332,7 +385,8 @@ void setup() {
   setLed(0, 0, LED_BREATH_LEVEL);   // 蓝色微亮（进入 loop 后由充电状态接管）
 
 #if ENABLE_CHARGING
-  startCharging();
+  // 按电池在位情况决定是否使能充电（没电池时保持 /CE 高电平）
+  startChargingIfBatteryPresent();
 #endif
 
 #if DEMO_EPD_POWER
@@ -348,10 +402,15 @@ void setup() {
 }
 
 void loop() {
-  static uint32_t tKey = 0, tLed = 0, tChg = 0, tGauge = 0, tChgReport = 0;
+  static uint32_t tKey = 0, tLed = 0, tChg = 0, tGauge = 0, tChgReport = 0, tBatt = 0;
   static uint8_t ledStep = 0;
   static ChgState chgState = CHG_UNKNOWN;
   static LedMode  ledMode  = LED_MODE_BREATH;
+  // 状态变化去抖：没电池时 BQ25895 会在 快充/充电完成 之间抖动，
+  // 直接打印会把日志刷屏，必须先连续稳定一段时间再采纳。
+  static ChgState candState = CHG_UNKNOWN;
+  static uint32_t candSince = 0;
+  static bool battPresent = false;
 
   // ---- 按键事件（每 500 ms 轮询一次电平变化）----
   if (millis() - tKey > 500) {
@@ -363,11 +422,30 @@ void loop() {
     if (k3 != last3) { Serial.printf("KEY3 %s\n", k3 ? "松开" : "按下"); last3 = k3; }
   }
 
-  // ---- 充电状态（每 500 ms 读一次 BQ25895 REG0B.CHRG_STAT）----
+  // ---- 电池在位检测 + 充电使能（每 3 s，用地址探测，不产生 I2C 报错）----
+  if (millis() - tBatt > 3000) {
+    tBatt = millis();
+    bool now = batteryPresent();
+    if (now != battPresent) {
+      battPresent = now;
+      Serial.printf("[电池] %s\n", battPresent ? "检测到电池" : "未检测到电池（MAX17048 0x36 无应答）");
+    }
+#if ENABLE_CHARGING
+    updateChargeEnable(battPresent);
+#endif
+  }
+
+  // ---- 充电状态（每 500 ms 采样，连续稳定 1.5 s 才认定并打印）----
   if (millis() - tChg > 500) {
     tChg = millis();
     ChgState s = readChargeState();
-    if (s != chgState) {
+    if (s != candState) { candState = s; candSince = millis(); }
+    bool stable = (s != CHG_UNKNOWN) && (millis() - candSince >= 1500);
+    // 没有电池时不报告“快充/充满”这类变化（此时数值必然抖动，没有意义）；
+    // 只允许把 CHG_UNKNOWN 归一成“未充电”一次，让状态有初值
+    bool firstInit  = (chgState == CHG_UNKNOWN && s == CHG_NOT_CHARGING);
+    bool reportable = firstInit || (battPresent && s != chgState);
+    if (stable && reportable) {
       Serial.printf("[BQ25895] 充电状态：%s -> %s\n",
                     chgStateName(chgState), chgStateName(s));
       chgState = s;
@@ -380,13 +458,14 @@ void loop() {
     reportChargeStatus();
   }
 
-  // ---- LED：充电中=红常亮，充满=绿常亮，其余=呼吸换色 ----
-  LedMode want = ledModeFor(chgState);
+  // ---- LED：充电中=红常亮，充满=绿常亮，无电池=黄色慢闪，其余=呼吸换色 ----
+  LedMode want = ledModeFor(chgState, battPresent);
   if (want != ledMode) {
     ledMode = want;
     ledStep = 0;
-    if (ledMode == LED_MODE_BREATH) tLed = millis() - 1000;   // 回到呼吸时立刻刷新一帧
-    else                            applyLedMode(ledMode);
+    if (ledMode == LED_MODE_BREATH)      tLed = millis() - 1000;   // 回到呼吸时立刻刷新一帧
+    else if (ledMode == LED_MODE_NOBAT)  tLed = millis() - 500;    // 立刻刷一帧黄色
+    else                                 applyLedMode(ledMode);
   }
 
   if (ledMode == LED_MODE_BREATH && millis() - tLed > 1000) {   // 呼吸/换色示意
@@ -396,6 +475,11 @@ void loop() {
                                       {0, 0, LED_BREATH_LEVEL}};
     setLed(seq[ledStep][0], seq[ledStep][1], seq[ledStep][2]);
     ledStep = (ledStep + 1) % 3;
+  } else if (ledMode == LED_MODE_NOBAT && millis() - tLed > 500) {   // 黄色慢闪：没装电池
+    tLed = millis();
+    ledStep ^= 1;
+    if (ledStep) setLed(LED_BREATH_LEVEL, LED_BREATH_LEVEL, 0);
+    else         setLed(0, 0, 0);
   }
 
   // ---- 每分钟上报一次 MAX17048 状态 ----
