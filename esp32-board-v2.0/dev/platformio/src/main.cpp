@@ -10,15 +10,20 @@
 //    6. 点亮 LED1（若安装了 Adafruit NeoPixel）
 //    7. loop 循环：每分钟上报一次 MAX17048 状态，LED 随充电状态变化
 //       （充电中 = 红色常亮，充满 = 绿色常亮，其余 = 呼吸换色）
+//    8. loop 循环：每 5 s 在墨水屏上刷新一屏调试信息
+//       （3 个 I2C 器件 + microSD 卡 + 电池/充电状态；仅在 ENABLE_EPD_DEBUG = 1 时）
 //
 //  可选开关（默认关闭，确认无误后再打开）：
 //    ENABLE_CHARGING  : 配置 BQ25895 并拉低 /CE 允许充电
 //    DEMO_EPD_POWER   : 开关一次墨水屏电源（不点亮屏幕）
+//    ENABLE_EPD_DEBUG : 墨水屏输出调试信息（0=关闭 1=开启）
+//                       开关与面板选择定义在 include/epd_debug.h，见下面的“开关”一节
 // =====================================================================
 
 #include <Arduino.h>
 #include <Wire.h>
 #include "board_pins.h"
+#include "epd_debug.h"      // 墨水屏调试输出（开关 ENABLE_EPD_DEBUG / 面板选择都在这里）
 
 // 可选依赖：安装了 Adafruit NeoPixel 才编译 LED 演示
 #if __has_include(<Adafruit_NeoPixel.h>)
@@ -27,8 +32,13 @@
 #endif
 
 // ----------------------------- 开关 ------------------------------
+// 墨水屏输出开关（0 = 关闭，1 = 开启）定义在 include/epd_debug.h：
+//     #define ENABLE_EPD_DEBUG 0
+// 那里同时放面板选择：默认 GDEY042T81；要换 GDEM102T91，在 platformio.ini 的
+// build_flags 里加 -DEPD_PANEL_GDEM102T91=1。两个值必须让 epd_debug.cpp 也看到，
+// 所以不放本文件（编译单元之间只能通过头文件或 -D 共享宏）。
 #define ENABLE_CHARGING   1     // 1 = 初始化充电参数并使能充电
-#define DEMO_EPD_POWER    0     // 1 = 演示 EPD_3V3 通断一次
+#define DEMO_EPD_POWER    0     // 1 = 演示 EPD_3V3 通断一次（ENABLE_EPD_DEBUG=1 时自动跳过）
 #define ICHG_REG_VALUE    0x0E  // 896 mA = 14 × 64 mA（按硬件热设计）
 #define IINLIM_REG_VALUE  0x10  // 900 mA = 100 mA + 16 × 50 mA
 #define ITERM_REG_VALUE   0x11  // IPRECHG 128 mA / ITERM 128 mA
@@ -344,7 +354,7 @@ static void applyLedMode(LedMode m) {
 void setup() {
   // 先把所有板级控制脚置于安全状态
   pinMode(PIN_LED_DIN, OUTPUT);   digitalWrite(PIN_LED_DIN, LOW);
-  pinMode(PIN_EPD_PWR_EN, OUTPUT);digitalWrite(PIN_EPD_PWR_EN, LOW);   // 面板保持断电
+  pinMode(PIN_EPD_PWR_EN, OUTPUT);digitalWrite(PIN_EPD_PWR_EN, LOW);   // 面板先断电，EPD 调试输出时由 epdDebugBegin() 拉高并常开
   pinMode(PIN_EPD_CS, OUTPUT);    digitalWrite(PIN_EPD_CS, HIGH);
   pinMode(PIN_EPD_DC, OUTPUT);    digitalWrite(PIN_EPD_DC, LOW);
   pinMode(PIN_EPD_RST, OUTPUT);   digitalWrite(PIN_EPD_RST, HIGH);
@@ -364,7 +374,7 @@ void setup() {
   unsigned long t0 = millis();
   while (!Serial && (millis() - t0) < 5000) delay(10);
 #endif
-  delay(200);
+  delay(2000);
 
   Serial.println();
   Serial.println(F("=================================================="));
@@ -372,6 +382,7 @@ void setup() {
   Serial.printf (" 芯片=%s  主频=%lu MHz  PSRAM=%u KB\n",
                  BOARD_NAME, (unsigned long)(getCpuFrequencyMhz()),
                  (unsigned)(ESP.getPsramSize() / 1024));
+  Serial.printf (" 墨水屏调试输出=%s\n", ENABLE_EPD_DEBUG ? "开启" : "关闭");
   Serial.println(F("=================================================="));
 
   Wire.begin(PIN_I2C_SDA, PIN_I2C_SCL, I2C_FREQ_HZ);
@@ -389,7 +400,12 @@ void setup() {
   startChargingIfBatteryPresent();
 #endif
 
-#if DEMO_EPD_POWER
+  // 墨水屏调试输出：面板上电（EPD_PWR_EN 保持高电平）+ 首帧全屏刷新。
+  // ENABLE_EPD_DEBUG = 0 时这是空函数，不产生任何代码。
+  epdDebugBegin();
+
+  // 电源脉冲演示与“EPD 调试输出”互斥：调试输出要求 EPD_3V3 常开，不能再断电
+#if DEMO_EPD_POWER && !ENABLE_EPD_DEBUG
   Serial.println(F("[EPD] 上电脉冲演示（不刷新屏幕）"));
   digitalWrite(PIN_EPD_PWR_EN, HIGH); delay(50);
   digitalWrite(PIN_EPD_PWR_EN, LOW);
@@ -488,4 +504,8 @@ void loop() {
     Serial.printf("---- 周期上报 t=%lus ----\n", (unsigned long)(millis() / 1000));
     readFuelGauge();
   }
+
+  // ---- 墨水屏调试信息（每 5 s 一屏；刷新期间会阻塞几百毫秒~几秒）----
+  // ENABLE_EPD_DEBUG = 0 时这是空函数，不产生任何代码。
+  epdDebugUpdate();
 }

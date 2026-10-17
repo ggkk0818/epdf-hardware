@@ -24,9 +24,11 @@ pio --version
 platformio/
 ├── platformio.ini          # 板卡/存储/烧录配置（已按 N16R8 调好）
 ├── include/
-│   └── board_pins.h        # 本板全部引脚宏、I2C 地址、BQ25895 寄存器地址
+│   ├── board_pins.h        # 本板全部引脚宏、I2C 地址、BQ25895 寄存器地址
+│   └── epd_debug.h         # 墨水屏调试输出开关（ENABLE_EPD_DEBUG）与面板选择
 └── src/
-    └── main.cpp            # 板级自检 Demo（I2C/充电器/电量计/Type-C/按键/LED）
+    ├── main.cpp            # 板级自检 Demo（I2C/充电器/电量计/Type-C/按键/LED）
+    └── epd_debug.cpp       # 墨水屏调试信息页面（开关打开时才参与编译）
 ```
 
 复制成自己的工程：
@@ -79,7 +81,8 @@ Type-C 电流档位 → 按键状态，然后每秒轮换 LED 颜色并实时打
 | 用途 | 库 | 说明 |
 |---|---|---|
 | WS2812 LED1 | `adafruit/Adafruit NeoPixel` | 在 `platformio.ini` 的 `lib_deps` 打开即可；未安装时示例会自动跳过 LED |
-| 墨水屏 | **Good Display GDEM102T91 官方驱动** | 建议把官方源码放到 `lib/` 下用 `file://lib/xxx` 引用（见 EPD_INTERFACE.md） |
+| 墨水屏 | `zinggjm/GxEPD2` + `adafruit/Adafruit GFX Library` | GxEPD2 **1.6.9 起已内置** GDEY042T81（400×300 SSD1683）与 GDEM102T91（960×640 SSD1677）驱动类，不需要官方例程移植；示例用它做屏幕调试输出 |
+| 屏上中文 | `olikraus/U8g2_for_Adafruit_GFX` | 提供 wqy12 / wqy16 GB2312 点阵字体，屏幕上显示中文标签 |
 | microSD | 内置 `SD` / `SdFat` | 走 SPI（SCLK=12, MOSI=11, MISO=13, CS=14） |
 | 其他 | `Wire`（内置） | I2C |
 

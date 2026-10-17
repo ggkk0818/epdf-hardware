@@ -85,6 +85,12 @@ VPP（脚 19）保持开路。
 4. 局部刷新（partial update）需要 SSD1677 的窗口/模式寄存器支持，
    在使用前确认官方 LUT 是否包含局部刷新波形。
 
+> **已核实（2026-10-11）**：GxEPD2 **1.6.9** 已内置本板两块面板的驱动类 ——
+> `GxEPD2_420_GDEY042T81`（400×300，SSD1683）与 `GxEPD2_1020_GDEM102T91`（960×640，SSD1677），
+> 两者都声明了 `hasPartialUpdate / hasFastPartialUpdate = true`，所以上面第 2 条“没有则必须自行移植”
+> 对本板不适用。示例程序的屏幕调试输出就是基于 GxEPD2 实现的，见
+> `platformio/src/epd_debug.cpp`（开关 `ENABLE_EPD_DEBUG`，面板选择 `-DEPD_PANEL_GDEM102T91=1`）。
+
 ## 6. 典型刷新流程（伪代码）
 
 ```cpp
